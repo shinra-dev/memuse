@@ -1,0 +1,24 @@
+citHeader("Why do you want to cite this?  What the hell is wrong with you?")
+
+citEntry(
+  entry = "Misc",
+  title = "fs: ",
+  author = personList(as.person("wrathematics")),
+  year = "2013",
+  note = "{R} Package",
+  url = "http://github.com/wrathematics/fs",
+  textVersion = "Schmidt, D., Chen, W.-C., Ostrouchov, G., and Patel, P. (2012) pbdBASE: Programming with Big Data -- Core pbd Classes and Methods. R Package, URL http://cran.r-project.org/package=pbdBASE",
+  key = "somedumbshitnoonewilleveruse"
+)
+
+citEntry(
+  entry = "Manual",
+  title = "Guide to the fs Package",
+  author = personList(as.person("wrathematics")),
+  year = "2013",
+  note = "{R} Vignette",
+  url = "http://cran.r-project.org/package=pbdBASE",
+  textVersion = "Schmidt, D., Chen, W.-C., Ostrouchov, G., and Patel, P. (2012) A Quick Guide for the pbdBASE Package. R Vignette, URL http://cran.r-project.org/package=pbdBASE",
+  key = "Schmidt2012pbdBASEvignette"
+)
+

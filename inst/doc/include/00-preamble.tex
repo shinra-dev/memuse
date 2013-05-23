@@ -1,0 +1,173 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\newcommand\code{\bgroup\@makeother\_\@makeother\~\@makeother\$\@codex}
+\def\@codex#1{{\normalfont\ttfamily\hyphenchar\font=-1 #1}\egroup}
+\makeatother
+%%\let\code=\texttt
+\let\proglang=\textsf
+
+\newcommand{\pkg}[1]{{\fontseries{b}\selectfont #1}}
+
+
+
+
+\newcommand\mnote[1]{\marginpar{\vspace*{-.8cm}#1}}
+
+\newcommand\easy{\mnote{\LARGE\color{green} \textbf{Easy}}}
+\newcommand\medium{\mnote{\LARGE\color{yellow2} \textbf{Medium}}}
+\newcommand\hard{\mnote{\LARGE\color{red} \textbf{Hard}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% paragraph spacing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{parskip}
+\setlength{\parskip}{.3cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{xcolor}
+\usepackage{color}
+
+\definecolor{yellow2}{rgb}{1, .7, 0}
+
+\definecolor{mygreen}{RGB}{0,150,0}
+
+\definecolor{gray}{rgb}{.6,.6,.6}
+\definecolor{dkgray}{rgb}{.3,.3,.3}
+\definecolor{orange}{rgb}{1,0.5,0}
+\definecolor{grayish}{rgb}{.9, .9, .9}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\definecolor{p0}{RGB}{150,0,0}
+\definecolor{p1}{RGB}{0,150,0}
+\definecolor{p2}{RGB}{0,0,150}
+\definecolor{p3}{RGB}{150,75,0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% lstlisting
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+
+\lstdefinelanguage{rr}{language=R,
+                      basicstyle=\ttfamily\color{black},
+backgroundcolor=\color{grayish},
+frame=single,
+breaklines=true,
+                      keywordstyle=\color{blue},
+commentstyle=\color{dkgreen},
+stringstyle=\color{mauve},
+numbers=left,%none,
+numberstyle=\tiny\color{dkgray},
+stepnumber=1,
+numbersep=8pt,
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+rulecolor=\color{gray},
+tabsize=4,
+captionpos=t,
+title=\lstname,
+escapechar=?
+% escapeinside={(*@}{@*)},
+% escapebegin={\begin{lrbox}{0}\minipage[t]{.3\linewidth}\raggedleft\normalfont\itshape\small\leavevmode\color{black!70}\ignorespaces},
+% escapeend={\endminipage\end{lrbox}\llap{\raisebox{0pt}[0pt][0pt]{\box0}\hspace{\comsep}}}
+}
+
+
+\lstdefinelanguage{ft}{
+  language=[90]Fortran,
+  basicstyle=\ttfamily,
+                      keywordstyle=\color{blue},
+commentstyle=\color{dkgreen},
+  morecomment=[l]{!\ }
+}
+
+
+
+\lstset{numbers=none,numberstyle=\footnotesize\ttfamily,
+        frame=single,frameround=tttt,language=R,
+        showspaces=false,showstringspaces=false,
+        breaklines=true,breakatwhitespace=true,
+        basicstyle=\small\ttfamily}
+%\lstset{literate={<-}{{$\leftarrow$}}1}
+\makeatletter
+\let\Code\@undefined
+\let\CodeInput\@undefined
+\let\CodeOutput\@undefined
+\makeatother
+\lstnewenvironment{Command}[1][title=Shell Command]{\lstset{#1}}{}
+\lstnewenvironment{Code}[1][title=R Script]{\lstset{#1}}{}
+\lstnewenvironment{Output}[1][title=\ ]{\lstset{#1}}{}
+\lstnewenvironment{CodeOutput}[1][title=R Output]{\lstset{#1}}{}
+\lstnewenvironment{Error}[1][]{
+  \lstset{title=Error Message,basicstyle=\small\ttfamily}\color{Red}}{}
+  
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Headers/footers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\newcommand{\prebodyheadfoot}{
+  \fancyhf{} % clear all header and footer fields
+  \fancyfoot{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  
+  % redefinition of the plain style:
+  \fancypagestyle{plain}{%
+  \fancyhf{} % clear all header and footer fields
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}}
+}
+
+\newcommand{\bodyheadfoot}{
+  \fancyhf{} % clear all header and footer fields
+% \fancyhead[L]{\slshape \rightmark}
+  \fancyhead[L]{\slshape \leftmark}
+  \fancyhead[R]{ \thepage\ of\ \pageref{LastPage}}
+  \renewcommand{\headrulewidth}{1pt}
+  \renewcommand{\footrulewidth}{0pt}
+  
+  % redefinition of the plain style:
+  \fancypagestyle{plain}{%
+  \fancyhf{} % clear all header and footer fields
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% misc.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \usepackage{url}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+% \usepackage{subfig}
+\usepackage{graphicx}
+
+
+\usepackage{hyperref}
+
+\hypersetup{
+    pdfnewwindow=true,
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    filecolor=magenta,
+    urlcolor=blue
+}
+

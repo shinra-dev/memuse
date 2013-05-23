@@ -1,0 +1,12 @@
+Package: fs
+Type: Package
+Title: What the package does (short line)
+Version: 1.0
+Date: 2013-05-21
+Description: More about what it does (maybe more than one line)
+License: GPL (>= 2)
+Depends: R (>= 2.14.0), methods
+LazyData: yes
+LazyLoad: yes
+Author: wrathematics
+Maintainer: wrathematics <wrathematics@gmail.com>

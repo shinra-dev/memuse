@@ -1,0 +1,5 @@
+import(methods)
+
+exportClasses("fs")
+exportMethods("+", "*", "^", "print", "show", "swap.unit", "swap.prefix", "swap.names")
+export(fs, howbig, howmany)

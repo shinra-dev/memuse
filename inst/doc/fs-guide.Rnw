@@ -1,0 +1,33 @@
+%\VignetteIndexEntry{pbdBASE-guide}
+
+\documentclass{article}
+\usepackage[margin=1.1in]{geometry}
+
+\input{./include/00-preamble}
+
+
+\author{wrathematics}
+\title{Guide to the \pkg{fs} Package\\[.4cm]}
+
+
+
+\begin{document}
+\maketitle
+\pagenumbering{roman}
+\tableofcontents
+
+
+\bodyheadfoot
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\pagestyle{fancy}
+
+\input{./include/01-introduction}
+
+% \newpage
+% \phantomsection
+% \addcontentsline{toc}{section}{References}
+% \bibliography{./pbdBASE-include/pbdBASE}
+
+\end{document}

@@ -1,0 +1,7 @@
+\name{Environment}
+\alias{.fs_envir}
+\docType{data}
+\title{Environment for the fs Package}
+\description{
+  The environment for the fs package.
+}
