@@ -7,7 +7,7 @@
 
 
 \author{wrathematics}
-\title{Guide to the \pkg{fs} Package\\[.4cm]}
+\title{Guide to the \pkg{MemUse} Package\\[.4cm]}
 
 
 

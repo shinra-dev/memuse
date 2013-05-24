@@ -47,7 +47,7 @@ setMethod("swap.names", signature(x="memuse"),
 
 
 
-setMethod("swap.unit", signature(x="memuse"),
+setMethod("swap.unit", signature(x="fs"),
   function(x, unit)
   {
     unit <- tolower(unit)
@@ -91,7 +91,7 @@ setMethod("swap.unit", signature(x="memuse"),
         x@unit <- new.unit
       }
       else
-        stop("invalid argument 'unit'.  See help('memuse')")
+        stop("invalid argument 'unit'.  See help('fs')")
     }
     
     return( x )

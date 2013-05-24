@@ -86,19 +86,19 @@ check.names <- function(x)
 
 
 
-check.mu <- function(x)
+check.fs <- function(x)
 {
   x <- check.names(x)
   if (is.logical(x))
-    stop("cannot construct 'memuse' object; bad 'unit.names'", call.=F)
+    stop("cannot construct 'fs' object; bad 'unit.names'", call.=F)
   
   x <- check.prefix(x)
   if (is.logical(x))
-    stop("cannot construct 'memuse' object; bad 'unit.prefix'", call.=F)
+    stop("cannot construct 'fs' object; bad 'unit.prefix'", call.=F)
   
   x <- check.unit(x)
   if (is.logical(x))
-    stop("cannot construct 'memuse' object; bad 'unit'", call.=F)
+    stop("cannot construct 'fs' object; bad 'unit'", call.=F)
   
   return( x )
 }
@@ -106,7 +106,7 @@ check.mu <- function(x)
 
 
 ### constructor
-mu <- function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+fs <- function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
 {
   if (unit == "best")
     u <- "B"
@@ -114,10 +114,10 @@ mu <- function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
     u <- unit
   
   # construct
-  x <- new("memuse", size=size, unit=u, unit.prefix=unit.prefix, unit.names=unit.names)
+  x <- new("fs", size=size, unit=u, unit.prefix=unit.prefix, unit.names=unit.names)
   
   # sanity check
-  x <- check.mu(x)
+  x <- check.fs(x)
   
   # convert to the correct unit
   x <- ct.unit(x)

@@ -53,7 +53,7 @@ best.unit <- function(x)
   else if (x@unit.prefix == "SI")
     f <- 1e3
   else 
-    mu_error()
+    fs_error()
   
   size <- convert.to.bytes(x)@size
   
@@ -100,7 +100,7 @@ ct.unit <- function(x)
   if (.UNIT == "best")
     x <- best.unit(x)
   else {
-    x <- check.mu(x)
+    x <- check.fs(x)
     
     if (tolower(x@unit) != .UNIT)
       x <- swap.unit(x, .UNIT)

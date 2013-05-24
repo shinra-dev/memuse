@@ -1,8 +1,8 @@
 ### Method declarations
-#setGeneric(name="print", 
-#  useAsDefault=base::print, 
-#  package="MemUse"
-#)
+setGeneric(name="print", 
+  useAsDefault=base::print, 
+  package="MemUse"
+)
 
 setGeneric(name="swap.unit", 
   function(x, unit)

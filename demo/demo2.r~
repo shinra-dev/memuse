@@ -4,10 +4,8 @@ library(memuse, quiet=T)
 linebreak <- function() cat(sprintf("\n"))
 
 
-# 100+200
 mu(100) + mu(200)
-# (100 * 200)/1024
-mu(100) * mu(200)
+mu(100) * mu(200) # = 20000/1024
 
 
 .NAMES <- "long"

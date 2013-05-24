@@ -1,5 +1,5 @@
 # print method
-setMethod("print", signature(x="memuse"),
+setMethod("print", signature(x="fs"),
   function(x, ..., unit=x@unit, unit.prefix=x@unit.prefix, unit.names=x@unit.names, digits=3)
   {
     if (unit.names != x@unit.names)
@@ -14,7 +14,7 @@ setMethod("print", signature(x="memuse"),
 )
 
 # show method
-setMethod("show", signature(object="memuse"),
+setMethod("show", signature(object="fs"),
   function(object) 
     print(object, unit=object@unit, unit.prefix=object@unit.prefix, unit.names=object@unit.names, digits=3)
 )

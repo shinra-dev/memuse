@@ -1,4 +1,3 @@
-### validObject check
 valid.mu <- function(object)
 {
   if (!class(object) == "memuse")

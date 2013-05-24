@@ -61,7 +61,7 @@ setMethod("*", signature(e1="memuse", e2="memuse"),
 
 
 ### Exponentiation
-setMethod("^", signature(e1="memuse", e2="memuse"),
+setMethod("^", signature(e1="fs", e2="fs"),
   function(e1, e2) 
   {
     # if unit prefices disagree, use .PREFIX

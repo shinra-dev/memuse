@@ -7,7 +7,7 @@ citEntry(
   year = "2013",
   note = "{R} Package",
   url = "https://github.com/wrathematics/memuse",
-  textVersion = "wrathematics (2013) MemUse: Estimating memory usage of dense, in-core objects. R Package, URL https://github.com/wrathematics/memuse",
+  textVersion = paste("wrathematics (2013) MemUse: Estimating memory usage of dense, in-core objects. R Package, URL https://github.com/wrathematics/memuse"),
   key = "MemUseRPackage"
 )
 
