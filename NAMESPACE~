@@ -1,5 +1,0 @@
-import(methods)
-
-exportClasses("memuse")
-exportMethods("+", "*", "^", "print", "show", "swap.unit", "swap.prefix", "swap.names")
-export(mu, howbig, howmany)
