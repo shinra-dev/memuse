@@ -106,7 +106,7 @@ check.mu <- function(x)
 
 
 ### constructor
-mu <- function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+memuse <- function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
 {
   if (unit == "best")
     u <- "B"
@@ -125,3 +125,4 @@ mu <- function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
   return( x )
 }
 
+mu <- memuse

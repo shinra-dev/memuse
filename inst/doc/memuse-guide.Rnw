@@ -3,7 +3,7 @@
 \documentclass{article}
 \usepackage[margin=1.1in]{geometry}
 
-\input{./include/00-preamble}
+\input{./include/preamble}
 
 
 \author{wrathematics}

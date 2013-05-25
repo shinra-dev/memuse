@@ -2,4 +2,4 @@ import(methods)
 
 exportClasses("memuse")
 exportMethods("+", "*", "^", "print", "show", "swap.unit", "swap.prefix", "swap.names")
-export(print, mu, howbig, howmany)
+export(print, memuse, mu, howbig, howbig.par, howmany)
