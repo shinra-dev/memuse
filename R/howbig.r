@@ -1,4 +1,4 @@
-howbig <- function(m, n, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES, ..., type="double", intsize=4)
+howbig <- function(nrow, ncol, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES, ..., type="double", intsize=4)
 {
   type <- match.arg(type, c("double", "integer"))
   
@@ -9,7 +9,7 @@ howbig <- function(m, n, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES, ...
   else if (type == "integer")
     bytes <- intsize
   
-  x@size <- m*n*bytes # number of bytes used
+  x@size <- nrow*ncol*bytes # number of bytes used
   
   x <- swap.unit(x, unit)
   
@@ -18,7 +18,7 @@ howbig <- function(m, n, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES, ...
 
 
 
-howbig.par <- function(m, n, cores, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES, ..., type="double", intsize=4)
+howbig.par <- function(nrow, ncol, cores, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES, ..., type="double", intsize=4)
 {
   type <- match.arg(type, c("double", "integer"))
   
@@ -30,7 +30,7 @@ howbig.par <- function(m, n, cores, unit=.UNIT, unit.prefix=.PREFIX, unit.names=
     bytes <- intsize
   
   ### total
-  x@size <- m*n*bytes # number of bytes used
+  x@size <- nrow*ncol*bytes # number of bytes used
   
   x <- swap.unit(x, unit)
   
@@ -40,7 +40,7 @@ howbig.par <- function(m, n, cores, unit=.UNIT, unit.prefix=.PREFIX, unit.names=
   y@size <- y@size / cores
   y <- swap.unit(y, unit)
   
-  ldim <- numroc(nprocs=cores, dim=c(m, n), bldim=c(4,4), ICTXT=0)
+  ldim <- numroc(nprocs=cores, dim=c(nrow, ncol), bldim=c(4,4), ICTXT=0)
   
   z <- howbig(m=ldim[1], n=ldim[2], unit=unit, unit.prefix=unit.prefix, unit.names=unit.names, type=type, intsize=intsize)
   

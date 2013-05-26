@@ -3,8 +3,6 @@ setMethod("howmany", signature(x="memuse"),
   {
     type <- match.arg(type, c("double", "integer"))
     
-    x <- mu(size=1, unit="b", unit.prefix=unit.prefix, unit.names=unit.names)
-    
     if (type == "double")
       bytes <- 8
     else if (type == "integer")
@@ -21,7 +19,7 @@ setMethod("howmany", signature(x="memuse"),
     else if (!missing(ncol))
       nrow <- size/(ncol*bytes)
     else
-      nrow <- ncol <- floor(sqrt(x@size/bytes))
+      nrow <- ncol <- floor(sqrt(size/bytes))
     
     return( c(nrow, ncol) )
   }
