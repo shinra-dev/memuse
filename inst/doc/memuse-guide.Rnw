@@ -24,6 +24,7 @@
 \pagestyle{fancy}
 
 \input{./include/01-introduction}
+\input{./include/02-use}
 
 % \newpage
 % \phantomsection
