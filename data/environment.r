@@ -1,1 +1,1 @@
-.fs_envir <- new.env()
+.memuse_envir <- new.env()

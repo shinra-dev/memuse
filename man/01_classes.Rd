@@ -1,44 +1,45 @@
-\name{ddmatrix-class}
+\name{memuse-class}
 \docType{class}
 
-\alias{fs}
-\alias{fs-class}
+\alias{memuse}
+\alias{memuse-class}
 
-\title{Class fs}
-\description{ Distributed matrix class. }
+\title{Class memuse}
+\description{ Memory usage class object. }
 
 \section{Creating Objects}{
-  \code{ new('ddmatrix', Data = ..., dim = ..., ldim = ...,
-  bldim = ..., ICTXT = ...)}
+  \code{ new('memuse', size = ..., unit = ..., unit.prefix = ...,
+  unit.names = ...)}
 }
 
 \section{Slots}{
 \describe{
-\item{\code{Data}:}{LOCAL: Object of class \code{matrix}}
-\item{\code{dim}:}{GLOBAL: Object of class \code{numeric}}
-\item{\code{ldim}:}{LOCAL: Object of class \code{numeric}}
-\item{\code{bldim}:}{GLOBAL: Object of class \code{numeric}}
-\item{\code{ICTXT}:}{GLOBAL: Object of class \code{numeric}}
+\item{\code{size}:}{Object of class \code{numeric}}
+\item{\code{unit}:}{Object of class \code{character}}
+\item{\code{unit.prefix}:}{Object of class \code{character}}
+\item{\code{unit.names}:}{Object of class \code{character}}
 }
 }
 \section{Prototype}{
 \describe{
-\item{matrix Data}{matrix(0.0)}
-\item{numeric dim}{c(1,1)}
-\item{numeric ldim}{c(1,1)}
-\item{numeric bldim}{c(1,1)}
-\item{numeric ICTXT}{0}
+\item{numeric size}{0}
+\item{character unit}{"B"}
+\item{character unit.prefix}{"IEC"}
+\item{character unit.names}{"short"}
 }
 }
 \section{Details}{
-  \code{ddmatrix} is the container for ScaLAPACK-friendly parallel
-  block-cyclically distributed matrices. The class object is
-  instantiated in SPMD fashion, whereby each process owns a piece
-  of the "whole" matrix (which no single R process need ever own in
-  its entirety), and each process stores its piece of the whole into a
-  container with a name common to all processes.
+  \code{memuse} is the container for memory usage data for an unallocated,
+  dense, in-core R object.  The \code{size} slot contains the memory 
+  usage in some unit of bytes.  The \code{unit} slot contains the 
+  unit of bytes that \code{size} is stored in (e.g., kb, mb, gb, ...).
+  The \code{unit.prefix} slot contains the unit prefix, either IEC or
+  SI.  The \code{unit.names} slot contains the unit names, either short
+  (e.g., kb) or long (e.g., kilobyte).
+  
+  See the MemUse guide vignette for more details.
 }
 \seealso{
-  \code{\link{InitGrid}, \link{SlotAccessors}}
+  \code{\link{Control}}
 }
 \keyword{Classes}

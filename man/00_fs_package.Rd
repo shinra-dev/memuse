@@ -1,26 +1,26 @@
-\name{pbdBASE-package}
-\alias{pbdBASE-package}
+\name{memuse-package}
+\alias{memuse-package}
 \docType{package}
-\title{Core pbd Classes and Methods}
+\title{Core memuse Classes and Methods}
 \description{
-  A package contains the basic methods for dealing with 
-  distributed data types, as well as the data types themselves.
+  The package gives the user the size (memory usage) of an in-core, 
+  dense matrix. The output is an S4 class object that can be manipulated 
+  to be presented in different ways (different units, short/long 
+  versions of those units, etc.). For more information, see the package 
+  vignette and the manual.
 }
 \details{
 \tabular{ll}{
-  Package: \tab pbdBASE\cr
+  Package: \tab memuse\cr
   Type: \tab Package\cr
   License: \tab GPL\cr
   LazyLoad: \tab yes\cr
 }
-  This package requires an MPI library (OpenMPI, MPICH2, or LAM/MPI).
 }
 \references{
-  Programming with Big Data in R Website:
-  \url{http://r-pbd.org/}
+  \url{http://wrathematics.github.io}
 }
 \author{
-  Drew Schmidt \email{schmidt AT math.utk.edu}, Wei-Chen Chen,
-  George Ostrouchov, and Pragneshkumar Patel.
+  wrathematics
 }
 \keyword{Package}

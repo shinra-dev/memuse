@@ -1,6 +1,6 @@
-\name{fs.internal}
+\name{memuse.internal}
 
-\alias{fs_error}
+\alias{memuse_error}
 \alias{get.units}
 \alias{get.power}
 \alias{convert.to.bytes}

@@ -1,7 +1,7 @@
 \name{Environment}
-\alias{.fs_envir}
+\alias{.memuse_envir}
 \docType{data}
-\title{Environment for the fs Package}
+\title{Environment for the memuse Package}
 \description{
-  The environment for the fs package.
+  The environment for the memuse package.
 }
