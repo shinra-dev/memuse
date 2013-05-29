@@ -54,6 +54,8 @@ setMethod("swap.unit", signature(x="memuse"),
     
     if (unit == "best")
       x <- best.unit(x)
+    else if (unit == tolower(x@unit))
+      return( check.mu(x) )
     else {
       flag <- FALSE
       

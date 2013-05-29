@@ -9,7 +9,16 @@ setMethod("print", signature(x="memuse"),
     if (unit != x@unit)
       x <- swap.unit(x, unit)
     
-    cat(sprintf(paste("%.", digits, "f ", x@unit, "\n", sep=""), x@size))
+    unit <- tolower(x@unit)
+    if (unit == "b" || unit == "bytes")
+      digits <- 0
+    
+    if (x@size > 1e22)
+      format <- "e"
+    else
+      format <- "f"
+    
+    cat(sprintf(paste("%.", digits, format, " ", x@unit, "\n", sep=""), x@size))
   }
 )
 

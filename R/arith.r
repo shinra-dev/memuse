@@ -21,7 +21,7 @@ setMethod("+", signature(e1="memuse", e2="memuse"),
     
     e1@size <- e1@size + e2@size
     
-    ret <- best.unit(e1)
+    ret <- swap.unit(e1, .UNIT)
     
     return( ret )
   }
@@ -52,10 +52,32 @@ setMethod("*", signature(e1="memuse", e2="memuse"),
     
     e1@size <- e1@size * e2@size
     
-    ret <- best.unit(e1)
+    ret <- swap.unit(e1, .UNIT)
     
     return( ret )
   }
+)
+
+
+
+setMethod("*", signature(e1="memuse", e2="numeric"),
+  function(e1, e2) 
+  {
+    e1 <- convert.to.bytes(e1)
+    
+    e1@size <- e1@size * e2
+    
+    ret <- swap.unit(e1, .UNIT)
+    
+    return( ret )
+  }
+)
+
+
+
+setMethod("*", signature(e1="numeric", e2="memuse"),
+  function(e1, e2) 
+    return( e2*e1 )
 )
 
 
@@ -83,7 +105,22 @@ setMethod("^", signature(e1="memuse", e2="memuse"),
     
     e1@size <- e1@size ^ e2@size
     
-    ret <- best.unit(e1)
+    ret <- swap.unit(e1, .UNIT)
+    
+    return( ret )
+  }
+)
+
+
+
+setMethod("^", signature(e1="memuse", e2="numeric"),
+  function(e1, e2) 
+  {
+    e1 <- convert.to.bytes(e1)
+    
+    e1@size <- e1@size ^ e2
+    
+    ret <- swap.unit(e1, .UNIT)
     
     return( ret )
   }

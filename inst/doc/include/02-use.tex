@@ -29,7 +29,7 @@ So for example, 1 kilobyte (kB) is equal to 1000 bytes, but 1 kibibyte (KiB) is 
 
 The reason for this odd distinction is that there is general ambiguity in the public versus technical definition of these terms.  People, even those who know the difference (myself included) almost overwhelmingly use, for example, gigabyte when they mean gibibyte.  The reason for this is obvious; ``gibibyte'' sounds fucking stupid.  This actually gets all the more confusing because in addition to conflating 1 MB with 1 MiB, ISP's advertise their speeds in terms of bits\footnote{1 byte is 8 bits} \emph{using the same goddamn symbol}, because they're huge assholes.
 
-Another example is when people talk about $\sim$~\hspace{-.1cm}big data\hspace{-.1cm}~$\sim$.  Often I/O people will use the term ``terabytes'' or ``exabytes'' and mean it.  Rescaling these units into the ones people are generally more familiar with is simple with the \code{MemUse} package:
+Another example is when people talk about \twiddle{big data}.  Often I/O people will use the term ``terabytes'' or ``exabytes'' and mean it.  Rescaling these units into the ones people are generally more familiar with is simple with the \code{MemUse} package:
 \begin{lstlisting}[language=rr]
 > swap.prefix(mu(size=1, unit="tb", unit.prefix="SI"))
 0.909 TiB

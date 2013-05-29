@@ -120,7 +120,7 @@ memuse <- function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
   x <- check.mu(x)
   
   # convert to the correct unit
-  x <- ct.unit(x)
+  x <- swap.unit(x, unit)
   
   return( x )
 }
