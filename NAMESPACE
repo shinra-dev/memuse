@@ -1,5 +1,20 @@
 import(methods)
 
 exportClasses("memuse")
-exportMethods("+", "*", "^", "print", "show", "swap.unit", "swap.prefix", "swap.names")
+
+exportMethods(
+  ### Accessors
+  "size", "unit", "unit.prefix", "unit.names",
+  ### Replacers
+  "size<-", "unit<-", "unit.prefix<-", "unit.names<-",
+  ### Arithmetic
+  "+", "*", "^", 
+  ### Printing
+  "print", "show", 
+  ### Swaps
+  "swap.unit", "swap.prefix", "swap.names",
+  ### Misc
+  "howmany"
+)
+
 export(print, memuse, mu, howbig, howbig.par, howmany)

@@ -1,7 +1,6 @@
 \name{memuse-class}
 \docType{class}
 
-\alias{memuse}
 \alias{memuse-class}
 
 \title{Class memuse}

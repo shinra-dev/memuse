@@ -63,6 +63,9 @@ setMethod("*", signature(e1="memuse", e2="memuse"),
 setMethod("*", signature(e1="memuse", e2="numeric"),
   function(e1, e2) 
   {
+    if (length(e2) != 1)
+      stop("memuse * vector : vector must be of length 1")
+    
     e1 <- convert.to.bytes(e1)
     
     e1@size <- e1@size * e2
@@ -76,8 +79,13 @@ setMethod("*", signature(e1="memuse", e2="numeric"),
 
 
 setMethod("*", signature(e1="numeric", e2="memuse"),
-  function(e1, e2) 
-    return( e2*e1 )
+  function(e1, e2)
+  {
+    if (length(e1) != 1)
+      stop("vector * memuse : vector must be of length 1")
+    else
+      return( e2*e1 )
+  }
 )
 
 
@@ -116,6 +124,9 @@ setMethod("^", signature(e1="memuse", e2="memuse"),
 setMethod("^", signature(e1="memuse", e2="numeric"),
   function(e1, e2) 
   {
+    if (length(e2) != 1)
+      stop("memuse ^ vector : vector must be of length 1")
+    
     e1 <- convert.to.bytes(e1)
     
     e1@size <- e1@size ^ e2
