@@ -42,7 +42,7 @@ howbig.par <- function(nrow, ncol, cores, unit=.UNIT, unit.prefix=.PREFIX, unit.
   
   ldim <- numroc(nprocs=cores, dim=c(nrow, ncol), bldim=c(4,4), ICTXT=0)
   
-  z <- howbig(m=ldim[1], n=ldim[2], unit=unit, unit.prefix=unit.prefix, unit.names=unit.names, type=type, intsize=intsize)
+  z <- howbig(nrow=ldim[1], ncol=ldim[2], unit=unit, unit.prefix=unit.prefix, unit.names=unit.names, type=type, intsize=intsize)
   
   out <- list(total=x, block=y, block.cyclic=z)
   

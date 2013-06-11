@@ -15,7 +15,7 @@
 \alias{unit.prefix<-}
 
 \alias{unit.names<--method}
-\alias{unit.names<--method}
+\alias{unit.names<-,memuse-method}
 \alias{unit.names<-}
 
 \title{ Replacers }
@@ -51,11 +51,12 @@
   string is returned.
 }
 \seealso{
-  \code{\link{Replacers}, \link{memuse-class}}
+  \code{\link{Accessors}, \link{memuse-class}}
 }
 \examples{
 x <- mu(2000, unit="bytes")
 x
+
 size(x) <- 1000
 x
 }

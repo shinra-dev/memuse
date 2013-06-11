@@ -4,13 +4,28 @@
 
 \alias{+-method}
 \alias{+,memuse,memuse-method}
+\alias{+,memuse,numeric-method}
+\alias{+,numeric,memuse-method}
 \alias{+}
+
+\alias{--method}
+\alias{-,memuse,memuse-method}
+\alias{-,memuse,numeric-method}
+\alias{-,numeric,memuse-method}
+\alias{-,memuse,missing-method}
+\alias{-}
 
 \alias{*-method}
 \alias{*,memuse,memuse-method}
 \alias{*,memuse,numeric-method}
 \alias{*,numeric,memuse-method}
 \alias{*}
+
+\alias{/-method}
+\alias{/,memuse,memuse-method}
+\alias{/,memuse,numeric-method}
+\alias{/,numeric,memuse-method}
+\alias{/}
 
 \alias{^-method}
 \alias{^,memuse,memuse-method}
@@ -31,7 +46,9 @@
 }
 \usage{
   x + y
+  x - y
   x * y
+  x / y
   x ^ y
 }
 \arguments{
@@ -47,11 +64,13 @@
   \code{\link{Constructor}, \link{memuse-class}}
 }
 \examples{
-x <- mu(100)
-y <- mu(200)
+x <- mu(200)
+y <- mu(100)
 
 x+y
+x-y
 x*y
+x/y
 x^2
 }
 \keyword{Methods}

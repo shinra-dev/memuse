@@ -7,8 +7,6 @@ exportMethods(
   "size", "unit", "unit.prefix", "unit.names",
   ### Replacers
   "size<-", "unit<-", "unit.prefix<-", "unit.names<-",
-  ### Arithmetic
-  "+", "*", "^", 
   ### Printing
   "print", "show", 
   ### Swaps
@@ -17,4 +15,11 @@ exportMethods(
   "howmany"
 )
 
-export(print, memuse, mu, howbig, howbig.par, howmany)
+export(
+  # Constructor
+  memuse, mu,
+  # Arithmetic
+  "+", "-", "*", "/", "^", 
+  # Misc
+  print, howbig, howbig.par, howmany
+)

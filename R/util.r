@@ -48,12 +48,17 @@ convert.to.bytes <- function(x)
 
 best.unit <- function(x)
 {
-  if (x@unit.prefix == "IEC")
+  if (x@unit.prefix == "IEC"){
     f <- 1024
-  else if (x@unit.prefix == "SI")
+    fun <- function(x) log2(abs(x))
+    dgts <- 10
+  } else if (x@unit.prefix == "SI"){
     f <- 1e3
-  else 
+    fun <- function(x) log10(abs(x))
+    dgts <- 3
+  } else {
     mu_error()
+  }
   
   size <- convert.to.bytes(x)@size
   
@@ -62,24 +67,13 @@ best.unit <- function(x)
     return( x )
   }
   
-  if (x@unit.prefix == "IEC"){
-    num.digits <- log2(size)
+  
+  num.digits <-fun(size)
     
-    for (i in seq.int(9)){
-      if (num.digits < 10*i){
-        unit <- .units[i]
-        break
-      }
-    }
-  }
-  else {
-    num.digits <- log10(size)
-    
-    for (i in seq.int(9)){
-      if (num.digits < 3*i){
-        unit <- .units[i]
-        break
-      }
+  for (i in seq.int(9)){
+    if (num.digits < dgts*i){
+      unit <- .units[i]
+      break
     }
   }
   
