@@ -1,32 +1,32 @@
 ### Method declarations
 #setGeneric(name="print", 
 #  useAsDefault=base::print, 
-#  package="MemUse"
+#  package="memuse"
 #)
 
 ### Accessors
 setGeneric(name="size", 
   function(x)
     standardGeneric("size"), 
-  package="MemUse"
+  package="memuse"
 )
 
 setGeneric(name="unit", 
   function(x)
     standardGeneric("unit"), 
-  package="MemUse"
+  package="memuse"
 )
 
 setGeneric(name="unit.prefix", 
   function(x)
     standardGeneric("unit.prefix"), 
-  package="MemUse"
+  package="memuse"
 )
 
 setGeneric(name="unit.names", 
   function(x)
     standardGeneric("unit.names"), 
-  package="MemUse"
+  package="memuse"
 )
 
 
@@ -34,25 +34,25 @@ setGeneric(name="unit.names",
 setGeneric(name="size<-", 
   function(x, value)
     standardGeneric("size<-"), 
-  package="MemUse"
+  package="memuse"
 )
 
 setGeneric(name="unit<-", 
   function(x, value)
     standardGeneric("unit<-"), 
-  package="MemUse"
+  package="memuse"
 )
 
 setGeneric(name="unit.prefix<-", 
   function(x, value)
     standardGeneric("unit.prefix<-"), 
-  package="MemUse"
+  package="memuse"
 )
 
 setGeneric(name="unit.names<-", 
   function(x, value)
     standardGeneric("unit.names<-"), 
-  package="MemUse"
+  package="memuse"
 )
 
 
@@ -60,19 +60,19 @@ setGeneric(name="unit.names<-",
 setGeneric(name="swap.unit", 
   function(x, unit)
     standardGeneric("swap.unit"), 
-  package="MemUse"
+  package="memuse"
 )
 
 setGeneric(name="swap.prefix", 
   function(x) 
     standardGeneric("swap.prefix"),
-  package="MemUse"
+  package="memuse"
 )
 
 setGeneric(name="swap.names", 
   function(x)
     standardGeneric("swap.names"), 
-  package="MemUse"
+  package="memuse"
 )
 
 
@@ -80,5 +80,10 @@ setGeneric(name="swap.names",
 setGeneric(name="howmany", 
   function(x, ...)
     standardGeneric("howmany"), 
-  package="MemUse"
+  package="memuse"
 )
+
+#setGeneric(name="as.numeric", 
+#  useAsDefault=base::as.numeric, 
+#  package="memuse"
+#)

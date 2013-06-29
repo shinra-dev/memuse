@@ -5,7 +5,7 @@
 \alias{mu}
 
 
-\title{ MemUse Constructor }
+\title{ memuse Constructor }
 \description{
   Constructor for objects of class \code{memuse}.
 }

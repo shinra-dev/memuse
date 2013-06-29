@@ -7,7 +7,7 @@
 
 
 \author{wrathematics}
-\title{Guide to the \pkg{MemUse} Package\\[.4cm]}
+\title{Guide to the \pkg{memuse} Package\\[.4cm]}
 
 
 
@@ -24,7 +24,10 @@
 \pagestyle{fancy}
 
 \input{./include/01-introduction}
-\input{./include/02-use}
+\input{./include/02-installation}
+\input{./include/03-sizematters}
+\input{./include/04-memuse}
+\input{./include/05-other}
 
 % \newpage
 % \phantomsection

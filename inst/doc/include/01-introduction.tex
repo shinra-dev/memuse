@@ -2,8 +2,6 @@
 
 \subsection{History}
 
-Hi there.  I am \twiddle{testing this now}.
-
 This package was born out of a $\approx$~10 line function I wrote to estimate the memory usage of (non-allocated) in-core, dense \proglang{R} objects of numeric (double precision) data.  I need this in my life by a surprising amount, so it made sense to actually create this thing instead of constantly doing ad hoc multiplications of $nrows\times ncols \times 8$ then dividing by powers of $1024$ (or 1000).
 
 But then I got the great idea to make this application \twiddle{enterprise ready} by adding a lot of unnecessary and convoluted OOP, and this stupid package was born.  This is sort of a love letter to other needlessly complex programs, like the \href{https://github.com/Mikkeren/FizzBuzzEnterpriseEdition}{Enterprise Fizzbuzz}\footnote{If you are unfamiliar with the \href{https://en.wikipedia.org/wiki/Bizz_buzz}{fizzbuzz}, see my posts ``\href{http://librestats.com/2012/01/10/honing-your-r-skills-for-job-interviews/}{Honing your R skills for Job Interviews}'' and ``\href{http://librestats.com/2013/04/26/the-fizzbuzz-that-fortran-deserves/}{The Fizzbuzz that Fortran Deserves}''.}.
@@ -20,21 +18,3 @@ But then I got the great idea to make this application \twiddle{enterprise ready
 \end{figure}
 This package is free software licensed under the GNU General Public License, version $\geq$ 2 (see Figure~\ref{fig:gnu}).
 If you violate the terms of the GPL then Richard Stallman's beard will sue you in internet court.
-
-
-
-\subsection{Installation}
-
-The package consists entirely of \proglang{R} code, so everything should install fine no matter which platform you use.  To install this from source on Windows, you will need to first install the \href{http://cran.r-project.org/bin/windows/Rtools/Rtools216.exe}{Rtools} package.  The package should install on Mac or Linux\footnote{\interject} without problem.
-
-The easiest way to install \pkg{MemUse} is via the \href{http://cran.r-project.org/web/packages/devtools/index.html}{\pkg{devtools}} package.  With this, you can effectively install packages from github just as you would from the CRAN.  To install \pkg{MemUse} using \pkg{devtools}, simply issue the command:
-\begin{lstlisting}[language=rr]
-library(devtools)
-install_github(repo="memuse", username="wrathematics")
-\end{lstlisting}
-from R.  Alternatively, you could download the sourcecode \href{https://github.com/wrathematics/memuse/archive/master.zip}{from github}, unzip this archive, and issue the command:
-\begin{lstlisting}[language=sh]
-R CMD INSTALL memuse-master
-\end{lstlisting}
-from your shell.
-

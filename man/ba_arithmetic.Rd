@@ -33,7 +33,7 @@
 \alias{^}
 
 
-\title{ MemUse Arithmetic }
+\title{ memuse Arithmetic }
 \description{
   Binary arithmetic operations for \code{memuse} objects.
 }

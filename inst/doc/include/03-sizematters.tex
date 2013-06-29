@@ -1,0 +1,39 @@
+\section{It Turns Out Size Does Matter, and How You Are Using It Is Wrong}
+The core of the \pkg{memuse} package is the \code{memuse} class object.  You can construct a \code{memuse} object via the \code{memuse()} or \code{mu()} constructor.  The constructor has several options.  You can pass the size of the object, the unit, the unit prefix (IEC or SI), and the unit names (short or long).  The size is the number of bytes, scaled by some factor depending on the unit.  The unit is an abstract rescaling unit, like percent, used for the sake of simple comprehension at larger scales; for example, kilobyte and kibibyte are the typical storage units to represent ``roughly a thousand'' bytes (more on this later).  Finally, the unit names are for printing, i.e., controlling whether the long version (e.g., kilobyte) or short version (kB) is used.
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|lll|lll|}\hline
+    \multicolumn{3}{|c}{IEC Prefix} & \multicolumn{3}{|c|}{SI Prefix} \\\hline
+    Short & Long & Factor & Short & Long & Factor\\\hline
+    b & byte & 1 & b & byte & 1\\
+    KiB & kibibyte & $2^{10}$ & kB & kilobyte & $10^3$\\
+    MiB & mebibyte & $2^{20}$ & MB & megabyte & $10^6$\\
+    GiB & gibibyte & $2^{30}$ & GB & gigabyte & $10^9$\\
+    TiB & tebibyte & $2^{40}$ & TB & terabyte & $10^{12}$\\
+    PiB & pebibyte & $2^{50}$ & PB & petabyte & $10^{15}$\\
+    EiB & exbibyte & $2^{60}$ & EB & exabyte & $10^{18}$\\
+    ZiB & zebibyte & $2^{70}$ & ZB & zettabyte & $10^{21}$\\
+    YiB & yobibyte & $2^{80}$ & YB & yottabyte & $10^{24}$\\\hline
+  \end{tabular}
+  \caption{Units, Unit Prefices, and Scaling Factors for Byte Storage}
+  \label{tab:units}
+\end{table}
+Table~\ref{tab:units} gives a complete list of the different units for the different prefices.
+
+So for example, 1 kilobyte (kB) is equal to 1000 bytes, but 1 kibibyte (KiB) is equal to 1024 bytes.  And so 1 kB is roughly $0.977$ KiB.
+
+There is a great deal of ambiguity in the public regarding the meaning of these terms.  People, even those who know the difference (myself included) almost overwhelmingly use, for example, gigabyte when they mean gibibyte.  The reason for this is obvious; ``gibibyte'' sounds fucking stupid.  This actually gets all the more confusing because in addition to many conflating --- intentionally or otherwise --- 1 megabyte (MB) with 1 mebibyte (MiB), internet service providers advertise their bandwidth speeds in terms of \emph{bits}\footnote{1 byte is 8 bits} instead of bytes \emph{using the same goddamn symbols}.  So for example, when an ISP reports ``15 MB'' bandwidth speeds, they are actually offering 5 megabit, or  1.875 megabytes (MB), which is 1.788 mebibytes (MiB).  They do this because they're huge assholes.
+
+Another example of this confusion is when people talk about \twiddle{big data}.  Often I/O people will use the term ``terabytes'' or ``exabytes'' and mean it, even though many file-on-disk-size reporting utilities (such as \code{du}) use the IEC prefix.  Rescaling reported SI units into IEC units --- the ones people are generally more familiar with --- is simple with the \code{memuse} package:
+\begin{lstlisting}[language=rr]
+> swap.prefix(mu(size=1, unit="tb", unit.prefix="SI"))
+0.909 TiB
+> swap.prefix(mu(size=1, unit="pb", unit.prefix="SI"))
+0.888 PiB
+\end{lstlisting}
+
+These sizes represent an impressive amount of data, but this ambiguity in naming conventions allows people to lie a bit.  For all of these reasons, since the package is meant to be useful for understanding R object size, the default behavior is somewhat complicated, but can be summarized as trying to provide what most people meant in the first place.  We achieve this by offering several default string objects which the user can easily control.  These units are \code{.UNIT}, \code{.PREFIX}, and \code{.NAMES}.  
+
+In the sections to follow, we will further examine the above \pkg{memuse} functions, as well as the other utilities the package offers.
+
+

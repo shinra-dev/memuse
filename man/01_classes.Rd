@@ -36,7 +36,7 @@
   SI.  The \code{unit.names} slot contains the unit names, either short
   (e.g., kb) or long (e.g., kilobyte).
   
-  See the MemUse guide vignette for more details.
+  See the memuse guide vignette for more details.
 }
 \seealso{
   \code{\link{Control}}

@@ -2,23 +2,23 @@ citHeader("Why do you want to cite this?  What the hell is wrong with you?")
 
 citEntry(
   entry = "Misc",
-  title = "MemUse: Estimating memory usage of dense, in-core objects.",
+  title = "memuse: Estimating memory usage of dense, in-core objects.",
   author = personList(as.person("wrathematics")),
   year = "2013",
   note = "{R} Package",
   url = "https://github.com/wrathematics/memuse",
-  textVersion = "wrathematics (2013) MemUse: Estimating memory usage of dense, in-core objects. R Package, URL https://github.com/wrathematics/memuse",
-  key = "MemUseRPackage"
+  textVersion = "wrathematics (2013) memuse: Estimating memory usage of dense, in-core objects. R Package, URL https://github.com/wrathematics/memuse",
+  key = "memuseRPackage"
 )
 
 citEntry(
   entry = "Manual",
-  title = "Guide to the MemUse Package",
+  title = "Guide to the memuse Package",
   author = personList(as.person("wrathematics")),
   year = "2013",
   note = "{R} Vignette",
   url = "https://github.com/wrathematics/memuse",
-  textVersion = "wrathematics (2013) Guide to the MemUse Package. R Vignette, URL https://github.com/wrathematics/memuse",
-  key = "MemUseRPackageVignette"
+  textVersion = "wrathematics (2013) Guide to the memuse Package. R Vignette, URL https://github.com/wrathematics/memuse",
+  key = "memuseRPackageVignette"
 )
 

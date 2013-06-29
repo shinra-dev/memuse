@@ -12,7 +12,7 @@ exportMethods(
   ### Swaps
   "swap.unit", "swap.prefix", "swap.names",
   ### Misc
-  "howmany"
+  "howmany"#, "as.numeric"
 )
 
 export(

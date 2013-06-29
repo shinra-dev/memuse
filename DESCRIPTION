@@ -1,11 +1,13 @@
-Package: MemUse
+Package: memuse
 Type: Package
-Title: MemUse
+Title: memuse
 Version: 1.0
 Date: 2013-05-21
-Description: The package gives the user the size (memory usage) of an 
-  in-core, dense matrix.  The output is an S4 class object that can be
-  manipulated to be presented in different ways (different units, 
+Description: How much ram do you need to store a 100,000 by 100,000 matrix?
+  Learn the scintillating answer to this and many more such questions with
+  the memuse package.  This package gives the user the size (memory usage) 
+  of an in-core, dense matrix.  The output is an S4 class object that can 
+  be manipulated to be presented in different ways (different units, 
   short/long versions of those units, etc.).
 License: GPL (>= 2)
 Depends: R (>= 2.14.0), methods

@@ -1,3 +1,3 @@
-demo   MemUse  Simple test cases.
-demo2  MemUse  Arithmetic.
-demo3  MemUse  The howbig() and howmany() methods.
+demo   memuse  Simple test cases.
+demo2  memuse  Arithmetic.
+demo3  memuse  The howbig() and howmany() methods.
