@@ -38,7 +38,7 @@ Aside from the constructor, you have already seen one very useful method:  \code
 > mu(100) * mu(200) # 100*200/1024
 19.531 KiB
 \end{lstlisting}
-Other arithmetic of memuse objects is available, including 
+Other arithmetic of memuse objects is available, including division, as well as 
 
 Finally, we have the methods that inspired the creation of this entire dumb thing in the first place:  \code{howbig()} and \code{howmany()}.  The former takes in the dimensions of a matrix (\code{nrow} rows and \code{ncol} columns) and returns the memory usage (as the package namesake would imply) of the object.  So for example, if you wanted to perform a principal components decomposition on a 100,000 by 100,000 matrix via SVD (as we have), then you would need:
 \begin{lstlisting}
