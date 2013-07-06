@@ -1,9 +1,27 @@
 \section{Using the memuse Package}
 
+The following sections demonstrate the ways in which the user is meant to interact with the \pkg{memuse} package.  Hence the title.
+
 
 \subsection{Constructing memuse Objects}
 
+The \code{memuse} object is an S4 class object, which is a high-falootin way of saying it's a data structure with specialized interpreted context.  Think of it like a list whose elements are always the same.  The specification is:
 
+\begin{align*}
+  \text{memuse} &= 
+  \begin{cases}
+    \text{size}\\
+    \text{unit}\\
+    \text{unit.prefix}\\
+    \text{unit.names}
+  \end{cases}
+\end{align*}
+
+This object has a prototype, sanity checking, and all kinds of other boring crap no one cares about.  What's important is how to use this thing.
+
+To construct a \code{memuse} object, you can use the \code{memuse()} or \code{mu()} constructors.  These functions behave identically; \code{memuse()} exists because I generally find it inappropriate to not have an object constructor of the same name as the object, and \code{mu()} exists because if I have to type more than 5 characters, I'm completely furious.  I'm looking at you, \code{suppressPackageStartupMessages()}\dots
+
+So as you might have guessed from Section~\ref{howuse}, the \code{memuse} object is full of options you will never use.  The full specification for a 
 
 
 \subsection{Default Parameters}

@@ -1,0 +1,15 @@
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}History}{1}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}License}{1}{subsection.1.2}
+\contentsline {section}{\numberline {2}Installation}{2}{section.2}
+\contentsline {subsection}{\numberline {2.1}Installing from Source}{2}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Installing from CRAN}{2}{subsection.2.2}
+\contentsline {section}{\numberline {3}It Turns Out That Size Does Matter, and How You Are Using It Is Wrong}{3}{section.3}
+\contentsline {section}{\numberline {4}Using the memuse Package}{4}{section.4}
+\contentsline {subsection}{\numberline {4.1}Constructing memuse Objects}{4}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Default Parameters}{4}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Methods}{5}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Package Demos}{6}{subsection.4.4}
+\contentsline {section}{\numberline {5}Other}{6}{section.5}
+\contentsline {subsection}{\numberline {5.1}Comparison to \bgroup \catcode `\_12\relax \catcode `\~12\relax \catcode `\$12\relax {\normalfont \ttfamily \hyphenchar \font =-1 object.size()}\egroup }{6}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Strings}{7}{subsection.5.2}

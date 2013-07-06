@@ -1,11 +1,13 @@
-\section{It Turns Out Size Does Matter, and How You Are Using It Is Wrong}
+\section{It Turns Out That Size Does Matter, and How You Are Using It Is Wrong}
+\label{howuse}
+
 The core of the \pkg{memuse} package is the \code{memuse} class object.  You can construct a \code{memuse} object via the \code{memuse()} or \code{mu()} constructor.  The constructor has several options.  You can pass the size of the object, the unit, the unit prefix (IEC or SI), and the unit names (short or long).  The size is the number of bytes, scaled by some factor depending on the unit.  The unit is an abstract rescaling unit, like percent, used for the sake of simple comprehension at larger scales; for example, kilobyte and kibibyte are the typical storage units to represent ``roughly a thousand'' bytes (more on this later).  Finally, the unit names are for printing, i.e., controlling whether the long version (e.g., kilobyte) or short version (kB) is used.
 \begin{table}[ht]
   \centering
   \begin{tabular}{|lll|lll|}\hline
     \multicolumn{3}{|c}{IEC Prefix} & \multicolumn{3}{|c|}{SI Prefix} \\\hline
     Short & Long & Factor & Short & Long & Factor\\\hline
-    b & byte & 1 & b & byte & 1\\
+    B & byte & 1 & B & byte & 1\\
     KiB & kibibyte & $2^{10}$ & kB & kilobyte & $10^3$\\
     MiB & mebibyte & $2^{20}$ & MB & megabyte & $10^6$\\
     GiB & gibibyte & $2^{30}$ & GB & gigabyte & $10^9$\\

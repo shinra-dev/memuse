@@ -1,0 +1,15 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{History}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{License}{section.1}% 3
+\BOOKMARK [1][-]{section.2}{Installation}{}% 4
+\BOOKMARK [2][-]{subsection.2.1}{Installing from Source}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.2}{Installing from CRAN}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{It Turns Out That Size Does Matter, and How You Are Using It Is Wrong}{}% 7
+\BOOKMARK [1][-]{section.4}{Using the memuse Package}{}% 8
+\BOOKMARK [2][-]{subsection.4.1}{Constructing memuse Objects}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.2}{Default Parameters}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.3}{Methods}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.4}{Package Demos}{section.4}% 12
+\BOOKMARK [1][-]{section.5}{Other}{}% 13
+\BOOKMARK [2][-]{subsection.5.1}{Comparison to `\13712`12`\04412=-1 object.size\(\)}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.2}{Strings}{section.5}% 15

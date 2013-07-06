@@ -1,6 +1,6 @@
 howbig <- function(nrow, ncol, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES, ..., type="double", intsize=4)
 {
-  type <- match.arg(type, c("double", "integer"))
+  type <- match.arg(tolower(type), c("double", "integer"))
   
   x <- mu(size=1, unit="b", unit.prefix=unit.prefix, unit.names=unit.names)
   
@@ -18,9 +18,10 @@ howbig <- function(nrow, ncol, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAME
 
 
 
-howbig.par <- function(nrow, ncol, cores, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES, ..., type="double", intsize=4)
+howbig.par <- function(nrow, ncol, cores, par="dmat", unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES, ..., type="double", intsize=4, ICTXT=0)
 {
-  type <- match.arg(type, c("double", "integer"))
+  par <- match.arg(tolower(par), c("dmat", "mpi"))
+  type <- match.arg(tolower(type), c("double", "integer"))
   
   x <- mu(size=1, unit="b", unit.prefix=unit.prefix, unit.names=unit.names)
   
@@ -35,16 +36,20 @@ howbig.par <- function(nrow, ncol, cores, unit=.UNIT, unit.prefix=.PREFIX, unit.
   x <- swap.unit(x, unit)
   
   ### local
-  y <- convert.to.bytes(x)
+  if (par == "mpi") {
+    y <- convert.to.bytes(x)
   
-  y@size <- y@size / cores
-  y <- swap.unit(y, unit)
-  
-  ldim <- numroc(nprocs=cores, dim=c(nrow, ncol), bldim=c(4,4), ICTXT=0)
-  
-  z <- howbig(nrow=ldim[1], ncol=ldim[2], unit=unit, unit.prefix=unit.prefix, unit.names=unit.names, type=type, intsize=intsize)
-  
-  out <- list(total=x, block=y, block.cyclic=z)
+    y@size <- y@size / cores
+    y <- swap.unit(y, unit)
+    
+    out <- list(total=x, local=y)
+  } else if (par == "dmat") {
+    ldim <- numroc(nprocs=cores, dim=c(nrow, ncol), bldim=c(4,4), ICTXT=ICTXT)
+    
+    z <- howbig(nrow=ldim[1], ncol=ldim[2], unit=unit, unit.prefix=unit.prefix, unit.names=unit.names, type=type, intsize=intsize)
+    
+    out <- list(total=x, local=z)
+  } 
   
   return( out )
 }
@@ -75,12 +80,12 @@ numroc <- function(nprocs, dim, bldim, ICTXT=0)
   
   if (ICTXT==0){
     PROCS <- optimal.grid(nprocs)
-  }
-  else if (ICTXT==1){
+  } else if (ICTXT==1){
     PROCS <- c(1, nprocs)
-  }
-  else {
+  } else if (ICTXT==2){
     PROCS <- c(nprocs, 1)
+  } else {
+    stop("ICTXT must be 0, 1, or 2")
   }
   
   ISRCPROC <- 0

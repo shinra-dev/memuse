@@ -1,5 +1,3 @@
-%\VignetteIndexEntry{pbdBASE-guide}
-
 \documentclass{article}
 \usepackage[margin=1.1in]{geometry}
 

@@ -1,7 +1,7 @@
 setMethod("howmany", signature(x="memuse"),
   function(x, nrow, ncol, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES, ..., type="double", intsize=4)
   {
-    type <- match.arg(type, c("double", "integer"))
+    type <- match.arg(tolower(type), c("double", "integer"))
     
     if (type == "double")
       bytes <- 8
