@@ -11,7 +11,7 @@
 
 \title{ Printing }
 \description{
-  Print methods for \code{memuse} class objects.
+  Print and show methods for \code{memuse} class objects.
 }
 \section{Methods}{
 \describe{
@@ -31,9 +31,6 @@
   \item{unit.names}{the unit names (short or long) to be used in printing; defaults
   to \code{x}'s unit.names}
   \item{digits}{the number of decimal digits to print; default is 3}
-}
-\details{
-  deets
 }
 \value{
   Returns a string.

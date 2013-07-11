@@ -36,7 +36,8 @@ convert.to.bytes <- function(x)
   else 
     mu_error()
   
-  size <- size * f^n
+#  size <- size * f^n
+  size <- abc(size, f, n)
   
   x@size <- size
   x@unit <- .units[[x@unit.names]][[x@unit.prefix]][["print"]][1L]
@@ -107,6 +108,8 @@ ct.unit <- function(x)
 # stable a*b^c with c an integer
 abc <- function(a, b, c)
 {
+  if (c==0)
+    return(a)
   p <- a
   for (i in seq.int(c)){
     p <- p*b

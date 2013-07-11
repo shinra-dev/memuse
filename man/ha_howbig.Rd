@@ -4,19 +4,23 @@
 \alias{howbig.par}
 
 
-\title{ How Big in Memory is a Matrix with Known Rows/Cols }
+\title{ howbig }
 \description{
-  Determines the memory usage for a dense, in-core, numeric matrix.
+  Determines the memory usage for a dense, in-core, numeric matrix of
+  specified rows/columns.
 }
 \usage{
   howbig(nrow, ncol, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES, 
          ..., type="double", intsize=4)
-  howbig.par(nrow, ncol, cores, par="dmat", unit=.UNIT, unit.prefix=.PREFIX, 
+  howbig.par(nrow, ncol, cores, par="mpi", unit=.UNIT, unit.prefix=.PREFIX, 
              unit.names=.NAMES, ..., type="double", intsize=4, ICTXT=0)
 }
 \arguments{
   \item{nrow, ncol}{Number of (global) rows/columns of the matrix.}
-  \item{cores}{The number
+  \item{cores}{The number of cores/processors}
+  \item{par}{Type of data distribution. Choices are "dmat" or "mpi". The
+  former is for \pkg{pbdDMAT} objects, the latter is the simple, locally
+  load-balanced block partitioning.}
   \item{unit}{string; the unit of storage, such as "MiB" or "MB", 
   depending on prefix.  Case is ignored.}
   \item{unit.prefix}{string; the unit prefix, namely IEC or SI.  Case 
@@ -30,6 +34,8 @@
   the default value will suffice.}
   \item{intsize}{The size (in bytes) of an integer.  Default is 4, but
   this is platform dependent.}
+  \item{ICTXT}{BLACS context number; only used with \code{howbig.par()}
+  with \code{par="dmat"}.}
 }
 \details{
   These functions provide the memory usage of an unallocated, dense, 
@@ -39,19 +45,17 @@
   usage of a \emph{distributed}, object
 }
 \value{
-  Returns a \code{memuse} class object.
+  \code{howbig()} returns a \code{memuse} class object.
+  
+  \code{howbig.par()} returns a list of 2 elements, each of class
+  \code{memuse}.  One is the total memory usage, the other is the 
+  local memory usage.
 }
 \seealso{
-  \code{\link{Constructor}, \link{memuse-class}}
+  \code{\link{howmany}}
 }
 \examples{
-x <- mu(200)
-y <- mu(100)
-
-x+y
-x-y
-x*y
-x/y
-x^2
+# size of a 1000x1000 matrix
+howbig(1000, 1000)
 }
 \keyword{Methods}

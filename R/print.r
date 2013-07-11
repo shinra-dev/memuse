@@ -3,11 +3,11 @@ setMethod("print", signature(x="memuse"),
   function(x, ..., unit=x@unit, unit.prefix=x@unit.prefix, unit.names=x@unit.names, digits=3)
   {
     if (unit.names != x@unit.names)
-      x <- swap.names(x)
+      x <- swap.names(x=x)
     if (unit.prefix != x@unit.prefix)
-      x <- swap.prefix(x)
+      x <- swap.prefix(x=x)
     if (unit != x@unit)
-      x <- swap.unit(x, unit)
+      x <- swap.unit(x=x, unit=unit, )
     
     unit <- tolower(x@unit)
     if (unit == "b" || unit == "bytes")

@@ -55,7 +55,8 @@
   \item{x, y}{\code{memuse} class objects}
 }
 \details{
-  deets
+  Simple binary arithmetic for \code{memuse} objects.  Options are
+  memuse-memuse, memuse-numeric, and numeric-memuse.
 }
 \value{
   Returns a \code{memuse} class object.

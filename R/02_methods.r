@@ -6,7 +6,7 @@
 
 ### Accessors
 setGeneric(name="size", 
-  function(x)
+  function(x, as.is=TRUE)
     standardGeneric("size"), 
   package="memuse"
 )
@@ -58,7 +58,7 @@ setGeneric(name="unit.names<-",
 
 ### Swaps
 setGeneric(name="swap.unit", 
-  function(x, unit)
+  function(x, unit, precedence=.PRECEDENCE)
     standardGeneric("swap.unit"), 
   package="memuse"
 )

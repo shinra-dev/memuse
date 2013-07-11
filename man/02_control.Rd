@@ -4,6 +4,8 @@
 \alias{.UNIT}
 \alias{.PREFIX}
 \alias{.NAMES}
+\alias{.PRECEDENCE}
+
 
 \docType{data}
 \title{Control Variables for the memuse Package.}
@@ -24,12 +26,15 @@
   \code{.NAMES} defaults to "short".  Acceptable values are "short" and
   "long".
   
+  \code{.PRECEDENCE} defaults to "prefix".  Acceptable values are "unit"
+  and "prefix".
+
   All values are case insensitive.  The correct case will be determined
   for the user if the incorrect case is supplied.  For an explanation 
   of what these values do, see \code{\link{memuse-class}} or the package
   user guide vignette.
 }
 \seealso{
-  \code{\link{memuse-class}}
+  \code{\link{memuse-class}, \link{Constructor}}
 }
 \keyword{Data}

@@ -18,7 +18,7 @@ check.unit <- function(x)
     return( x )
   }
   
-  # Unit does not match unit.prefix --- assume they meant the given unit.prefix and fix uni
+  # Unit does not match unit.prefix --- assume they meant the given unit.prefix and fix unit
   check <- .units[[x@unit.names]]
   check[[x@unit.prefix]] <- NULL
   
@@ -106,7 +106,7 @@ check.mu <- function(x)
 
 
 ### constructor
-memuse <- function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+memuse <- function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)#, precedence=.PRECEDENCE)
 {
   if (unit == "best")
     u <- "B"
@@ -119,10 +119,14 @@ memuse <- function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
   # sanity check
   x <- check.mu(x)
   
-  # convert to the correct unit
-  x <- swap.unit(x, unit)
+#  # convert to the correct unit
+#  precedence <- match.arg(tolower(precedence), c("unit", "prefix"))
+  
+#  if (precedence == "unit")
+  x <- swap.unit(x=x, unit="best")#, precedence=precedence)
   
   return( x )
 }
 
 mu <- memuse
+

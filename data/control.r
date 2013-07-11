@@ -3,3 +3,5 @@
 .NAMES <- "short"
 
 .PREFIX <- "IEC"
+
+.PRECEDENCE <- "prefix"

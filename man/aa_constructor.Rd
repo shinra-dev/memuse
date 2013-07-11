@@ -25,10 +25,10 @@
   "long" and "short", respectively.  Case is ignored.}
 }
 \details{
-  deets
+  Simple constructor for \code{memuse} objects.
 }
 \value{
-  Returns a memuse class object.
+  Returns a \code{memuse} class object.
 }
 \seealso{
   \code{\link{Constructor}, \link{memuse-class}}

@@ -48,9 +48,12 @@ setMethod("swap.names", signature(x="memuse"),
 
 
 setMethod("swap.unit", signature(x="memuse"),
-  function(x, unit)
+  function(x, unit)#, precedence=.PRECEDENCE)
   {
     unit <- tolower(unit)
+    
+    if (unit==x@unit)
+      return(x)
     
     if (unit == "best")
       x <- best.unit(x)

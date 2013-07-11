@@ -28,7 +28,6 @@ setMethod("+", signature(e1="memuse", e2="memuse"),
 )
 
 
-
 setMethod("+", signature(e1="memuse", e2="numeric"),
   function(e1, e2) 
   {
@@ -44,7 +43,6 @@ setMethod("+", signature(e1="memuse", e2="numeric"),
     return( ret )
   }
 )
-
 
 
 setMethod("+", signature(e1="numeric", e2="memuse"),
@@ -125,7 +123,6 @@ setMethod("*", signature(e1="memuse", e2="memuse"),
 )
 
 
-
 setMethod("*", signature(e1="memuse", e2="numeric"),
   function(e1, e2) 
   {
@@ -143,7 +140,6 @@ setMethod("*", signature(e1="memuse", e2="numeric"),
 )
 
 
-
 setMethod("*", signature(e1="numeric", e2="memuse"),
   function(e1, e2)
   {
@@ -153,6 +149,7 @@ setMethod("*", signature(e1="numeric", e2="memuse"),
       return( e2*e1 )
   }
 )
+
 
 
 ### Division
@@ -185,7 +182,6 @@ setMethod("/", signature(e1="memuse", e2="memuse"),
 )
 
 
-
 setMethod("/", signature(e1="memuse", e2="numeric"),
   function(e1, e2) 
   {
@@ -203,7 +199,6 @@ setMethod("/", signature(e1="memuse", e2="numeric"),
 )
 
 
-
 setMethod("/", signature(e1="numeric", e2="memuse"),
   function(e1, e2)
   {
@@ -213,7 +208,6 @@ setMethod("/", signature(e1="numeric", e2="memuse"),
       return( e2/e1 )
   }
 )
-
 
 
 ### Exponentiation
@@ -246,7 +240,6 @@ setMethod("^", signature(e1="memuse", e2="memuse"),
 )
 
 
-
 setMethod("^", signature(e1="memuse", e2="numeric"),
   function(e1, e2) 
   {
@@ -262,3 +255,4 @@ setMethod("^", signature(e1="memuse", e2="numeric"),
     return( ret )
   }
 )
+

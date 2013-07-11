@@ -1,7 +1,12 @@
 ### Accessors
 setMethod("size", signature(x="memuse"),
-  function(x)
-    return(x@size)
+  function(x, as.is=TRUE)
+  {
+    if (as.is)
+      return(x@size)
+    else
+      return(convert.to.bytes(x)@size)
+  }
 )
 
 setMethod("unit", signature(x="memuse"),

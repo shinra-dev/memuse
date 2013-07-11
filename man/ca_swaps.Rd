@@ -17,7 +17,7 @@
 
 \title{ Swaps }
 \description{
-  Binary arithmetic operations for \code{memuse} objects.
+  Methods for swapping between different memuse formats.
 }
 \section{Methods}{
 \describe{
@@ -34,7 +34,18 @@
   \item{unit}{new unit for the \code{memuse} object after the swap occurs}
 }
 \details{
-  deets
+  These methods allow simple (coherent) swaps between the different 
+  \code{memuse} formats. 
+  
+  \code{swap.unit()} will switch an object to another, supplied unit.  If
+  the unit is from another prefix, then the prefix too will change.  In this
+  case, the size will change appropriately.
+
+  \code{swap.prefix()} will change an object from one unit.prefix to the
+  other. In this case, the size will change appropriately.
+
+  \code{swap.names} will change from short to long, or long to short printing.
+  The size and prefix of the object are unchanged.
 }
 \value{
   Returns a \code{memuse} class object.
