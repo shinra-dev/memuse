@@ -1,3 +1,6 @@
-demo   memuse  Simple test cases.
-demo2  memuse  Arithmetic.
-demo3  memuse  The howbig() and howmany() methods.
+demo1        memuse  Simple test cases.
+demo2        memuse  Arithmetic.
+demo3        memuse  The howbig() and howmany() methods.
+demo1_plain  memuse  Same as demo1 without fancy printing.
+demo2_plain  memuse  Same as demo2 without fancy printing.
+demo3_plain  memuse  Same as demo3 without fancy printing.

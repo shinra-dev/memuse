@@ -21,6 +21,6 @@
   \url{http://wrathematics.github.io}
 }
 \author{
-  wrathematics
+  Drew Schmidt
 }
 \keyword{Package}

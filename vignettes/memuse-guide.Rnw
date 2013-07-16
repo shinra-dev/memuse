@@ -6,7 +6,7 @@
 \input{./include/preamble}
 
 
-\author{wrathematics}
+\author{Drew Schmidt}
 \title{Guide to the \pkg{memuse} Package\\[.4cm]}
 
 

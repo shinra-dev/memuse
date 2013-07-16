@@ -2,7 +2,7 @@
 
 \subsection{Comparison to \code{object.size()}}
 
-\proglang{R} contains a handy tool for telling you how big an already allocated object is, the \code{object.size()} method.  This package is effectively an extension of that method for un-allocated objects, provided your objects are numeric (more on this later).
+\proglang{R} contains a handy tool for telling you how big an already allocated object is, the \code{object.size()} function.  The functions in this package are essentially an extension of that function for un-allocated, dense objects, provided your objects are numeric (more on this later).
 
 So say we have the vector \code{x <- 1.0}.  This should be using 8 bytes to store that \code{1.0} as a double, right?  Well\dots
 \begin{lstlisting}[language=rr]
@@ -10,7 +10,7 @@ So say we have the vector \code{x <- 1.0}.  This should be using 8 bytes to stor
 48 bytes
 \end{lstlisting}
 
-So where is all that extra space coming from?  Simply put, \proglang{R} objects are more than just their data.  They contain a great deal of very useful metadata, which is where all the nice abstraction comes from.  Whenever you create a vector, \proglang{R} keeps track, for example, its length.  If you do not appreciate this convenience, go learn \proglang{C} and then get back to me.  
+So where is all that extra space coming from?  Simply put, \proglang{R} objects are more than just their data.  They contain a great deal of very useful metadata, which is where all the nice abstraction comes from.  Whenever you create a vector, \proglang{R} keeps track of, for example, its length.  If you do not appreciate this convenience, go learn \proglang{C} and then get back to me.  
 
 For vectors, this overhead is 40 bytes, regardless of the type of data.  Matrices, unsurprisingly cost more, clocking in at 200 bytes overhead.  It is worth noting that this overhead does not scale; it is on a per-object basis.  So we don't need 40 bytes for each element of a vector when just 8 would do (in the case of double precision values).  We need 40 plus 8 per element:
 \begin{lstlisting}[language=rr]
@@ -26,7 +26,7 @@ For vectors, this overhead is 40 bytes, regardless of the type of data.  Matrice
 800040 bytes
 \end{lstlisting}
 
-The story is slightly more complicated for integer data (and a lot more complicated for strings; see the following section).  On my machine (and probably yours, but not necessarily), ints costs 4 bytes.  However, \proglang{R} does some aggressive allocation, most likely for reasons of efficiency:
+The story is slightly more complicated for integer data (and a lot more complicated for strings; see the following section).  On my machine (and probably yours, but not necessarily), \code{int}s costs 4 bytes.  However, \proglang{R} does some aggressive allocation:
 \begin{lstlisting}[language=rr]
 > object.size(1L:3L)
 56 bytes
@@ -35,7 +35,7 @@ The story is slightly more complicated for integer data (and a lot more complica
 \end{lstlisting}
 Here we see \proglang{R} allocating more bytes than it needs for integer vectors sometimes, choosing to allocate in 16 byte chunks rather than 8 byte chunks.
 
-The \pkg{memuse} package does not adjust for this overhead, because it honestly just doesn't matter.  This overhead is really not worth worrying about, and when you think about all the abstraction it buys you, it's a hell of a bargain.  If you have a million R objects stored, you're wasting less than a mebibyte ($1024^2$ bytes); so you would need a billion objects to use just about a gibibyte ($1024^3$ bytes) on overhead.  And if you're doing that kind of silly nonsense, my advice would be to learn how to properly use data structures.
+The \pkg{memuse} package does not adjust for this overhead, because it honestly just doesn't matter.  This overhead is really not worth worrying about, and when you think about all the abstraction it buys you, it's a hell of a bargain.  If you have a million R objects stored, you're wasting less than one MiB ($1024^2$ bytes); so you would need a billion objects to use just about a GiB ($1024^3$ bytes) on overhead.  And if you're doing that kind of silly shit, my advice would be to learn how to properly use data structures.
 
 
 

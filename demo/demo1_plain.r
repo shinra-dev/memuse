@@ -1,30 +1,25 @@
 ### Basic construction and object options
 library(memuse, quiet=T)
 
-linebreak <- function() cat(sprintf("\n"))
+linebreak <- function(n=1) cat(sprintf(paste(rep("\n", n))))
+
 
 # The best unit for representation is chosen by default
 mu(2000)
 mu(2000, unit="kib")
 
-linebreak()
-
-
-# Construction is case insensitive; we always choose the correct case
+# Construction is case insensitive; we always choose the correct case.
 mu(120, unit="gIb", unit.prefix="iec", unit.names="SHorT")
 
-linebreak()
-
-
-# If an incorrect unit is supplied (SI when should be IEC), then the
-# assumption is the prefix is correct but the unit is being misused
-# (as is commonly the case).  So passing unit="kb" with unit.prefix="IEC"
-# will make the appropriate correction:
+# If an incorrect unit is supplied (SI when should be IEC), then 
+# the assumption is the prefix is correct but the unit is being 
+# misused (as is typically the case).  So passing unit='kb' with 
+# unit.prefix='IEC' will make the appropriate correction:
 mu(2000, unit="kb")
 mu(2000, unit="kb", unit.names="long")
+mu(2000, unit="kb", unit.prefix="SI")
 
 linebreak()
-
 
 # We can change the default unit.prefix and unit.names
 .NAMES <- "long"

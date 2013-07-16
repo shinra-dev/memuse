@@ -1,6 +1,16 @@
 ======================= Log Before Release =====================================
+2013-7-16:
+  * Finishing touches for CRAN.
+
+2013-7-10:
+  * Added arithmetic compatibility with object_size objects.
+
 2013-7-6:
-  * Finally added all the CRAN/package stuff.
+  * Fixed constructor bug.
+
+2013-6-15:
+  * Expanded vignette.
+  * Finished expanded howbig() and howmany().
 
 2013-5-23:
   * The joke got tastelessly out of hand.
