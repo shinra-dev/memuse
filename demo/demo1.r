@@ -26,9 +26,9 @@ iprint("mu(120, unit=\"gIb\", unit.prefix=\"iec\", unit.names=\"SHorT\")")
 
 cat(sprintf("
 # If an incorrect unit is supplied (SI when should be IEC), then 
-the assumption is the prefix is correct but the unit is being 
-misused (as is typically the case).  So passing unit='kb' with 
-unit.prefix='IEC' will make the appropriate correction:\n"))
+# the assumption is the prefix is correct but the unit is being 
+# misused (as is typically the case).  So passing unit='kb' with 
+# unit.prefix='IEC' will make the appropriate correction:\n"))
 iprint("mu(2000, unit=\"kb\")")
 iprint("mu(2000, unit=\"kb\", unit.names=\"long\")")
 iprint("mu(2000, unit=\"kb\", unit.prefix=\"SI\")")
@@ -52,7 +52,7 @@ cat(sprintf("> .NAMES <- \"short\""))
 linebreak(2)
 
 cat(sprintf("# We can easily convert between different units\n"))
-iprint("> x <- mu(120, unit=\"kib\")")
+cat(sprintf("> x <- mu(120, unit=\"kib\")\n"))
 x <- mu(120, unit="kib")
 iprint("print(x)")
 iprint("swap.unit(x, \"kb\")")

@@ -65,7 +65,7 @@ howbig.par <- function(nrow, ncol, cores, par="mpi", unit=.UNIT, unit.prefix=.PR
   par <- match.arg(tolower(par), c("dmat", "mpi"))
   type <- match.arg(tolower(type), c("double", "integer"))
   
-  x <- mu(size=1, unit="b", unit.prefix=unit.prefix, unit.names=unit.names)
+  x <- internal.mu(size=1, unit="b", unit.prefix=unit.prefix, unit.names=unit.names)
   
   if (type == "double")
     bytes <- 8

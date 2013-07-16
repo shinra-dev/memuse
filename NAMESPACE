@@ -3,6 +3,8 @@ import(methods)
 exportClasses("memuse")
 
 exportMethods(
+  ### Constructors
+  "mu", "memuse",
   ### Accessors
   "size", "unit", "unit.prefix", "unit.names",
   ### Replacers
@@ -12,7 +14,7 @@ exportMethods(
   ### Swaps
   "swap.unit", "swap.prefix", "swap.names",
   ### Misc
-  "howmany"#, "as.numeric"
+  "howmany", "as.memuse"#, "as.numeric"
 )
 
 export(

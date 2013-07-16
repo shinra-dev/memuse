@@ -42,3 +42,6 @@ setClass("memuse",
           validity=valid.mu
 )
 
+
+# to prevent R whining during package installation
+setClass("object_size") 

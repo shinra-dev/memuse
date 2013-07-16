@@ -1,12 +1,14 @@
 ======================= Log Before Release =====================================
 2013-7-16:
   * Finishing touches for CRAN.
+  * Expanded package demos.
 
 2013-7-10:
-  * Added arithmetic compatibility with object_size objects.
+  * Added interoperability with object_size objects.
 
 2013-7-6:
   * Fixed constructor bug.
+  * Finished howbig.par().
 
 2013-6-15:
   * Expanded vignette.

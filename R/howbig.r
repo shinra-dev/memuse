@@ -2,7 +2,7 @@ howbig <- function(nrow, ncol, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAME
 {
   type <- match.arg(tolower(type), c("double", "integer"))
   
-  x <- mu(size=1, unit="b", unit.prefix=unit.prefix, unit.names=unit.names)
+  x <- internal.mu(size=1, unit="b", unit.prefix=unit.prefix, unit.names=unit.names)
   
   if (type == "double")
     bytes <- 8

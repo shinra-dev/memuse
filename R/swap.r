@@ -30,7 +30,7 @@ setMethod("swap.names", signature(x="memuse"),
   {
     if (x@unit.names == "short")
       new.names <- "long"
-    else if (x@unit.prefix == "long")
+    else if (x@unit.names == "long")
       new.names <- "short"
     else
       mu_error()

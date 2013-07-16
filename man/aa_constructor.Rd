@@ -1,17 +1,26 @@
 \name{Constructor}
 \alias{Constructor}
+\docType{methods}
 
 \alias{memuse}
-\alias{mu}
+\alias{memuse-method}
+\alias{memuse,numeric-method}
+\alias{memuse,object_size-method}
 
+\alias{mu}
+\alias{mu-method}
+\alias{mu,numeric-method}
+\alias{mu,object_size-method}
 
 \title{ memuse Constructor }
 \description{
   Constructor for objects of class \code{memuse}.
 }
 \usage{
-  memuse(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
-  mu(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+  \S4method{memuse}{numeric}(size=0, unit=.UNIT, unit.prefix=.PREFIX, 
+                             unit.names=.NAMES)
+  \S4method{mu}{numeric}(size=0, unit=.UNIT, unit.prefix=.PREFIX, 
+                         unit.names=.NAMES)
 }
 \arguments{
   \item{size}{numeric; indicates the unit-multiple number of bytes used

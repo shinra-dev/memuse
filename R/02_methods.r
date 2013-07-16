@@ -4,6 +4,19 @@
 #  package="memuse"
 #)
 
+### Constructors
+setGeneric(name="memuse", 
+  function(size, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+    standardGeneric("memuse"), 
+  package="memuse"
+)
+
+setGeneric(name="mu", 
+  function(size, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+    standardGeneric("mu"), 
+  package="memuse"
+)
+
 ### Accessors
 setGeneric(name="size", 
   function(x, as.is=TRUE)
@@ -87,3 +100,9 @@ setGeneric(name="howmany",
 #  useAsDefault=base::as.numeric, 
 #  package="memuse"
 #)
+
+setGeneric(name="as.memuse", 
+  function(x, ...)
+    standardGeneric("as.memuse"), 
+  package="memuse"
+)
