@@ -1,7 +1,7 @@
 Package: memuse
 Type: Package
-Title: memuse
-Version: 1.0
+Title: Estimate the memory usage of numeric matrices.
+Version: 1.1
 Date: 2013-05-21
 Description: How much ram do you need to store a 100,000 by 100,000 matrix?
   Learn the scintillating answer to this and many more such questions with

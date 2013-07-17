@@ -20,6 +20,7 @@ valid.mu <- function(object)
     return( "invalid slot 'unit'.  See help('memuse')" )
 }
 
+
 ### memory usage (memuse) class
 # slots are:  
    # size --- the actual size in some memuse units
