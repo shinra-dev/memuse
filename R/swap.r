@@ -1,3 +1,4 @@
+# Switch out prefix (changing x@size as needed)
 setMethod("swap.prefix", signature(x="memuse"),
   function(x)
   {
@@ -8,7 +9,7 @@ setMethod("swap.prefix", signature(x="memuse"),
     else
       mu_error()
     
-    power <- get.power(x)
+    power <- get_power(x)
     
     if (new.prefix == "IEC")
       x@size <- x@size * (1e3/1024)^power
@@ -24,7 +25,7 @@ setMethod("swap.prefix", signature(x="memuse"),
 )
 
 
-
+# Switch out names from short to long or vice versa
 setMethod("swap.names", signature(x="memuse"),
   function(x)
   {
@@ -46,7 +47,7 @@ setMethod("swap.names", signature(x="memuse"),
 )
 
 
-
+# Switch unit to supplied unit --- this one is a bit of a mess
 setMethod("swap.unit", signature(x="memuse"),
   function(x, unit)#, precedence=.PRECEDENCE)
   {
@@ -76,7 +77,7 @@ setMethod("swap.unit", signature(x="memuse"),
       }
       
       if (flag){
-        x <- convert.to.bytes(x)
+        x <- convert_to_bytes(x)
         
         x@unit.names <- unit.names
         x@unit.prefix <- unit.prefix
@@ -102,5 +103,4 @@ setMethod("swap.unit", signature(x="memuse"),
     return( x )
   }
 )
-
 

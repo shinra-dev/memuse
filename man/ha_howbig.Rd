@@ -12,13 +12,13 @@
 \usage{
   howbig(nrow, ncol, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES, 
          ..., type="double", intsize=4)
-  howbig.par(nrow, ncol, cores, par="mpi", unit=.UNIT, unit.prefix=.PREFIX, 
+  howbig.par(nrow, ncol, cores, par="balanced", unit=.UNIT, unit.prefix=.PREFIX, 
              unit.names=.NAMES, ..., type="double", intsize=4, ICTXT=0)
 }
 \arguments{
   \item{nrow, ncol}{Number of (global) rows/columns of the matrix.}
   \item{cores}{The number of cores/processors}
-  \item{par}{Type of data distribution. Choices are "dmat" or "mpi". The
+  \item{par}{Type of data distribution. Choices are "dmat" or "balanced". The
   former is for \pkg{pbdDMAT} objects, the latter is the simple, locally
   load-balanced block partitioning.}
   \item{unit}{string; the unit of storage, such as "MiB" or "MB", 

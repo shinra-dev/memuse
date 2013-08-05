@@ -17,6 +17,13 @@ setGeneric(name="mu",
   package="memuse"
 )
 
+#setGeneric(name="object.size", useAsDefault=utils::object.size, package="memuse")
+setGeneric(name="object.size", 
+  function(x)
+    standardGeneric("object.size"), 
+  package="memuse"
+)
+
 ### Accessors
 setGeneric(name="size", 
   function(x, as.is=TRUE)
@@ -91,8 +98,14 @@ setGeneric(name="swap.names",
 
 ### Other
 setGeneric(name="howmany", 
-  function(x, ...)
+  function(x, nrow, ncol, out.type="full", ...)
     standardGeneric("howmany"), 
+  package="memuse"
+)
+
+setGeneric(name="howmany.par", 
+  function(x, nrow, ncol, out.type="full", ...)
+    standardGeneric("howmany.par"), 
   package="memuse"
 )
 

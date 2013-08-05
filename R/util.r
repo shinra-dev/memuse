@@ -1,17 +1,18 @@
+# Constructor error message
 mu_error <- function() stop("Badly formed 'memuse' object", call.=FALSE)
 
 
-
-get.units <- function(x)
+# Function to grab the printable units from the convoluted .units data structure
+get_units <- function(x)
 {
   return( .units[[x@unit.names]][[x@unit.prefix]][["print"]] )
 }
 
 
-
-get.power <- function(x)
+# Get the correct power for the factor that determines which unit is to be used
+get_power <- function(x)
 {
-  units <- get.units(x)
+  units <- get_units(x)
   
   power <- which(units == x@unit)
   
@@ -22,8 +23,8 @@ get.power <- function(x)
 }
 
 
-
-convert.to.bytes <- function(x)
+# Convert a memuse object to one stored in bytes
+convert_to_bytes <- function(x)
 {
   size <- x@size
   
@@ -46,7 +47,7 @@ convert.to.bytes <- function(x)
 }
 
 
-
+# Find the best unit representation for an object
 best.unit <- function(x)
 {
   if (x@unit.prefix == "IEC"){
@@ -61,7 +62,7 @@ best.unit <- function(x)
     mu_error()
   }
   
-  size <- convert.to.bytes(x)@size
+  size <- convert_to_bytes(x)@size
   
   if (size == 0){
     x@unit.names <- .units[[x@unit.names]][[x@unit.prefix]][["print"]][1L]
@@ -87,7 +88,7 @@ best.unit <- function(x)
 }
 
 
-
+# get the control unit
 ct.unit <- function(x)
 {
   .UNIT <- tolower(.UNIT)
@@ -117,3 +118,71 @@ abc <- function(a, b, c)
   
   return( p )
 }
+
+
+# Approximate size (by order magnitude) of a number
+approx_size <- function(x, digits=1)
+{
+  # vectorize if needed
+  if (length(x) > 1)
+    return( sapply(x, approx_size) )
+  
+  ordmag <- log10(x)
+  if (ordmag < 3){
+    char <- ""
+  }
+  else if (ordmag < 6){
+    char <- "k"
+    x <- round(x/(10^3), digits=digits)
+  } 
+  else if (ordmag < 9){
+    char <- "m"
+    x <- round(x/(10^6), digits=digits)
+  } 
+  else if (ordmag < 12){
+    char <- "b"
+    x <- round(x/(10^9), digits=digits)
+  } 
+  else if (ordmag < 15){
+    char <- "t"
+    x <- round(x/(10^12), digits=digits)
+  } 
+  else if (ordmag < 18){
+    char <- "qd"
+    x <- round(x/(10^15), digits=digits)
+  } 
+  else if (ordmag < 21){
+    char <- "qt"
+    x <- round(x/(10^18), digits=digits)
+  } 
+  else if (ordmag < 24){
+    char <- "sx"
+    x <- round(x/(10^21), digits=digits)
+  } 
+  else if (ordmag < 27){
+    char <- "sp"
+    x <- round(x/(10^24), digits=digits)
+  }
+  
+  size <- paste(x, char, sep="")
+  
+  return( size )
+}
+
+
+# whole number checker
+is.int <- function(x)
+{
+  # IEEE arithmetic gives 52 bit mantissa, so instead of doing that
+  # weird shit R suggests in help('is.integer'), we will just use
+  # machine epsilon for the tolerance.  Deal with it, nerd.
+  # With this tolerance, this is probably equivalent to just doing
+  # x==floor(x), but for some reason this makes me less nervous.
+  tol <- 2^(-53)
+  
+  if (!is.numeric(x))
+    return( FALSE )
+  else
+    return( abs(x - floor(x)) < tol )
+}
+

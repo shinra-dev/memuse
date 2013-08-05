@@ -1,3 +1,15 @@
+2013-8-10:
+  * Enhanced the vignette.
+  * Added vignette cover.
+
+2013-8-6:
+  * Method "object_size()" now returns memuse objects.
+
+2013-8-5:
+  * Added approximate sizes for howmany() output.
+  * Made internals more consistent.
+  * Better internal documentation.
+
 2013-7-17:
   * Fixed title.
 

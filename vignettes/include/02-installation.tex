@@ -1,18 +1,27 @@
 \section{Installation}
 
-The package consists entirely of \proglang{R} code, so everything should install fine no matter which platform you use.  You have several options 
+The package consists entirely of \proglang{R} code, so everything should install 
+fine no matter which platform you use.  You have several options for 
+installation.
 
 
 \subsection{Installing from Source}
 
-The sourcecode for this package is available on GitHub.  No binary is available from GitHub, only the source.  To install this (or any other) package from source on Windows, you will need to first install the \href{http://cran.r-project.org/bin/windows/Rtools/Rtools216.exe}{Rtools} package.  This package should install on Mac or Linux\footnote{\interject} without problem.
+The sourcecode for this package is available (and actively maintained) on 
+GitHub.  No binary is available from GitHub, only the source.  To install this 
+(or any other) package from source on Windows, you will need to first install 
+the \href{http://cran.r-project.org/bin/windows/Rtools/Rtools216.exe}{Rtools} 
+package.  Rtools is not needed for Mac or Linux\footnote{\interject} 
+platforms, and so \pkg{memuse} should install on them without problem.
 
 The easiest way to install \pkg{memuse} from GitHub is via the \href{http://cran.r-project.org/web/packages/devtools/index.html}{\pkg{devtools}} package by Hadley Wickham.  With this package, you can effectively install packages from GitHub just as you would from the CRAN.  To install \pkg{memuse} using \pkg{devtools}, simply issue the command:
 \begin{lstlisting}[language=rr]
 library(devtools)
 install_github(repo="memuse", username="wrathematics")
 \end{lstlisting}
-from R.  Alternatively, you could download the sourcecode \href{https://github.com/wrathematics/memuse/archive/master.zip}{from github}, unzip this archive, and issue the command:
+from R.  Alternatively, you could  
+\href{https://github.com/wrathematics/memuse/archive/master.zip}{download the 
+sourcecode from github}, unzip this archive, and issue the command:
 \begin{lstlisting}[language=sh]
 R CMD INSTALL memuse-master
 \end{lstlisting}
@@ -21,7 +30,8 @@ from your shell.
 
 \subsection{Installing from CRAN}
 
-Assuming the CRAN actually lets this nonesense on their servers, then installation amounts to issuing the command
+I managed to trick the CRAN into letting this nonesense on their servers, 
+so the installation amounts to issuing the command
 \begin{lstlisting}[language=rr]
 install.packages("memuse")
 \end{lstlisting}

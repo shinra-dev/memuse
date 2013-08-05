@@ -4,7 +4,7 @@ exportClasses("memuse")
 
 exportMethods(
   ### Constructors
-  "mu", "memuse",
+  "mu", "memuse", "object.size",
   ### Accessors
   "size", "unit", "unit.prefix", "unit.names",
   ### Replacers
@@ -18,10 +18,10 @@ exportMethods(
 )
 
 export(
-  # Constructor
+  ### Constructor
   memuse, mu,
-  # Arithmetic
+  ### Arithmetic
   "+", "-", "*", "/", "^", 
-  # Misc
+  ### Misc
   print, howbig, howbig.par, howmany
 )

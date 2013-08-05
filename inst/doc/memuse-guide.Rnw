@@ -12,6 +12,22 @@
 
 
 \begin{document}
+
+\prebodyheadfoot
+
+\newgeometry{textwidth=9in,textheight=11in}
+\begin{titlepage}
+  \begin{minipage}[c]{8.5in}
+  \begin{center}
+    \hspace*{0.8cm}
+    \includegraphics[width=8.25in,height=10in]{./cover/cover.pdf}
+  \end{center}
+  \end{minipage}
+\end{titlepage}
+
+
+\restoregeometry
+  
 \maketitle
 \pagenumbering{roman}
 \tableofcontents

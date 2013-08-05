@@ -19,8 +19,8 @@ setMethod("+", signature(e1="memuse", e2="memuse"),
         e1 <- swap.names(e1)
     }
     
-    e1 <- convert.to.bytes(e1)
-    e2 <- convert.to.bytes(e2)
+    e1 <- convert_to_bytes(e1)
+    e2 <- convert_to_bytes(e2)
     
     e1@size <- e1@size + e2@size
     
@@ -37,7 +37,7 @@ setMethod("+", signature(e1="memuse", e2="numeric"),
     if (length(e2) != 1)
       stop("memuse + numeric : vector must be of length 1")
     
-    e1 <- convert.to.bytes(e1)
+    e1 <- convert_to_bytes(e1)
     
     e1@size <- e1@size + e2
     
@@ -63,7 +63,7 @@ setMethod("+", signature(e1="numeric", e2="memuse"),
 setMethod("+", signature(e1="memuse", e2="object_size"),
   function(e1, e2) 
   {
-    e1 <- convert.to.bytes(e1)
+    e1 <- convert_to_bytes(e1)
     
     e1@size <- e1@size + unclass(e2)
     
@@ -123,7 +123,7 @@ setMethod("-", signature(e1="memuse", e2="missing"),
 setMethod("-", signature(e1="memuse", e2="object_size"),
   function(e1, e2) 
   {
-    e1 <- convert.to.bytes(e1)
+    e1 <- convert_to_bytes(e1)
     
     e1@size <- e1@size - unclass(e2)
     
@@ -137,7 +137,7 @@ setMethod("-", signature(e1="memuse", e2="object_size"),
 setMethod("-", signature(e1="object_size", e2="memuse"),
   function(e1, e2) 
   {
-    e2 <- convert.to.bytes(e2)
+    e2 <- convert_to_bytes(e2)
     
     e2@size <- unclass(e1) - e2@size
     
@@ -169,8 +169,8 @@ setMethod("*", signature(e1="memuse", e2="memuse"),
         e1 <- swap.names(e1)
     }
     
-    e1 <- convert.to.bytes(e1)
-    e2 <- convert.to.bytes(e2)
+    e1 <- convert_to_bytes(e1)
+    e2 <- convert_to_bytes(e2)
     
     e1@size <- e1@size * e2@size
     
@@ -187,7 +187,7 @@ setMethod("*", signature(e1="memuse", e2="numeric"),
     if (length(e2) != 1)
       stop("memuse * numeric : vector must be of length 1")
     
-    e1 <- convert.to.bytes(e1)
+    e1 <- convert_to_bytes(e1)
     
     e1@size <- e1@size * e2
     
@@ -214,7 +214,7 @@ setMethod("*", signature(e1="numeric", e2="memuse"),
 setMethod("*", signature(e1="memuse", e2="object_size"),
   function(e1, e2) 
   {
-    e1 <- convert.to.bytes(e1)
+    e1 <- convert_to_bytes(e1)
     
     e1@size <- e1@size * unclass(e2)
     
@@ -254,8 +254,8 @@ setMethod("/", signature(e1="memuse", e2="memuse"),
         e1 <- swap.names(e1)
     }
     
-    e1 <- convert.to.bytes(e1)
-    e2 <- convert.to.bytes(e2)
+    e1 <- convert_to_bytes(e1)
+    e2 <- convert_to_bytes(e2)
     
     e1@size <- e1@size / e2@size
     
@@ -272,7 +272,7 @@ setMethod("/", signature(e1="memuse", e2="numeric"),
     if (length(e2) != 1)
       stop("memuse * numeric : vector must be of length 1")
     
-    e1 <- convert.to.bytes(e1)
+    e1 <- convert_to_bytes(e1)
     
     e1@size <- e1@size / e2
     
@@ -298,7 +298,7 @@ setMethod("/", signature(e1="numeric", e2="memuse"),
 setMethod("/", signature(e1="memuse", e2="object_size"),
   function(e1, e2) 
   {
-    e1 <- convert.to.bytes(e1)
+    e1 <- convert_to_bytes(e1)
     
     e1@size <- e1@size / unclass(e2)
     
@@ -312,7 +312,7 @@ setMethod("/", signature(e1="memuse", e2="object_size"),
 setMethod("/", signature(e1="object_size", e2="memuse"),
   function(e1, e2) 
   {
-    e2 <- convert.to.bytes(e2)
+    e2 <- convert_to_bytes(e2)
     
     e2@size <- unclass(e1) / e2@size
     
@@ -345,8 +345,8 @@ setMethod("^", signature(e1="memuse", e2="memuse"),
         e1 <- swap.names(e1)
     }
     
-    e1 <- convert.to.bytes(e1)
-    e2 <- convert.to.bytes(e2)
+    e1 <- convert_to_bytes(e1)
+    e2 <- convert_to_bytes(e2)
     
     e1@size <- e1@size ^ e2@size
     
@@ -363,7 +363,7 @@ setMethod("^", signature(e1="memuse", e2="numeric"),
     if (length(e2) != 1)
       stop("memuse ^ vector : vector must be of length 1")
     
-    e1 <- convert.to.bytes(e1)
+    e1 <- convert_to_bytes(e1)
     
     e1@size <- e1@size ^ e2
     
