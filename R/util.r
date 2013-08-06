@@ -124,8 +124,12 @@ abc <- function(a, b, c)
 approx_size <- function(x, digits=1)
 {
   # vectorize if needed
-  if (length(x) > 1)
-    return( sapply(x, approx_size) )
+  if (length(x) > 1){
+    ret <- sapply(x, approx_size)
+    class(ret) <- "approx"
+    
+    return( ret )
+  }
   
   ordmag <- log10(x)
   if (ordmag < 3){
@@ -165,6 +169,8 @@ approx_size <- function(x, digits=1)
   }
   
   size <- paste(x, char, sep="")
+  
+  class(size) <- "approx"
   
   return( size )
 }

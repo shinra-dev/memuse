@@ -3,11 +3,12 @@
 \docType{package}
 \title{Core memuse Classes and Methods}
 \description{
-  The package gives the user the size (memory usage) of an in-core, 
-  dense matrix. The output is an S4 class object that can be manipulated 
-  to be presented in different ways (different units, short/long 
-  versions of those units, etc.). For more information, see the package 
-  vignette and the manual.
+  The package gives the user the size (memory usage) of an unallocated, dense, 
+  in-core numeric object (matrix/vector). The output is an S4 class object 
+  that can be manipulated to be presented in different ways (different units, 
+  short/long versions of those units, etc.). Details about these various 
+  options are outlined in the rest of this manual, as well as the package 
+  vignette.
 }
 \details{
 \tabular{ll}{
@@ -18,7 +19,11 @@
 }
 }
 \references{
+  Project home page:
   \url{http://wrathematics.github.io}
+
+  CRAN listing:
+  \url{http://cran.r-project.org/web/packages/memuse/index.html}
 }
 \author{
   Drew Schmidt

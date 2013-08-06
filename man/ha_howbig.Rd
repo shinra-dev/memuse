@@ -12,8 +12,9 @@
 \usage{
   howbig(nrow, ncol, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES, 
          ..., type="double", intsize=4)
-  howbig.par(nrow, ncol, cores, par="balanced", unit=.UNIT, unit.prefix=.PREFIX, 
-             unit.names=.NAMES, ..., type="double", intsize=4, ICTXT=0)
+  howbig.par(nrow, ncol, cores=1, par="balanced", unit=.UNIT, 
+			 unit.prefix=.PREFIX, unit.names=.NAMES, ..., type="double", 
+			 intsize=4, ICTXT=0, bldim=c(4, 4))
 }
 \arguments{
   \item{nrow, ncol}{Number of (global) rows/columns of the matrix.}
@@ -36,6 +37,7 @@
   this is platform dependent.}
   \item{ICTXT}{BLACS context number; only used with \code{howbig.par()}
   with \code{par="dmat"}.}
+  \item{bldim}{Blocking factor for block-cyclically decomposed (dmat) data.}
 }
 \details{
   These functions provide the memory usage of an unallocated, dense, 

@@ -44,5 +44,10 @@ setClass("memuse",
 )
 
 
+### Virtual classes
+
 # to prevent R whining during package installation
 setClass("object_size") 
+
+# for nice printing
+setClass("approx", representation="VIRTUAL")

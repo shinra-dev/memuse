@@ -2,7 +2,7 @@ setMethod("howmany", signature(x="memuse"),
   function(x, nrow, ncol, out.type="full", ..., type="double", intsize=4)
   {
     # Manage input arguments
-    ret.type <- match.arg(arg=tolower(out.type), choices=c("full", "approximate"))
+    out.type <- match.arg(arg=tolower(out.type), choices=c("full", "approximate"))
     type <- match.arg(arg=tolower(type), choices=c("double", "integer"))
     
     if (type == "double")
@@ -32,15 +32,10 @@ setMethod("howmany", signature(x="memuse"),
     # Return
     ret <- c(nrow, ncol)
     
-    if (out.type == "approximate"){
+    if (out.type == "approximate")
       ret <- approx_size(ret)
-      paste(paste(ret, collapse=" "), "\n")
-      
-      invisible( ret )
-    }
-    else {
-      return( ret )
-    }
+    
+    return( ret )
   }
 )
 

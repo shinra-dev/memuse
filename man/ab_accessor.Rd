@@ -60,7 +60,10 @@
   otherwise a string is returned.
 }
 \seealso{
-  \code{\link{Replacers}, \link{memuse-class}}
+  \code{
+    \link{memuse-class}
+    \link{Replacers}
+  }
 }
 \examples{
 x <- mu(1e6)

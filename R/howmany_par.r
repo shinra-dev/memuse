@@ -1,46 +1,32 @@
-setMethod("howmany", signature(x="memuse"),
-  function(x, nrow, ncol, out.type="full", ..., type="double", intsize=4)
+setMethod("howmany.par", signature(x="memuse"),
+  function(x, nrow, ncol, out.type="full", cores=1, par="row", ..., type="double", intsize=4, ICTXT=0, bldim=c(4, 4))
   {
-    # Manage input arguments
-    ret.type <- match.arg(arg=tolower(out.type), choices=c("full", "approximate"))
-    type <- match.arg(arg=tolower(type), choices=c("double", "integer"))
+    out.type <- match.arg(arg=tolower(out.type), choices=c("full", "approximate"))
     
-    if (type == "double")
-      bytes <- 8
-    else if (type == "integer")
-      bytes <- intsize
+    # global
+    dim <- howmany(x=x, nrow=nrow, out.type="full", type=type, intsize=intsize)
     
-    # Get the size
-    size <- convert_to_bytes(x)@size
-    
-    if (!missing(nrow)){
-      if (!is.int(nrow))
-        stop("argument 'nrow' must be an integer")
-      else if (!missing(ncol))
-        stop("you should supply at most one of 'nrow' and 'ncol'.  Perhaps you meant to use howbig()?")
-      else
-        ncol <- floor(size/(nrow*bytes))
+    # local
+    par <- match.arg(tolower(par), c("row", "column", "dmat"))
+    if (par == "row") {
+      ldim <- c(floor(dim[1L]/cores), dim[2L])
     }
-    else if (!missing(ncol)){
-      if (!is.int(ncol))
-        stop("argument 'ncol' must be an integer")
-      nrow <- floor(size/(ncol*bytes))
+    else if (par == "column"){
+      ldim <- c(dim[1L], floor(dim[2L]/cores))
     }
-    else
-      nrow <- ncol <- floor(sqrt(size/bytes))
+    else if (par == "dmat") {
+      ldim <- numroc(nprocs=cores, dim=dim, bldim=bldim, ICTXT=ICTXT)
+    }
     
-    # Return
-    ret <- c(nrow, ncol)
-    
+    # re-cast return as neededS
     if (out.type == "approximate"){
-      ret <- approx_size(ret)
-      paste(paste(ret, collapse=" "), "\n")
-      
-      invisible( ret )
+      dim <- approx_size(dim)
+      ldim <- approx_size(ldim)
     }
-    else {
-      return( ret )
-    }
+    
+    out <- list(global=dim, local=ldim)
+    
+    return( out )
   }
 )
 

@@ -32,7 +32,10 @@
   Returns a \code{memuse} object.
 }
 \seealso{
-  \code{\link{Accessors}, \link{memuse-class}}
+  \code{
+    \link{memuse-class}
+    \link{Accessors}
+  }
 }
 \examples{
 as.memuse(10)

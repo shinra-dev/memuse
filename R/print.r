@@ -1,4 +1,4 @@
-### print method
+### print methods
 setMethod("print", signature(x="memuse"),
   function(x, ..., unit=x@unit, unit.prefix=x@unit.prefix, unit.names=x@unit.names, digits=3)
   {
@@ -22,9 +22,23 @@ setMethod("print", signature(x="memuse"),
   }
 )
 
-### show method
+
+setMethod("print", signature(x="approx"),
+  function(x) 
+    cat(paste(paste(x, collapse=" "), "\n"))
+)
+
+
+
+### show methods
 setMethod("show", signature(object="memuse"),
   function(object) 
     print(object, unit=object@unit, unit.prefix=object@unit.prefix, unit.names=object@unit.names, digits=3)
+)
+
+
+setMethod("show", signature(object="approx"),
+  function(object) 
+    cat(paste(paste(object, collapse=" "), "\n"))
 )
 

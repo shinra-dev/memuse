@@ -17,19 +17,17 @@
   Constructor for objects of class \code{memuse}.
 }
 \usage{
-  \S4method{memuse}{numeric}(size=0, unit=.UNIT, unit.prefix=.PREFIX, 
-                             unit.names=.NAMES)
-  \S4method{mu}{numeric}(size=0, unit=.UNIT, unit.prefix=.PREFIX, 
-                         unit.names=.NAMES)
+  \S4method{memuse}{numeric}(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+  \S4method{mu}{numeric}(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
 }
 \arguments{
-  \item{size}{numeric; indicates the unit-multiple number of bytes used
+  \item{size}{\code{numeric}; indicates the unit-multiple number of bytes used
   by the object.}
-  \item{unit}{string; the unit of storage, such as "MiB" or "MB", 
+  \item{unit}{\code{string}; the unit of storage, such as "MiB" or "MB", 
   depending on prefix.  Case is ignored.}
-  \item{unit.prefix}{string; the unit prefix, namely IEC or SI.  Case 
+  \item{unit.prefix}{\code{string}; the unit prefix, namely IEC or SI.  Case 
   is ignored.}
-  \item{unit.names}{string; control for whether the unit names should 
+  \item{unit.names}{\code{string}; control for whether the unit names should 
   be printed out or their abbreviation should be used.  Options are 
   "long" and "short", respectively.  Case is ignored.}
 }
@@ -40,7 +38,11 @@
   Returns a \code{memuse} class object.
 }
 \seealso{
-  \code{\link{Constructor}, \link{memuse-class}}
+  \code{
+    \link{memuse-class}
+    \link{Accessors}
+    \link{Converters}
+  }
 }
 \examples{
 x <- mu(100, unit="kb")

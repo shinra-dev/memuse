@@ -1,14 +1,16 @@
 \name{memuse.internal}
 
-\alias{memuse_error}
-\alias{get.units}
-\alias{get.power}
-\alias{convert.to.bytes}
-\alias{best.unit}
-\alias{ct.unit}
-\alias{abc}
+% Virtual classes and methods
+\alias{approx-class}
+\alias{print,approx-method}
+\alias{show,approx-method}
+
+\alias{object.size}
+\alias{object.size-method}
+\alias{object.size,ANY-method}
 
 
+% Internal data structures
 \alias{.units}
 
 

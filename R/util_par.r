@@ -1,5 +1,3 @@
-### utility functions for howbig.par(par="dmat")
-
 # determine the optimal grid size (ICTXT=0)
 optimal.grid <- function(nprocs)
 {

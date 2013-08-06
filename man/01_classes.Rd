@@ -7,8 +7,10 @@
 \description{ Memory usage class object. }
 
 \section{Creating Objects}{
-  \code{ new('memuse', size = ..., unit = ..., unit.prefix = ...,
+  \code{new('memuse', size = ..., unit = ..., unit.prefix = ...,
   unit.names = ...)}
+  \code{memuse(size = ..., unit = ..., unit.prefix = ..., unit.names = ...)}
+  \code{mu(size = ..., unit = ..., unit.prefix = ..., unit.names = ...)}
 }
 
 \section{Slots}{
@@ -36,9 +38,13 @@
   SI.  The \code{unit.names} slot contains the unit names, either short
   (e.g., kb) or long (e.g., kilobyte).
   
-  See the memuse guide vignette for more details.
+  There is almost certainly no compelling reason to work with this class
+  directly.  Instead, you should use the host of methods for this class.
 }
 \seealso{
-  \code{\link{Control}}
+  \code{
+    \link{Control}
+    \link{Constructor}
+  }
 }
 \keyword{Classes}

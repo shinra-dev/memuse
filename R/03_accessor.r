@@ -5,7 +5,7 @@ setMethod("size", signature(x="memuse"),
     if (as.is)
       return(x@size)
     else
-      return(convert.to.bytes(x)@size)
+      return(convert_to_bytes(x)@size)
   }
 )
 
