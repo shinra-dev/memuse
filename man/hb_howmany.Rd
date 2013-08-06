@@ -19,10 +19,10 @@
 }
 \usage{
   \S4method{howmany}{memuse}(x, nrow, ncol, out.type="full", ..., 
-							 type="double", intsize=4)
+               type="double", intsize=4)
   \S4method{howmany.par}{memuse}(x, nrow, ncol, out.type="full", cores=1, 
-								 par="row", ..., type="double", intsize=4, 
-								 ICTXT=0, bldim=c(4, 4))
+                 par="row", ..., type="double", intsize=4, 
+                 ICTXT=0, bldim=c(4, 4))
 }
 \arguments{
   \item{x}{The size of a matrix stored as a \code{memuse} class object.}

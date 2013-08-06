@@ -36,7 +36,10 @@
   Returns a string.
 }
 \seealso{
-  \code{\link{Constructor}, \link{memuse-class}}
+  \code{\
+    link{Constructor}
+    \link{memuse-class}
+  }
 }
 \examples{
 x <- mu(1e6)

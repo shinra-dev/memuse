@@ -73,7 +73,10 @@
   Returns a \code{memuse} class object.
 }
 \seealso{
-  \code{\link{Constructor}, \link{memuse-class}}
+  \code{
+    \link{Constructor}
+    \link{memuse-class}
+  }
 }
 \examples{
 x <- mu(200)

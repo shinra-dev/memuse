@@ -51,7 +51,10 @@
   string is returned.
 }
 \seealso{
-  \code{\link{Accessors}, \link{memuse-class}}
+  \code{
+    \link{Accessors}
+    \link{memuse-class}
+  }
 }
 \examples{
 x <- mu(2000, unit="bytes")
