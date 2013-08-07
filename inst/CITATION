@@ -1,4 +1,4 @@
-citHeader("Why do you want to cite this?  What the hell is wrong with you?")
+citHeader("Why do you want to cite this?")
 
 citEntry(
   entry = "Misc",
