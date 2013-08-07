@@ -6,7 +6,7 @@ setMethod("howmany", signature(x="memuse"),
     representation <- match.arg(tolower(representation), c("dense", "sparse"))
     type <- match.arg(arg=tolower(type), choices=c("double", "integer"))
     
-    bytes <- check_type(type=type, intsize=intsize
+    bytes <- check_type(type=type, intsize=intsize)
     
     # Get the size
     size <- convert_to_bytes(x)@size

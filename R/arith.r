@@ -184,8 +184,8 @@ setMethod("*", signature(e1="memuse", e2="memuse"),
 setMethod("*", signature(e1="memuse", e2="numeric"),
   function(e1, e2) 
   {
-    if (length(e2) != 1)
-      stop("memuse * numeric : vector must be of length 1")
+#    if (length(e2) != 1)
+#      stop("memuse * numeric : vector must be of length 1")
     
     e1 <- convert_to_bytes(e1)
     

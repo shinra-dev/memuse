@@ -11,13 +11,13 @@ howbig <- function(nrow, ncol, representation="dense", unit=.UNIT, unit.prefix=.
   representation <- match.arg(tolower(representation), c("dense", "sparse"))
   if (representation == "sparse"){
     if (sparsity < 0 || sparsity > 1){
-	  stop("argument 'sparsity' should be between 0 and 1")
+    stop("argument 'sparsity' should be between 0 and 1")
     }
     else {
-	  x <- sparsity * x
-	}
+    x <- sparsity * x
   }
-
+  }
+  
   x <- swap.unit(x, unit)
   
   return( x )
