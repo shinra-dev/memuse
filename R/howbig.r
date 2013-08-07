@@ -1,4 +1,4 @@
-howbig <- function(nrow, ncol, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES, ..., type="double", intsize=4)
+howbig <- function(nrow, ncol, representation="dense", unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES, ..., sparsity=0.05, type="double", intsize=4)
 {
   type <- match.arg(tolower(type), c("double", "integer"))
   
@@ -11,6 +11,16 @@ howbig <- function(nrow, ncol, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAME
   
   x@size <- nrow*ncol*bytes # number of bytes used
   
+  representation <- match.arg(tolower(representation), c("dense", "sparse"))
+  if (representation == "sparse"){
+    if (sparsity < 0 || sparsity > 1){
+	  stop("argument 'sparsity' should be between 0 and 1")
+    }
+    else {
+	  x <- sparsity * x
+	}
+  }
+
   x <- swap.unit(x, unit)
   
   return( x )
