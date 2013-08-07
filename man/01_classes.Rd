@@ -7,9 +7,10 @@
 \description{ Memory usage class object. }
 
 \section{Creating Objects}{
-  \code{new('memuse', size = ..., unit = ..., unit.prefix = ...,
-  unit.names = ...)}
+  \code{new('memuse', size = ..., unit = ..., unit.prefix = ..., unit.names = ...)}
+  
   \code{memuse(size = ..., unit = ..., unit.prefix = ..., unit.names = ...)}
+
   \code{mu(size = ..., unit = ..., unit.prefix = ..., unit.names = ...)}
 }
 

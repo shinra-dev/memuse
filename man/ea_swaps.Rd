@@ -25,9 +25,9 @@
 }
 }
 \usage{
-  \S4method{swap.unit}{memuse}(x, unit)
-  \S4method{swap.prefix}{memuse}(x)
-  \S4method{swap.names}{memuse}(x)
+\S4method{swap.unit}{memuse}(x, unit)
+\S4method{swap.prefix}{memuse}(x)
+\S4method{swap.names}{memuse}(x)
 }
 \arguments{
   \item{x}{memuse object}

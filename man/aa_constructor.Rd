@@ -17,8 +17,8 @@
   Constructor for objects of class \code{memuse}.
 }
 \usage{
-  \S4method{memuse}{numeric}(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
-  \S4method{mu}{numeric}(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+\S4method{memuse}{numeric}(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+\S4method{mu}{numeric}(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
 }
 \arguments{
   \item{size}{\code{numeric}; indicates the unit-multiple number of bytes used

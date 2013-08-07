@@ -15,25 +15,31 @@
 }
 \details{
   Currently, there are 4 control data objects:
-
-  \code{.UNIT} defaults to "best".  The default choice will scale \code{size}
+  \itemize{
+  \item  \code{.UNIT} defaults to "best".  The default choice will scale \code{size}
   values to the nearest (by scaling factor --- 1024 or 1000 depending on
   unit prefix).  Other acceptable choices are, for example, "kb" or "kib".
   If the user requests the wrong unit by prefix (e.g., "kb" instead of
   "kib" when the unit prefix is IEC), then the correct one will be 
   chosen for the user.
   
-  \code{.PREFIX} defaults to "IEC".  Acceptable values are "IEC" and "SI".
+  \item \code{.PREFIX} defaults to "IEC".  Acceptable values are "IEC" and "SI".
   
-  \code{.NAMES} defaults to "short".  Acceptable values are "short" and
+  \item \code{.NAMES} defaults to "short".  Acceptable values are "short" and
   "long".
   
-  \code{.PRECEDENCE} defaults to "prefix".  Acceptable values are "unit"
+  \item \code{.PRECEDENCE} defaults to "prefix".  Acceptable values are "unit"
   and "prefix".
 
+  }
+
   All values are case insensitive, in that the correct case will be determined
-  for the user if the incorrect case is supplied.  For a "human readable"
-  explanation of what these values do, see the package vignette.
+  for the user if the incorrect case is supplied.  For example, if the user
+  sets \code{.PREFIX <- "si"}, then the correct case ("SI") will be determined
+  as needed.
+  
+  For a "human readable" explanation of what these values do, see the package 
+  vignette.
 }
 \seealso{
   \code{

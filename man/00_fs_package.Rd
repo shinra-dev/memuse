@@ -14,8 +14,10 @@
 \tabular{ll}{
   Package: \tab memuse\cr
   Type: \tab Package\cr
-  License: \tab GPL\cr
+  License: \tab GPL (>= 2)\cr
+  LazyData: \tab yes\cr
   LazyLoad: \tab yes\cr
+  NeedsCompilation: \tab no
 }
 }
 \references{

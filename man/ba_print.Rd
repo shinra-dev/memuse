@@ -19,8 +19,8 @@
 }
 }
 \usage{
-  \S4method{print}{memuse}(x, ..., unit=x@unit, unit.prefix=x@unit.prefix, unit.names=x@unit.names, digits=3)
-  \S4method{show}{memuse}(object)
+\S4method{print}{memuse}(x, ..., unit=x@unit, unit.prefix=x@unit.prefix, unit.names=x@unit.names, digits=3)
+\S4method{show}{memuse}(object)
 }
 \arguments{
   \item{x, object}{\code{memuse} class object}

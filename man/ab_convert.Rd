@@ -17,8 +17,8 @@
 }
 }
 \usage{
-  \S4method{as.memuse}{numeric}(x, ...)
-  \S4method{as.memuse}{object_size}(x, ...)
+\S4method{as.memuse}{numeric}(x, ...)
+\S4method{as.memuse}{object_size}(x, ...)
 }
 \arguments{
   \item{x}{Numeric or object_size data.}

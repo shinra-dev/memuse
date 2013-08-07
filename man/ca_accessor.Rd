@@ -32,11 +32,11 @@
 }
 }
 \usage{
-  \S4method{size}{memuse}(x, as.is=TRUE)
-  \S4method{as.numeric}{memuse}(x, ...)
-  \S4method{unit}{memuse}(x)
-  \S4method{unit.prefix}{memuse}(x)
-  \S4method{unit.names}{memuse}(x)
+\S4method{size}{memuse}(x, as.is=TRUE)
+\S4method{as.numeric}{memuse}(x, ...)
+\S4method{unit}{memuse}(x)
+\S4method{unit.prefix}{memuse}(x)
+\S4method{unit.names}{memuse}(x)
 }
 \arguments{
   \item{x}{memuse object}
