@@ -17,5 +17,6 @@ License: GPL (>= 2)
 Depends: R (>= 2.14.0), utils, methods
 LazyData: yes
 LazyLoad: yes
+NeedsCompilation: no
 Author: Drew Schmidt
 Maintainer: Drew Schmidt <wrathematics@gmail.com>

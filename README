@@ -2,9 +2,10 @@ This package is an over-engineered solution to a mostly non-existent problem,
 as a sort of love letter to other needlessly complex programs like the 
 "Enterprise Fizzbuzz" https://github.com/Mikkeren/FizzBuzzEnterpriseEdition .
 
-The package gives the user the size (memory usage) of an in-core, dense matrix.
-The output is an S4 class object that can be manipulated to be presented in
-different ways (different units, short/long versions of those units, etc.). 
-For more information, see the package vignette and the manual.
+The package gives the user the size (memory usage) of an in-core, dense 
+matrix.  The output is an S4 class object that can be manipulated to be 
+presented in different ways (different units, short/long versions of those 
+units, etc.).  For more information, see the package vignette and the manual.
 
-The package can be installed via:  R CMD INSTALL memuse_1.0.tar.gz
+For installation instructions, see the package vignette, located in the 
+package source tree:  inst/doc/memuse-guide.pdf
