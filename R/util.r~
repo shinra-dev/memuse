@@ -2,7 +2,7 @@
 mu_error <- function() stop("Badly formed 'memuse' object", call.=FALSE)
 
 
-check_type <- function(type, intsize)
+check_type <- function(type)
 {
   if (type == "double")
     bytes <- 8

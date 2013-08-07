@@ -1,6 +1,19 @@
 howbig.par <- function(nrow, ncol, cores=1, par="balanced", unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES, ..., type="double", intsize=4, ICTXT=0, bldim=c(4, 4))
 {
   par <- match.arg(arg=tolower(par), choices=c("dmat", "balanced"))
+###  type <- match.arg(arg=tolower(type), choices=c("double", "integer"))
+###  
+###  x <- internal.mu(size=1, unit="b", unit.prefix=unit.prefix, unit.names=unit.names)
+###  
+###  if (type == "double")
+###    bytes <- 8
+###  else if (type == "integer")
+###    bytes <- intsize
+###  
+###  # total
+###  x@size <- nrow*ncol*bytes # number of bytes used
+###  
+###  x <- swap.unit(x, unit)
   
   x <- howbig(nrow=nrow, ncol=ncol, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names, type=type, intsize=intsize)
   
