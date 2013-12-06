@@ -1,6 +1,6 @@
 import(methods)
 
-exportClasses("memuse", "approx")
+exportClasses("memuse")
 
 exportMethods(
   ### Constructors
@@ -25,5 +25,7 @@ export(
   ### Arithmetic
   "+", "-", "*", "/", "^", 
   ### Misc
-  print, howbig, howbig.par, howmany, howmany.par
+  print, howbig, howbig.par, howmany, howmany.par,
+  ### Approx stuff
+  approx_size
 )

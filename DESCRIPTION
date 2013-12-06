@@ -11,7 +11,8 @@ Description: How much ram do you need to store a 100,000 by 100,000 matrix?
   offers similar functionality to that of R's object.size() function, with 
   the key difference being that memuse does not require an object to already
   be allocated.  So one can determine the size of enormous matrices even
-  from a laptop.
+  from a laptop.  In short, it's basically a fancy printing system for byte
+  sizes.
 License: GPL (>= 2)
 Depends: R (>= 2.14.0), utils, methods
 LazyData: yes

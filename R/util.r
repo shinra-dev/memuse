@@ -131,62 +131,6 @@ abc <- function(a, b, c)
 }
 
 
-# Approximate size (by order magnitude) of a number
-approx_size <- function(x, digits=1)
-{
-  # vectorize if needed
-  if (length(x) > 1){
-    ret <- sapply(x, approx_size)
-    class(ret) <- "approx"
-    
-    return( ret )
-  }
-  
-  ordmag <- log10(x)
-  if (ordmag < 3){
-    char <- ""
-  }
-  else if (ordmag < 6){
-    char <- "k"
-    x <- round(x/(10^3), digits=digits)
-  } 
-  else if (ordmag < 9){
-    char <- "m"
-    x <- round(x/(10^6), digits=digits)
-  } 
-  else if (ordmag < 12){
-    char <- "b"
-    x <- round(x/(10^9), digits=digits)
-  } 
-  else if (ordmag < 15){
-    char <- "t"
-    x <- round(x/(10^12), digits=digits)
-  } 
-  else if (ordmag < 18){
-    char <- "qd"
-    x <- round(x/(10^15), digits=digits)
-  } 
-  else if (ordmag < 21){
-    char <- "qt"
-    x <- round(x/(10^18), digits=digits)
-  } 
-  else if (ordmag < 24){
-    char <- "sx"
-    x <- round(x/(10^21), digits=digits)
-  } 
-  else if (ordmag < 27){
-    char <- "sp"
-    x <- round(x/(10^24), digits=digits)
-  }
-  
-  size <- paste(x, char, sep="")
-  
-  class(size) <- "approx"
-  
-  return( size )
-}
-
-
 # whole number checker
 is.int <- function(x)
 {

@@ -31,12 +31,14 @@ setClass("memuse",
           representation(
                          size="numeric",
                          unit="character",
+                         baseunit="character",
                          unit.prefix="character",
                          unit.names="character"
           ),
           prototype(
                          size=0,
                          unit="B",
+                         baseunit="bytes",
                          unit.prefix="IEC",
                          unit.names="short"
           ), 
@@ -51,3 +53,4 @@ setClass("object_size")
 
 # for nice printing
 setClass("approx", representation="VIRTUAL")
+

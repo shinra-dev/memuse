@@ -1,3 +1,4 @@
+* approx_size() is broken
 * add approx to howbig()
 * finish sum(), mean(), etc. methods
 * expand arithmetic to work on vectors/lists

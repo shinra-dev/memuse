@@ -6,6 +6,7 @@ The package gives the user the size (memory usage) of an in-core, dense
 matrix.  The output is an S4 class object that can be manipulated to be 
 presented in different ways (different units, short/long versions of those 
 units, etc.).  For more information, see the package vignette and the manual.
+It's basically a fancy printing system for byte sizes.
 
 For installation instructions, see the package vignette, located in the 
 package source tree:  inst/doc/memuse-guide.pdf
