@@ -38,28 +38,3 @@ setMethod("object.size", signature(x="ANY"),
   }
 )
 
-
-### Recasting methods
-setMethod("as.numeric", signature(x="memuse"),
-  function(x, ...)
-  {
-    return( convert_to_bytes(x)@size )
-  }
-)
-
-
-setMethod("as.memuse", signature(x="numeric"),
-  function(x, ...)
-  {
-    return( internal.mu(size=x, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES) )
-  }
-)
-
-
-setMethod("as.memuse", signature(x="object_size"),
-  function(x, ...)
-  {
-    return( as.memuse(unclass(x)) )
-  }
-)
-

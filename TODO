@@ -2,3 +2,7 @@
 * add approx to howbig()
 * finish sum(), mean(), etc. methods
 * expand arithmetic to work on vectors/lists
+
+
+* make 'approx' a formal class: exact, approx
+* make arithmetic methods for 'approx'
