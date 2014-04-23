@@ -1,3 +1,5 @@
+== This Release ==
+
 * approx_size() is broken
 * add approx to howbig()
 * finish sum(), mean(), etc. methods
@@ -6,3 +8,10 @@
 
 * make 'approx' a formal class: exact, approx
 * make arithmetic methods for 'approx'
+
+* add a time printer, replace system.time()
+
+
+== Next release ==
+
+* incorporate bits

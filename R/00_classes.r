@@ -28,21 +28,21 @@ valid.mu <- function(object)
    # unit.prefix --- IEC or SI units
    # unit.names --- short (e.g., kb) or long (e.g., kilobyte)
 setClass("memuse", 
-          representation(
-                         size="numeric",
-                         unit="character",
-                         baseunit="character",
-                         unit.prefix="character",
-                         unit.names="character"
-          ),
-          prototype(
-                         size=0,
-                         unit="B",
-                         baseunit="bytes",
-                         unit.prefix="IEC",
-                         unit.names="short"
-          ), 
-          validity=valid.mu
+  representation(
+    size="numeric",
+    unit="character",
+    baseunit="character",
+    unit.prefix="character",
+    unit.names="character"
+  ),
+  prototype(
+    size=0,
+    unit="B",
+    baseunit="bytes",
+    unit.prefix="IEC",
+    unit.names="short"
+  ), 
+  validity=valid.mu
 )
 
 

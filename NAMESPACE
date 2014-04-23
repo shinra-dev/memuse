@@ -1,3 +1,5 @@
+useDynLib("memuse")
+
 import(methods)
 
 exportClasses("memuse")
@@ -20,6 +22,7 @@ exportMethods(
 )
 
 export(
+  meminfo,
   ### Constructor
   memuse, mu,
   ### Arithmetic
