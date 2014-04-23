@@ -11,9 +11,6 @@ approx_size <- function(x, unit="best", unit.names="long", ..., digits=1)
     return( ret )
   }
   
-  
-  unit.names <- match.arg(tolower(unit.names), c("short", "long", "comma"))
-  
   ordmag <- log10(x)
   
   if (ordmag < 3)
@@ -25,7 +22,10 @@ approx_size <- function(x, unit="best", unit.names="long", ..., digits=1)
   {
     index <- max(1, min(which(.numbers$exponent > ordmag)) - 1)
     
-    char <- .numbers$name[index]
+    if (unit.names == "long")
+      unit <- .numbers$name[index]
+    else if (unit.names == "short")
+      unit <- .numbers$shorthand[index]
     
     printsize <- as.character( round(x/(10^.numbers$exponent[index]), digits=digits) )
   }

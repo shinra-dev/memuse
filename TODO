@@ -9,9 +9,9 @@
 * make 'approx' a formal class: exact, approx
 * make arithmetic methods for 'approx'
 
-* add a time printer, replace system.time()
-
 
 == Next release ==
 
 * incorporate bits
+* add a time printer, replace system.time()
+
