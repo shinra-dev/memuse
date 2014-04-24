@@ -17,22 +17,15 @@ meminfo <- function(compact.free=TRUE, show.virtual=FALSE)
   if (os == "Linux" && compact.free)
   {
     ret$freeram <- ret$freeram + ret$bufferram + ret$cachedram
-    ret$bufferram <- NULL
-    ret$cachedram <- NULL
+    ret$bufferram <- ret$cachedram <- NULL
   }
   
   if (!show.virtual)
   {
     if (os == "Linux")
-    {
-      ret$totalswap <- NULL
-      ret$freeswap <- NULL
-    }
+      ret$totalswap <- ret$freeswap <- ret$swapcached <- NULL
     else if (os == "Windows")
-    {
-      ret$totalpage <- NULL
-      ret$freepage <- NULL
-    }
+      ret$totalpage <- ret$freepage <- NULL
   }
   
   return( ret )

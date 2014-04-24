@@ -41,7 +41,7 @@
 
 #define chkret(ret) if(ret)return(ret)
 
-int get_cached(double *memcached, char *field, int fieldlen)
+int read_proc_meminfo(double *memcached, char *field, int fieldlen)
 {
   int tmplen = 1024 * sizeof(char);
   char *tmp;
@@ -80,15 +80,24 @@ int get_cached(double *memcached, char *field, int fieldlen)
 int get_meminfo(double **mem)
 {
   int ret;
-  double memcached;
+  double cached;
   
   *mem = malloc(MEMLEN * sizeof(*mem));
   
+  
   // cached
-  ret = get_cached(&memcached, "Cached", 6);
+  ret = read_proc_meminfo(&cached, "Cached", 6);
   
   chkret(ret);
-  (*mem)[MEMCACHED] = memcached;
+  (*mem)[MEMCACHED] = cached;
+  
+  
+  // swap cached
+  ret = read_proc_meminfo(&cached, "SwapCached", 10);
+  
+  chkret(ret);
+  (*mem)[SWAPCACHED] = cached;
+  
   
   // everything else
   struct sysinfo info;
@@ -105,6 +114,12 @@ int get_meminfo(double **mem)
   
   return ret;
 }
+
+
+
+// --------------------------------------------------------
+#elif OS_MAC
+
 
 
 

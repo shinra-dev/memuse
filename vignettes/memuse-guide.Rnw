@@ -44,6 +44,7 @@
 \input{./include/03-sizematters}
 \input{./include/04-memuse}
 \input{./include/05-other}
+\input{./include/06-meminfo}
 
 % \newpage
 % \phantomsection
