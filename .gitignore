@@ -6,6 +6,10 @@
 *~
 *.swp
 
+configure
+
+src/Makevars
+
 *.aux
 *.bbl
 *.blg
