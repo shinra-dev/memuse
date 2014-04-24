@@ -1,0 +1,2 @@
+AC_INIT(DESCRIPTION)
+AC_OUTPUT(src/Makevars)
