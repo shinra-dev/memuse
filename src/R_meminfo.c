@@ -64,23 +64,23 @@ SEXP set_meminfo(double *mem)
   newRvec(freeswap, 1, "double");
   newRvec(swapcached, 1, "double");
   
+  DBL(bufferram, 0) = mem[BUFFERRAM] * memunit;
+  DBL(memcached, 0) = mem[MEMCACHED] * memunit;
+  DBL(totalswap, 0) = mem[TOTALSWAP] * memunit;
+  DBL(freeswap, 0) = mem[FREESWAP] * memunit;
+  DBL(swapcached, 0) = mem[SWAPCACHED] * memunit;
+  
   R_list_names = make_list_names(MEMLEN-1, "totalram", "freeram", "bufferram", "cachedram", "totalswap", "freeswap", "swapcached");
   R_list = make_list(R_list_names, MEMLEN-1, totalram, freeram, bufferram, memcached, totalswap, freeswap, swapcached);
-  
-  REAL(VECTOR_ELT(R_list, BUFFERRAM))[0] = mem[BUFFERRAM] * memunit;
-  REAL(VECTOR_ELT(R_list, MEMCACHED))[0] = mem[MEMCACHED] * memunit;
-  REAL(VECTOR_ELT(R_list, TOTALSWAP))[0] = mem[TOTALSWAP] * memunit;
-  REAL(VECTOR_ELT(R_list, FREESWAP))[0] = mem[FREESWAP] * memunit;
-  REAL(VECTOR_ELT(R_list, SWAPCACHED))[0] = mem[SWAPCACHED] * memunit;
   #elif OS_WINDOWS
   newRvec(totalpage, 1, "double");
   newRvec(freepage, 1, "double");
   
+  DBL(totalpage, 0) = mem[TOTALPAGE];
+  DBL(freepage, 0) = mem[FREEPAGE];
+  
   R_list_names = make_list_names(MEMLEN-1, "totalram", "freeram", "totalpage", "freepage");
   R_list = make_list(R_list_names, MEMLEN-1, totalram, freeram, totalpage, freepage);
-  
-  REAL(VECTOR_ELT(R_list, TOTALPAGE))[0] = mem[TOTALPAGE];
-  REAL(VECTOR_ELT(R_list, FREEPAGE))[0] = mem[FREEPAGE];
   #elif OS_NIX
   R_list_names = make_list_names(MEMLEN-1, "totalram", "freeram");
   R_list = make_list(R_list_names, MEMLEN-1, totalram, freeram);

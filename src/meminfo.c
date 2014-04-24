@@ -138,7 +138,13 @@ int get_meminfo(double **mem)
   
   status.dwLength = sizeof(status);
   
+  // "If the function succeeds, the return value is nonzero."
+  // Go fuck yourself, Windows.
   ret = GlobalMemoryStatusEx(&status);
+  if (ret !=0 )
+    ret = 0;
+  else
+    ret = -1;
   
   (*mem)[MEMUNIT] = 1.0;
   
