@@ -127,9 +127,9 @@ int get_meminfo(double **mem)
   
   
   (*mem)[TOTALRAM] = ((double) status.ullTotalPhys);
-  (*mem)[FREERAM] = ((double) statex.ullAvailPhys);
-  (*mem)[TOTALPAGE] = ((double) statex.ullTotalPageFile);
-  (*mem)[FREEPAGE] = ((double) statex.ullAvailPageFile);
+  (*mem)[FREERAM] = ((double) status.ullAvailPhys);
+  (*mem)[TOTALPAGE] = ((double) status.ullTotalPageFile);
+  (*mem)[FREEPAGE] = ((double) status.ullAvailPageFile);
   
   
   return status.ullTotalPhys;
