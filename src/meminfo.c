@@ -125,6 +125,7 @@ int get_meminfo(double **mem)
   
   ret = GlobalMemoryStatusEx(&status);
   
+  (*mem)[MEMUNIT] = 1.0;
   
   (*mem)[TOTALRAM] = ((double) status.ullTotalPhys);
   (*mem)[FREERAM] = ((double) status.ullAvailPhys);

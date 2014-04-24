@@ -35,12 +35,13 @@
   #define FREESWAP 5
   #define MEMUNIT 6
 #elif OS_WINDOWS
-  #define MEMLEN 4
+  #define MEMLEN 5
   
   #define TOTALRAM 0
   #define FREERAM 1
   #define TOTALPAGE 2
   #define FREEPAGE 3
+  #define MEMUNIT 4
 #elif OS_NIX
   #define MEMLEN 3
   
