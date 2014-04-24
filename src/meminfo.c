@@ -148,7 +148,7 @@ int get_meminfo(double **mem)
   (*mem)[FREEPAGE] = ((double) status.ullAvailPageFile);
   
   
-  return status.ullTotalPhys;
+  return ret;
 }
 
 
