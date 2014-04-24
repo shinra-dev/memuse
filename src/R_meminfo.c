@@ -64,6 +64,8 @@ SEXP set_meminfo(double *mem)
   REAL(VECTOR_ELT(R_list, TOTALSWAP))[0] = mem[TOTALSWAP] * memunit;
   REAL(VECTOR_ELT(R_list, FREESWAP))[0] = mem[FREESWAP] * memunit;
   #elif OS_WINDOWS
+  SEXP totalpage, freepage;
+  
   newRvec(totalpage, 1, "double");
   newRvec(freepage, 1, "double");
   
