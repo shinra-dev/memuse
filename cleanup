@@ -2,6 +2,7 @@
 
 rm -rf ./chm
 rm -rf ./config.*
+rm -rf ./autom4te.cache
 rm -rf ./src/*.dylib
 rm -rf ./src/*.so
 rm -rf ./src/*.o
