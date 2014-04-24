@@ -1,17 +1,17 @@
 == This Release ==
 
-* approx_size() is broken
 * add approx to howbig()
 * finish sum(), mean(), etc. methods
 * expand arithmetic to work on vectors/lists
+* finish meminfo()
+* documentation is a mess
 
-
-* make 'approx' a formal class: exact, approx
-* make arithmetic methods for 'approx'
 
 
 == Next release ==
 
 * incorporate bits
 * add a time printer, replace system.time()
+* make 'approx' a formal class, give method exact
+* make arithmetic methods for 'approx'
 

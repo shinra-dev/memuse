@@ -18,17 +18,32 @@
 #define OS_NIX (defined(OS_BSD) || defined(OS_HURD) || defined(OS_LINUX) || defined(OS_MAC) || defined(OS_SOLARIS))
 
 
+// FIXME in case I'm dumb enough to leave these in on accident, 
+// I'm using these for testing
+//#define OS_LINUX 0
+//#define OS_NIX 1
+
+
+#if OS_LINUX
+  #define MEMLEN 7
+  
+  #define TOTALRAM 0
+  #define FREERAM 1
+  #define BUFFERRAM 2
+  #define MEMCACHED 3
+  #define TOTALSWAP 4
+  #define FREESWAP 5
+  #define MEMUNIT 6
+#elif OS_NIX
+  #define MEMLEN 3
+  
+  #define TOTALRAM 0
+  #define FREERAM 1
+  #define MEMUNIT 2
+#endif
+
+
 // Magic numbers
-#define MEMLEN 7
-
-#define TOTALRAM 0
-#define FREERAM 1
-#define BUFFERRAM 2
-#define MEMCACHED 3
-#define TOTALSWAP 4
-#define FREESWAP 5
-#define MEMUNIT 6
-
 #define MISSING -10.0
 
 #define PLATFORM_ERROR 100

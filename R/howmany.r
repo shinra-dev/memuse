@@ -1,5 +1,5 @@
 setMethod("howmany", signature(x="memuse"),
-  function(x, nrow, ncol, out.type="full", representation="dense", ..., sparsity=0.05, type="double", intsize=4)
+  function(x, nrow, ncol, out.type="full", representation="dense", ..., sparsity=0.05, type="double", intsize=4, unit.names="short")
   {
     # Manage input arguments
     out.type <- match.arg(arg=tolower(out.type), choices=c("full", "approximate"))
@@ -31,7 +31,7 @@ setMethod("howmany", signature(x="memuse"),
     ret <- c(nrow, ncol)
     
     if (out.type == "approximate")
-      ret <- approx_size(ret)
+      ret <- approx.size(ret, unit.names=unit.names)
     
     return( ret )
   }

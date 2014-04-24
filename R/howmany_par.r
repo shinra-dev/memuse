@@ -20,8 +20,8 @@ setMethod("howmany.par", signature(x="memuse"),
     
     # re-cast return as neededS
     if (out.type == "approximate"){
-      dim <- approx_size(dim)
-      ldim <- approx_size(ldim)
+      dim <- approx.size(dim)
+      ldim <- approx.size(ldim)
     }
     
     out <- list(global=dim, local=ldim)

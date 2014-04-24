@@ -1,4 +1,8 @@
 ======================= Version 2.0 ===========================================
+2014-4-22:
+  * Added meminfo() method for Linux and Solaris.
+  * Fixed approx_size() bug.
+
 2014-3-17:
   * Added as.character() method.
 
