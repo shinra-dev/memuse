@@ -109,40 +109,6 @@ int get_meminfo(double **mem)
 
 
 // --------------------------------------------------------
-#elif (OS_BSD || OS_MAC)
-
-#include <sys/types.h>
-#include <sys/sysctl.h>
-
-int get_meminfo(double **mem)
-{
-  
-  
-  int mib [] = { CTL_HW, HW_MEMSIZE };
-  int64_t value = 0;
-  size_t length = sizeof(value);
-  
-  if(-1 == sysctl(mib, 2, &value, &length, NULL, 0))
-    // An error occurred
-  
-  mach_msg_type_number_t count = HOST_VM_INFO_COUNT;
-  vm_statistics_data_t vmstat;
-  if(KERN_SUCCESS != host_statistics(mach_host_self(), HOST_VM_INFO, (host_info_t)&vmstat, &count))
-    // An error occurred
-  
-  double total = vmstat.wire_count + vmstat.active_count + vmstat.inactive_count + vmstat.free_count;
-  double wired = vmstat.wire_count / total;
-  double active = vmstat.active_count / total;
-  double inactive = vmstat.inactive_count / total;
-  double free = vmstat.free_count / total;
-  
-  
-  
-}
-
-
-
-// --------------------------------------------------------
 #elif OS_WINDOWS
 
 #include <windows.h>
@@ -159,26 +125,11 @@ int get_meminfo(double **mem)
   
   ret = GlobalMemoryStatusEx(&status);
   
-  // IN BYTES !
   
-  
-  // Total ram
-  status.ullTotalPhys
-  
-  // Free
-  statex.ullAvailPhys
-  
-  // Page total
-  statex.ullTotalPageFile
-  
-  // Free paging
-  statex.ullAvailPageFile
-  
-  // VM total
-  statex.ullTotalVirtual
-  
-  // VM free
-  statex.ullAvailVirtual
+  (*mem)[TOTALRAM] = ((double) status.ullTotalPhys);
+  (*mem)[FREERAM] = ((double) statex.ullAvailPhys);
+  (*mem)[TOTALPAGE] = ((double) statex.ullTotalPageFile);
+  (*mem)[FREEPAGE] = ((double) statex.ullAvailPageFile);
   
   
   return status.ullTotalPhys;
