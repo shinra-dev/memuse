@@ -27,6 +27,7 @@
 
 
 #include "memuse.h"
+#define chkret(ret) if(ret)return(ret)
 
 
 
@@ -38,8 +39,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
-#define chkret(ret) if(ret)return(ret)
 
 int read_proc_meminfo(double *memcached, char *field, int fieldlen)
 {
@@ -146,6 +145,8 @@ int get_meminfo(double **mem)
   else
     ret = -1;
   
+  chkret(ret);
+  
   (*mem)[MEMUNIT] = 1.0;
   
   (*mem)[TOTALRAM] = ((double) status.ullTotalPhys);
@@ -170,8 +171,16 @@ int get_meminfo(double **mem)
   *mem = malloc(MEMLEN * sizeof(*mem));
   
   npages = sysconf(_SC_PHYS_PAGES);
+  if (npages == -1)
+    return -1;
+  
   pagesize = sysconf(_SC_PAGESIZE);
-  freepages = sysconf( _SC_AVPHYS_PAGES);
+  if (pagesize == -1)
+    return -1;
+  
+  freepages = sysconf(_SC_AVPHYS_PAGES);
+  if (freepages == -1)
+    return -1;
   
   (*mem)[MEMUNIT] = 1.0;
   

@@ -30,5 +30,7 @@ export(
   ### Misc
   print, howbig, howbig.par, howmany, howmany.par,
   ### Approx stuff
-  approx.size
+  approx.size,
+  ### Times
+  wc.time, print.timing
 )
