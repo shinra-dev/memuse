@@ -41,7 +41,7 @@
 
 #define chkret(ret) if(ret)return(ret)
 
-int get_cached(double *memcached, char *field, int fieldlen)
+int read_proc_meminfo(double *memcached, char *field, int fieldlen)
 {
   int tmplen = 1024 * sizeof(char);
   char *tmp;
@@ -80,15 +80,24 @@ int get_cached(double *memcached, char *field, int fieldlen)
 int get_meminfo(double **mem)
 {
   int ret;
-  double memcached;
+  double cached;
   
   *mem = malloc(MEMLEN * sizeof(*mem));
   
+  
   // cached
-  ret = get_cached(&memcached, "Cached", 6);
+  ret = read_proc_meminfo(&cached, "Cached", 6);
   
   chkret(ret);
-  (*mem)[MEMCACHED] = memcached;
+  (*mem)[MEMCACHED] = cached;
+  
+  
+  // swap cached
+  ret = read_proc_meminfo(&cached, "SwapCached", 10);
+  
+  chkret(ret);
+  (*mem)[SWAPCACHED] = cached;
+  
   
   // everything else
   struct sysinfo info;
@@ -109,6 +118,12 @@ int get_meminfo(double **mem)
 
 
 // --------------------------------------------------------
+#elif OS_MAC
+
+
+
+
+// --------------------------------------------------------
 #elif OS_WINDOWS
 
 #include <windows.h>
@@ -123,7 +138,13 @@ int get_meminfo(double **mem)
   
   status.dwLength = sizeof(status);
   
+  // "If the function succeeds, the return value is nonzero."
+  // Go fuck yourself, Windows.
   ret = GlobalMemoryStatusEx(&status);
+  if (ret !=0 )
+    ret = 0;
+  else
+    ret = -1;
   
   (*mem)[MEMUNIT] = 1.0;
   
@@ -133,7 +154,7 @@ int get_meminfo(double **mem)
   (*mem)[FREEPAGE] = ((double) status.ullAvailPageFile);
   
   
-  return status.ullTotalPhys;
+  return ret;
 }
 
 

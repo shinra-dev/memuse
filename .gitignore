@@ -1,10 +1,13 @@
-*.in
 *.o
 *.so
 *.log
 *.status
 *~
 *.swp
+
+configure
+
+src/Makevars
 
 *.aux
 *.bbl

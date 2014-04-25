@@ -1,0 +1,21 @@
+#################################################################
+SEXPTOOLS_CPPFLAGS = `$(R_HOME)/bin/Rscript -e "SEXPtools:::cppflags()"`
+SEXPTOOLS_LDFLAGS = `$(R_HOME)/bin/Rscript -e "SEXPtools:::ldflags()"`
+
+PKG_CPPFLAGS = $(SEXPTOOLS_CPPFLAGS)
+PKG_CFLAGS = -w
+PKG_LIBS = $(SEXPTOOLS_LDFLAGS)
+
+
+OBJECTS = meminfo.o R_meminfo.o
+
+### Start making here.
+all: $(SHLIB)
+
+$(SHLIB): $(OBJECTS)
+
+clean:
+		@rm -rf *.o *.d *.rc *.so* *.dylib *.dll *.a *.lib \
+				Makedeps Makevars $(SHLIB) $(OBJECTS)
+
+

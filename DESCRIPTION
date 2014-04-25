@@ -19,6 +19,6 @@ LazyData: yes
 LazyLoad: yes
 NeedsCompilation: yes
 ByteCompile: yes
-Author: Drew Schmidt
+Author: Drew Schmidt [aut, cre],
+  Wei-Chen Chen [ctb]
 Maintainer: Drew Schmidt <wrathematics@gmail.com>
-Packaged: 2014-04-24 20:21:33 UTC; snoweye
