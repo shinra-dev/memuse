@@ -133,9 +133,11 @@ int get_meminfo(double **mem)
 int get_meminfo(double **mem)
 {
   int ret;
+
+  *mem = malloc(MEMLEN * sizeof(*mem));
   
   MEMORYSTATUSEX status;
-  
+
   status.dwLength = sizeof(status);
   
   // "If the function succeeds, the return value is nonzero."
