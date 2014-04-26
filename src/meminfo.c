@@ -132,22 +132,18 @@ int get_meminfo(double **mem)
 int get_meminfo(double **mem)
 {
   int ret;
-
-  *mem = malloc(MEMLEN * sizeof(*mem));
   
   MEMORYSTATUSEX status;
-
   status.dwLength = sizeof(status);
   
   // "If the function succeeds, the return value is nonzero."
   // Go fuck yourself, Windows.
   ret = GlobalMemoryStatusEx(&status);
-  if (ret !=0 )
-    ret = 0;
-  else
-    ret = -1;
   
-  chkret(ret);
+  if (ret == 0)
+    return -1;
+  
+  *mem = malloc(MEMLEN * sizeof(*mem));
   
   (*mem)[MEMUNIT] = 1.0;
   
@@ -157,7 +153,7 @@ int get_meminfo(double **mem)
   (*mem)[FREEPAGE] = ((double) status.ullAvailPageFile);
   
   
-  return ret;
+  return 0;
 }
 
 
