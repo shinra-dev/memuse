@@ -1,4 +1,4 @@
-citHeader("Why do you want to cite this?")
+citHeader("To cite the memuse package or memuse vignette:")
 
 citEntry(
   entry = "Misc",

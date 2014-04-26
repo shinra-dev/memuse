@@ -1,6 +1,20 @@
 \section{Hardware Memory Information: meminfo()}
 
-As of \pkg{memuse}~$\geq 2.0$, we include the \code{meminfo()} utility.  This function gathers some minimal hardware information about available memory.  This is \emph{extremely} platform dependent, and so we discuss some of the major implementations available.  
+\subsection{Using meminfo()}
+
+As of \pkg{memuse}~$\geq 2.0$, we include the \code{meminfo()} utility.  This function gathers some minimal hardware information about available memory: physical and (when possible) virtual.  This is \emph{extremely} platform dependent, and we will discuss some of the specifics in the following subsection.  
+
+To use, simply call:
+\begin{lstlisting}
+meminfo()
+\end{lstlisting}
+
+And a list will be returned containing some information.  By default, this will only contain a simplified profile of total and ``available'' (more on this later) physical memory.  For Linux, Mac, and Windows, the option is available for swap (or paging in the case of Windows) information.  
+
+
+
+
+\subsection{Platform Bullshit}
 
 The platform with the best support in the \pkg{memuse} package is Linux.  This is largely because getting this information in Linux is very simple --- and the data itself is very well-defined --- compared to other platforms.  So get your shit together, other OS devs.
 
@@ -14,7 +28,7 @@ For the remainder, we will be discussing how various values for ram are calculat
 
 
 
-\subsection{Linux}
+\subsubsection{Linux}
 In Linux, the total available ram can be broken down into
 \begin{itemize}
   \item truly unused (freeram)
@@ -48,26 +62,27 @@ The actual implementation of \code{meminfo()} uses \code{sysinfo} (see \code{man
 
 
 
-\subsection{Mac OS X}
+\subsubsection{Mac OS X}
 
 
 
 
 
 
-\subsection{Windows}
+\subsubsection{Windows}
 
 The \href{http://msdn.microsoft.com/en-us/library/windows/desktop/aa366589%28v=vs.85%29.aspx}{Windows documentation} 
-on this is surprisingly clear and thorough.  Well done on finally getting something right, Microsoft.
+on this is surprisingly clear and thorough.  I would compliment them, except that the function returns \emph{nonzero upon success}, which is in violation of the \proglang{C} standard, not to mention common decency.  Good job, guys.
+
+Also, this may crash your R session, so watch out.
 
 
 
 
 
+\subsubsection{Miscellaneous *NIX Variants}
 
-\subsection{Miscellaneous *NIX Variants}
-
-Everybody seems to have their own little wiggle for to \code{sysctl} for getting various memory statistics, and I just don't have the kind of time or resources to set up 100 different BSD-variant vm's to test that the man pages aren't lying to me.  As such, all *NIX's outside of Linux and Mac get only total ram and ``free ram'', as reported by \code{sysconf}.
+Everybody seems to have their own little wiggle to \code{sysctl} for getting various memory statistics, and I just don't have the kind of time or resources to set up 100 different BSD-variant vm's to test that the man pages aren't lying to me.  As such, all *NIX's outside of Linux and Mac get only total ram and ``free ram'', as reported by \code{sysconf}.
 
 Contributions are welcome.
 

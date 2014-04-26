@@ -2,19 +2,22 @@
 
 \documentclass{article}
 \usepackage[margin=1.1in]{geometry}
+\newcommand{\thispackage}{\pkg{memuse}\xspace}
 
 \input{./include/preamble}
 
 
-\author{Drew Schmidt}
-\title{Guide to the \pkg{memuse} Package\\[.4cm]}
+\myauthor{Drew Schmidt}
+\mytitle{Guide to the \thispackage Package}
+\mysubtitle{A Package for Estimating Memory Usage}
+\myversion{2.0}
 
 
 
 \begin{document}
 
-\prebodyheadfoot
-
+% \prebodyheadfoot
+% 
 \newgeometry{textwidth=9in,textheight=11in}
 \begin{titlepage}
   \begin{minipage}[c]{8.5in}
@@ -26,18 +29,9 @@
 \end{titlepage}
 
 
-\restoregeometry
-  
-\maketitle
-\pagenumbering{roman}
-\tableofcontents
+% \restoregeometry
 
-
-\bodyheadfoot
-\newpage
-\pagenumbering{arabic}
-\setcounter{page}{1}
-\pagestyle{fancy}
+\makefirstfew
 
 \input{./include/01-introduction}
 \input{./include/02-installation}

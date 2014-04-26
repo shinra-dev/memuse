@@ -1,6 +1,37 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{xspace}
+
+\input{./include/titlepage.tex}
+
+\newcommand{\makefirstfew}{%
+\prebodyheadfoot
+\restoregeometry
+
+  
+\titleGP
+\newpage
+
+\input{./include/00-acknowledgement}
+\vfill
+\input{./include/00-copyright}
+\newpage
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+
+\bodyheadfoot
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\pagestyle{fancy}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% definitions
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \makeatletter
 \newcommand\code{\bgroup\@makeother\_\@makeother\~\@makeother\$\@codex}
@@ -50,6 +81,16 @@
 \definecolor{p3}{RGB}{150,75,0}
 
 
+
+\definecolor{g11}{rgb}{0, 0, 1}
+\definecolor{g12}{rgb}{0, .4, 1}
+\definecolor{g13}{rgb}{0, .8, 1}
+
+\definecolor{g21}{rgb}{0, .5, .3}
+\definecolor{g22}{rgb}{.4, .5, .3}
+\definecolor{g23}{rgb}{.8, .5, .3}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% lstlisting
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -82,20 +123,49 @@
 
 
 \lstdefinelanguage{ft}{
-  language=[90]Fortran,
-  basicstyle=\ttfamily,
-                      keywordstyle=\color{blue},
-commentstyle=\color{dkgreen},
-  morecomment=[l]{!\ }
+        language=[90]Fortran,
+        basicstyle=\ttfamily,
+        keywordstyle=\color{blue},
+        commentstyle=\color{dkgreen},
+        morecomment=[l]{!\ }
+}
+
+\lstdefinelanguage{fanC}{
+        language=[ANSI]C,
+        basicstyle=\ttfamily\color{black},
+        backgroundcolor=\color{grayish},
+        frame=single,
+        breaklines=true,
+        keywordstyle=\color{blue},
+        commentstyle=\color{dkgreen}\itshape,
+        stringstyle=\color{mauve},
+        numbers=none,
+        showspaces=false,
+        showstringspaces=false,
+        showtabs=false,
+        rulecolor=\color{gray},
+        tabsize=4,
+        captionpos=t,
+        morecomment=[l]{//},
+        morekeywords={newRvec,newRlist, newRmat, R_INIT, PT, R_END, INTP, DBLP, 
+INT, DBL, STR, MatINT, matDBL, RNULL, is_null, is_Rnull, is_Rnan, is_Rna, 
+is_double, is_integer, PRINT}
 }
 
 
 
-\lstset{numbers=none,numberstyle=\footnotesize\ttfamily,
-        frame=single,frameround=tttt,language=R,
-        showspaces=false,showstringspaces=false,
-        breaklines=true,breakatwhitespace=true,
-        basicstyle=\small\ttfamily}
+\lstset{
+        numbers=none,
+        numberstyle=\footnotesize\ttfamily,
+        frame=single,
+        frameround=tttt,
+        showspaces=false,
+        showstringspaces=false,
+        breaklines=true,
+        breakatwhitespace=true,
+        basicstyle=\small\ttfamily
+}
+  
 %\lstset{literate={<-}{{$\leftarrow$}}1}
 \makeatletter
 \let\Code\@undefined
@@ -152,6 +222,10 @@ commentstyle=\color{dkgreen},
 %%%%% misc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newcommand{\R}{\proglang{R}}
+\newcommand{\C}{\proglang{C}}
+\newcommand{\Cpp}{\proglang{C$++$}}
+
 % \usepackage{url}
 \usepackage{multirow}
 \usepackage{amsmath}
@@ -172,11 +246,28 @@ commentstyle=\color{dkgreen},
     urlcolor=blue
 }
 
+\newcommand{\secref}[1]{\hyperref[#1]{Section~\ref*{#1}}}
+
+% \newcommand{\twiddle}[1]{\hspace{.05cm}$\sim$~\hspace{-.1cm}#1\hspace{-.1cm}~$\sim$\hspace{.05cm}}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[nottoc,notlof,notlot]{tocbibind}
+\usepackage[authoryear,round]{natbib}
+\usepackage{multirow}
+\bibliographystyle{include/jss}
+
 
 \newcommand{\interject}{I'd just like to interject for a moment. What you're referring to as Linux, is in fact, GNU/Linux, or as I've recently taken to calling it, GNU plus Linux. Linux is not an operating system unto itself, but rather another free component of a fully functioning GNU system made useful by the GNU corelibs, shell utilities and vital system components comprising a full OS as defined by POSIX.
-\\\\
+\\[.2cm]
 Many computer users run a modified version of the GNU system every day, without realizing it. Through a peculiar turn of events, the version of GNU which is widely used today is often called Linux, and many of its users are not aware that it is basically the GNU system, developed by the GNU Project.
-\\\\
+\\[.2cm]
 There really is a Linux, and these people are using it, but it is just a part of the system they use. Linux is the kernel: the program in the system that allocates the machine's resources to the other programs that you run. The kernel is an essential part of an operating system, but useless by itself; it can only function in the context of a complete operating system. Linux is normally used in combination with the GNU operating system: the whole system is basically GNU with Linux added, or GNU/Linux. All the so-called Linux distributions are really distributions of GNU/Linux.}
 
 
