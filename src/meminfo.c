@@ -119,6 +119,59 @@ int get_meminfo(double **mem)
 // --------------------------------------------------------
 #elif OS_MAC
 
+#include <mach/vm_statistics.h>
+#include <mach/mach_types.h> 
+#include <mach/mach_init.h>
+#include <mach/mach_host.h>
+
+
+int get_meminfo(double **mem)
+{
+  int ret;
+  *mem = malloc(MEMLEN * sizeof(*mem));
+  
+  // Ram
+  vm_size_t page_size;
+  mach_port_t mach_port;
+  mach_msg_type_number_t count;
+  vm_statistics_data_t vm_stats;
+  
+  mach_port = mach_host_self();
+  count = sizeof(vm_stats) / sizeof(natural_t);
+  
+  ret = host_page_size(mach_port, &page_size);
+  if (ret != KERN_SUCCESS)
+    return -1;
+  
+  ret = host_statistics(mach_port, HOST_VM_INFO, (host_info_t)&vm_stats, &count);
+  if (ret != KERN_SUCCESS)
+    return -1;
+  
+  (*mem)[TOTALRAM] = ((double) 1); // FIXME
+  
+  (*mem)[FREERAM] = ((double) (int64_t)vm_stats.free_count * (int64_t)page_size);
+  
+  
+  // Swap
+  struct statfs stats;
+  ret = statfs("/", &stats);
+  chkret(ret);
+  
+  (*mem)[FREESWAP] = (double) ((uint64_t)stats.f_bsize * stats.f_bfree);
+  
+  
+  xsw_usage vmusage = {0};
+  size_t size = sizeof(vmusage);
+  ret = sysctlbyname("vm.swapusage", &vmusage, &size, NULL, 0);
+  chkret(ret);
+  
+  (*mem)[TOTALSWAP] = ((double) size);
+  
+  
+  (*mem)[MEMUNIT] = 1.0;
+  
+  return 0;
+}
 
 
 
