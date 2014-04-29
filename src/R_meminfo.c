@@ -18,7 +18,7 @@
 #include "memuse.h"
 
 
-SEXP meminfo_error()
+SEXP meminfo_error(int code)
 {
   R_INIT;
   SEXP R_list_names, R_list, platform;
@@ -28,7 +28,10 @@ SEXP meminfo_error()
   R_list_names = make_list_names(1, "platform");
   R_list = make_list(R_list_names, 1, platform);
   
-  REAL(VECTOR_ELT(R_list, 0))[0] = -1.0;
+  if (code == FAILURE)
+    REAL(VECTOR_ELT(R_list, 0))[0] = ((double) FAILURE);
+  else if (code == PLATFORM_ERROR)
+    REAL(VECTOR_ELT(R_list, 0))[0] = ((double) PLATFORM_ERROR);
   
   R_END;
   return R_list;
@@ -110,7 +113,7 @@ SEXP R_meminfo()
   if (!ret)
     R_list = set_meminfo(mem);
   else
-    R_list = meminfo_error();
+    R_list = meminfo_error(ret);
   
   if (ret != PLATFORM_ERROR)
     free(mem);

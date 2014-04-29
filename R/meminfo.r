@@ -8,6 +8,8 @@ meminfo <- function(compact.free=TRUE, show.virtual=FALSE)
   os <- get.os()
   
   if (any(unlist(out) == -1))
+    stop("There were errors accessing hardware info")
+  else if (any(unlist(out) == -10))
     stop("platform not supported at this time")
   
 #  out <- lapply(out, function(x) {if (x == -10) NULL else x})
@@ -27,6 +29,13 @@ meminfo <- function(compact.free=TRUE, show.virtual=FALSE)
     else if (os == "Windows")
       ret$totalpage <- ret$freepage <- NULL
   }
+  else
+  {
+    if (os != "Linux" && os != "Windows" && os != "Mac")
+      warning("show.virtual=TRUE is unsupported for this platform")
+  }
   
   return( ret )
 }
+
+

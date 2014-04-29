@@ -73,7 +73,7 @@ int read_proc_meminfo(double *memcached, char *field, int fieldlen)
     }
   }
   
-  return -1;
+  return FAILURE;
 }
 
 int get_meminfo(double **mem)
@@ -130,22 +130,24 @@ int get_meminfo(double **mem)
   int ret;
   *mem = malloc(MEMLEN * sizeof(*mem));
   
-  // Ram
   vm_size_t page_size;
   mach_port_t mach_port;
   mach_msg_type_number_t count;
   vm_statistics_data_t vm_stats;
   
+  xsw_usage vmusage = {0};
+  
+  // Ram
   mach_port = mach_host_self();
   count = sizeof(vm_stats) / sizeof(natural_t);
   
   ret = host_page_size(mach_port, &page_size);
   if (ret != KERN_SUCCESS)
-    return -1;
+    return FAILURE;
   
   ret = host_statistics(mach_port, HOST_VM_INFO, (host_info_t)&vm_stats, &count);
   if (ret != KERN_SUCCESS)
-    return -1;
+    return FAILURE;
   
   (*mem)[TOTALRAM] = ((double) 1); // FIXME
   
@@ -160,7 +162,6 @@ int get_meminfo(double **mem)
   (*mem)[FREESWAP] = (double) ((uint64_t)stats.f_bsize * stats.f_bfree);
   
   
-  xsw_usage vmusage = {0};
   size_t size = sizeof(vmusage);
   ret = sysctlbyname("vm.swapusage", &vmusage, &size, NULL, 0);
   chkret(ret);
@@ -185,6 +186,8 @@ int get_meminfo(double **mem)
 int get_meminfo(double **mem)
 {
   int ret;
+  *mem = malloc(MEMLEN * sizeof(*mem));
+  
   
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
@@ -194,9 +197,7 @@ int get_meminfo(double **mem)
   ret = GlobalMemoryStatusEx(&status);
   
   if (ret == 0)
-    return -1;
-  
-  *mem = malloc(MEMLEN * sizeof(*mem));
+    return FAILURE;
   
   (*mem)[MEMUNIT] = 1.0;
   
@@ -215,28 +216,63 @@ int get_meminfo(double **mem)
 
 #include <unistd.h>
 
+#if OS_FREEBSD
+#include <sys/types.h>
+#include <sys/sysctl.h>
+#include <kvm.h>
+#endif
+
 int get_meminfo(double **mem)
 {
   long npages, pagesize, freepages;
-  
   *mem = malloc(MEMLEN * sizeof(*mem));
   
+  
   npages = sysconf(_SC_PHYS_PAGES);
-  if (npages == -1)
-    return -1;
+  if (npages == FAILURE)
+    return FAILURE;
   
   pagesize = sysconf(_SC_PAGESIZE);
-  if (pagesize == -1)
-    return -1;
+  if (pagesize == FAILURE)
+    return FAILURE;
   
   freepages = sysconf(_SC_AVPHYS_PAGES);
-  if (freepages == -1)
-    return -1;
+  if (freepages == FAILURE)
+    return FAILURE;
   
   (*mem)[MEMUNIT] = 1.0;
   
   (*mem)[TOTALRAM] = (double) (npages * pagesize);
   (*mem)[FREERAM] = (double) (pagesize * freepages);
+  
+  #if OS_FREEBSD
+  size_t size;
+  long buf;
+  size = sizeof buf;
+  
+  ret = sysctlbyname("vm.swap_enabled", &buf, &size, NULL, 0);
+  chkret(ret);
+  if (buf == 0)
+  {
+    (*mem)[FREESWAP] = 0.0;
+    (*mem)[TOTALSWAP] = 0.0;
+  }
+  else
+  {
+    kvm_t kd;
+    struct kvm_swap swap;
+    
+    ret = sysctlbyname("vm.swap_total", &buf, &size, NULL, 0);
+    chkret(ret);
+    (*mem)[FREESWAP] = (double) buf;
+    
+    ret = kvm_getswapinfo(&kd, &swap, maxswap, int flags);
+    chkret(ret);
+    
+  }
+  
+  
+  #endif
   
   return 0;
 }
