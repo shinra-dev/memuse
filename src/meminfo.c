@@ -212,15 +212,68 @@ int get_meminfo(double **mem)
 
 
 // --------------------------------------------------------
-#elif OS_NIX // Misc nix's
+#elif OS_FREEBSD
 
 #include <unistd.h>
 
-#if OS_FREEBSD
 #include <sys/types.h>
 #include <sys/sysctl.h>
-#include <kvm.h>
-#endif
+
+
+int get_meminfo(double **mem)
+{
+  int ret;
+  long npages, pagesize;
+  size_t size;
+  uint64_t buf;
+  size = sizeof(buf);
+  
+  *mem = malloc(MEMLEN * sizeof(*mem));
+  
+  
+  npages = sysconf(_SC_PHYS_PAGES);
+  if (npages == FAILURE)
+    return FAILURE;
+  
+  pagesize = sysconf(_SC_PAGESIZE);
+  if (pagesize == FAILURE)
+    return FAILURE;
+  
+  
+  ret = sysctlbyname("vm.stats.vm.v_free_count", &buf, &size, NULL, 0);
+  
+  (*mem)[MEMUNIT] = 1.0;
+  
+  (*mem)[TOTALRAM] = (double) (npages * pagesize);
+  (*mem)[FREERAM] = (double) (pagesize * buf);
+  
+  ret = sysctlbyname("vm.swap_enabled", &buf, &size, NULL, 0);
+  chkret(ret);
+
+  if (buf == 0)
+  {
+    (*mem)[FREESWAP] = 0.0;
+    (*mem)[TOTALSWAP] = 0.0;
+  }
+  else
+  {
+    ret = sysctlbyname("vm.swap_total", &buf, &size, NULL, 0);
+    // FIXME this sets errno=12, but that's horse shit
+    ret = 0;
+    chkret(ret);
+    
+    (*mem)[TOTALSWAP] = (double) buf;
+    chkret(ret);
+  }
+  
+  return 0;
+}
+
+
+// --------------------------------------------------------
+#elif OS_NIX // Misc nix's
+
+#include <unistd.h>
 
 int get_meminfo(double **mem)
 {
@@ -245,34 +298,6 @@ int get_meminfo(double **mem)
   (*mem)[TOTALRAM] = (double) (npages * pagesize);
   (*mem)[FREERAM] = (double) (pagesize * freepages);
   
-  #if OS_FREEBSD
-  size_t size;
-  long buf;
-  size = sizeof buf;
-  
-  ret = sysctlbyname("vm.swap_enabled", &buf, &size, NULL, 0);
-  chkret(ret);
-  if (buf == 0)
-  {
-    (*mem)[FREESWAP] = 0.0;
-    (*mem)[TOTALSWAP] = 0.0;
-  }
-  else
-  {
-    kvm_t kd;
-    struct kvm_swap swap;
-    
-    ret = sysctlbyname("vm.swap_total", &buf, &size, NULL, 0);
-    chkret(ret);
-    (*mem)[FREESWAP] = (double) buf;
-    
-    ret = kvm_getswapinfo(&kd, &swap, maxswap, int flags);
-    chkret(ret);
-    
-  }
-  
-  
-  #endif
   
   return 0;
 }

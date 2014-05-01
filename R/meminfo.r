@@ -12,8 +12,6 @@ meminfo <- function(compact.free=TRUE, show.virtual=FALSE)
   else if (any(unlist(out) == -10))
     stop("platform not supported at this time")
   
-#  out <- lapply(out, function(x) {if (x == -10) NULL else x})
-  
   ret <- lapply(out, mu)
   
   if (os == "Linux" && compact.free)
@@ -28,6 +26,8 @@ meminfo <- function(compact.free=TRUE, show.virtual=FALSE)
       ret$totalswap <- ret$freeswap <- ret$swapcached <- NULL
     else if (os == "Windows")
       ret$totalpage <- ret$freepage <- NULL
+    else if (os == "FreeBSD")
+      ret$totalswap <- NULL
   }
   else
   {

@@ -9,7 +9,7 @@
 
 #define OS_MAC ((defined(__APPLE__) && defined(__MACH__)) || macintosh || Macintosh)
 
-#define OS_FREEBSD defined(__FreeBSD__
+#define OS_FREEBSD defined(__FreeBSD__)
 #define OS_BSD (defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__bsdi__) || defined(__DragonFly__))
 #define OS_SOLARIS (defined(__sun) || defined(sun))
 #define OS_HURD (defined(__GNU__) || defined(__gnu_hurd__)) // why the hell not
@@ -51,13 +51,12 @@
   #define FREEPAGE 3
   #define MEMUNIT 4
 #elif OS_FREEBSD
-  #define MEMLEN 5
+  #define MEMLEN 4
   
   #define TOTALRAM 0
   #define FREERAM 1
   #define TOTALSWAP 2
-  #define FREESWAP 3
-  #define MEMUNIT 4
+  #define MEMUNIT 3
 #elif OS_NIX
   #define MEMLEN 3
   
