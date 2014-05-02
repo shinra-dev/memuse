@@ -222,6 +222,7 @@ int get_meminfo(double **mem)
 
 int sysctl_val(char *name, double *val)
 {
+  int ret;
   uint64_t oldp;
   size_t oldlenp;
   oldlenp = sizeof(oldp);
@@ -242,47 +243,38 @@ int get_meminfo(double **mem)
   *mem = malloc(MEMLEN * sizeof(*mem));
   (*mem)[MEMUNIT] = 1.0;
   
+  /* This sets val to something insane for some reason ???
   ret = sysctl_val("hw.pagesize", &val);
   chkret(ret);
   pagesize = val;
+  */
+  ret = sysconf(_SC_PAGESIZE);
+  if (ret == FAILURE)
+    return FAILURE;
+  else
+    pagesize = (double) ret;
   
   
   ret = sysctl_val("hw.physmem", &val);
   chkret(ret);
-  (*mem)[TOTALRAM] = (double) val;
+  (*mem)[TOTALRAM] = val;
   
   ret = sysctl_val("vm.stats.vm.v_free_count", &val);
   chkret(ret);
-  (*mem)[FREERAM] = (double) (val * oldp);
+  (*mem)[FREERAM] = val * pagesize;
   
   ret = sysctl_val("vm.stats.vm.v_active_count", &val);
   chkret(ret);
-  (*mem)[BUFFERRAM] = (double) (val * oldp);
+  (*mem)[BUFFERRAM] = val * pagesize;
   
   ret = sysctl_val("vm.stats.vm.v_cache_count", &val);
   chkret(ret);
-  (*mem)[MEMCACHED] = (double) (val * oldp);
+  (*mem)[MEMCACHED] = val * pagesize;
   
   
-  
-  ret = sysctlbyname("vm.swap_enabled", &oldp, &size, NULL, 0);
+  ret = sysctl_val("vm.swap_total", &val);
   chkret(ret);
-  
-  if (oldp == 0)
-  {
-/*    (*mem)[FREESWAP] = 0.0;*/
-    (*mem)[TOTALSWAP] = 0.0;
-  }
-  else
-  {
-    ret = sysctlbyname("vm.swap_total", &oldp, &size, NULL, 0);
-    // FIXME this sets errno=12, but that's horse shit
-    ret = 0;
-    chkret(ret);
-    
-    (*mem)[TOTALSWAP] = (double) oldp;
-    chkret(ret);
-  }
+  (*mem)[TOTALSWAP] = val;
   
   return 0;
 }
@@ -295,7 +287,7 @@ int get_meminfo(double **mem)
 
 int get_meminfo(double **mem)
 {
-  long npages, pagesize, freepages;
+  uint64_t npages, pagesize, freepages;
   *mem = malloc(MEMLEN * sizeof(*mem));
   
   
