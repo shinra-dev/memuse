@@ -16,7 +16,7 @@ And a list will be returned containing some information.  By default, this will 
 
 \subsection{Platform Bullshit}
 
-The platform with the best support in the \pkg{memuse} package is Linux.  This is largely because getting this information in Linux is very simple --- and the data itself is very well-defined --- compared to other platforms.  So get your shit together, other OS devs.
+The platform with the best support in the \pkg{memuse} package is Linux.  This is largely because getting this information in Linux is very simple --- on top of the data itself is very well-defined --- compared to other platforms.  So get your shit together, other OS devs.
 
 For clarity, we define some terms here.
 
@@ -61,14 +61,6 @@ The actual implementation of \code{meminfo()} uses \code{sysinfo} (see \code{man
 
 
 
-
-\subsubsection{Mac OS X}
-
-
-
-
-
-
 \subsubsection{Windows}
 
 The \href{http://msdn.microsoft.com/en-us/library/windows/desktop/aa366589%28v=vs.85%29.aspx}{Windows documentation} 
@@ -77,6 +69,21 @@ on this is surprisingly clear and thorough.  I would compliment them, except tha
 Also, this may crash your R session, so watch out.
 
 
+
+
+
+\subsubsection{Mac OS X}
+
+
+
+
+
+
+\subsubsection{FreeBSD}
+
+For some reason, FreeBSD doesn't support \code{_SC_AVPHYS_PAGES} in \code{sysconf} like Solaris and Linux do.  So for getting free memory, I have to make a call to \code{sysctlbyname}.
+
+Also, the only way I could see to support getting free swap on FreeBSD is to make libkvm a dependency, which is kind of ridiculous.  Also, I figure you folks will just call sysctl(8) anyway and wonder why I even went to all this trouble in the first place, so you get what you get.
 
 
 

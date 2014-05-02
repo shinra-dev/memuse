@@ -51,12 +51,14 @@
   #define FREEPAGE 3
   #define MEMUNIT 4
 #elif OS_FREEBSD
-  #define MEMLEN 4
+  #define MEMLEN 6
   
   #define TOTALRAM 0
   #define FREERAM 1
-  #define TOTALSWAP 2
-  #define MEMUNIT 3
+  #define BUFFERRAM 2
+  #define MEMCACHED 3
+  #define TOTALSWAP 4
+  #define MEMUNIT 5
 #elif OS_NIX
   #define MEMLEN 3
   

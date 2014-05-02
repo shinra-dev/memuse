@@ -220,49 +220,67 @@ int get_meminfo(double **mem)
 #include <sys/sysctl.h>
 
 
+int sysctl_val(char *name, double *val)
+{
+  uint64_t oldp;
+  size_t oldlenp;
+  oldlenp = sizeof(oldp);
+  
+  ret = sysctlbyname(name, &oldp, &oldlenp, NULL, 0);
+  
+  *val = (double) oldp;
+  
+  return ret;
+}
+
+
 int get_meminfo(double **mem)
 {
   int ret;
-  long npages, pagesize;
-  size_t size;
-  uint64_t buf;
-  size = sizeof(buf);
+  double val, pagesize;
   
   *mem = malloc(MEMLEN * sizeof(*mem));
-  
-  
-  npages = sysconf(_SC_PHYS_PAGES);
-  if (npages == FAILURE)
-    return FAILURE;
-  
-  pagesize = sysconf(_SC_PAGESIZE);
-  if (pagesize == FAILURE)
-    return FAILURE;
-  
-  
-  ret = sysctlbyname("vm.stats.vm.v_free_count", &buf, &size, NULL, 0);
-  
   (*mem)[MEMUNIT] = 1.0;
   
-  (*mem)[TOTALRAM] = (double) (npages * pagesize);
-  (*mem)[FREERAM] = (double) (pagesize * buf);
-  
-  ret = sysctlbyname("vm.swap_enabled", &buf, &size, NULL, 0);
+  ret = sysctl_val("hw.pagesize", &val);
   chkret(ret);
-
-  if (buf == 0)
+  pagesize = val;
+  
+  
+  ret = sysctl_val("hw.physmem", &val);
+  chkret(ret);
+  (*mem)[TOTALRAM] = (double) val;
+  
+  ret = sysctl_val("vm.stats.vm.v_free_count", &val);
+  chkret(ret);
+  (*mem)[FREERAM] = (double) (val * oldp);
+  
+  ret = sysctl_val("vm.stats.vm.v_active_count", &val);
+  chkret(ret);
+  (*mem)[BUFFERRAM] = (double) (val * oldp);
+  
+  ret = sysctl_val("vm.stats.vm.v_cache_count", &val);
+  chkret(ret);
+  (*mem)[MEMCACHED] = (double) (val * oldp);
+  
+  
+  
+  ret = sysctlbyname("vm.swap_enabled", &oldp, &size, NULL, 0);
+  chkret(ret);
+  
+  if (oldp == 0)
   {
-    (*mem)[FREESWAP] = 0.0;
+/*    (*mem)[FREESWAP] = 0.0;*/
     (*mem)[TOTALSWAP] = 0.0;
   }
   else
   {
-    ret = sysctlbyname("vm.swap_total", &buf, &size, NULL, 0);
+    ret = sysctlbyname("vm.swap_total", &oldp, &size, NULL, 0);
     // FIXME this sets errno=12, but that's horse shit
     ret = 0;
     chkret(ret);
     
-    (*mem)[TOTALSWAP] = (double) buf;
+    (*mem)[TOTALSWAP] = (double) oldp;
     chkret(ret);
   }
   
