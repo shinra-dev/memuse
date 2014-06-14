@@ -15,7 +15,7 @@
 
 
 #include <SEXPtools.h>
-#include "meminfo.h"
+#include "meminfo/meminfo.h"
 
 
 #define TRYFUNC(THEFUN) ret=meminfo_##THEFUN(&tmp); \
