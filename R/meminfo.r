@@ -1,51 +1,44 @@
 get.os <- function() Sys.info()[1L]
 
 
-meminfo <- function(compact.free=TRUE, show.virtual=FALSE, ..., use.c=TRUE)
+meminfo <- function(compact.free=TRUE)
 {
   os <- get.os()
   
-  if (use.c)
-    ret <- meminfo.c()
-  else
-  {
-    if (os == "Linux") ret <- meminfo.linux()
-    else if (os == "FreeBSD") ret <- meminfo.freebsd()
-    else stop(paste("use.c=TRUE not supported on", os))
-  }
+  ret <- meminfo.c()
   
   
-  if (compact.free)
-  {
-    if (os == "Linux")
-    {
-      ret$freeram <- ret$freeram + ret$bufferram + ret$cachedram
-      ret$bufferram <- ret$cachedram <- NULL
-    }
-    else if (os == "FreeBSD")
-      ret$bufferram <- ret$cachedram <- NULL
-  }
-  else
-  {
-    if (os != "Linux" && os != "FreeBSD")
-      warning(paste("compact.free=FALSE is not supported on", os))
-  }
-  
-  
-  if (!show.virtual)
-  {
-    if (os == "Linux")
-      ret$totalswap <- ret$freeswap <- ret$cachedswap <- NULL
-    else if (os == "Windows")
-      ret$totalpage <- ret$freepage <- NULL
-    else if (os == "FreeBSD")
-      ret$totalswap <- NULL
-  }
-  else
-  {
-    if (os != "Linux" && os != "Windows" && os != "Mac" && os != "FreeBSD")
-      warning(paste("show.virtual=TRUE is not supported on", os))
-  }
+#  if (compact.free)
+#  {
+#    if (os == "Linux")
+#    {
+#      ret$freeram <- ret$freeram + ret$bufferram + ret$cachedram
+#      ret$bufferram <- ret$cachedram <- NULL
+#    }
+#    else if (os == "FreeBSD")
+#      ret$bufferram <- ret$cachedram <- NULL
+#  }
+#  else
+#  {
+#    if (os != "Linux" && os != "FreeBSD")
+#      warning(paste("compact.free=FALSE is not supported on", os))
+#  }
+#  
+#  
+#  if (!show.virtual)
+#  {
+#    if (os == "Linux")
+#      ret$totalswap <- ret$freeswap <- ret$cachedswap <- NULL
+#    else if (os == "Windows")
+#      ret$totalpage <- ret$freepage <- NULL
+#    else if (os == "FreeBSD")
+#      ret$totalswap <- NULL
+#  }
+#  else
+#  {
+#    if (os != "Linux" && os != "Windows" && os != "Mac" && os != "FreeBSD")
+#      warning(paste("show.virtual=TRUE is not supported on", os))
+#  }
   
   
   return( ret )
@@ -59,8 +52,35 @@ meminfo.c <- function()
   
   if (any(unlist(out) == -1))
     stop("There were errors accessing hardware info")
-  else if (any(unlist(out) == -10))
-    stop("platform not supported at this time")
+#  else if (any(unlist(out) == -10))
+#    stop("platform not supported at this time")
+  
+  ret <- lapply(out, mu)
+  
+  return( ret )
+}
+
+
+
+
+swapinfo <- function()
+{
+  os <- get.os()
+  
+  ret <- swapinfo.c()
+  
+  return( ret )
+}
+
+
+swapinfo.c <- function()
+{
+  out <- .Call("R_swapinfo", PACKAGE="memuse")
+  
+  if (any(unlist(out) == -1))
+    stop("There were errors accessing hardware info")
+#  else if (any(unlist(out) == -10))
+#    stop("platform not supported at this time")
   
   ret <- lapply(out, mu)
   

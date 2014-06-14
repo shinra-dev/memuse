@@ -28,28 +28,7 @@
 
 
 
-SEXP meminfo_error(int code)
-{
-  R_INIT;
-  SEXP R_list_names, R_list, platform;
-  
-  newRvec(platform, 1, "double");
-  
-  R_list_names = make_list_names(1, "platform");
-  R_list = make_list(R_list_names, 1, platform);
-  
-  if (code == FAILURE)
-    REAL(VECTOR_ELT(R_list, 0))[0] = ((double) FAILURE);
-  else if (code == PLATFORM_ERROR)
-    REAL(VECTOR_ELT(R_list, 0))[0] = ((double) PLATFORM_ERROR);
-  
-  R_END;
-  return R_list;
-}
-
-
-
-SEXP set_meminfo()
+SEXP R_meminfo()
 {
   R_INIT;
   
@@ -59,23 +38,14 @@ SEXP set_meminfo()
   
   SEXP R_list, R_list_names;
   SEXP totalram, freeram, bufferram, cachedram;
-  SEXP totalswap, freeswap, cachedswap;
-  
-  totalram = freeram = bufferram = cachedram = NULL;
-  totalswap = freeswap = cachedswap = NULL;
   
   TRYFUNC(totalram);
   TRYFUNC(freeram);
   TRYFUNC(bufferram);
   TRYFUNC(cachedram);
-  TRYFUNC(totalswap);
-  TRYFUNC(freeswap);
-  TRYFUNC(cachedswap);
   
-  printf("%d %d\n", ct, (int)tmp);
-  
-  R_list_names = make_list_names(ct, "totalram", "freeram", "bufferram", "cachedram", "totalswap", "freeswap", "cachedswap");
-  R_list = make_list(R_list_names, ct, totalram, freeram, bufferram, cachedram, totalswap, freeswap, cachedswap);
+  R_list_names = make_list_names(ct, "totalram", "freeram", "bufferram", "cachedram");
+  R_list = make_list(R_list_names, ct, totalram, freeram, bufferram, cachedram);
   
   
   R_END;
@@ -84,16 +54,30 @@ SEXP set_meminfo()
 
 
 
-// Main interface
-SEXP R_meminfo()
+
+SEXP R_swapinfo()
 {
-  SEXP R_list;
+  R_INIT;
   
-  R_list = set_meminfo();
-/*    R_list = meminfo_error(ret);*/
+  int ret;
+  int ct = 0;
+  uint64_t tmp;
   
+  SEXP R_list, R_list_names;
+  SEXP totalswap, freeswap, cachedswap;
+  
+  TRYFUNC(totalswap);
+  TRYFUNC(freeswap);
+  TRYFUNC(cachedswap);
+  
+  R_list_names = make_list_names(ct, "totalswap", "freeswap", "cachedswap");
+  R_list = make_list(R_list_names, ct, totalswap, freeswap, cachedswap);
+  
+  
+  R_END;
   return R_list;
 }
+
 
 
 

@@ -22,7 +22,7 @@ exportMethods(
 )
 
 export(
-  meminfo,
+  meminfo, swapinfo,
   ### Constructor
   memuse, mu,
   ### Arithmetic

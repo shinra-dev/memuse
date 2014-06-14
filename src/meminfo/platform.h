@@ -85,7 +85,7 @@ int sysctl_val(char *name, uint64_t *val);
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
-int sysctl_val(char *name, double *val);
+int sysctl_val(char *name, uint64_t *val);
 
 
 #elif OS_NIX

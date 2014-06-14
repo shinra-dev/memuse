@@ -67,7 +67,7 @@ int read_proc_meminfo(uint64_t *val, char *field, int fieldlen)
 }
 
 
-#elif OS_MAC
+#elif OS_MAC || OS_FREEBSD
 
 int sysctl_val(char *name, uint64_t *val)
 {
@@ -79,23 +79,6 @@ int sysctl_val(char *name, uint64_t *val)
   ret = sysctlbyname(name, &oldp, &oldlenp, NULL, 0);
   
   *val = (uint64_t) oldp;
-  
-  return ret;
-}
-
-
-#elif OS_FREEBSD
-
-int sysctl_val(char *name, double *val)
-{
-  int ret;
-  uint64_t oldp;
-  size_t oldlenp;
-  oldlenp = sizeof(oldp);
-  
-  ret = sysctlbyname(name, &oldp, &oldlenp, NULL, 0);
-  
-  *val = (double) oldp;
   
   return ret;
 }
