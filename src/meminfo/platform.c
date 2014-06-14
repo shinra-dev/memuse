@@ -69,7 +69,7 @@ int read_proc_meminfo(uint64_t *val, char *field, int fieldlen)
 
 #elif OS_MAC
 
-int sysctl_val(char *name, double *val)
+int sysctl_val(char *name, uint64_t *val)
 {
   int ret;
   uint64_t oldp;
@@ -78,7 +78,7 @@ int sysctl_val(char *name, double *val)
   
   ret = sysctlbyname(name, &oldp, &oldlenp, NULL, 0);
   
-  *val = (double) oldp;
+  *val = (uint64_t) oldp;
   
   return ret;
 }

@@ -68,7 +68,7 @@ int read_proc_meminfo(uint64_t *val, char *field, int fieldlen);
 #include <sys/param.h>
 #include <sys/mount.h>
 
-int sysctl_val(char *name, double *val);
+int sysctl_val(char *name, uint64_t *val);
 
 
 #elif OS_WINDOWS

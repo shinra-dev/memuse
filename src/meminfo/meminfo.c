@@ -263,7 +263,7 @@ int meminfo_freeswap(uint64_t *freeswap)
   struct xsw_usage vmusage = {0};
   size_t size = sizeof(vmusage);
   sysctlbyname("vm.swapusage", &vmusage, &size, NULL, 0);
-  *totalswap = vmusage.xsu_avail;
+  *freeswap = vmusage.xsu_avail;
   #elif OS_WINDOWS
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
