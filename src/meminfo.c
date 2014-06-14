@@ -123,6 +123,25 @@ int get_meminfo(double **mem)
 #include <mach/mach_types.h> 
 #include <mach/mach_init.h>
 #include <mach/mach_host.h>
+#include <sys/types.h>
+#include <sys/sysctl.h>
+    #include <sys/param.h>
+     #include <sys/mount.h>
+
+int sysctl_val(char *name, double *val)
+{
+  int ret;
+  uint64_t oldp;
+  size_t oldlenp;
+  oldlenp = sizeof(oldp);
+  
+  ret = sysctlbyname(name, &oldp, &oldlenp, NULL, 0);
+  
+  *val = (double) oldp;
+  
+  return ret;
+}
+
 
 
 int get_meminfo(double **mem)
@@ -135,7 +154,7 @@ int get_meminfo(double **mem)
   mach_msg_type_number_t count;
   vm_statistics_data_t vm_stats;
   
-  xsw_usage vmusage = {0};
+  size_t size;  
   
   // Ram
   mach_port = mach_host_self();
@@ -149,26 +168,32 @@ int get_meminfo(double **mem)
   if (ret != KERN_SUCCESS)
     return FAILURE;
   
-  (*mem)[TOTALRAM] = ((double) 1); // FIXME
+  double totram;
+  ret = sysctl_val("hw.memsize", &totram);
+  chkret(ret);
+
+  (*mem)[TOTALRAM] = ((double) totram); 
   
   (*mem)[FREERAM] = ((double) (int64_t)vm_stats.free_count * (int64_t)page_size);
   
-  
   // Swap
+  double totalswap;
+  ret = sysctl_val("vm.swapusage", &totalswap);
+  chkret(ret);
+  (*mem)[TOTALSWAP] = totalswap;
+
   struct statfs stats;
   ret = statfs("/", &stats);
   chkret(ret);
-  
-  (*mem)[FREESWAP] = (double) ((uint64_t)stats.f_bsize * stats.f_bfree);
-  
-  
-  size_t size = sizeof(vmusage);
-  ret = sysctlbyname("vm.swapusage", &vmusage, &size, NULL, 0);
-  chkret(ret);
-  
-  (*mem)[TOTALSWAP] = ((double) size);
-  
-  
+ (*mem)[FREESWAP] = (double) ((uint64_t)stats.f_bsize * stats.f_bfree);
+
+
+struct xsw_usage vmusage = {0};
+size_t vmusage_size = sizeof(vmusage);
+ sysctlbyname("vm.swapusage", &vmusage, &vmusage_size, NULL, 0);
+ (*mem)[TOTALSWAP] = (double) vmusage.xsu_total;
+ (*mem)[FREESWAP] = (double) vmusage.xsu_avail;
+
   (*mem)[MEMUNIT] = 1.0;
   
   return 0;

@@ -84,6 +84,15 @@ SEXP set_meminfo(double *mem)
   
   R_list_names = make_list_names(MEMLEN-1, "totalram", "freeram", "totalpage", "freepage");
   R_list = make_list(R_list_names, MEMLEN-1, totalram, freeram, totalpage, freepage);
+  #elif OS_MAC
+  newRvec(totalswap, 1, "double");
+  newRvec(freeswap, 1, "double");
+  
+  DBL(totalswap, 0) = mem[TOTALSWAP];
+  DBL(freeswap, 0) = mem[FREESWAP];
+  
+  R_list_names = make_list_names(MEMLEN-1, "totalram", "freeram", "totalswap", "freeswap");
+  R_list = make_list(R_list_names, MEMLEN-1, totalram, freeram, totalswap, freeswap);
   #elif OS_FREEBSD
   newRvec(bufferram, 1, "dbl");
   newRvec(memcached, 1, "dbl");
