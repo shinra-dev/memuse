@@ -174,26 +174,26 @@ int get_meminfo(double **mem)
 
   (*mem)[TOTALRAM] = ((double) totram); 
   
-  (*mem)[FREERAM] = ((double) (int64_t)vm_stats.free_count * (int64_t)page_size);
+  (*mem)[FREERAM] = (double) ((int64_t)vm_stats.free_count * (int64_t)page_size);
   
   // Swap
   double totalswap;
   ret = sysctl_val("vm.swapusage", &totalswap);
   chkret(ret);
   (*mem)[TOTALSWAP] = totalswap;
-
+  
   struct statfs stats;
   ret = statfs("/", &stats);
   chkret(ret);
- (*mem)[FREESWAP] = (double) ((uint64_t)stats.f_bsize * stats.f_bfree);
-
-
-struct xsw_usage vmusage = {0};
-size_t vmusage_size = sizeof(vmusage);
- sysctlbyname("vm.swapusage", &vmusage, &vmusage_size, NULL, 0);
- (*mem)[TOTALSWAP] = (double) vmusage.xsu_total;
- (*mem)[FREESWAP] = (double) vmusage.xsu_avail;
-
+  (*mem)[FREESWAP] = (double) ((uint64_t)stats.f_bsize * stats.f_bfree);
+  
+  
+  struct xsw_usage vmusage = {0};
+  size_t vmusage_size = sizeof(vmusage);
+  sysctlbyname("vm.swapusage", &vmusage, &vmusage_size, NULL, 0);
+  (*mem)[TOTALSWAP] = (double) vmusage.xsu_total;
+  (*mem)[FREESWAP] = (double) vmusage.xsu_avail;
+  
   (*mem)[MEMUNIT] = 1.0;
   
   return 0;

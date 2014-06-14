@@ -35,13 +35,14 @@
   #define SWAPCACHED 6
   #define MEMUNIT 7
 #elif OS_MAC
-  #define MEMLEN 5
+  #define MEMLEN 6
   
   #define TOTALRAM 0
   #define FREERAM 1
   #define TOTALSWAP 2
   #define FREESWAP 3
-  #define MEMUNIT 4
+  #define FREESPACE 4
+  #define MEMUNIT 5
 #elif OS_WINDOWS
   #define MEMLEN 5
   

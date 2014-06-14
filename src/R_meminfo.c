@@ -50,6 +50,8 @@ SEXP set_meminfo(double *mem)
   
   #if OS_WINDOWS
   SEXP totalpage, freepage;
+  #elif OS_MAC
+  SEXP totalswap, freeswap, freespace;
   #else
   SEXP totalswap, freeswap;
   #endif
@@ -87,12 +89,14 @@ SEXP set_meminfo(double *mem)
   #elif OS_MAC
   newRvec(totalswap, 1, "double");
   newRvec(freeswap, 1, "double");
+  newRvec(freespace, 1, "double");
   
   DBL(totalswap, 0) = mem[TOTALSWAP];
   DBL(freeswap, 0) = mem[FREESWAP];
+  DBL(freespace, 0) = mem[FREESPACE];
   
-  R_list_names = make_list_names(MEMLEN-1, "totalram", "freeram", "totalswap", "freeswap");
-  R_list = make_list(R_list_names, MEMLEN-1, totalram, freeram, totalswap, freeswap);
+  R_list_names = make_list_names(MEMLEN-1, "totalram", "freeram", "totalswap", "freeswap", "freespace");
+  R_list = make_list(R_list_names, MEMLEN-1, totalram, freeram, totalswap, freeswap, freespace);
   #elif OS_FREEBSD
   newRvec(bufferram, 1, "dbl");
   newRvec(memcached, 1, "dbl");

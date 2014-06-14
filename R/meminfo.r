@@ -35,7 +35,7 @@ meminfo <- function(compact.free=TRUE, show.virtual=FALSE, ..., use.c=TRUE)
   if (!show.virtual)
   {
     if (os == "Linux")
-      ret$totalswap <- ret$freeswap <- ret$swapcached <- NULL
+      ret$totalswap <- ret$freeswap <- ret$cachedswap <- NULL
     else if (os == "Windows")
       ret$totalpage <- ret$freepage <- NULL
     else if (os == "FreeBSD")
