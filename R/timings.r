@@ -38,10 +38,10 @@ readable.time <- function(time, unit.in="seconds")
 
 
 
-print.timing <- function(object, digits=3)
+print.timing <- function(x, digits=3)
 {
-  time <- round(object, digits=digits)
-  unit <- attributes(object)$unit
+  time <- round(x, digits=digits)
+  unit <- attributes(x)$unit
   
   cat(paste(time, unit, "\n"))
   invisible()
@@ -54,6 +54,6 @@ wc.time <- function(expr, gcFirst=TRUE)
   time <- base::system.time(expr=expr, gcFirst=gcFirst)[3]
   attributes(time) <- NULL
   
-  return( readable.time(time, unit="seconds") )
+  return( readable.time(time, unit.in="seconds") )
 }
 

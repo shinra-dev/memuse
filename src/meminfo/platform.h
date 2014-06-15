@@ -46,6 +46,9 @@
 
 
 
+#include <stdint.h>
+
+
 #if OS_LINUX
 
 #include <sys/sysinfo.h>
@@ -53,6 +56,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 int read_proc_meminfo(uint64_t *val, char *field, int fieldlen);
 

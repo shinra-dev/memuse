@@ -13,7 +13,7 @@ Description: How much ram do you need to store a 100,000 by 100,000 matrix?
   be allocated.  So one can determine the size of enormous matrices even
   from a laptop.  In short, it's basically a fancy printing system for byte
   sizes.
-License: BSD 2-clause License + file LICENSE
+License: GPL (>= 2)
 Depends: R (>= 2.14.0), utils, methods, SEXPtools
 LazyData: yes
 LazyLoad: yes

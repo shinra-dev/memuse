@@ -1,0 +1,22 @@
+What is this?
+====================================================================
+This is essentially just a collection of man page info cobbled together
+into something that arguably works.  
+
+
+
+How do I install it?
+====================================================================
+Just do a simple `make`.
+
+
+
+Software license and disclaimer
+====================================================================
+This software is licensed under the permissive 2-clause BSD license.
+You can find a quick summary of the license here:
+
+https://tldrlegal.com/license/bsd-2-clause-license-%28freebsd%29
+
+The full terms of the license (it's very short) are contained in the
+LICENSE file which should have been distributed with this project.

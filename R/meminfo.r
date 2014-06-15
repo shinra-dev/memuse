@@ -82,6 +82,9 @@ swapinfo.c <- function()
 }
 
 
+pageinfo <- swapinfo
+
+
 
 # ---------------------------------------------------------
 # A more boring implementation --- this actually came 

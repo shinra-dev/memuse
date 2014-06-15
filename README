@@ -1,3 +1,5 @@
+What is this?
+====================================================================
 This package is an over-engineered solution to a mostly non-existent problem,
 as a sort of love letter to other needlessly complex programs like the 
 "Enterprise Fizzbuzz" https://github.com/Mikkeren/FizzBuzzEnterpriseEdition .
@@ -8,5 +10,18 @@ presented in different ways (different units, short/long versions of those
 units, etc.).  For more information, see the package vignette and the manual.
 It's basically a fancy printing system for byte sizes.
 
+
+
+How do I install it?
+====================================================================
 For installation instructions, see the package vignette, located in the 
 package source tree:  inst/doc/memuse-guide.pdf
+
+
+
+Software license and disclaimer
+====================================================================
+This software is licensed under the GNU General Public License, version
+2 or greater.  The C library 'meminfo' located in src/meminfo of the
+memuse package source tree is additionally licensed under the 
+permissive 2-clause BSD license.

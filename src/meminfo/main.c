@@ -25,65 +25,29 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <stdint.h>
+#include <stdio.h>
+
+#include "platform.h"
 #include "meminfo.h"
 
-
-#if OS_LINUX
-
-int read_proc_meminfo(uint64_t *val, char *field, int fieldlen)
-{
-  uint64_t tmplen = 1024 * sizeof(char);
-  char *tmp;
-  uint64_t value = FAILURE;
-  
-  *val = 0L;
-  
-  FILE* fp = fopen("/proc/meminfo", "r");
-  
-  if (fp != NULL)
-  {
-    tmp = (char*) malloc(tmplen);
-    
-    while (getline(&tmp, &tmplen, fp) >= 0)
-    {
-      if (strncmp(tmp, field, fieldlen) == 0)
-      {
-        sscanf(tmp, "%*s%ld", &value);
-        break;
-      }
-    }
-    
-    fclose(fp);
-    free((void*)tmp);
-    
-    if (value != FAILURE)
-    {
-      *val = value * 1024L;
-      return 0;
-    }
-  }
-  
-  return FAILURE;
-}
+#define CHECKRET(ret) if(ret==FAILURE)\
+  return -1;\
+  else if (ret==PLATFORM_ERROR)\
+  return -1;
 
 
-#elif OS_MAC || OS_FREEBSD
-
-int sysctl_val(char *name, uint64_t *val)
+int main(int argc, char **argv)
 {
   int ret;
-  uint64_t oldp;
-  size_t oldlenp;
-  oldlenp = sizeof(oldp);
+  uint64_t tmp;
   
-  ret = sysctlbyname(name, &oldp, &oldlenp, NULL, 0);
+  ret = meminfo_totalram(&tmp);
+  printf("%f\n", (double) tmp);
+  ret = meminfo_freeram(&tmp);
+  ret = meminfo_bufferram(&tmp);
+  ret = meminfo_cachedram(&tmp);
   
-  *val = (uint64_t) oldp;
   
-  return ret;
+  return 0;
 }
-
-#endif
-
-
-

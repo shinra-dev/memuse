@@ -5,9 +5,10 @@
 *~
 *.swp
 
-configure
-
 src/Makevars
+src/meminfo/meminfo
+src/meminfo/libmeminfo.so
+src/meminfo/libmeminfo.a
 
 *.aux
 *.bbl
