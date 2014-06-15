@@ -1,20 +1,20 @@
 CC=clang
-
 CFLAGS=-O0 -Wall
 
-OBJECTS = platform.c meminfo.c
+OBJECTS = platform.c meminfo.c print.c
 
 all: meminfo shared static
 
 meminfo: 
-	$(CC) $(CFLAGS) -o meminfo $(OBJECTS) main.c
+	$(CC) $(CFLAGS) $(OBJECTS) main.c -o meminfo
 
-#shared:
-#	$(CC) $(CFLAGS) -fPIC -o libmeminfo.so $(OBJECTS) 
+shared:
+	$(CC) -c $(CFLAGS) -fPIC $(OBJECTS)
+	$(CC) -shared -o libmeminfo.so *.o -lc
 
-#static:
-#	$(CC) $(CFLAGS) -fPIC -o $(OBJECTS)
-#	ar rcs libmeminfo.a *.o
+static:
+	$(CC) -c $(CFLAGS) $(OBJECTS)
+	ar rcs libmeminfo.a *.o
 
 clean:
 	rm -f *.o

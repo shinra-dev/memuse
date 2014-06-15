@@ -25,40 +25,39 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+
 #include <stdint.h>
 #include <stdio.h>
 
-#include "platform.h"
-#include "meminfo.h"
 
-#define CHECKRET(ret) if(ret==FAILURE)\
-  return FAILURE;\
-  else if (ret==PLATFORM_ERROR)\
-  return PLATFORM_ERROR;
+#define SCALE 1024
 
-#define CHECKANDPRINT(val,str) CHECKRET(ret);\
-  printf(str);\
-  meminfo_putval(val);\
-  putchar('\n')
+static const char *meminfo_names[] = 
+  {"B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"};
 
-int meminfo_putval(uint64_t val);
 
-int main(int argc, char **argv)
+
+int meminfo_putval(uint64_t val)
 {
-  int ret;
-  uint64_t tmp;
+  double dval = (double) val;
+  double tmp;
+  int ind = 0;
   
-  ret = meminfo_totalram(&tmp);
-  CHECKANDPRINT(tmp, "totalram:  ");
+  tmp = val / SCALE;
   
-  ret = meminfo_freeram(&tmp);
-  CHECKANDPRINT(tmp, "freeram:   ");
+  while (tmp > 1.)
+  {
+    dval = tmp;
+    tmp /= (double) SCALE;
+    ind++;
+  }
   
-  ret = meminfo_bufferram(&tmp);
-  CHECKANDPRINT(tmp, "bufferram: ");
-  
-  ret = meminfo_cachedram(&tmp);
-  CHECKANDPRINT(tmp, "cachedram: ");
+  if (ind == 0)
+    printf("%d %s", (int)val, meminfo_names[ind]);
+  else
+    printf("%.3f %s", dval, meminfo_names[ind]);
   
   return 0;
 }
+
+
