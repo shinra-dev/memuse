@@ -34,9 +34,9 @@ int read_proc_meminfo(uint64_t *val, char *field, int fieldlen)
 {
   int tmplen = 1024 * sizeof(char);
   char *tmp;
-  long value = -1L;
+  uint64_t value = -1L;
   
-  val[0] = 0;
+  val[0] = 0L;
   
   FILE* fp = fopen("/proc/meminfo", "r");
   
@@ -58,7 +58,7 @@ int read_proc_meminfo(uint64_t *val, char *field, int fieldlen)
     
     if (value != -1L)
     {
-      val[0] = (double) (value * 1024L);
+      val[0] = value * 1024L;
       return 0;
     }
   }

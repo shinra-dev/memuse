@@ -1,6 +1,15 @@
 get.os <- function() Sys.info()[1L]
 
 
+val_or_zero <- function(x)
+{
+  if (is.null(x))
+    return(0)
+  else
+    return(x)
+}
+
+
 meminfo <- function(compact.free=TRUE)
 {
   os <- get.os()
@@ -8,41 +17,16 @@ meminfo <- function(compact.free=TRUE)
   ret <- meminfo.c()
   
   
-#  if (compact.free)
-#  {
-#    if (os == "Linux")
-#    {
-#      ret$freeram <- ret$freeram + ret$bufferram + ret$cachedram
-#      ret$bufferram <- ret$cachedram <- NULL
-#    }
-#    else if (os == "FreeBSD")
-#      ret$bufferram <- ret$cachedram <- NULL
-#  }
-#  else
-#  {
-#    if (os != "Linux" && os != "FreeBSD")
-#      warning(paste("compact.free=FALSE is not supported on", os))
-#  }
-#  
-#  
-#  if (!show.virtual)
-#  {
-#    if (os == "Linux")
-#      ret$totalswap <- ret$freeswap <- ret$cachedswap <- NULL
-#    else if (os == "Windows")
-#      ret$totalpage <- ret$freepage <- NULL
-#    else if (os == "FreeBSD")
-#      ret$totalswap <- NULL
-#  }
-#  else
-#  {
-#    if (os != "Linux" && os != "Windows" && os != "Mac" && os != "FreeBSD")
-#      warning(paste("show.virtual=TRUE is not supported on", os))
-#  }
+  if (compact.free)
+  {
+    ret$freeram <- val_or_zero(ret$freeram) + val_or_zero(ret$bufferram) + val_or_zero(ret$cachedram)
+    ret$bufferram <- ret$cachedram <- NULL
+  }
   
   
   return( ret )
 }
+
 
 
 
@@ -52,8 +36,13 @@ meminfo.c <- function()
   
   if (any(unlist(out) == -1))
     stop("There were errors accessing hardware info")
-#  else if (any(unlist(out) == -10))
-#    stop("platform not supported at this time")
+  
+  if (all(unlist(out) == -10))
+    stop("platform not supported at this time")
+  
+  tmp <- -which(out == -10)
+  if (length(tmp) > 0)
+    out <- out[tmp]
   
   ret <- lapply(out, mu)
   
@@ -79,8 +68,13 @@ swapinfo.c <- function()
   
   if (any(unlist(out) == -1))
     stop("There were errors accessing hardware info")
-#  else if (any(unlist(out) == -10))
-#    stop("platform not supported at this time")
+  
+  if (all(unlist(out) == -10))
+    stop("platform not supported at this time")
+  
+  tmp <- -which(out == -10)
+  if (length(tmp) > 0)
+    out <- out[tmp]
   
   ret <- lapply(out, mu)
   
