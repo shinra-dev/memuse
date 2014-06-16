@@ -58,7 +58,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int read_proc_meminfo(uint64_t *val, char *field, int fieldlen);
+int read_proc_file(const char* file, uint64_t *val, char *field, int fieldlen);
 
 
 #elif OS_MAC

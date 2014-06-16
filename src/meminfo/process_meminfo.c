@@ -25,60 +25,37 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "meminfo.h"
 
+#include <stdint.h>
+#include "platform.h"
 
-#if OS_LINUX
-
-int read_proc_file(const char *file, uint64_t *val, char *field, int fieldlen)
-{
-  uint64_t tmplen = sizeof(char);
-  char *tmp;
-  uint64_t value = FAILURE;
-  
-  *val = 0L;
-  
-  FILE* fp = fopen(file, "r");
-  
-  if (fp != NULL)
-  {
-    tmp = (char*) malloc(tmplen);
-    
-    while (getline(&tmp, &tmplen, fp) >= 0)
-    {
-      if (strncmp(tmp, field, fieldlen) == 0)
-      {
-        sscanf(tmp, "%*s%ld", &value);
-        break;
-      }
-    }
-    
-    fclose(fp);
-    free((void*)tmp);
-    
-    if (value != FAILURE)
-    {
-      *val = value;
-      return 0;
-    }
-  }
-  
-  return FAILURE;
-}
-
-
-#elif OS_MAC || OS_FREEBSD
-
-int sysctl_val(char *name, uint64_t *val)
+int meminfo_process_size(uint64_t *size)
 {
   int ret;
-  size_t vallen;
-  vallen = sizeof(*val);
   
-  ret = sysctlbyname(name, val, &vallen, NULL, 0);
+  #if OS_LINUX
+  ret = read_proc_file("/proc/self/status", size, "VmSize:", 7);
+  *size *= 1024L;
+  #else
+  return PLATFORM_ERROR;
+  #endif
   
   return ret;
 }
 
-#endif
+
+int meminfo_process_peak(uint64_t *peak)
+{
+  int ret;
+  
+  #if OS_LINUX
+  ret = read_proc_file("/proc/self/status", peak, "VmPeak:", 7);
+  *peak *= 1024L;
+  #else
+  return PLATFORM_ERROR;
+  #endif
+  
+  return ret;
+}
+
 

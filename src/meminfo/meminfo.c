@@ -186,9 +186,10 @@ int meminfo_cachedram(uint64_t *cachedram)
   int ret;
   
   #if OS_LINUX
-  ret = read_proc_meminfo(cachedram, "Cached:", 7);
+  ret = read_proc_file("/proc/meminfo", cachedram, "Cached:", 7);
   
   chkret(ret);
+  *cachedram *= 1024L;
   #elif OS_FREEBSD
   //FIXME
   #else
@@ -291,9 +292,10 @@ int meminfo_cachedswap(uint64_t *cachedswap)
   int ret;
   
   #if OS_LINUX
-  ret = read_proc_meminfo(cachedswap, "SwapCached:", 11);
+  ret = read_proc_file("/proc/meminfo", cachedswap, "SwapCached:", 11);
   
   chkret(ret);
+  *cachedswap *= 1024L;
   #else
   return PLATFORM_ERROR;
   #endif
