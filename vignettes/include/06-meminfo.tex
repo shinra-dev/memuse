@@ -11,12 +11,15 @@ meminfo()
 
 And a list will be returned containing some information.  By default, this will only contain a simplified profile of total and ``available'' (more on this later) physical memory.  For Linux, Mac, and Windows, the option is available for swap (or paging in the case of Windows) information.  
 
+Contributions are welcome.
 
 
 
 \subsection{Platform Bullshit}
 
-The platform with the best support in the \pkg{memuse} package is Linux.  This is largely because getting this information in Linux is very simple --- on top of the data itself is very well-defined --- compared to other platforms.  So get your shit together, other OS devs.
+The platform with the best support in the \pkg{memuse} package is Linux.  This is largely 
+because getting this information in Linux is very simple --- on top of the data itself is 
+very well-defined --- compared to other platforms.  So get your shit together, other OS devs.
 
 For clarity, we define some terms here.
 
@@ -42,7 +45,8 @@ By default, memuse will collapse the first three into \code{freeram}, because th
 For more details, \href{https://www.redhat.com/advice/tips/meminfo.html}{Redhat} has a pretty good breakdown of the various items.
 
 
-These values can easily be found in \code{/proc/meminfo}, with a small sample of the file provided:
+These values should agree with (and in some cases, are taken directly from) those found in 
+\code{/proc/meminfo}, with a small sample of the file provided:
 
 \begin{center}
 \begin{minipage}{.4\textwidth}
@@ -74,7 +78,7 @@ Also, this may crash your R session, so watch out.
 
 \subsubsection{Mac OS X}
 
-
+Mac is kind of a mess if I'm being honest.
 
 
 
@@ -83,13 +87,12 @@ Also, this may crash your R session, so watch out.
 
 For some reason, FreeBSD doesn't support \code{_SC_AVPHYS_PAGES} in \code{sysconf} like Solaris and Linux do.  So for getting free memory, I have to make a call to \code{sysctlbyname}.
 
-Also, the only way I could see to support getting free swap on FreeBSD is to make libkvm a dependency, which is kind of ridiculous.  Also, I figure you folks will just call sysctl(8) anyway and wonder why I even went to all this trouble in the first place, so you get what you get.
+Also, the only way I could see to support getting free swap on FreeBSD is to make libkvm a dependency, 
+which is kind of ridiculous.  Also, I figure you folks will just call \code{sysctl(8)} anyway and 
+wonder why I even went to all this trouble in the first place, so you get what you get.
 
 
 
 \subsubsection{Miscellaneous *NIX Variants}
 
 Everybody seems to have their own little wiggle to \code{sysctl} for getting various memory statistics, and I just don't have the kind of time or resources to set up 100 different BSD-variant vm's to test that the man pages aren't lying to me.  As such, all *NIX's outside of Linux and Mac get only total ram and ``free ram'', as reported by \code{sysconf}.
-
-Contributions are welcome.
-

@@ -31,14 +31,12 @@ setClass("memuse",
   representation(
     size="numeric",
     unit="character",
-    baseunit="character",
     unit.prefix="character",
     unit.names="character"
   ),
   prototype(
     size=0,
     unit="B",
-    baseunit="bytes",
     unit.prefix="IEC",
     unit.names="short"
   ), 

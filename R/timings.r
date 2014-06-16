@@ -38,7 +38,7 @@ readable.time <- function(time, unit.in="seconds")
 
 
 
-print.timing <- function(x, digits=3)
+print.timing <- function(x, digits=3, ...)
 {
   time <- round(x, digits=digits)
   unit <- attributes(x)$unit

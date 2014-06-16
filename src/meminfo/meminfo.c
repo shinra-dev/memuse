@@ -64,7 +64,7 @@ int meminfo_totalram(uint64_t *totalram)
   if (ret == FAILURE)
     return FAILURE;
   
-  ret = sysctl_val("hw.physmem", &totalram);
+  ret = sysctl_val("hw.physmem", totalram);
   chkret(ret);
   #elif OS_NIX
   uint64_t npages, pagesize;
@@ -77,7 +77,7 @@ int meminfo_totalram(uint64_t *totalram)
   if (pagesize == FAILURE)
     return FAILURE;
   
-  totalram = npages * pagesize;
+  *totalram = npages * pagesize;
   #else
   return PLATFORM_ERROR;
   #endif
@@ -127,19 +127,19 @@ int meminfo_freeram(uint64_t *freeram)
   if (ret == 0)
     return FAILURE;
   
-  *totalram = status.ullAvailPhys;
+  *freeram = status.ullAvailPhys;
   #elif OS_FREEBSD
-  uint64_t tmp;
+  int pagesize;
   ret = sysconf(_SC_PAGESIZE);
   if (ret == FAILURE)
     return FAILURE;
   else
     pagesize = ret;
   
-  ret = sysctl_val("vm.stats.vm.v_free_count", &tmp);
+  ret = sysctl_val("vm.stats.vm.v_free_count", freeram);
   chkret(ret);
   
-  *freeram = tmp * pagesize;
+  *freeram *= (uint64_t) pagesize;
   #elif OS_NIX
   uint64_t pagesize, freepages;
   
@@ -151,7 +151,7 @@ int meminfo_freeram(uint64_t *freeram)
   if (freepages == FAILURE)
     return FAILURE;
   
-  totalram = pagesize * freepages;
+  *freeram = pagesize * freepages;
   #else
   return PLATFORM_ERROR;
   #endif
@@ -232,7 +232,7 @@ int meminfo_totalswap(uint64_t *totalswap)
   if (ret == 0)
     return FAILURE;
   
-  *totalram = status.ullTotalPageFile;
+  *totalswap = status.ullTotalPageFile;
   #elif OS_FREEBSD
   ret = sysconf(_SC_PAGESIZE);
   if (ret == FAILURE)
@@ -275,7 +275,7 @@ int meminfo_freeswap(uint64_t *freeswap)
   if (ret == 0)
     return FAILURE;
   
-  *totalram = status.ullAvailPageFile;
+  *freeswap = status.ullAvailPageFile;
   #else
   return PLATFORM_ERROR;
   #endif

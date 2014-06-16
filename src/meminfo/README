@@ -1,5 +1,8 @@
 What is this?
 ====================================================================
+This program/library is a platform independent solution for getting
+some basic hardware information about ram and/or swap.
+
 This is essentially just a collection of man page info cobbled together
 into something that arguably works.  
 

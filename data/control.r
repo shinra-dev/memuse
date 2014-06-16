@@ -1,5 +1,3 @@
-.BASEUNIT <- "bytes"
-
 .UNIT <- "best"
 
 .NAMES <- "short"

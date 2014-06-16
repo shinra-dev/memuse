@@ -72,18 +72,13 @@ int read_proc_meminfo(uint64_t *val, char *field, int fieldlen)
 int sysctl_val(char *name, uint64_t *val)
 {
   int ret;
-  uint64_t oldp;
-  size_t oldlenp;
-  oldlenp = sizeof(oldp);
+  size_t vallen;
+  vallen = sizeof(*val);
   
-  ret = sysctlbyname(name, &oldp, &oldlenp, NULL, 0);
-  
-  *val = (uint64_t) oldp;
+  ret = sysctlbyname(name, val, &vallen, NULL, 0);
   
   return ret;
 }
 
 #endif
-
-
 
