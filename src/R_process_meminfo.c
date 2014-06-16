@@ -18,8 +18,15 @@
 #include <stdint.h>
 
 
-// Just for testing
+#define TRYFUNC(THEFUN) ret=meminfo_process_##THEFUN(&tmp); \
+  newRvec(THEFUN, 1, "double"); \
+  ct++; \
+  if (ret == 0) \
+    DBL(THEFUN, 0) = (double) tmp; \
+  else \
+    DBL(THEFUN, 0) = (double) ret
 
+// Just for testing
 SEXP R_memuse_getpid()
 {
   R_INIT;
@@ -39,16 +46,20 @@ SEXP R_memuse_process_size()
 {
   R_INIT;
   uint64_t tmp;
-  SEXP ret;
+  int ct = 0;
+  int ret;
+  SEXP R_list, R_list_names;
+  SEXP size, peak;
   
-  meminfo_process_size(&tmp);
+  TRYFUNC(size);
+  TRYFUNC(peak);
   
-  newRvec(ret, 1, "double");
+  R_list_names = make_list_names(ct, "size", "peak");
+  R_list = make_list(R_list_names, ct, size, peak);
   
-  DBL(ret, 0) = (double) tmp;
   
   R_END;
-  return ret;
+  return R_list;
 }
 
 

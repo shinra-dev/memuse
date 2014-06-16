@@ -8,7 +8,7 @@ PKG_LIBS = $(SEXPTOOLS_LDFLAGS)
 
 
 MEMOBJS = meminfo/meminfo.o meminfo/platform.o meminfo/getpid.o meminfo/process_meminfo.o
-ROBJS   = R_meminfo2.o R_getpid.o
+ROBJS   = R_meminfo2.o R_process_meminfo.o
 
 OBJECTS = $(MEMOBJS) $(ROBJS)
 

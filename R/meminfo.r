@@ -173,3 +173,18 @@ meminfo.freebsd <- function()
 }
 
 
+# ---------------------------------------------------------
+# Current R process memory usage
+# ---------------------------------------------------------
+
+
+meminfo.process <- function()
+{
+  out <- .Call("R_memuse_process_size")
+  
+  ret <- lapply(out, mu)
+  
+  return( ret )
+}
+
+

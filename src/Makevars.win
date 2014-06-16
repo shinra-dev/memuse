@@ -10,7 +10,10 @@ PKG_CFLAGS = -w
 PKG_LIBS = $(SEXPTOOLS_LDFLAGS)
 
 
-OBJECTS = R_meminfo2.o meminfo/meminfo.o meminfo/platform.o
+MEMOBJS = meminfo/meminfo.o meminfo/platform.o meminfo/getpid.o meminfo/process_meminfo.o
+ROBJS   = R_meminfo2.o R_process_meminfo.o
+
+OBJECTS = $(MEMOBJS) $(ROBJS)
 
 ### Start making here.
 all: $(SHLIB)
