@@ -28,6 +28,15 @@
 
 #include <stdint.h>
 #include "platform.h"
+#include "meminfo.h"
+
+#if OS_WINDOWS
+#include <PsAPI.h>
+int meminfo_getpid();
+#endif
+
+
+// http://msdn.microsoft.com/en-us/library/windows/desktop/ms682050%28v=vs.85%29.aspx
 
 int meminfo_process_size(uint64_t *size)
 {
@@ -36,6 +45,11 @@ int meminfo_process_size(uint64_t *size)
   #if OS_LINUX
   ret = read_proc_file("/proc/self/status", size, "VmSize:", 7);
   *size *= 1024L;
+  #elif OS_WINDOWS
+  PROCESS_MEMORY_COUNTERS pmc;
+  
+  GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+  *size = (uint64_t)pmc.WorkingSetSize;
   #else
   return PLATFORM_ERROR;
   #endif
@@ -51,6 +65,11 @@ int meminfo_process_peak(uint64_t *peak)
   #if OS_LINUX
   ret = read_proc_file("/proc/self/status", peak, "VmPeak:", 7);
   *peak *= 1024L;
+  #elif OS_WINDOWS
+  PROCESS_MEMORY_COUNTERS pmc;
+  
+  GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+  *peak = (uint64_t)pmc.PeakWorkingSetSize;
   #else
   return PLATFORM_ERROR;
   #endif

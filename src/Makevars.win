@@ -7,7 +7,7 @@ SEXPTOOLS_LDFLAGS = $(shell ${R_SCMD} "SEXPtools:::ldflags()")
 
 PKG_CPPFLAGS = $(SEXPTOOLS_CPPFLAGS)
 PKG_CFLAGS = -w
-PKG_LIBS = $(SEXPTOOLS_LDFLAGS)
+PKG_LIBS = $(SEXPTOOLS_LDFLAGS) -lpsapi
 
 
 MEMOBJS = meminfo/meminfo.o meminfo/platform.o meminfo/getpid.o meminfo/process_meminfo.o

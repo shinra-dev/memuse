@@ -80,6 +80,8 @@ int sysctl_val(char *name, uint64_t *val);
 #include <windows.h>
 #include <stdio.h>
 #include <tchar.h>
+#include <psapi.h>
+
 
 
 #elif OS_FREEBSD

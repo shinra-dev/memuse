@@ -28,18 +28,23 @@
 
 #include <stdint.h>
 #include "platform.h"
+#include "meminfo.h"
 
-int meminfo_getpid(uint64_t *pid)
+int meminfo_getpid()
 {
   int ret;
   
   #if OS_LINUX
+  uint64_t pid;
   ret = read_proc_file("/proc/self/status", &pid, "Pid:", 4);
+  chkret(ret);
+  #elif OS_WINDOWS
+  DWORD pid = GetCurrentProcessId();
   #else
   return PLATFORM_ERROR;
   #endif
   
-  return ret;
+  return (int) pid;
 }
 
 
