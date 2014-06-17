@@ -182,6 +182,16 @@ meminfo.process <- function()
 {
   out <- .Call("R_memuse_process_size")
   
+  if (any(unlist(out) == -1))
+    stop("There were errors accessing process info")
+  
+  if (all(unlist(out) == -10))
+    stop("platform not supported at this time")
+  
+  tmp <- -which(out == -10)
+  if (length(tmp) > 0)
+    out <- out[tmp]
+  
   ret <- lapply(out, mu)
   
   return( ret )

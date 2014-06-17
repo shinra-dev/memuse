@@ -33,6 +33,8 @@
 #if OS_WINDOWS
 #include <PsAPI.h>
 int meminfo_getpid();
+#elif OS_MAC
+#include<mach/mach.h>
 #endif
 
 
@@ -50,6 +52,12 @@ int meminfo_process_size(uint64_t *size)
   
   GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
   *size = (uint64_t)pmc.WorkingSetSize;
+  #elif OS_MAC
+  struct task_basic_info info;
+  mach_msg_type_number_t info_count = TASK_BASIC_INFO_COUNT;
+  
+  ret = task_info(mach_task_self(), TASK_BASIC_INFO, (task_info_t)&info, &info_count);
+  *size = info.resident_size;
   #else
   return PLATFORM_ERROR;
   #endif

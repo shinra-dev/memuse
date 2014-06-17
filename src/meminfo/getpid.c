@@ -40,7 +40,10 @@ int meminfo_getpid()
   chkret(ret);
   #elif OS_WINDOWS
   DWORD pid = GetCurrentProcessId();
+  #elif OS_MAC
+  int pid = getpid();
   #else
+  int pid;
   return PLATFORM_ERROR;
   #endif
   
