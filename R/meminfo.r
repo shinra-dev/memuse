@@ -198,3 +198,12 @@ meminfo.process <- function()
 }
 
 
+# ---------------------------------------------------------
+# Exported names
+# ---------------------------------------------------------
+
+Sys.meminfo <- meminfo
+Sys.swapinfo <- swapinfo
+Sys.pageinfo <- swapinfo
+Sys.procmem <- meminfo.process
+
