@@ -6,11 +6,15 @@
 \alias{memuse-method}
 \alias{memuse,numeric-method}
 \alias{memuse,object_size-method}
+\alias{memuse,NULL-method}
+\alias{memuse,missing-method}
 
 \alias{mu}
 \alias{mu-method}
 \alias{mu,numeric-method}
 \alias{mu,object_size-method}
+\alias{mu,NULL-method}
+\alias{mu,missing-method}
 
 \title{ memuse Constructor }
 \description{

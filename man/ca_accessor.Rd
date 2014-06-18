@@ -10,6 +10,10 @@
 \alias{as.numeric,memuse-method}
 \alias{as.numeric}
 
+\alias{as.character-method}
+\alias{as.character,memuse-method}
+\alias{as.character}
+
 \alias{unit-method}
 \alias{unit,memuse-method}
 \alias{unit}
@@ -33,7 +37,8 @@
 }
 \usage{
 \S4method{size}{memuse}(x, as.is=TRUE)
-\S4method{as.numeric}{memuse}(x, ...)
+\S4method{as.numeric}{memuse}(x, as.is=FALSE)
+\S4method{as.character}{memuse}(x, ...)
 \S4method{unit}{memuse}(x)
 \S4method{unit.prefix}{memuse}(x)
 \S4method{unit.names}{memuse}(x)

@@ -3,9 +3,9 @@
 #-------------------------------------------------
 
 setMethod("as.memuse", signature(x="numeric"),
-  function(x, ...)
+  function(x, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
   {
-    ret <- internal.mu(size=x, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+    ret <- internal.mu(size=x, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
     
     return( ret )
   }
@@ -14,9 +14,28 @@ setMethod("as.memuse", signature(x="numeric"),
 
 
 setMethod("as.memuse", signature(x="object_size"),
-  function(x, ...)
+  function(x, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
   {
-    ret <- as.memuse(unclass(x))
+    ret <- as.memuse(x=unclass(x), unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
+    
+    return( ret )
+  }
+)
+
+
+
+setMethod("as.memuse", signature(x="character"),
+  function(x, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+  {
+    y <- unlist(strsplit(x=x, split=" "))
+    
+    if (length(y) != 2)
+      stop("malformed string; can not convert to a memuse object")
+    
+    size <- as.numeric(y[1L])
+    unit <- y[2L]
+    
+    ret <- mu(size=size, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
     
     return( ret )
   }
@@ -29,9 +48,9 @@ setMethod("as.memuse", signature(x="object_size"),
 #-------------------------------------------------
 
 setMethod("as.character", signature(x="memuse"),
-  function(x, ..., unit=x@unit, unit.prefix=x@unit.prefix, unit.names=x@unit.names, digits=3)
+  function(x, ...)
   {
-    ret <- utils::capture.output(print(x, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names, digits=digits))
+    ret <- utils::capture.output(print(x))
     
     return( ret )
   }
@@ -40,9 +59,9 @@ setMethod("as.character", signature(x="memuse"),
 
 
 setMethod("as.numeric", signature(x="memuse"),
-  function(x, ...)
+  function(x, as.is=FALSE)
   {
-    return( convert_to_bytes(x)@size )
+    return( size(x, as.is=as.is) )
   }
 )
 

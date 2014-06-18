@@ -12,6 +12,9 @@
 
 % Internal data structures
 \alias{.units}
+\alias{.numbers}
+\alias{.time}
+\alias{.units_bits}
 
 
 \title{ Internal Functions }

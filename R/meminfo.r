@@ -178,8 +178,11 @@ meminfo.freebsd <- function()
 # ---------------------------------------------------------
 
 
-meminfo.process <- function()
+meminfo.process <- function(gcFirst=TRUE)
 {
+  if (gcFirst)
+    gc(FALSE)
+  
   out <- .Call("R_memuse_process_size")
   
   if (any(unlist(out) == -1))

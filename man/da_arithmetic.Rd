@@ -40,7 +40,6 @@
 \alias{^,memuse,numeric-method}
 \alias{^}
 
-
 \title{ memuse Arithmetic }
 \description{
   Binary arithmetic operations for \code{memuse} objects.

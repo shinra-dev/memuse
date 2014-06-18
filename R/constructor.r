@@ -26,12 +26,32 @@ setMethod("mu", signature(size="object_size"),
 
 
 
+setMethod("mu", signature(size="missing"),
+  function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+  {
+    return( memuse(0, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names) )
+  }
+)
+
+
+
+
 setMethod("memuse", signature(size="NULL"),
   function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
   {
     return( NULL )
   }
 )
+
+
+
+setMethod("memuse", signature(size="missing"),
+  function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+  {
+    return( mu(0, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names) )
+  }
+)
+
 
 
 
