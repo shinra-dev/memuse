@@ -14,17 +14,8 @@
 // Copyright 2014, Schmidt
 
 
-#include <SEXPtools.h>
-#include <stdint.h>
+#include "memuse.h"
 
-
-#define TRYFUNC(THEFUN) ret=meminfo_process_##THEFUN(&tmp); \
-  newRvec(THEFUN, 1, "double"); \
-  ct++; \
-  if (ret == 0) \
-    DBL(THEFUN, 0) = (double) tmp; \
-  else \
-    DBL(THEFUN, 0) = (double) ret
 
 // Just for testing
 SEXP R_memuse_getpid()
@@ -49,13 +40,13 @@ SEXP R_memuse_process_size()
   int ct = 0;
   int ret;
   SEXP R_list, R_list_names;
-  SEXP size, peak;
+  SEXP process_size, process_peak;
   
-  TRYFUNC(size);
-  TRYFUNC(peak);
+  TRYFUNC(process_size);
+  TRYFUNC(process_peak);
   
   R_list_names = make_list_names(ct, "size", "peak");
-  R_list = make_list(R_list_names, ct, size, peak);
+  R_list = make_list(R_list_names, ct, process_size, process_peak);
   
   
   R_END;

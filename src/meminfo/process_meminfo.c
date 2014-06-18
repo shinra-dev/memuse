@@ -38,8 +38,6 @@ int meminfo_getpid();
 #endif
 
 
-// http://msdn.microsoft.com/en-us/library/windows/desktop/ms682050%28v=vs.85%29.aspx
-
 int meminfo_process_size(uint64_t *size)
 {
   int ret;
