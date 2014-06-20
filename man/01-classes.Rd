@@ -10,7 +10,7 @@
   \code{new('memuse', size = ..., unit = ..., unit.prefix = ..., unit.names = ...)}
   
   \code{memuse(size = ..., unit = ..., unit.prefix = ..., unit.names = ...)}
-
+  
   \code{mu(size = ..., unit = ..., unit.prefix = ..., unit.names = ...)}
 }
 

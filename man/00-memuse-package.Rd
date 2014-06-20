@@ -3,12 +3,13 @@
 \docType{package}
 \title{Core memuse Classes and Methods}
 \description{
-  The package gives the user the size (memory usage) of an unallocated, dense, 
-  in-core numeric object (matrix/vector). The output is an S4 class object 
-  that can be manipulated to be presented in different ways (different units, 
-  short/long versions of those units, etc.). Details about these various 
-  options are outlined in the rest of this manual, as well as the package 
-  vignette.
+  Originally an amusing fancy printing system, this package contains that, as
+  well as some functionality for showing.  As of version 2.0, the package
+  contains some helpful utilities for accessing hardware ram information,
+  ram usage of the current R process, as well as some other niceties.
+  
+  If you do a lot of benchmarking, this is the package you've been waiting for.
+  Maybe.  I mean, I don't want to be too pushy about it.
 }
 \details{
 \tabular{ll}{
@@ -17,13 +18,13 @@
   License: \tab GPL (>= 2)\cr
   LazyData: \tab yes\cr
   LazyLoad: \tab yes\cr
-  NeedsCompilation: \tab no
+  NeedsCompilation: \tab yes
 }
 }
 \references{
   Project home page:
-  \url{http://wrathematics.github.io}
-
+  \url{http://github.com/wrathematics/memuse}
+  
   CRAN listing:
   \url{http://cran.r-project.org/web/packages/memuse/index.html}
 }

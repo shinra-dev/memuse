@@ -3,17 +3,19 @@
 \alias{Sys.meminfo}
 \alias{Sys.swapinfo}
 \alias{Sys.pageinfo}
-\alias{Sys.procmem}
 
 \title{ meminfo }
 \description{
   Platform memory information.
 }
 \usage{
-  Sys.meminfo(compact.free=TRUE)
-  Sys.swapinfo()
-  Sys.pageinfo()
-  Sys.procmem(gcFirst=TRUE)
+Sys.meminfo(compact.free=TRUE)
+
+Sys.swapinfo()
+
+Sys.pageinfo()
+
+Sys.procmem(gcFirst=TRUE)
 }
 \arguments{
   \item{compact.free}{logical; determines whether various free memory
@@ -31,9 +33,6 @@
   name (provided for Windows users who may be more comfortable/familiar
   with the 'pagefile' naming convention).
   
-  \code{Sys.procmem()} returns the total memory usage of the current R
-  process, and (if supported), the maximum memory usage as well.
-  
   All of the C-level source code for these methods (in src/meminfo of
   the root directory of the memuse source tree) is licensed under the
   permissive 2-Clause BSD license.
@@ -42,8 +41,7 @@
   Returns a list, whose values are platform dependent in addition to being
   modified by input arguments.
 }
-\seealso{
-  \code{\link{howmany}}
+  \code{\link{procmem}}
 }
 \examples{
 \dontrun{

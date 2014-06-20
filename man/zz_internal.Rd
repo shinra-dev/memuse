@@ -11,6 +11,7 @@
 
 
 % Internal data structures
+\alias{.memuse_envir}
 \alias{.units}
 \alias{.numbers}
 \alias{.time}

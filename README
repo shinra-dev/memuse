@@ -1,14 +1,35 @@
 What is this?
 ====================================================================
-This package is an over-engineered solution to a mostly non-existent problem,
-as a sort of love letter to other needlessly complex programs like the 
-"Enterprise Fizzbuzz" https://github.com/Mikkeren/FizzBuzzEnterpriseEdition .
- 
-The package gives the user the size (memory usage) of an in-core, dense 
-matrix.  The output is an S4 class object that can be manipulated to be 
-presented in different ways (different units, short/long versions of those 
-units, etc.).  For more information, see the package vignette and the manual.
-It's basically a fancy printing system for byte sizes.
+Originally, this package was an over-engineered solution to a mostly 
+non-existent problem, as a sort of love letter to other needlessly complex 
+programs like the "Enterprise Fizzbuzz":
+
+https://github.com/Mikkeren/FizzBuzzEnterpriseEdition
+
+However, as of version 2.0, I'm sad to report that the package is actually
+becoming quite useful.  With this package you can get some information about
+how much ram is physically available on the host machine:
+
+Sys.meminfo()
+Sys.swapinfo() ## same as Sys.pageinfo()
+
+You can find the ram usage of the current R process:
+
+Sys.procmem()
+
+You can also estimate how much ram a matrix would require to store:
+
+howbig()
+howmany()
+
+Finally, the package is full of helpful printing utilities and replacements for
+native R functionality (with better outputs):
+
+object.size()
+wc.time() ## replaces system.time()
+approx.size()
+
+For more information, see the package vignette.
 
 
 

@@ -1,33 +1,64 @@
-\section{Hardware Memory Information: meminfo()}
-
-\subsection{Using meminfo()}
-
-As of \pkg{memuse}~$\geq 2.0$, we include the \code{meminfo()} utility.  This function gathers some minimal hardware information about available memory: physical and (when possible) virtual.  This is \emph{extremely} platform dependent, and we will discuss some of the specifics in the following subsection.  
-
-To use, simply call:
-\begin{lstlisting}
-meminfo()
-\end{lstlisting}
-
-And a list will be returned containing some information.  By default, this will only contain a simplified profile of total and ``available'' (more on this later) physical memory.  For Linux, Mac, and Windows, the option is available for swap (or paging in the case of Windows) information.  
-
-Contributions are welcome.
-
-
+\section{Hardware Memory Information}
 
 \subsection{Platform Bullshit}
 
-The platform with the best support in the \pkg{memuse} package is Linux.  This is largely 
-because getting this information in Linux is very simple --- on top of the data itself is 
-very well-defined --- compared to other platforms.  So get your shit together, other OS devs.
+The platform with the best support in the \pkg{memuse} package is Linux.  This 
+is largely because getting this information in Linux is very simple --- on top 
+of the data itself being very well-defined --- compared to other platforms.  So 
+get your shit together, other OS devs.
+
+All platforms get these values differently, and calculate them in slightly 
+different ways.  About the only measurement that means the same thing on all 
+platforms is ``total physical ram''.  Everything else is what you get when no 
+one wants to standardize anything.
+
+Not only do the return values themselves sometimes have different meanings on 
+different platforms, but some things are/aren't returned on different platforms 
+as well.  The remainder of this section will outline those differences, as a 
+kind of angrily written reference standard.
+
+
+
+\subsection{Terminology}
 
 For clarity, we define some terms here.
 
-Swap is pretend ram that you probably shouldn't ever use; generally I would rather have a program crash than send me into a 40 hour swap death.
+RAM is ``fast'' storage on your computer --- until you learn about cache 
+anyway.  \emph{Free ram} is the portion of ram not being used, either by the OS 
+(when this information is possible to get) or by programs, hackers, etc.
 
-All operating systems basically treat swap/page files the same.  There are minor differences in allocation; for example, Mac OS X bizarrely uses unused space on the \code{/boot} partition for swap.  But the basic principle is the same: dump stuff to disk.
+Swap is pretend-ram that you shouldn't ever actually use.  I would much
+rather have a program crash than send me into a 40 hour swap death.  In 
+short, it's ``ram'' on your disk.  How swap is used and/or created itself is 
+platform dependent.  Swap is pretty much the same thing as paging on 
+Windows, and so \code{Sys.swapinfo()} is aliased as \code{Sys.pageinfo()}.  The 
+two functions are identical within a given platform.
 
-For the remainder, we will be discussing how various values for ram are calculated.
+All operating systems basically treat swap/page files the same.  There are minor 
+differences in allocation; for example, Mac OS X bizarrely uses unused space on 
+the \code{/boot} partition for swap.  But the basic principle is the same: dump 
+stuff to disk.
+
+
+
+\subsection{Sys.meminfo() and Sys.swapinfo()}
+
+As of \pkg{memuse}~$\geq 2.0$, we include the \code{Sys.meminfo()} and 
+\code{Sys.swapinfo()} utilities.  The former gathers some minimal 
+hardware information about available memory, and the latter does the same but 
+for swap.
+
+To use, simply call:
+\begin{lstlisting}
+Sys.meminfo()
+Sys.swapinfo()
+\end{lstlisting}
+
+And a list will be returned containing some information.  By default, this will 
+only contain a simplified profile of total and ``available'' (more on this 
+later) physical memory. 
+
+
 
 
 
@@ -63,22 +94,11 @@ SwapCached:            8 kB
 The actual implementation of \code{meminfo()} uses \code{sysinfo} (see \code{man 2 sysinfo}) for everything but cached memory, which is read directly from \code{/proc/meminfo}.
 
 
-
-
 \subsubsection{Windows}
-
-The \href{http://msdn.microsoft.com/en-us/library/windows/desktop/aa366589%28v=vs.85%29.aspx}{Windows documentation} 
-on this is surprisingly clear and thorough.  I would compliment them, except that the function returns \emph{nonzero upon success}, which is in violation of the \proglang{C} standard, not to mention common decency.  Good job, guys.
-
-Also, this may crash your R session, so watch out.
-
-
-
 
 
 \subsubsection{Mac OS X}
 
-Mac is kind of a mess if I'm being honest.
 
 
 
@@ -95,4 +115,74 @@ wonder why I even went to all this trouble in the first place, so you get what y
 
 \subsubsection{Miscellaneous *NIX Variants}
 
-Everybody seems to have their own little wiggle to \code{sysctl} for getting various memory statistics, and I just don't have the kind of time or resources to set up 100 different BSD-variant vm's to test that the man pages aren't lying to me.  As such, all *NIX's outside of Linux and Mac get only total ram and ``free ram'', as reported by \code{sysconf}.
+Everybody seems to have their own little wiggle to \code{sysctl} for getting 
+various memory statistics, and I just don't have the kind of time or resources 
+to set up 100 different BSD-variant vm's to test that the man pages aren't lying 
+to me.  As such, all *NIX's outside of Linux and Mac get only total ram and 
+``free ram'', as reported by \code{sysconf}.
+
+\code{Sys.swapinfo()} is not supported on these platforms at this time.
+
+
+
+
+\subsection{Sys.procmem()}
+
+We also provide a utility for discovering the amount of ram being used by the 
+current R process.  To use it, simply call:
+\begin{lstlisting}[language=rr]
+Sys.procmem()
+\end{lstlisting}
+
+This is utility is only supported on Linux, Windows, and Mac.  On Linux and 
+Windows, the utility will also return the maximum amount of ram used by the 
+current R process.  You can see how this works by calling:
+
+\begin{lstlisting}[language=rr]
+library(memuse)
+
+Sys.procmem()
+x <- rnorm(1e7)
+object.size(x)
+Sys.procmem()
+rm(x)
+gc(FALSE)
+Sys.procmem()
+\end{lstlisting}
+
+Just as an example, on my machine, this produces:
+\vspace{-.6cm}
+\begin{Output}
+> Sys.procmem()
+$size
+134.488 MiB
+
+$peak
+134.488 MiB
+
+> x <- rnorm(1e7)
+
+> object.size(x)
+76.294 MiB
+
+> Sys.procmem()
+$size
+210.785 MiB
+
+$peak
+210.785 MiB
+
+> rm(x)
+> gc(FALSE)
+         used (Mb) gc trigger (Mb) max used (Mb)
+Ncells 324437 17.4     597831 32.0   407500 21.8
+Vcells 578176  4.5    9599428 73.3 10582203 80.8
+
+> Sys.procmem()
+$size
+134.488 MiB
+
+$peak
+210.785 MiB
+
+\end{Output}

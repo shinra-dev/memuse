@@ -16,9 +16,10 @@ digits2zero <- function(str)
 
 
 
-approx.size <- function(x, unit="best", unit.names="long", ..., digits=1)
+approx.size <- function(x, unit.names="long", ..., digits=1)
 {
-  unit <- match.arg(tolower(unit), c("best"))
+  #unit <- match.arg(tolower(unit), c("best"))
+  unit <- "best" ### FIXME
   unit.names <- match.arg(tolower(unit.names), c("long", "short", "comma"))
   
   if (length(x) > 1)
