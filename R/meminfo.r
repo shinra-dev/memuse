@@ -183,7 +183,7 @@ meminfo.process <- function(gcFirst=TRUE)
   if (gcFirst)
     gc(FALSE)
   
-  out <- .Call("R_memuse_process_size")
+  out <- .Call("R_memuse_process_size", PACKAGE="memuse")
   
   if (any(unlist(out) == -1))
     stop("There were errors accessing process info")
