@@ -3,7 +3,7 @@
 
 \alias{Sys.procmem}
 
-\title{ meminfo }
+\title{procmem}
 \description{
   Shows the amount of ram used by the current R process.
 }

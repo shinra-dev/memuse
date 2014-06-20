@@ -34,13 +34,9 @@ int meminfo_getpid()
 {
   int ret;
   
-  #if OS_LINUX
-  uint64_t pid;
-  ret = read_proc_file("/proc/self/status", &pid, "Pid:", 4);
-  chkret(ret);
-  #elif OS_WINDOWS
+  #if OS_WINDOWS
   DWORD pid = GetCurrentProcessId();
-  #elif OS_MAC
+  #elif OS_NIX
   int pid = getpid();
   #else
   int pid;

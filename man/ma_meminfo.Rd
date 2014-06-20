@@ -1,10 +1,11 @@
 \name{meminfo}
+\alias{meminfo}
 
 \alias{Sys.meminfo}
 \alias{Sys.swapinfo}
 \alias{Sys.pageinfo}
 
-\title{ meminfo }
+\title{meminfo}
 \description{
   Platform memory information.
 }
@@ -14,15 +15,11 @@ Sys.meminfo(compact.free=TRUE)
 Sys.swapinfo()
 
 Sys.pageinfo()
-
-Sys.procmem(gcFirst=TRUE)
 }
 \arguments{
   \item{compact.free}{logical; determines whether various free memory
   values should be combined into a single value. See details section
   for more information.}
-  \item{gcFirst}{logical; determines if garbage collection should be
-  called before getting process memory usage.}
 }
 \details{
   \code{Sys.meminfo()} returns some basic memory values, such as total ram, 
@@ -41,6 +38,7 @@ Sys.procmem(gcFirst=TRUE)
   Returns a list, whose values are platform dependent in addition to being
   modified by input arguments.
 }
+\seealso{
   \code{\link{procmem}}
 }
 \examples{

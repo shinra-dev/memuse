@@ -1,7 +1,4 @@
-### Basic construction and object options
 library(memuse, quiet=T)
-
-linebreak <- function(n=1) cat(sprintf(paste(rep("\n", n))))
 
 
 # The best unit for representation is chosen by default
@@ -19,7 +16,6 @@ mu(2000, unit="kb")
 mu(2000, unit="kb", unit.names="long")
 mu(2000, unit="kb", unit.prefix="SI")
 
-linebreak()
 
 # We can change the default unit.prefix and unit.names
 .NAMES <- "long"
@@ -31,10 +27,10 @@ mu(120, unit="kb")
 
 .NAMES <- "short"
 
-linebreak()
 
 # We can easily convert between different units
 x <- mu(120, unit="kib")
 print(x)
 swap.unit(x, "kb")
 swap.unit(x, "b")
+
