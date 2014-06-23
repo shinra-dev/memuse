@@ -82,11 +82,13 @@
   \code{\link{howbig}}
 }
 \examples{
+\dontrun{
 x <- mu(1, "gib")
 
 # largest square matrix that's 1 GiB
 howmany(x)
 # same, but ballpark figure
 howmany(mu(1, "gib"), out.type="approx")
+}
 }
 \keyword{Methods}

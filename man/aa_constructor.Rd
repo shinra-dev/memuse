@@ -49,10 +49,12 @@
   }
 }
 \examples{
+\dontrun{
 x <- mu(100, unit="kb")
 x
 
 y <- mu(100, unit="kb", unit.prefix="SI")
 y
+}
 }
 \keyword{Methods}

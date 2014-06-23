@@ -61,7 +61,9 @@
   \code{\link{howmany}}
 }
 \examples{
+\dontrun{
 # size of a 1000x1000 matrix
 howbig(1000, 1000)
+}
 }
 \keyword{Methods}

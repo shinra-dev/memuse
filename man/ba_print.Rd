@@ -42,9 +42,11 @@
   }
 }
 \examples{
+\dontrun{
 x <- mu(1e6)
 
 print(x)
 x # same as show(x)
+}
 }
 \keyword{Methods}

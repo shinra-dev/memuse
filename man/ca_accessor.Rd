@@ -71,6 +71,7 @@
   }
 }
 \examples{
+\dontrun{
 x <- mu(1e6)
 
 size(x)
@@ -78,5 +79,6 @@ as.numeric(x)
 unit(x)
 unit.prefix(x)
 unit.names(x)
+}
 }
 \keyword{Methods}

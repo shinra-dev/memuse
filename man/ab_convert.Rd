@@ -52,6 +52,8 @@
   }
 }
 \examples{
+\dontrun{
 as.memuse(10)
+}
 }
 \keyword{Methods}

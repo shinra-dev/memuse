@@ -22,8 +22,10 @@
   \code{\link{howmany}}
 }
 \examples{
+\dontrun{
 library(memuse)
 
 approx.size(12345678)
 approx.size(12345678, unit.names="comma")
+}
 }

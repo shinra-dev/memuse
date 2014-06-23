@@ -78,6 +78,7 @@
   }
 }
 \examples{
+\dontrun{
 x <- mu(200)
 y <- mu(100)
 
@@ -86,5 +87,6 @@ x-y
 x*y
 x/y
 x^2
+}
 }
 \keyword{Methods}

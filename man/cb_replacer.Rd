@@ -57,10 +57,12 @@
   }
 }
 \examples{
+\dontrun{
 x <- mu(2000, unit="bytes")
 x
 
 size(x) <- 1000
 x
+}
 }
 \keyword{Methods}

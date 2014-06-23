@@ -57,11 +57,13 @@
   }
 }
 \examples{
+\dontrun{
 x <- mu(1e6)
 
 x
 swap.prefix(x)
 swap.names(x)
 swap.unit(x, "bytes")
+}
 }
 \keyword{Methods}
