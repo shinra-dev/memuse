@@ -2,12 +2,12 @@
 R_SCMD = ${R_HOME}/bin${R_ARCH_BIN}/Rscript -e
 
 #################################################################
-SEXPTOOLS_CPPFLAGS = $(shell ${R_SCMD} "SEXPtools:::cppflags()")
-SEXPTOOLS_LDFLAGS = $(shell ${R_SCMD} "SEXPtools:::ldflags()")
+RNACI_CPPFLAGS = $(shell ${R_SCMD} "RNACI:::cppflags()")
+RNACI_LDFLAGS = $(shell ${R_SCMD} "RNACI:::ldflags()")
 
-PKG_CPPFLAGS = $(SEXPTOOLS_CPPFLAGS)
+PKG_CPPFLAGS = $(RNACI_CPPFLAGS)
 PKG_CFLAGS = -w
-PKG_LIBS = $(SEXPTOOLS_LDFLAGS) -lpsapi
+PKG_LIBS = $(RNACI_LDFLAGS) -lpsapi
 
 
 MEMOBJS = meminfo/meminfo.o meminfo/platform.o meminfo/getpid.o meminfo/process_meminfo.o

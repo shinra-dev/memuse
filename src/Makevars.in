@@ -1,10 +1,10 @@
 #################################################################
-SEXPTOOLS_CPPFLAGS = `$(R_HOME)/bin/Rscript -e "SEXPtools:::cppflags()"`
-SEXPTOOLS_LDFLAGS = `$(R_HOME)/bin/Rscript -e "SEXPtools:::ldflags()"`
+RNACI_CPPFLAGS = `$(R_HOME)/bin/Rscript -e "RNACI:::cppflags()"`
+RNACI_LDFLAGS = `$(R_HOME)/bin/Rscript -e "RNACI:::ldflags()"`
 
-PKG_CPPFLAGS = $(SEXPTOOLS_CPPFLAGS)
+PKG_CPPFLAGS = $(RNACI_CPPFLAGS)
 PKG_CFLAGS = -w
-PKG_LIBS = $(SEXPTOOLS_LDFLAGS)
+PKG_LIBS = $(RNACI_LDFLAGS)
 
 
 MEMOBJS = meminfo/meminfo.o meminfo/platform.o meminfo/getpid.o meminfo/process_meminfo.o

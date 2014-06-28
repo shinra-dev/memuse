@@ -2,7 +2,7 @@
 #define __R_MEMUSE__
 
 
-#include <SEXPtools.h>
+#include <RNACI.h>
 #include "meminfo/meminfo.h"
 
 
