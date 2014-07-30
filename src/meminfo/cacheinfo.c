@@ -63,23 +63,25 @@ int meminfo_totalcache(uint64_t *totalcache, const unsigned int level)
   }
   
   *totalcache = ret;
-  #elif OS_APPLE
+  #elif OS_MAC
   uint64_t cache_size = 0;
   size_t size = sizeof(cache_size);
   
   if (level == 1)
-    sysctlbyname("hw.l1dcachesize", &cache_size, &size, 0, 0);
+    ret = sysctlbyname("hw.l1dcachesize", &cache_size, &size, 0, 0);
   else if (level == 2)
-    sysctlbyname("hw.l2dcachesize", &cache_size, &size, 0, 0);
+    ret = sysctlbyname("hw.l2cachesize", &cache_size, &size, 0, 0);
   else if (level == 3)
-    sysctlbyname("hw.l3dcachesize", &cache_size, &size, 0, 0);
+    ret = sysctlbyname("hw.l3cachesize", &cache_size, &size, 0, 0);
   else
     return FAILURE;
   
+  chkret(ret);  
+
   if (cache_size == 0)
     return FAILURE;
   
-  *totalcache = cache_size * 1024L;
+  *totalcache = cache_size;
   #elif OS_WINDOWS
   int i;
   BOOL winret;
