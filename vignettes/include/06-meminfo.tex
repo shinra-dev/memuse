@@ -1,8 +1,25 @@
 \section{Hardware Memory Information}
 
-\subsection{Platform Bullshit}
+As of \thispackage version 2.0, some basic hardware memory information is 
+available:
 
-The platform with the best support in the \pkg{memuse} package is Linux.  This 
+\begin{center}
+\vspace{0.2cm}
+\begin{tabular}{ll} \hline\hline
+Function & Description of Measurement \\ \hline
+\code{Sys.meminfo()} & Total and free RAM (also buffers and cache if 
+available)\\
+\code{Sys.swapinfo()} & Total and free swap/page space.\\
+\code{Sys.procmem()} & Total and peak RAM usage by current \R process.\\
+\code{Sys.cacheinfo()} & Cache sizes \\
+\hline\hline
+\end{tabular}
+\vspace{0.2cm}
+\end{center}
+
+Not all platforms are supported, and even among those that are, not all 
+measurements are available across all platforms.  The platform with the best 
+support in the \pkg{memuse} package is Linux.  This 
 is largely because getting this information in Linux is very simple --- on top 
 of the data itself being very well-defined --- compared to other platforms.  So 
 get your shit together, other OS devs.
@@ -17,15 +34,20 @@ different platforms, but some things are/aren't returned on different platforms
 as well.  The remainder of this section will outline those differences, as a 
 kind of angrily written reference standard.
 
+The remainder of this section is dedicated to the sisyphean tragedy of 
+multiplatform software development.
+
+
 
 
 \subsection{Terminology}
 
 For clarity, we define some terms here.
 
-RAM is ``fast'' storage on your computer --- until you learn about cache 
-anyway.  \emph{Free ram} is the portion of ram not being used, either by the OS 
-(when this information is possible to get) or by programs, hackers, etc.
+RAM is ``fast'' storage on your computer (if you pretend that cache doesn't 
+exist, anyway).  \emph{Free ram} is the portion of ram not being used, either 
+by the OS (when this information is possible to get) or by programs, hackers, 
+etc.
 
 Swap is pretend-ram that you shouldn't ever actually use.  I would much
 rather have a program crash than send me into a 40 hour swap death.  In 
@@ -43,6 +65,7 @@ stuff to disk.
 
 \subsection{Sys.meminfo() and Sys.swapinfo()}
 
+%%% FIXME
 As of \pkg{memuse}~$\geq 2.0$, we include the \code{Sys.meminfo()} and 
 \code{Sys.swapinfo()} utilities.  The former gathers some minimal 
 hardware information about available memory, and the latter does the same but 
@@ -129,14 +152,14 @@ to me.  As such, all *NIX's outside of Linux and Mac get only total ram and
 \subsection{Sys.procmem()}
 
 We also provide a utility for discovering the amount of ram being used by the 
-current R process.  To use it, simply call:
+current \R process.  To use it, simply call:
 \begin{lstlisting}[language=rr]
 Sys.procmem()
 \end{lstlisting}
 
 This is utility is only supported on Linux, Windows, and Mac.  On Linux and 
 Windows, the utility will also return the maximum amount of ram used by the 
-current R process.  You can see how this works by calling:
+current \R process.  You can see how this works by calling:
 
 \begin{lstlisting}[language=rr]
 library(memuse)

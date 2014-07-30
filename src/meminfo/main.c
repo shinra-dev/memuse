@@ -36,18 +36,27 @@
   else if (ret==PLATFORM_ERROR)\
   return PLATFORM_ERROR;
 
-#define CHECKANDPRINT(val,str) CHECKRET(ret);\
+#define CHECKANDPRINT(val,str) \
   printf(str);\
+  if (ret==FAILURE) \
+  printf("Operation not available on this platform"); \
+  else if(ret==PLATFORM_ERROR) \
+  printf("Operating system is not supported"); \
+  else \
   meminfo_putval(val);\
   putchar('\n')
 
-int meminfo_putval(uint64_t val);
+#define BLANKS printf("\n\n")
+
+
 
 int main(int argc, char **argv)
 {
   int ret;
   uint64_t tmp;
   
+  
+  // RAM
   ret = meminfo_totalram(&tmp);
   CHECKANDPRINT(tmp, "totalram:  ");
   
@@ -60,5 +69,39 @@ int main(int argc, char **argv)
   ret = meminfo_cachedram(&tmp);
   CHECKANDPRINT(tmp, "cachedram: ");
   
+  BLANKS;
+  
+  
+  // Swap
+  ret = meminfo_totalswap(&tmp);
+  CHECKANDPRINT(tmp, "totalswap:  ");
+  
+  ret = meminfo_freeswap(&tmp);
+  CHECKANDPRINT(tmp, "freeswap:   ");
+  
+  ret = meminfo_cachedswap(&tmp);
+  CHECKANDPRINT(tmp, "cachedswap: ");
+  
+  BLANKS;
+  
+  
+  // Cache
+  ret = meminfo_totalcache(&tmp, 1);
+  CHECKANDPRINT(tmp, "L1:  ");
+  
+  ret = meminfo_totalcache(&tmp, 2);
+  CHECKANDPRINT(tmp, "L2:  ");
+  
+  ret = meminfo_totalcache(&tmp, 3);
+  CHECKANDPRINT(tmp, "L3:  ");
+  
+  BLANKS;
+  
+  
+  // Process RAM usage
+  ret = meminfo_process_size(&tmp);
+  CHECKANDPRINT(tmp, "RAM Usage for This Program:  ");
+  
   return 0;
 }
+

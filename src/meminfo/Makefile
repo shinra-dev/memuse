@@ -1,7 +1,7 @@
 CC=clang
 CFLAGS=-O0 -Wall
 
-OBJECTS = platform.c meminfo.c print.c
+OBJECTS =  cacheinfo.c meminfo.c platform.c print.c process_meminfo.c swapinfo.c
 
 all: meminfo shared static
 
@@ -19,4 +19,6 @@ static:
 clean:
 	rm -f *.o
 	rm -f meminfo
+	rm -f *.a
+	rm -f *.so
 

@@ -42,7 +42,7 @@ int read_proc_file(const char *file, uint64_t *val, char *field, int fieldlen)
   
   if (fp != NULL)
   {
-    tmp = (char*) malloc(tmplen);
+    tmp = malloc(tmplen);
     
     while (getline(&tmp, &tmplen, fp) >= 0)
     {
@@ -54,7 +54,33 @@ int read_proc_file(const char *file, uint64_t *val, char *field, int fieldlen)
     }
     
     fclose(fp);
-    free((void*)tmp);
+    free(tmp);
+    
+    if (value != FAILURE)
+    {
+      *val = value;
+      return 0;
+    }
+  }
+  
+  return FAILURE;
+}
+
+
+
+int read_sys_file(const char *file, uint64_t *val)
+{
+  uint64_t value = FAILURE;
+  
+  *val = 0L;
+  
+  FILE* fp = fopen(file, "r");
+  
+  if (fp != NULL)
+  {
+    while(fscanf(fp, "%ldK", &value) > 0){}
+    
+    fclose(fp);
     
     if (value != FAILURE)
     {

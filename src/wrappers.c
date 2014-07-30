@@ -17,18 +17,53 @@
 #include "memuse.h"
 
 
-// Just for testing
-SEXP R_memuse_getpid()
+SEXP R_meminfo()
 {
   R_INIT;
+  
+  int ret;
+  int ct = 0;
   uint64_t tmp;
   
-  meminfo_getpid(&tmp);
+  SEXP R_list, R_list_names;
+  SEXP totalram, freeram, bufferram, cachedram;
   
-  Rprintf("pid=%lld\n", tmp);
+  TRYFUNC(totalram);
+  TRYFUNC(freeram);
+  TRYFUNC(bufferram);
+  TRYFUNC(cachedram);
+  
+  R_list_names = make_list_names(ct, "totalram", "freeram", "bufferram", "cachedram");
+  R_list = make_list(R_list_names, ct, totalram, freeram, bufferram, cachedram);
+  
   
   R_END;
-  return R_NilValue;
+  return R_list;
+}
+
+
+
+SEXP R_swapinfo()
+{
+  R_INIT;
+  
+  int ret;
+  int ct = 0;
+  uint64_t tmp;
+  
+  SEXP R_list, R_list_names;
+  SEXP totalswap, freeswap, cachedswap;
+  
+  TRYFUNC(totalswap);
+  TRYFUNC(freeswap);
+  TRYFUNC(cachedswap);
+  
+  R_list_names = make_list_names(ct, "totalswap", "freeswap", "cachedswap");
+  R_list = make_list(R_list_names, ct, totalswap, freeswap, cachedswap);
+  
+  
+  R_END;
+  return R_list;
 }
 
 
@@ -53,4 +88,23 @@ SEXP R_memuse_process_size()
   return R_list;
 }
 
+
+
+SEXP R_cacheinfo(SEXP level)
+{
+  R_INIT;
+  
+  int ret;
+  int ct = 0;
+  uint64_t tmp;
+  
+  SEXP RET;
+  
+  
+  CACHEFUN(totalcache, RET, INT(level));
+  
+  
+  R_END;
+  return RET;
+}
 

@@ -14,6 +14,14 @@
   else \
     DBL(THEFUN, 0) = (double) ret
 
+#define CACHEFUN(THEFUN, STORAGE, LEVEL) ret=meminfo_##THEFUN(&tmp, LEVEL); \
+  newRvec(STORAGE, 1, "double"); \
+  ct++; \
+  if (ret == MEMUSE_OK) \
+    DBL(STORAGE, 0) = (double) tmp; \
+  else \
+    DBL(STORAGE, 0) = (double) ret
+
 
 
 #endif

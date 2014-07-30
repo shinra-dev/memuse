@@ -30,10 +30,10 @@
 
 
 /* 
- *           Ram
+ *           Swap
  */ 
 
-int meminfo_totalram(uint64_t *totalram)
+int meminfo_totalswap(uint64_t *totalswap)
 {
   int ret;
   
@@ -43,10 +43,12 @@ int meminfo_totalram(uint64_t *totalram)
   
   chkret(ret);
   
-  *totalram = info.totalram * info.mem_unit;
+  *totalswap = info.totalswap * info.mem_unit;
   #elif OS_MAC
-  ret = sysctl_val("hw.memsize", totalram);
-  chkret(ret);
+  struct xsw_usage vmusage = {0};
+  size_t size = sizeof(vmusage);
+  sysctlbyname("vm.swapusage", &vmusage, &size, NULL, 0);
+  *totalswap = vmusage.xsu_total;
   #elif OS_WINDOWS
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
@@ -58,26 +60,14 @@ int meminfo_totalram(uint64_t *totalram)
   if (ret == 0)
     return FAILURE;
   
-  *totalram = status.ullTotalPhys;
+  *totalswap = status.ullTotalPageFile;
   #elif OS_FREEBSD
   ret = sysconf(_SC_PAGESIZE);
   if (ret == FAILURE)
     return FAILURE;
   
-  ret = sysctl_val("hw.physmem", totalram);
+  ret = sysctl_val("vm.swap_total", totalswap);
   chkret(ret);
-  #elif OS_NIX
-  uint64_t npages, pagesize;
-  
-  npages = sysconf(_SC_PHYS_PAGES);
-  if (npages == FAILURE)
-    return FAILURE;
-  
-  pagesize = sysconf(_SC_PAGESIZE);
-  if (pagesize == FAILURE)
-    return FAILURE;
-  
-  *totalram = npages * pagesize;
   #else
   return PLATFORM_ERROR;
   #endif
@@ -86,8 +76,7 @@ int meminfo_totalram(uint64_t *totalram)
 }
 
 
-
-int meminfo_freeram(uint64_t *freeram)
+int meminfo_freeswap(uint64_t *freeswap)
 {
   int ret;
   
@@ -97,25 +86,12 @@ int meminfo_freeram(uint64_t *freeram)
   
   chkret(ret);
   
-  *freeram = info.freeram * info.mem_unit;
+  *freeswap = info.freeswap * info.mem_unit;
   #elif OS_MAC
-  vm_size_t page_size;
-  mach_port_t mach_port;
-  mach_msg_type_number_t count;
-  vm_statistics_data_t vm_stats;
-  
-  mach_port = mach_host_self();
-  count = sizeof(vm_stats) / sizeof(natural_t);
-  
-  ret = host_page_size(mach_port, &page_size);
-  if (ret != KERN_SUCCESS)
-    return FAILURE;
-  
-  ret = host_statistics(mach_port, HOST_VM_INFO, (host_info_t)&vm_stats, &count);
-  if (ret != KERN_SUCCESS)
-    return FAILURE;
-  
-  *freeram = (uint64_t) vm_stats.free_count * (uint64_t) page_size;
+  struct xsw_usage vmusage = {0};
+  size_t size = sizeof(vmusage);
+  sysctlbyname("vm.swapusage", &vmusage, &size, NULL, 0);
+  *freeswap = vmusage.xsu_avail;
   #elif OS_WINDOWS
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
@@ -127,31 +103,7 @@ int meminfo_freeram(uint64_t *freeram)
   if (ret == 0)
     return FAILURE;
   
-  *freeram = status.ullAvailPhys;
-  #elif OS_FREEBSD
-  int pagesize;
-  ret = sysconf(_SC_PAGESIZE);
-  if (ret == FAILURE)
-    return FAILURE;
-  else
-    pagesize = ret;
-  
-  ret = sysctl_val("vm.stats.vm.v_free_count", freeram);
-  chkret(ret);
-  
-  *freeram *= (uint64_t) pagesize;
-  #elif OS_NIX
-  uint64_t pagesize, freepages;
-  
-  pagesize = sysconf(_SC_PAGESIZE);
-  if (pagesize == FAILURE)
-    return FAILURE;
-  
-  freepages = sysconf(_SC_AVPHYS_PAGES);
-  if (freepages == FAILURE)
-    return FAILURE;
-  
-  *freeram = pagesize * freepages;
+  *freeswap = status.ullAvailPageFile;
   #else
   return PLATFORM_ERROR;
   #endif
@@ -161,17 +113,16 @@ int meminfo_freeram(uint64_t *freeram)
 
 
 
-int meminfo_bufferram(uint64_t *bufferram)
+
+int meminfo_cachedswap(uint64_t *cachedswap)
 {
   int ret;
   
   #if OS_LINUX
-  struct sysinfo info;
-  ret = sysinfo(&info);
+  ret = read_proc_file("/proc/meminfo", cachedswap, "SwapCached:", 11);
   
   chkret(ret);
-  
-  *bufferram = info.bufferram * info.mem_unit;
+  *cachedswap *= 1024L;
   #else
   return PLATFORM_ERROR;
   #endif
@@ -179,24 +130,5 @@ int meminfo_bufferram(uint64_t *bufferram)
   return 0;
 }
 
-
-
-int meminfo_cachedram(uint64_t *cachedram)
-{
-  int ret;
-  
-  #if OS_LINUX
-  ret = read_proc_file("/proc/meminfo", cachedram, "Cached:", 7);
-  
-  chkret(ret);
-  *cachedram *= 1024L;
-  #elif OS_FREEBSD
-  //FIXME
-  #else
-  return PLATFORM_ERROR;
-  #endif
-  
-  return 0;
-}
 
 

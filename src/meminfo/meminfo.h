@@ -41,6 +41,9 @@
 #define PLATFORM_ERROR -10
 
 
+// cacheinfo.c
+int meminfo_totalcache(uint64_t *totalcache, const unsigned int level);
+
 // meminfo.c
 int meminfo_totalram(uint64_t *totalram);
 int meminfo_freeram(uint64_t *freeram);
@@ -49,6 +52,9 @@ int meminfo_cachedram(uint64_t *cachedram);
 int meminfo_totalswap(uint64_t *totalswap);
 int meminfo_freeswap(uint64_t *freeswap);
 int meminfo_cachedswap(uint64_t *cachedswap);
+
+// print.c
+int meminfo_putval(uint64_t val);
 
 // process_meminfo.c
 int meminfo_process_size(uint64_t *size);

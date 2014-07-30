@@ -7,8 +7,14 @@ PKG_CFLAGS = -w
 PKG_LIBS = $(RNACI_LDFLAGS)
 
 
-MEMOBJS = meminfo/meminfo.o meminfo/platform.o meminfo/getpid.o meminfo/process_meminfo.o
-ROBJS   = R_meminfo2.o R_process_meminfo.o
+MEMOBJS = meminfo/meminfo.o \
+	meminfo/swapinfo.o \
+	meminfo/platform.o \
+	meminfo/getpid.o \
+	meminfo/process_meminfo.o \
+	meminfo/cacheinfo.o
+
+ROBJS   = wrappers.o
 
 OBJECTS = $(MEMOBJS) $(ROBJS)
 

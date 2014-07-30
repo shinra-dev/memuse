@@ -201,6 +201,37 @@ meminfo.process <- function(gcFirst=TRUE)
 }
 
 
+
+# ---------------------------------------------------------
+# Cache sizes
+# ---------------------------------------------------------
+
+cacheinfo <- function()
+{
+  levels <- 1L:3L
+  
+  ret <- sapply(levels, function(level) .Call("R_cacheinfo", level))
+  
+  names(ret) <- paste("l", levels, sep="")
+  
+  if (all(ret < 0))
+  {
+    if (1L %in% levels || cacheinfo(levels=1L)[[1L]]@size < 0)
+      stop("platform not supported at this time")
+    else
+      stop("requested levels not available")
+  }
+  if (any(ret < 0))
+  {
+    ret <- ret[which(ret > 0)]
+  }
+  
+  ret <- sapply(ret, mu)
+  
+  return( ret )
+}
+
+
 # ---------------------------------------------------------
 # Exported names
 # ---------------------------------------------------------
@@ -209,4 +240,5 @@ Sys.meminfo <- meminfo
 Sys.swapinfo <- swapinfo
 Sys.pageinfo <- swapinfo
 Sys.procmem <- meminfo.process
+Sys.cacheinfo <- cacheinfo
 
