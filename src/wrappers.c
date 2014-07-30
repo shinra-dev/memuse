@@ -16,7 +16,30 @@
 
 #include "memuse.h"
 
+// Constants
+SEXP R_meminfo_retvals(SEXP retval)
+{
+  R_INIT;
+  
+  PRINT(retval);
+  printf("%d %d %d\n", MEMUSE_OK, FAILURE, PLATFORM_ERROR);
+  
+  SEXP RET;
+  newRvec(RET, 1, "str");
+  
+  if (INT(retval) == MEMUSE_OK)
+    SET_STRING_ELT(RET, 0, mkChar("ok"));
+  else if (INT(retval) == FAILURE)
+    SET_STRING_ELT(RET, 0, mkChar("There were errors accessing hardware info; please report this to the package maintainer."));
+  else if (INT(retval) == PLATFORM_ERROR)
+    SET_STRING_ELT(RET, 0, mkChar("Your operating system is not supported at this time."));
+  
+  R_END;
+  return RET;
+}
 
+
+// Wrappers
 SEXP R_meminfo()
 {
   R_INIT;
@@ -90,7 +113,7 @@ SEXP R_memuse_process_size()
 
 
 
-SEXP R_cacheinfo(SEXP level)
+SEXP R_cachesize(SEXP level)
 {
   R_INIT;
   
@@ -106,5 +129,25 @@ SEXP R_cacheinfo(SEXP level)
   
   R_END;
   return RET;
+}
+
+
+
+SEXP R_cachelinesize(SEXP level)
+{
+  R_INIT;
+  
+  int ret;
+  int ct = 0;
+  uint64_t tmp;
+  
+  SEXP cachelinesize;
+  
+  
+  TRYFUNC(cachelinesize);
+  
+  
+  R_END;
+  return cachelinesize;
 }
 

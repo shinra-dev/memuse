@@ -43,12 +43,6 @@ int meminfo_totalcache(uint64_t *totalcache, const unsigned int level)
   int ret;
   
   #if OS_LINUX
-/*  char *file = malloc(50);*/
-/*  sprintf(file, "%s%d%s", "/sys/devices/system/cpu/cpu0/cache/index", level, "/size");*/
-/*  ret = read_sys_file(file, totalcache);*/
-/*  */
-/*  free(file);*/
-  
   if (level == 1)
     ret = sysconf(_SC_LEVEL1_DCACHE_SIZE);
   if (level == 2)
@@ -118,4 +112,71 @@ int meminfo_totalcache(uint64_t *totalcache, const unsigned int level)
   return 0;
 }
 
+
+
+/* 
+ *           Cache
+ */ 
+
+int meminfo_cachelinesize(uint64_t *linesize)
+{
+  int ret;
+  
+  #if OS_LINUX
+  ret = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
+  
+  if (ret == 0)
+  {
+    *linesize = 0L;
+    return FAILURE;
+  }
+  
+  *linesize = ret;
+  #elif OS_MAC
+  uint64_t cache_size = 0;
+  size_t size = sizeof(cache_size);
+  
+  ret = sysctlbyname("hw.cachelinesize", &cache_size, &size, 0, 0);
+  
+  chkret(ret);  
+
+  if (cache_size == 0)
+    return FAILURE;
+  
+  *totalcache = cache_size;
+  #elif OS_WINDOWS
+  int i;
+  BOOL winret;
+  DWORD size = 0;
+  SYSTEM_LOGICAL_PROCESSOR_INFORMATION *slpi;
+  
+  winret = GetLogicalProcessorInformation(0, &size);
+  if (winret == TRUE)
+  {
+    *totalcache = 0L;
+    return FAILURE;
+  }
+  
+  slpi = (SYSTEM_LOGICAL_PROCESSOR_INFORMATION *) malloc(size);
+  GetLogicalProcessorInformation(&slpi[0], &size);
+  
+  *totalcache = 0L;
+  
+  for (i=0; i != size / sizeof(SYSTEM_LOGICAL_PROCESSOR_INFORMATION); i++)
+  {
+    if (slpi[i].Relationship == RelationCache && slpi[i].Cache.Level == 1)
+    {
+      *totalcache = slpi[i].Cache.LineSize;
+      return 0;
+    }
+  }
+  
+  return FAILURE;
+  
+  #else
+  return PLATFORM_ERROR;
+  #endif
+  
+  return 0;
+}
 

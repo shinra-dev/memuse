@@ -22,7 +22,8 @@ exportMethods(
 )
 
 export(
-  Sys.meminfo, Sys.swapinfo, Sys.pageinfo, Sys.procmem, Sys.cacheinfo,
+  Sys.meminfo, Sys.swapinfo, Sys.pageinfo, Sys.procmem, 
+  Sys.cachesize, Sys.cachelinesize,
   ### Constructor
   memuse, mu,
   ### Arithmetic

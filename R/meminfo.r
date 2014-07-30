@@ -10,6 +10,17 @@ val_or_zero <- function(x)
 }
 
 
+
+meminfo_retvals <- function(retval)
+{
+  if (length(retval) > 1)
+    return(sapply(retval, meminfo_retvals))
+  
+  .Call("R_meminfo_retvals", as.integer(retval), PACKAGE="memuse")
+}
+
+
+
 meminfo <- function(compact.free=TRUE)
 {
   os <- get.os()
@@ -131,7 +142,8 @@ meminfo.linux <- function()
   swapcached <- meminfo.linux.clean(x=mem[ind])
   
   
-  ret <- list(totalram=totalram, freeram=freeram, bufferram=bufferram, cachedram=cachedram, totalswap=totalswap, freeswap=freeswap, swapcached=swapcached)
+  ret <- list(totalram=totalram, freeram=freeram, bufferram=bufferram, cachedram=cachedram, 
+              totalswap=totalswap, freeswap=freeswap, swapcached=swapcached)
   
   return( ret )
 }
@@ -206,17 +218,17 @@ meminfo.process <- function(gcFirst=TRUE)
 # Cache sizes
 # ---------------------------------------------------------
 
-cacheinfo <- function()
+cachesize <- function()
 {
   levels <- 1L:3L
   
-  ret <- sapply(levels, function(level) .Call("R_cacheinfo", level))
+  ret <- sapply(levels, function(level) .Call("R_cachesize", level, PACKAGE="memuse"))
   
   names(ret) <- paste("l", levels, sep="")
   
   if (all(ret < 0))
   {
-    if (1L %in% levels || cacheinfo(levels=1L)[[1L]]@size < 0)
+    if (1L %in% levels || cachesize(levels=1L)[[1L]]@size < 0)
       stop("platform not supported at this time")
     else
       stop("requested levels not available")
@@ -232,6 +244,22 @@ cacheinfo <- function()
 }
 
 
+
+
+cachelinesize <- function()
+{
+  ret <- .Call("R_cachelinesize", PACKAGE="memuse")
+  
+  
+  if (ret < 0)
+    stop("platform not supported at this time")
+  
+  ret <- mu(ret)
+  
+  return( ret )
+}
+
+
 # ---------------------------------------------------------
 # Exported names
 # ---------------------------------------------------------
@@ -240,5 +268,6 @@ Sys.meminfo <- meminfo
 Sys.swapinfo <- swapinfo
 Sys.pageinfo <- swapinfo
 Sys.procmem <- meminfo.process
-Sys.cacheinfo <- cacheinfo
+Sys.cachesize <- cachesize
+Sys.cachelinesize <- cachelinesize
 
