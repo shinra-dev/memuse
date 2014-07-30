@@ -143,7 +143,7 @@ int meminfo_cachelinesize(uint64_t *linesize)
   if (cache_size == 0)
     return FAILURE;
   
-  *totalcache = cache_size;
+  *linesize = cache_size;
   #elif OS_WINDOWS
   int i;
   BOOL winret;
@@ -166,7 +166,7 @@ int meminfo_cachelinesize(uint64_t *linesize)
   {
     if (slpi[i].Relationship == RelationCache && slpi[i].Cache.Level == 1)
     {
-      *totalcache = slpi[i].Cache.LineSize;
+      *linesize = slpi[i].Cache.LineSize;
       return 0;
     }
   }
