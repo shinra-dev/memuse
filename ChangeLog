@@ -1,66 +1,26 @@
-======================= Version 2.0 ===========================================
-2014-6-16:
-  * Added Sys.procmem()
+Release 2.1:
+	* Added Sys.cacheinfo()
+	* Rewrote package demos to be more meaningful.
 
-2014-6-10:
-  * Added Sys.swapinfo()
+Release 2.0:
+	* Added Sys.procmem()
+	* Added Sys.swapinfo()
+	* Added Sys.meminfo()
+	* Fixed approx_size() bugs.
+	* Added as.character() method.
+	* Added sparse matrix handling for howbig().
 
-2014-5-1:
-  * Added Sys.meminfo()
+Release 1.1:
+	* Cleaned up the docs.
+	* Added howbig.par().
+	* Added better print handling of approximate returns.
+	* Enhanced the vignette and added cover.
+	* Method "object.size()" now returns memuse objects.
+	* Added approximate sizes for howmany() output.
+	* Made internals more consistent.
+	* Better internal documentation.
 
-2014-4-22
-  * Fixed approx_size() bug.
+Release 1.0:
+	* Started with a 10 line function that was more than sufficient.
+	* The joke got tastelessly out of hand.
 
-2014-3-17:
-  * Added as.character() method.
-
-2014-2-15:
-  * Fixed approx_size() bug.
-
-2013-8-7: 
-  * Added sparse matrix handling for howbig().
-
-======================= Version 1.1 ===========================================
-2013-8-6:
-  * Cleaned up the docs.
-
-2013-8-5:
-  * Added howbig.par().
-  * Added better print handling of approximate returns.
-
-2013-8-4:
-  * Enhanced the vignette.
-  * Added vignette cover.
-
-2013-8-3:
-  * Method "object.size()" now returns memuse objects.
-
-2013-8-2:
-  * Added approximate sizes for howmany() output.
-  * Made internals more consistent.
-  * Better internal documentation.
-
-2013-7-17:
-  * Fixed title.
-
-======================= Log Before Release ====================================
-2013-7-16:
-  * Finishing touches for CRAN.
-  * Expanded package demos.
-
-2013-7-10:
-  * Added interoperability with object_size objects.
-
-2013-7-6:
-  * Fixed constructor bug.
-  * Finished howbig.par().
-
-2013-6-15:
-  * Expanded vignette.
-  * Finished expanded howbig() and howmany().
-
-2013-5-23:
-  * The joke got tastelessly out of hand.
-
-2013-5-19:
-  * Started with a 10 line function that was more than sufficient.

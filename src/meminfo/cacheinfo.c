@@ -28,6 +28,12 @@
 
 #include "meminfo.h"
 
+#if OS_WINDOWS
+typedef BOOL (WINAPI *LPFN_GLPI)(
+    PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, 
+    PDWORD);
+#endif
+
 /* 
  *           Cache
  */ 
@@ -76,12 +82,12 @@ int meminfo_totalcache(uint64_t *totalcache, const unsigned int level)
   *totalcache = cache_size * 1024L;
   #elif OS_WINDOWS
   int i;
-  bool winret;
+  BOOL winret;
   DWORD size = 0;
   SYSTEM_LOGICAL_PROCESSOR_INFORMATION *slpi;
   
   winret = GetLogicalProcessorInformation(0, &size);
-  if (retval == TRUE)
+  if (winret == TRUE)
   {
     *totalcache = 0L;
     return FAILURE;
