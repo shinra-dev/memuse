@@ -150,17 +150,14 @@ int meminfo_cachelinesize(uint64_t *linesize)
   DWORD size = 0;
   SYSTEM_LOGICAL_PROCESSOR_INFORMATION *slpi;
   
+  *linesize = 0L;
+  
   winret = GetLogicalProcessorInformation(0, &size);
   if (winret == TRUE)
-  {
-    *totalcache = 0L;
     return FAILURE;
-  }
   
   slpi = (SYSTEM_LOGICAL_PROCESSOR_INFORMATION *) malloc(size);
   GetLogicalProcessorInformation(&slpi[0], &size);
-  
-  *totalcache = 0L;
   
   for (i=0; i != size / sizeof(SYSTEM_LOGICAL_PROCESSOR_INFORMATION); i++)
   {
