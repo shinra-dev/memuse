@@ -86,14 +86,17 @@ int main(int argc, char **argv)
   
   
   // Cache
-  ret = meminfo_totalcache(&tmp, 1);
+  ret = meminfo_cachesize(&tmp, 1);
   CHECKANDPRINT(tmp, "L1:  ");
   
-  ret = meminfo_totalcache(&tmp, 2);
+  ret = meminfo_cachesize(&tmp, 2);
   CHECKANDPRINT(tmp, "L2:  ");
   
-  ret = meminfo_totalcache(&tmp, 3);
+  ret = meminfo_cachesize(&tmp, 3);
   CHECKANDPRINT(tmp, "L3:  ");
+  
+  ret = meminfo_cachelinesize(&tmp);
+  CHECKANDPRINT(tmp, "\nCache Linesize:  ");
   
   BLANKS;
   

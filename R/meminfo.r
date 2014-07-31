@@ -227,16 +227,9 @@ cachesize <- function()
   names(ret) <- paste("l", levels, sep="")
   
   if (all(ret < 0))
-  {
-    if (1L %in% levels || cachesize(levels=1L)[[1L]]@size < 0)
-      stop("platform not supported at this time")
-    else
-      stop("requested levels not available")
-  }
-  if (any(ret < 0))
-  {
+    stop("platform not supported at this time")
+  else if (any(ret < 0))
     ret <- ret[which(ret > 0)]
-  }
   
   ret <- sapply(ret, mu)
   

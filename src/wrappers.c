@@ -124,7 +124,7 @@ SEXP R_cachesize(SEXP level)
   SEXP RET;
   
   
-  CACHEFUN(totalcache, RET, INT(level));
+  CACHEFUN(cachesize, RET, INT(level));
   
   
   R_END;

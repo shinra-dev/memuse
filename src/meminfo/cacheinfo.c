@@ -38,7 +38,7 @@ typedef BOOL (WINAPI *LPFN_GLPI)(
  *           Cache
  */ 
 
-int meminfo_totalcache(uint64_t *totalcache, const unsigned int level)
+int meminfo_cachesize(uint64_t *totalcache, const unsigned int level)
 {
   int ret;
   
