@@ -10,4 +10,7 @@ Sys.swapinfo()
 Sys.procmem()
 
 ### How big are the processor caches?
-Sys.cacheinfo()
+Sys.cachesize()
+
+### How big is the cache line?
+Sys.cachelinesize()
