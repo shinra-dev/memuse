@@ -35,9 +35,8 @@
 
 int meminfo_totalswap(uint64_t *totalswap)
 {
-  int ret;
-  
   #if OS_LINUX
+  int ret;
   struct sysinfo info;
   ret = sysinfo(&info);
   
@@ -50,6 +49,7 @@ int meminfo_totalswap(uint64_t *totalswap)
   sysctlbyname("vm.swapusage", &vmusage, &size, NULL, 0);
   *totalswap = vmusage.xsu_total;
   #elif OS_WINDOWS
+  int ret;
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
   
@@ -79,9 +79,9 @@ int meminfo_totalswap(uint64_t *totalswap)
 
 int meminfo_freeswap(uint64_t *freeswap)
 {
+  #if OS_LINUX
   int ret;
   
-  #if OS_LINUX
   struct sysinfo info;
   ret = sysinfo(&info);
   
@@ -94,6 +94,7 @@ int meminfo_freeswap(uint64_t *freeswap)
   sysctlbyname("vm.swapusage", &vmusage, &size, NULL, 0);
   *freeswap = vmusage.xsu_avail;
   #elif OS_WINDOWS
+  int ret;
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
   
@@ -117,9 +118,9 @@ int meminfo_freeswap(uint64_t *freeswap)
 
 int meminfo_cachedswap(uint64_t *cachedswap)
 {
+  #if OS_LINUX
   int ret;
   
-  #if OS_LINUX
   ret = read_proc_file("/proc/meminfo", cachedswap, "SwapCached:", 11);
   
   chkret(ret);

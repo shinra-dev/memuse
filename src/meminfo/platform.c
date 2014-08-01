@@ -67,32 +67,6 @@ int read_proc_file(const char *file, uint64_t *val, char *field, int fieldlen)
 }
 
 
-
-int read_sys_file(const char *file, uint64_t *val)
-{
-  uint64_t value = FAILURE;
-  
-  *val = 0L;
-  
-  FILE* fp = fopen(file, "r");
-  
-  if (fp != NULL)
-  {
-    while(fscanf(fp, "%ldK", &value) > 0){}
-    
-    fclose(fp);
-    
-    if (value != FAILURE)
-    {
-      *val = value;
-      return 0;
-    }
-  }
-  
-  return FAILURE;
-}
-
-
 #elif OS_MAC || OS_FREEBSD
 
 int sysctl_val(char *name, uint64_t *val)

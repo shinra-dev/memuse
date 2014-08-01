@@ -21,9 +21,6 @@ SEXP R_meminfo_retvals(SEXP retval)
 {
   R_INIT;
   
-  PRINT(retval);
-  printf("%d %d %d\n", MEMUSE_OK, FAILURE, PLATFORM_ERROR);
-  
   SEXP RET;
   newRvec(RET, 1, "str");
   

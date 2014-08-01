@@ -165,9 +165,9 @@ int meminfo_freeram(uint64_t *freeram)
 
 int meminfo_bufferram(uint64_t *bufferram)
 {
+  #if OS_LINUX
   int ret;
   
-  #if OS_LINUX
   struct sysinfo info;
   ret = sysinfo(&info);
   
@@ -185,9 +185,9 @@ int meminfo_bufferram(uint64_t *bufferram)
 
 int meminfo_cachedram(uint64_t *cachedram)
 {
+  #if OS_LINUX
   int ret;
   
-  #if OS_LINUX
   ret = read_proc_file("/proc/meminfo", cachedram, "Cached:", 7);
   
   chkret(ret);
