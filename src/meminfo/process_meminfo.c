@@ -41,6 +41,8 @@ int meminfo_getpid();
 int meminfo_process_size(uint64_t *size)
 {
   int ret = 0;
+  *size = 0L;
+  
   
   #if OS_LINUX
   ret = read_proc_file("/proc/self/status", size, "VmSize:", 7);
@@ -67,6 +69,8 @@ int meminfo_process_size(uint64_t *size)
 int meminfo_process_peak(uint64_t *peak)
 {
   int ret = 0;
+  *peak = 0L;
+  
   
   #if OS_LINUX
   ret = read_proc_file("/proc/self/status", peak, "VmPeak:", 7);

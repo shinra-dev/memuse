@@ -30,21 +30,17 @@
 #include "platform.h"
 #include "meminfo.h"
 
-int meminfo_getpid()
+
+uint32_t meminfo_getpid()
 {
-  int ret;
-  
   #if OS_WINDOWS
   DWORD pid = GetCurrentProcessId();
   #elif OS_NIX
-  int pid = getpid();
+  uint32_t pid = getpid();
   #else
-  int pid;
   return PLATFORM_ERROR;
   #endif
   
-  return (int) pid;
+  return (uint32_t) pid;
 }
-
-
 

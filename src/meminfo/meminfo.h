@@ -42,8 +42,11 @@
 
 
 // cacheinfo.c
-int meminfo_cachesize(uint64_t *totalcache, const unsigned int level);
-int meminfo_cachelinesize(uint64_t *totalcache);
+int meminfo_cachesize(uint32_t *totalcache, const unsigned int level);
+int meminfo_cachelinesize(uint16_t *totalcache);
+
+// getpid.c
+uint32_t meminfo_getpid();
 
 // meminfo.c
 int meminfo_totalram(uint64_t *totalram);

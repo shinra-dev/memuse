@@ -42,8 +42,11 @@ typedef BOOL (WINAPI *LPFN_GLPI)(
 
 // level=0 is level-1 instruction cache, level=1 is level-1 data cache
 
-int meminfo_cachesize(uint64_t *totalcache, const unsigned int level)
+int meminfo_cachesize(uint32_t *totalcache, const unsigned int level)
 {
+  *totalcache = 0;
+  
+  
   #if OS_LINUX
   int ret = 0;
   
@@ -58,7 +61,7 @@ int meminfo_cachesize(uint64_t *totalcache, const unsigned int level)
   
   if (ret == 0)
   {
-    *totalcache = 0L;
+    *totalcache = 0;
     return FAILURE;
   }
   
@@ -66,7 +69,7 @@ int meminfo_cachesize(uint64_t *totalcache, const unsigned int level)
   #elif OS_MAC
   int ret = 0;
   
-  uint64_t cache_size = 0;
+  uint32_t cache_size = 0;
   size_t size = sizeof(cache_size);
   
   if (level == 0)
@@ -142,8 +145,11 @@ int meminfo_cachesize(uint64_t *totalcache, const unsigned int level)
  *           Cache linesize
  */ 
 
-int meminfo_cachelinesize(uint64_t *linesize)
+int meminfo_cachelinesize(uint16_t *linesize)
 {
+  *linesize = 0;
+  
+  
   #if OS_LINUX
   int ret;
   
@@ -151,14 +157,14 @@ int meminfo_cachelinesize(uint64_t *linesize)
   
   if (ret == 0)
   {
-    *linesize = 0L;
+    *linesize = 0;
     return FAILURE;
   }
   
   *linesize = ret;
   #elif OS_MAC
   int ret;
-  uint64_t cache_size = 0;
+  uint16_t cache_size = 0;
   size_t size = sizeof(cache_size);
   
   ret = sysctlbyname("hw.cachelinesize", &cache_size, &size, 0, 0);
@@ -175,7 +181,7 @@ int meminfo_cachelinesize(uint64_t *linesize)
   DWORD size = 0;
   SYSTEM_LOGICAL_PROCESSOR_INFORMATION *slpi;
   
-  *linesize = 0L;
+  *linesize = 0;
   
   winret = GetLogicalProcessorInformation(0, &size);
   if (winret == TRUE)

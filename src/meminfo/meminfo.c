@@ -37,6 +37,9 @@ int meminfo_totalram(uint64_t *totalram)
 {
   int ret;
   
+  *totalram = 0L;
+  
+  
   #if OS_LINUX
   struct sysinfo info;
   ret = sysinfo(&info);
@@ -64,7 +67,7 @@ int meminfo_totalram(uint64_t *totalram)
   if (ret == FAILURE)
     return FAILURE;
   
-  *totalram=0;
+  *totalram = 0;
   ret = sysctl_val("hw.physmem", totalram);
   chkret(ret);
   #elif OS_NIX
@@ -91,6 +94,9 @@ int meminfo_totalram(uint64_t *totalram)
 int meminfo_freeram(uint64_t *freeram)
 {
   int ret;
+  
+  *freeram = 0L;
+  
   
   #if OS_LINUX
   struct sysinfo info;
@@ -137,7 +143,6 @@ int meminfo_freeram(uint64_t *freeram)
   else
     pagesize = ret;
   
-  *freeram=0;
   ret = sysctl_val("vm.stats.vm.v_free_count", freeram);
   chkret(ret);
   
@@ -165,6 +170,9 @@ int meminfo_freeram(uint64_t *freeram)
 
 int meminfo_bufferram(uint64_t *bufferram)
 {
+  *bufferram = 0L;
+  
+  
   #if OS_LINUX
   int ret;
   
@@ -185,6 +193,9 @@ int meminfo_bufferram(uint64_t *bufferram)
 
 int meminfo_cachedram(uint64_t *cachedram)
 {
+  *cachedram = 0L;
+  
+  
   #if OS_LINUX
   int ret;
   

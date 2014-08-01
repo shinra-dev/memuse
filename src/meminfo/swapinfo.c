@@ -35,6 +35,9 @@
 
 int meminfo_totalswap(uint64_t *totalswap)
 {
+  *totalswap = 0L;
+  
+  
   #if OS_LINUX
   int ret;
   struct sysinfo info;
@@ -66,7 +69,7 @@ int meminfo_totalswap(uint64_t *totalswap)
   if (ret == FAILURE)
     return FAILURE;
   
-  *totalswap=0;
+  *totalswap = 0;
   ret = sysctl_val("vm.swap_total", totalswap);
   chkret(ret);
   #else
@@ -77,8 +80,12 @@ int meminfo_totalswap(uint64_t *totalswap)
 }
 
 
+
 int meminfo_freeswap(uint64_t *freeswap)
 {
+  *freeswap = 0L;
+  
+  
   #if OS_LINUX
   int ret;
   
@@ -118,6 +125,9 @@ int meminfo_freeswap(uint64_t *freeswap)
 
 int meminfo_cachedswap(uint64_t *cachedswap)
 {
+  *cachedswap = 0L;
+  
+  
   #if OS_LINUX
   int ret;
   
@@ -131,6 +141,4 @@ int meminfo_cachedswap(uint64_t *cachedswap)
   
   return 0;
 }
-
-
 
