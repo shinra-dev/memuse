@@ -64,6 +64,7 @@ int meminfo_totalram(uint64_t *totalram)
   if (ret == FAILURE)
     return FAILURE;
   
+  *totalram=0;
   ret = sysctl_val("hw.physmem", totalram);
   chkret(ret);
   #elif OS_NIX
@@ -136,6 +137,7 @@ int meminfo_freeram(uint64_t *freeram)
   else
     pagesize = ret;
   
+  *freeram=0;
   ret = sysctl_val("vm.stats.vm.v_free_count", freeram);
   chkret(ret);
   

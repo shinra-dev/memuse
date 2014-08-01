@@ -66,6 +66,7 @@ int meminfo_totalswap(uint64_t *totalswap)
   if (ret == FAILURE)
     return FAILURE;
   
+  *totalswap=0;
   ret = sysctl_val("vm.swap_total", totalswap);
   chkret(ret);
   #else
