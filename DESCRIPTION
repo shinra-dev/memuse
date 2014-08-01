@@ -9,7 +9,6 @@ Description: How much ram do you need to store a 100,000 by 100,000 matrix?
 License: GPL (>= 2)
 Depends: R (>= 2.14.0), utils, methods
 LinkingTo: RNACI 
-Imports: RNACI
 LazyData: yes
 LazyLoad: yes
 NeedsCompilation: yes

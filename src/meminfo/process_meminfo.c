@@ -31,7 +31,7 @@
 #include "meminfo.h"
 
 #if OS_WINDOWS
-#include <PsAPI.h>
+#include <Psapi.h>
 int meminfo_getpid();
 #elif OS_MAC
 #include<mach/mach.h>
@@ -40,7 +40,7 @@ int meminfo_getpid();
 
 int meminfo_process_size(uint64_t *size)
 {
-  int ret;
+  int ret = 0;
   
   #if OS_LINUX
   ret = read_proc_file("/proc/self/status", size, "VmSize:", 7);
@@ -66,7 +66,7 @@ int meminfo_process_size(uint64_t *size)
 
 int meminfo_process_peak(uint64_t *peak)
 {
-  int ret;
+  int ret = 0;
   
   #if OS_LINUX
   ret = read_proc_file("/proc/self/status", peak, "VmPeak:", 7);

@@ -30,24 +30,30 @@
 
 #if OS_WINDOWS
 typedef BOOL (WINAPI *LPFN_GLPI)(
-    PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, 
-    PDWORD);
+  PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, 
+  PDWORD);
 #endif
 
+
+
 /* 
- *           Cache
+ *           Cache sizes
  */ 
+
+// level=0 is level-1 instruction cache, level=1 is level-1 data cache
 
 int meminfo_cachesize(uint64_t *totalcache, const unsigned int level)
 {
-  int ret;
-  
   #if OS_LINUX
-  if (level == 1)
+  int ret = 0;
+  
+  if (level == 0)
+    ret = sysconf(_SC_LEVEL1_ICACHE_SIZE);
+  else if (level == 1)
     ret = sysconf(_SC_LEVEL1_DCACHE_SIZE);
-  if (level == 2)
+  else if (level == 2)
     ret = sysconf(_SC_LEVEL2_CACHE_SIZE);
-  if (level == 3)
+  else if (level == 3)
     ret = sysconf(_SC_LEVEL3_CACHE_SIZE);
   
   if (ret == 0)
@@ -58,10 +64,14 @@ int meminfo_cachesize(uint64_t *totalcache, const unsigned int level)
   
   *totalcache = ret;
   #elif OS_MAC
+  int ret = 0;
+  
   uint64_t cache_size = 0;
   size_t size = sizeof(cache_size);
   
-  if (level == 1)
+  if (level == 0)
+    ret = sysctlbyname("hw.l1icachesize", &cache_size, &size, 0, 0);
+  else if (level == 1)
     ret = sysctlbyname("hw.l1dcachesize", &cache_size, &size, 0, 0);
   else if (level == 2)
     ret = sysctlbyname("hw.l2cachesize", &cache_size, &size, 0, 0);
@@ -77,26 +87,40 @@ int meminfo_cachesize(uint64_t *totalcache, const unsigned int level)
   
   *totalcache = cache_size;
   #elif OS_WINDOWS
-  int i;
+  int i, winlevel;
   BOOL winret;
   DWORD size = 0;
   SYSTEM_LOGICAL_PROCESSOR_INFORMATION *slpi;
+  PROCESSOR_CACHE_TYPE cachetype;
+  
+  if (level == 0)
+  {
+    winlevel = 1;
+    cachetype = CacheInstruction;
+  }
+  else if (level == 1)
+  {
+    winlevel = 1;
+    cachetype= CacheData;
+  }
+  else
+  {
+    winlevel = level;
+    cachetype = CacheUnified;
+  }
+  
+  *totalcache = 0L;
   
   winret = GetLogicalProcessorInformation(0, &size);
   if (winret == TRUE)
-  {
-    *totalcache = 0L;
     return FAILURE;
-  }
   
   slpi = (SYSTEM_LOGICAL_PROCESSOR_INFORMATION *) malloc(size);
   GetLogicalProcessorInformation(&slpi[0], &size);
   
-  *totalcache = 0L;
-  
   for (i=0; i != size / sizeof(SYSTEM_LOGICAL_PROCESSOR_INFORMATION); i++)
   {
-    if (slpi[i].Relationship == RelationCache && slpi[i].Cache.Level == level)
+    if (slpi[i].Relationship == RelationCache && slpi[i].Cache.Level == winlevel)
     {
       *totalcache = slpi[i].Cache.Size;
       return 0;
@@ -115,14 +139,14 @@ int meminfo_cachesize(uint64_t *totalcache, const unsigned int level)
 
 
 /* 
- *           Cache
+ *           Cache linesize
  */ 
 
 int meminfo_cachelinesize(uint64_t *linesize)
 {
+  #if OS_LINUX
   int ret;
   
-  #if OS_LINUX
   ret = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
   
   if (ret == 0)
@@ -133,6 +157,7 @@ int meminfo_cachelinesize(uint64_t *linesize)
   
   *linesize = ret;
   #elif OS_MAC
+  int ret;
   uint64_t cache_size = 0;
   size_t size = sizeof(cache_size);
   

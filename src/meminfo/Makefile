@@ -1,19 +1,27 @@
 CC=clang
 CFLAGS=-O0 -Wall
 
-OBJECTS =  cacheinfo.c meminfo.c platform.c print.c process_meminfo.c swapinfo.c
+ifeq ($(OS),Windows_NT)
+  CC=gcc
+  LDFLAGS=-lpsapi
+  TKLIB="-L/opt/tcl/lib -ltk -ltcl"
+  TKINC="-I/opt/tcl/include"
+endif
+
+
+OBJECTS = cacheinfo.c meminfo.c platform.c print.c process_meminfo.c swapinfo.c
 
 all: meminfo shared static
 
-meminfo: 
-	$(CC) $(CFLAGS) $(OBJECTS) main.c -o meminfo
+meminfo:
+	$(CC) $(CFLAGS) $(OBJECTS) main.c -o meminfo $(LDFLAGS)
 
 shared:
-	$(CC) -c $(CFLAGS) -fPIC $(OBJECTS)
+	$(CC) -c $(CFLAGS) -fPIC $(OBJECTS) $(LDFLAGS)
 	$(CC) -shared -o libmeminfo.so *.o -lc
 
 static:
-	$(CC) -c $(CFLAGS) $(OBJECTS)
+	$(CC) -c $(CFLAGS) $(OBJECTS) $(LDFLAGS)
 	ar rcs libmeminfo.a *.o
 
 clean:

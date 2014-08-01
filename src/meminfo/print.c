@@ -45,7 +45,7 @@ int meminfo_putval(uint64_t val)
   
   tmp = val / SCALE;
   
-  while (tmp > 1.)
+  while (tmp >= 1.)
   {
     dval = tmp;
     tmp /= (double) SCALE;
@@ -53,7 +53,7 @@ int meminfo_putval(uint64_t val)
   }
   
   if (ind == 0)
-    printf("%d %s", (int)val, meminfo_names[ind]);
+    printf("%d %s", (int) val, meminfo_names[ind]);
   else
     printf("%.3f %s", dval, meminfo_names[ind]);
   

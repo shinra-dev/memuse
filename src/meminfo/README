@@ -15,7 +15,7 @@
 What is this?
 ====================================================================
 This program/library is a platform independent solution for getting
-some basic hardware information about ram and/or swap.
+some basic hardware information about ram, swap, and cache.
 
 This is essentially just a collection of a bunch of man page info 
 cobbled together.

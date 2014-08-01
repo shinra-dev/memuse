@@ -116,9 +116,9 @@ int meminfo_freeswap(uint64_t *freeswap)
 
 int meminfo_cachedswap(uint64_t *cachedswap)
 {
+  #if OS_LINUX
   int ret;
   
-  #if OS_LINUX
   ret = read_proc_file("/proc/meminfo", cachedswap, "SwapCached:", 11);
   
   chkret(ret);

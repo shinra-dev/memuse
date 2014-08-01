@@ -49,6 +49,12 @@
 #define BLANKS printf("\n\n")
 
 
+#if OS_LINUX
+  #define HDDRAM swap
+#else
+  #define HDDRAM page
+#endif
+
 
 int main(int argc, char **argv)
 {
@@ -73,6 +79,16 @@ int main(int argc, char **argv)
   
   
   // Swap
+  #if OS_WINDOWS
+  ret = meminfo_totalswap(&tmp);
+  CHECKANDPRINT(tmp, "totalpage:  ");
+  
+  ret = meminfo_freeswap(&tmp);
+  CHECKANDPRINT(tmp, "freepage:   ");
+  
+  ret = meminfo_cachedswap(&tmp);
+  CHECKANDPRINT(tmp, "cachedpage: ");
+  #else
   ret = meminfo_totalswap(&tmp);
   CHECKANDPRINT(tmp, "totalswap:  ");
   
@@ -81,13 +97,17 @@ int main(int argc, char **argv)
   
   ret = meminfo_cachedswap(&tmp);
   CHECKANDPRINT(tmp, "cachedswap: ");
+  #endif
   
   BLANKS;
   
   
   // Cache
+  ret = meminfo_cachesize(&tmp, 0);
+  CHECKANDPRINT(tmp, "L1I: ");
+  
   ret = meminfo_cachesize(&tmp, 1);
-  CHECKANDPRINT(tmp, "L1:  ");
+  CHECKANDPRINT(tmp, "L1D: ");
   
   ret = meminfo_cachesize(&tmp, 2);
   CHECKANDPRINT(tmp, "L2:  ");
