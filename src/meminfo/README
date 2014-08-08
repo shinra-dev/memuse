@@ -19,13 +19,68 @@ some basic hardware information about ram, swap, and cache.  This is
 essentially just a collection of a bunch of man page info cobbled
 together.
 
-Return values for each function are always in bytes.
+The primary goals of this library are to be light, simple, and 
+portable.
+
+
+
+What are the requirements?
+====================================================================
+You will need clang, or to change line 1 of the Makefile to CC=gcc
+or whatever if you're some kind of plebian.  On Windows, I'm assuming
+you have mingw.  All os's need GNU Make because of Windows nonesense.
 
 
 
 How do I install it?
 ====================================================================
 make
+
+
+
+How do I use it?
+====================================================================
+Include meminfo.h.  Each function returns an int, one of MEMUSE_OK, 
+FAILURE, or PLATFORM_ERROR.  The desired value is passed by reference, 
+and the "returned" value is always in bytes.  See main.c for 
+example usage.
+
+
+For cache sizes:
+
+    int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level);
+    int meminfo_cachelinesize(cachelinesize_t *totalcache);
+
+Here, level is the cache level, as in 1, 2, or 3.  By convention, 
+0 is level 1 instruction cache, and 1 is level 1 data cache.
+
+
+For current process memory usage:
+
+    int meminfo_process_size(memsize_t *size);
+    int meminfo_process_peak(memsize_t *peak);
+
+
+For ram usage:
+
+    int meminfo_totalram(memsize_t *totalram);
+    int meminfo_freeram(memsize_t *freeram);
+    int meminfo_bufferram(memsize_t *bufferram);
+    int meminfo_cachedram(memsize_t *cachedram);
+
+
+For swap usage:
+
+    int meminfo_totalswap(memsize_t *totalswap);
+    int meminfo_freeswap(memsize_t *freeswap);
+    int meminfo_cachedswap(memsize_t *cachedswap);
+
+
+For fancy printing, use:
+
+    int meminfo_putval(memsize_t val);
+
+where val is some number of bytes.
 
 
 
@@ -36,5 +91,5 @@ You can find a quick summary of the license here:
 
 https://tldrlegal.com/license/bsd-2-clause-license-%28freebsd%29
 
-The full terms of the license (it's very short) are contained in the
-LICENSE file which should have been distributed with this project.
+The full terms of the license are contained in the LICENSE file 
+which should have been distributed with the source of this project.

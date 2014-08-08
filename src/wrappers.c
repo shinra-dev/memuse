@@ -1,20 +1,41 @@
-//  This program is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-//  
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//  
-//  You should have received a copy of the GNU General Public License
-//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+/*
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 // Copyright 2014, Schmidt
 
 
-#include "memuse.h"
+#include <RNACI.h>
+#include "meminfo/meminfo.h"
+
+
+#define TRYFUNC(THEFUN) ret=meminfo_##THEFUN(&tmp); \
+  newRvec(THEFUN, 1, "double"); \
+  ct++; \
+  if (ret == MEMUSE_OK) \
+    DBL(THEFUN, 0) = (double) tmp; \
+  else \
+    DBL(THEFUN, 0) = (double) ret
+
+#define CACHEFUN(THEFUN, STORAGE, LEVEL) ret=meminfo_##THEFUN(&tmp, LEVEL); \
+  newRvec(STORAGE, 1, "double"); \
+  ct++; \
+  if (ret == MEMUSE_OK) \
+    DBL(STORAGE, 0) = (double) tmp; \
+  else \
+    DBL(STORAGE, 0) = (double) ret
+
 
 // Constants
 SEXP R_meminfo_retvals(SEXP retval)
@@ -37,13 +58,13 @@ SEXP R_meminfo_retvals(SEXP retval)
 
 
 // Wrappers
-SEXP R_meminfo()
+SEXP R_meminfo_raminfo()
 {
   R_INIT;
   
   int ret;
   int ct = 0;
-  uint64_t tmp;
+  memsize_t tmp;
   
   SEXP R_list, R_list_names;
   SEXP totalram, freeram, bufferram, cachedram;
@@ -63,13 +84,13 @@ SEXP R_meminfo()
 
 
 
-SEXP R_swapinfo()
+SEXP R_meminfo_swapinfo()
 {
   R_INIT;
   
   int ret;
   int ct = 0;
-  uint64_t tmp;
+  memsize_t tmp;
   
   SEXP R_list, R_list_names;
   SEXP totalswap, freeswap, cachedswap;
@@ -88,10 +109,10 @@ SEXP R_swapinfo()
 
 
 
-SEXP R_memuse_process_size()
+SEXP R_meminfo_procinfo()
 {
   R_INIT;
-  uint64_t tmp;
+  memsize_t tmp;
   int ct = 0;
   int ret;
   SEXP R_list, R_list_names;
@@ -110,19 +131,17 @@ SEXP R_memuse_process_size()
 
 
 
-SEXP R_cachesize(SEXP level)
+SEXP R_meminfo_cacheinfo_size(SEXP level)
 {
   R_INIT;
   
   int ret;
   int ct = 0;
-  uint64_t tmp;
+  cachesize_t tmp;
   
   SEXP RET;
   
-  
   CACHEFUN(cachesize, RET, INT(level));
-  
   
   R_END;
   return RET;
@@ -130,19 +149,17 @@ SEXP R_cachesize(SEXP level)
 
 
 
-SEXP R_cachelinesize(SEXP level)
+SEXP R_meminfo_cacheinfo_linesize()
 {
   R_INIT;
   
   int ret;
   int ct = 0;
-  uint64_t tmp;
+  cachelinesize_t tmp;
   
   SEXP cachelinesize;
   
-  
   TRYFUNC(cachelinesize);
-  
   
   R_END;
   return cachelinesize;

@@ -1,17 +1,17 @@
 /*
   Copyright (c) 2014, Schmidt
   All rights reserved.
-
+  
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
-
+  
   1. Redistributions of source code must retain the above copyright notice,
   this list of conditions and the following disclaimer.
-
+  
   2. Redistributions in binary form must reproduce the above copyright
   notice, this list of conditions and the following disclaimer in the
   documentation and/or other materials provided with the distribution.
-
+  
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
   TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
@@ -61,9 +61,11 @@
 int read_proc_file(const char* file, uint64_t *val, char *field, int fieldlen);
 
 
+
 #elif OS_MAC
 
 #include <mach/vm_statistics.h>
+#include <mach/mach.h>
 #include <mach/mach_types.h>
 #include <mach/mach_init.h>
 #include <mach/mach_host.h>
@@ -75,12 +77,19 @@ int read_proc_file(const char* file, uint64_t *val, char *field, int fieldlen);
 int sysctl_val(char *name, uint64_t *val);
 
 
+
 #elif OS_WINDOWS
 
 #include <windows.h>
 #include <stdio.h>
 #include <tchar.h>
-#include <psapi.h>
+#include <Psapi.h>
+
+typedef BOOL (WINAPI *LPFN_GLPI)(
+  PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, 
+  PDWORD);
+
+int meminfo_getpid();
 
 
 
@@ -95,6 +104,7 @@ int sysctl_val(char *name, uint64_t *val);
 int sysctl_mib(char *name, int *mib, size_t *mibsize);
 int sysctlmib_val(int *mib, size_t mibsize, void *data, size_t *datasize);
 int sysctl_val(char *name, uint64_t *val);
+
 
 
 #elif OS_NIX

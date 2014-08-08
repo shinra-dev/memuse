@@ -13,6 +13,6 @@ LazyData: yes
 LazyLoad: yes
 NeedsCompilation: yes
 ByteCompile: yes
-Author: Drew Schmidt [aut, cre], Wei-Chen Chen [ctb], Christian 
-  Heckendorf [ctb]
+Author: Drew Schmidt [aut, cre], Christian Heckendorf [ctb], Wei-Chen 
+  Chen [ctb]
 Maintainer: Drew Schmidt <wrathematics@gmail.com>

@@ -2,17 +2,17 @@
   Copyright (c) 2014, Schmidt
   FreeBSD support improved by Heckendorf, 2014
   All rights reserved.
-
+  
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
-
+  
   1. Redistributions of source code must retain the above copyright notice,
   this list of conditions and the following disclaimer.
-
+  
   2. Redistributions in binary form must reproduce the above copyright
   notice, this list of conditions and the following disclaimer in the
   documentation and/or other materials provided with the distribution.
-
+  
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
   TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
@@ -27,24 +27,25 @@
 */
 
 #include "meminfo.h"
+#include "platform.h"
 
 
 #if OS_LINUX
 
-int read_proc_file(const char *file, uint64_t *val, char *field, int fieldlen)
+int read_proc_file(const char *file, memsize_t *val, char *field, int fieldlen)
 {
-  uint64_t tmplen = sizeof(char);
+  memsize_t tmplen = sizeof(char);
   char *tmp;
-  uint64_t value = FAILURE;
-
+  memsize_t value = FAILURE;
+  
   *val = 0L;
-
+  
   FILE* fp = fopen(file, "r");
-
+  
   if (fp != NULL)
   {
     tmp = malloc(tmplen);
-
+    
     while (getline(&tmp, &tmplen, fp) >= 0)
     {
       if (strncmp(tmp, field, fieldlen) == 0)
@@ -53,17 +54,17 @@ int read_proc_file(const char *file, uint64_t *val, char *field, int fieldlen)
         break;
       }
     }
-
+    
     fclose(fp);
     free(tmp);
-
+    
     if (value != FAILURE)
     {
       *val = value;
       return 0;
     }
   }
-
+  
   return FAILURE;
 }
 
@@ -78,14 +79,14 @@ int sysctlmib_val(int *mib, size_t mibsize, void *data, size_t *datasize){
   return sysctl(mib, mibsize+1, data, datasize, NULL, 0);
 }
 
-int sysctl_val(char *name, uint64_t *val)
+int sysctl_val(char *name, memsize_t *val)
 {
   int ret;
   size_t vallen;
   vallen = sizeof(*val);
-
+  
   ret = sysctlbyname(name, val, &vallen, NULL, 0);
-
+  
   return ret;
 }
 

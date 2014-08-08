@@ -3,20 +3,20 @@ RNACI_CPPFLAGS = `$(R_HOME)/bin/Rscript -e "RNACI:::cppflags()"`
 RNACI_LDFLAGS = `$(R_HOME)/bin/Rscript -e "RNACI:::ldflags()"`
 
 PKG_CPPFLAGS = $(RNACI_CPPFLAGS)
-PKG_CFLAGS = -w
+PKG_CFLAGS = -g -w
 PKG_LIBS = $(RNACI_LDFLAGS)
 
 
-MEMOBJS = meminfo/meminfo.o \
-	meminfo/swapinfo.o \
-	meminfo/platform.o \
-	meminfo/getpid.o \
-	meminfo/process_meminfo.o \
-	meminfo/cacheinfo.o
+MEMINFO_OBJS = \
+		meminfo/cacheinfo.o \
+		meminfo/platform.o \
+		meminfo/procinfo.o \
+		meminfo/raminfo.o \
+		meminfo/swapinfo.o
 
-ROBJS   = wrappers.o
+R_OBJS   = wrappers.o
 
-OBJECTS = $(MEMOBJS) $(ROBJS)
+OBJECTS = $(MEMINFO_OBJS) $(R_OBJS)
 
 ### Start making here.
 all: $(SHLIB)

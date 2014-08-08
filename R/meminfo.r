@@ -43,7 +43,7 @@ meminfo <- function(compact.free=TRUE)
 
 meminfo.c <- function()
 {
-  out <- .Call("R_meminfo", PACKAGE="memuse")
+  out <- .Call("R_meminfo_raminfo", PACKAGE="memuse")
   
   if (any(unlist(out) == -1))
     stop("There were errors accessing hardware info")
@@ -75,7 +75,7 @@ swapinfo <- function()
 
 swapinfo.c <- function()
 {
-  out <- .Call("R_swapinfo", PACKAGE="memuse")
+  out <- .Call("R_meminfo_swapinfo", PACKAGE="memuse")
   
   if (any(unlist(out) == -1))
     stop("There were errors accessing hardware info")
@@ -107,7 +107,7 @@ meminfo.process <- function(gcFirst=TRUE)
   if (gcFirst)
     gc(FALSE)
   
-  out <- .Call("R_memuse_process_size", PACKAGE="memuse")
+  out <- .Call("R_meminfo_procinfo", PACKAGE="memuse")
   
   if (any(unlist(out) == -1))
     stop("There were errors accessing process info")
@@ -134,7 +134,7 @@ cachesize <- function()
 {
   levels <- 0L:3L
   
-  ret <- sapply(levels, function(level) .Call("R_cachesize", level, PACKAGE="memuse"))
+  ret <- sapply(levels, function(level) .Call("R_meminfo_cacheinfo_size", level, PACKAGE="memuse"))
   
   names(ret) <- c("L1I", "L1D", "L2", "L3")
   
@@ -152,7 +152,7 @@ cachesize <- function()
 
 cachelinesize <- function()
 {
-  ret <- .Call("R_cachelinesize", PACKAGE="memuse")
+  ret <- .Call("R_meminfo_cacheinfo_linesize", PACKAGE="memuse")
   
   
   if (ret < 0)

@@ -31,9 +31,9 @@
 
 
 #include <stdint.h>
-#include "platform.h"
 
-// Magic numbers
+
+// Returns
 #define chkret(ret) if(ret)return(ret)
 
 #define MEMUSE_OK 0
@@ -41,28 +41,35 @@
 #define PLATFORM_ERROR -10
 
 
+typedef uint64_t memsize_t;
+typedef uint32_t cachesize_t;
+typedef uint16_t cachelinesize_t;
+
 // cacheinfo.c
-int meminfo_cachesize(uint32_t *totalcache, const unsigned int level);
-int meminfo_cachelinesize(uint16_t *totalcache);
+int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level);
+int meminfo_cachelinesize(cachelinesize_t *totalcache);
 
 // getpid.c
 uint32_t meminfo_getpid();
 
-// meminfo.c
-int meminfo_totalram(uint64_t *totalram);
-int meminfo_freeram(uint64_t *freeram);
-int meminfo_bufferram(uint64_t *bufferram);
-int meminfo_cachedram(uint64_t *cachedram);
-int meminfo_totalswap(uint64_t *totalswap);
-int meminfo_freeswap(uint64_t *freeswap);
-int meminfo_cachedswap(uint64_t *cachedswap);
-
 // print.c
-int meminfo_putval(uint64_t val);
+int meminfo_putval(memsize_t val);
 
 // process_meminfo.c
-int meminfo_process_size(uint64_t *size);
-int meminfo_process_peak(uint64_t *peak);
+int meminfo_process_size(memsize_t *size);
+int meminfo_process_peak(memsize_t *peak);
+
+// raminfo.c
+int meminfo_totalram(memsize_t *totalram);
+int meminfo_freeram(memsize_t *freeram);
+int meminfo_bufferram(memsize_t *bufferram);
+int meminfo_cachedram(memsize_t *cachedram);
+
+// swapinfo.c
+int meminfo_totalswap(memsize_t *totalswap);
+int meminfo_freeswap(memsize_t *freeswap);
+int meminfo_cachedswap(memsize_t *cachedswap);
+
 
 
 #endif

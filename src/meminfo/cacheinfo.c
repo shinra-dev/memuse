@@ -27,12 +27,7 @@
 
 
 #include "meminfo.h"
-
-#if OS_WINDOWS
-typedef BOOL (WINAPI *LPFN_GLPI)(
-  PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, 
-  PDWORD);
-#endif
+#include "platform.h"
 
 
 
@@ -42,7 +37,7 @@ typedef BOOL (WINAPI *LPFN_GLPI)(
 
 // level=0 is level-1 instruction cache, level=1 is level-1 data cache
 
-int meminfo_cachesize(uint32_t *totalcache, const unsigned int level)
+int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
 {
   *totalcache = 0;
   
@@ -69,7 +64,7 @@ int meminfo_cachesize(uint32_t *totalcache, const unsigned int level)
   #elif OS_MAC
   int ret = 0;
   
-  uint32_t cache_size = 0;
+  cachesize_t cache_size = 0;
   size_t size = sizeof(cache_size);
   
   if (level == 0)
@@ -145,7 +140,7 @@ int meminfo_cachesize(uint32_t *totalcache, const unsigned int level)
  *           Cache linesize
  */ 
 
-int meminfo_cachelinesize(uint16_t *linesize)
+int meminfo_cachelinesize(cachelinesize_t *linesize)
 {
   *linesize = 0;
   
@@ -161,10 +156,10 @@ int meminfo_cachelinesize(uint16_t *linesize)
     return FAILURE;
   }
   
-  *linesize = ret;
+  *linesize = (uint16_t) ret;
   #elif OS_MAC
   int ret;
-  uint16_t cache_size = 0;
+  cachelinesize_t cache_size = 0;
   size_t size = sizeof(cache_size);
   
   ret = sysctlbyname("hw.cachelinesize", &cache_size, &size, 0, 0);

@@ -26,19 +26,11 @@
 */
 
 
-#include <stdint.h>
 #include "platform.h"
 #include "meminfo.h"
 
-#if OS_WINDOWS
-#include <Psapi.h>
-int meminfo_getpid();
-#elif OS_MAC
-#include<mach/mach.h>
-#endif
 
-
-int meminfo_process_size(uint64_t *size)
+int meminfo_process_size(memsize_t *size)
 {
   int ret = 0;
   *size = 0L;
@@ -51,7 +43,7 @@ int meminfo_process_size(uint64_t *size)
   PROCESS_MEMORY_COUNTERS pmc;
   
   GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
-  *size = (uint64_t)pmc.WorkingSetSize;
+  *size = (memsize_t)pmc.WorkingSetSize;
   #elif OS_MAC
   struct task_basic_info info;
   mach_msg_type_number_t info_count = TASK_BASIC_INFO_COUNT;
@@ -66,7 +58,7 @@ int meminfo_process_size(uint64_t *size)
 }
 
 
-int meminfo_process_peak(uint64_t *peak)
+int meminfo_process_peak(memsize_t *peak)
 {
   int ret = 0;
   *peak = 0L;
@@ -79,7 +71,7 @@ int meminfo_process_peak(uint64_t *peak)
   PROCESS_MEMORY_COUNTERS pmc;
   
   GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
-  *peak = (uint64_t)pmc.PeakWorkingSetSize;
+  *peak = (memsize_t)pmc.PeakWorkingSetSize;
   #else
   return PLATFORM_ERROR;
   #endif

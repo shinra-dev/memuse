@@ -25,11 +25,9 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <stdint.h>
-#include <stdio.h>
-
 #include "platform.h"
 #include "meminfo.h"
+
 
 #define CHECKRET(ret) if(ret==FAILURE)\
   return FAILURE;\
@@ -49,83 +47,77 @@
 #define BLANKS printf("\n\n")
 
 
-#if OS_LINUX
-  #define HDDRAM swap
-#else
-  #define HDDRAM page
-#endif
-
 
 int main(int argc, char **argv)
 {
   int ret;
-  uint16_t tmp16;
-  uint32_t tmp32;
-  uint64_t tmp64;
+  cachelinesize_t cachelinesize;
+  cachesize_t cachesize;
+  memsize_t memsize;
   
   
   // RAM
-  ret = meminfo_totalram(&tmp64);
-  CHECKANDPRINT(tmp64, "totalram:  ");
+  ret = meminfo_totalram(&memsize);
+  CHECKANDPRINT(memsize, "totalram:  ");
   
-  ret = meminfo_freeram(&tmp64);
-  CHECKANDPRINT(tmp64, "freeram:   ");
+  ret = meminfo_freeram(&memsize);
+  CHECKANDPRINT(memsize, "freeram:   ");
   
-  ret = meminfo_bufferram(&tmp64);
-  CHECKANDPRINT(tmp64, "bufferram: ");
+  ret = meminfo_bufferram(&memsize);
+  CHECKANDPRINT(memsize, "bufferram: ");
   
-  ret = meminfo_cachedram(&tmp64);
-  CHECKANDPRINT(tmp64, "cachedram: ");
+  ret = meminfo_cachedram(&memsize);
+  CHECKANDPRINT(memsize, "cachedram: ");
   
   BLANKS;
   
   
   // Swap
   #if OS_WINDOWS
-  ret = meminfo_totalswap(&tmp64);
-  CHECKANDPRINT(tmp64, "totalpage:  ");
+  ret = meminfo_totalswap(&memsize);
+  CHECKANDPRINT(memsize, "totalpage:  ");
   
-  ret = meminfo_freeswap(&tmp64);
-  CHECKANDPRINT(tmp64, "freepage:   ");
+  ret = meminfo_freeswap(&memsize);
+  CHECKANDPRINT(memsize, "freepage:   ");
   
-  ret = meminfo_cachedswap(&tmp64);
-  CHECKANDPRINT(tmp64, "cachedpage: ");
+  ret = meminfo_cachedswap(&memsize);
+  CHECKANDPRINT(memsize, "cachedpage: ");
   #else
-  ret = meminfo_totalswap(&tmp64);
-  CHECKANDPRINT(tmp64, "totalswap:  ");
+  ret = meminfo_totalswap(&memsize);
+  CHECKANDPRINT(memsize, "totalswap:  ");
   
-  ret = meminfo_freeswap(&tmp64);
-  CHECKANDPRINT(tmp64, "freeswap:   ");
+  ret = meminfo_freeswap(&memsize);
+  CHECKANDPRINT(memsize, "freeswap:   ");
   
-  ret = meminfo_cachedswap(&tmp64);
-  CHECKANDPRINT(tmp64, "cachedswap: ");
+  ret = meminfo_cachedswap(&memsize);
+  CHECKANDPRINT(memsize, "cachedswap: ");
   #endif
   
   BLANKS;
   
   
   // Cache
-  ret = meminfo_cachesize(&tmp32, 0);
-  CHECKANDPRINT(tmp32, "L1I: ");
+  ret = meminfo_cachesize(&cachesize, 0);
+  CHECKANDPRINT(cachesize, "L1I: ");
   
-  ret = meminfo_cachesize(&tmp32, 1);
-  CHECKANDPRINT(tmp32, "L1D: ");
+  ret = meminfo_cachesize(&cachesize, 1);
+  CHECKANDPRINT(cachesize, "L1D: ");
   
-  ret = meminfo_cachesize(&tmp32, 2);
-  CHECKANDPRINT(tmp32, "L2:  ");
+  ret = meminfo_cachesize(&cachesize, 2);
+  CHECKANDPRINT(cachesize, "L2:  ");
   
-  ret = meminfo_cachesize(&tmp32, 3);
-  CHECKANDPRINT(tmp32, "L3:  ");
+  ret = meminfo_cachesize(&cachesize, 3);
+  CHECKANDPRINT(cachesize, "L3:  ");
   
-  ret = meminfo_cachelinesize(&tmp16);
-  CHECKANDPRINT(tmp16, "\nCache Linesize:  ");
+  ret = meminfo_cachelinesize(&cachelinesize);
+  CHECKANDPRINT(cachelinesize, "\nCache Linesize:  ");
   
   BLANKS;
   
   
   // Process RAM usage
-  ret = meminfo_process_size(&tmp64);
-  CHECKANDPRINT(tmp64, "RAM Usage for This Program:  ");
+  ret = meminfo_process_size(&memsize);
+  CHECKANDPRINT(memsize, "RAM Usage for This Program:  ");
   
   return 0;
 }

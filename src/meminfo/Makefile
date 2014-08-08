@@ -1,5 +1,5 @@
 CC=clang
-CFLAGS=-O0 -Wall
+CFLAGS=-O0 -w
 
 ifeq ($(OS),Windows_NT)
   CC=gcc
@@ -9,7 +9,7 @@ ifeq ($(OS),Windows_NT)
 endif
 
 
-OBJECTS = cacheinfo.c meminfo.c platform.c print.c process_meminfo.c swapinfo.c
+OBJECTS = cacheinfo.c platform.c print.c procinfo.c raminfo.c swapinfo.c
 
 all: meminfo shared static
 

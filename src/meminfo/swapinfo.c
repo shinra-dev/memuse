@@ -2,17 +2,17 @@
   Copyright (c) 2014, Schmidt
   FreeBSD support improved by Heckendorf, 2014
   All rights reserved.
-
+  
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
-
+  
   1. Redistributions of source code must retain the above copyright notice,
   this list of conditions and the following disclaimer.
-
+  
   2. Redistributions in binary form must reproduce the above copyright
   notice, this list of conditions and the following disclaimer in the
   documentation and/or other materials provided with the distribution.
-
+  
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
   TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
@@ -28,24 +28,25 @@
 
 
 #include "meminfo.h"
+#include "platform.h"
 
 
 /*
  *           Swap
  */
 
-int meminfo_totalswap(uint64_t *totalswap)
+int meminfo_totalswap(memsize_t *totalswap)
 {
   *totalswap = 0L;
-
-
+  
+  
   #if OS_LINUX
   int ret;
   struct sysinfo info;
   ret = sysinfo(&info);
-
+  
   chkret(ret);
-
+  
   *totalswap = info.totalswap * info.mem_unit;
   #elif OS_MAC
   struct xsw_usage vmusage = {0};
@@ -56,46 +57,46 @@ int meminfo_totalswap(uint64_t *totalswap)
   int ret;
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
-
+  
   // "If the function succeeds, the return value is nonzero."
   // Go fuck yourself, Windows.
   ret = GlobalMemoryStatusEx(&status);
-
+  
   if (ret == 0)
     return FAILURE;
-
+  
   *totalswap = status.ullTotalPageFile;
   #elif OS_FREEBSD
   int ret;
   ret = sysconf(_SC_PAGESIZE);
   if (ret == FAILURE)
     return FAILURE;
-
+  
   *totalswap = 0;
   ret = sysctl_val("vm.swap_total", totalswap);
   chkret(ret);
   #else
   return PLATFORM_ERROR;
   #endif
-
+  
   return 0;
 }
 
 
 
-int meminfo_freeswap(uint64_t *freeswap)
+int meminfo_freeswap(memsize_t *freeswap)
 {
   *freeswap = 0L;
-
-
+  
+  
   #if OS_LINUX
   int ret;
-
+  
   struct sysinfo info;
   ret = sysinfo(&info);
-
+  
   chkret(ret);
-
+  
   *freeswap = info.freeswap * info.mem_unit;
   #elif OS_MAC
   struct xsw_usage vmusage = {0};
@@ -109,65 +110,65 @@ int meminfo_freeswap(uint64_t *freeswap)
   int mib[16];
   int i,n;
   int page=getpagesize();
-  uint64_t used=0;
-
+  memsize_t used=0;
+  
   *freeswap=0;
   mibsize=sizeof(mib)/sizeof(mib[0]);
   if(sysctl_mib("vm.swap_info",mib,&mibsize)==-1)
-	  return FAILURE;
-
+    return FAILURE;
+  
   for(i=0;;i++){
-	  mib[mibsize]=i;
-	  size=sizeof(xsw);
-
-	  if(sysctlmib_val(mib,mibsize,&xsw,&size)==-1)
-		  break;
-
-	  used+=xsw.xsw_used*page;
+    mib[mibsize]=i;
+    size=sizeof(xsw);
+    
+    if(sysctlmib_val(mib,mibsize,&xsw,&size)==-1)
+      break;
+    
+    used+=xsw.xsw_used*page;
   }
   if(meminfo_totalswap(freeswap))
-	  return FAILURE;
-
+    return FAILURE;
+  
   *freeswap-=used;
   #elif OS_WINDOWS
   int ret;
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
-
+  
   // "If the function succeeds, the return value is nonzero."
   // Go fuck yourself, Windows.
   ret = GlobalMemoryStatusEx(&status);
-
+  
   if (ret == 0)
     return FAILURE;
-
+  
   *freeswap = status.ullAvailPageFile;
   #else
   return PLATFORM_ERROR;
   #endif
-
+  
   return 0;
 }
 
 
 
 
-int meminfo_cachedswap(uint64_t *cachedswap)
+int meminfo_cachedswap(memsize_t *cachedswap)
 {
   *cachedswap = 0L;
-
-
+  
+  
   #if OS_LINUX
   int ret;
-
+  
   ret = read_proc_file("/proc/meminfo", cachedswap, "SwapCached:", 11);
-
+  
   chkret(ret);
   *cachedswap *= 1024L;
   #else
   return PLATFORM_ERROR;
   #endif
-
+  
   return 0;
 }
 
