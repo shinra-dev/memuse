@@ -51,7 +51,6 @@
 int main(int argc, char **argv)
 {
   int ret;
-  cachelinesize_t cachelinesize;
   cachesize_t cachesize;
   memsize_t memsize;
   
@@ -109,8 +108,8 @@ int main(int argc, char **argv)
   ret = meminfo_cachesize(&cachesize, 3);
   CHECKANDPRINT(cachesize, "L3:  ");
   
-  ret = meminfo_cachelinesize(&cachelinesize);
-  CHECKANDPRINT(cachelinesize, "\nCache Linesize:  ");
+  ret = meminfo_cachelinesize(&cachesize);
+  CHECKANDPRINT(cachesize, "\nCache Linesize:  ");
   
   BLANKS;
   

@@ -43,11 +43,10 @@
 
 typedef uint64_t memsize_t;
 typedef uint32_t cachesize_t;
-typedef uint16_t cachelinesize_t;
 
 // cacheinfo.c
 int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level);
-int meminfo_cachelinesize(cachelinesize_t *totalcache);
+int meminfo_cachelinesize(cachesize_t *totalcache);
 
 // getpid.c
 uint32_t meminfo_getpid();

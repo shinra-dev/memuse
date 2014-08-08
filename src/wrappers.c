@@ -155,7 +155,7 @@ SEXP R_meminfo_cacheinfo_linesize()
   
   int ret;
   int ct = 0;
-  cachelinesize_t tmp;
+  cachesize_t tmp;
   
   SEXP cachelinesize;
   

@@ -83,7 +83,7 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
   if (cache_size == 0)
     return FAILURE;
   
-  *totalcache = cache_size;
+  *totalcache = (cachesize_t) cache_size;
   #elif OS_WINDOWS
   int i, winlevel;
   BOOL winret;
@@ -140,7 +140,7 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
  *           Cache linesize
  */ 
 
-int meminfo_cachelinesize(cachelinesize_t *linesize)
+int meminfo_cachelinesize(cachesize_t *linesize)
 {
   *linesize = 0;
   
@@ -159,7 +159,7 @@ int meminfo_cachelinesize(cachelinesize_t *linesize)
   *linesize = (uint16_t) ret;
   #elif OS_MAC
   int ret;
-  cachelinesize_t cache_size = 0;
+  uint64_t cache_size = 0;
   size_t size = sizeof(cache_size);
   
   ret = sysctlbyname("hw.cachelinesize", &cache_size, &size, 0, 0);
@@ -169,7 +169,7 @@ int meminfo_cachelinesize(cachelinesize_t *linesize)
   if (cache_size == 0)
     return FAILURE;
   
-  *linesize = cache_size;
+  *linesize = (cachesize_t) cache_size;
   #elif OS_WINDOWS
   int i;
   BOOL winret;
