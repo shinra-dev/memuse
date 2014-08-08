@@ -89,8 +89,6 @@ typedef BOOL (WINAPI *LPFN_GLPI)(
   PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, 
   PDWORD);
 
-int meminfo_getpid();
-
 
 
 #elif OS_FREEBSD
