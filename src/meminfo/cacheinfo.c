@@ -64,22 +64,22 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
   #elif OS_MAC
   int ret = 0;
   
-  cachesize_t cache_size = 0;
+  uint64_t cache_size = 0;
   size_t size = sizeof(cache_size);
   
   if (level == 0)
-    ret = sysctlbyname("hw.l1icachesize", &cache_size, &size, 0, 0);
+    ret = sysctlbyname("hw.l1icachesize", &cache_size, &size, NULL, 0);
   else if (level == 1)
-    ret = sysctlbyname("hw.l1dcachesize", &cache_size, &size, 0, 0);
+    ret = sysctlbyname("hw.l1dcachesize", &cache_size, &size, NULL, 0);
   else if (level == 2)
-    ret = sysctlbyname("hw.l2cachesize", &cache_size, &size, 0, 0);
+    ret = sysctlbyname("hw.l2cachesize", &cache_size, &size, NULL, 0);
   else if (level == 3)
-    ret = sysctlbyname("hw.l3cachesize", &cache_size, &size, 0, 0);
+    ret = sysctlbyname("hw.l3cachesize", &cache_size, &size, NULL, 0);
   else
     return FAILURE;
   
-  chkret(ret);  
-
+  chkret(ret);
+  
   if (cache_size == 0)
     return FAILURE;
   
