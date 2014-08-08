@@ -1,5 +1,6 @@
 /*
   Copyright (c) 2014, Schmidt
+  FreeBSD support improved by Heckendorf, 2014
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
