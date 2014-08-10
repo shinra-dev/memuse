@@ -25,12 +25,11 @@ is largely because getting this information in Linux is very simple --- on top
 of the data itself being very well-defined --- compared to other platforms.  So 
 get your shit together, other OS devs.
 
-All of this data can be accessed by a standalone \C library located in \code{memuse/src/meminfo}.  
-You can test the library by going to this directory and running \code{make}; also see the 
-\code{README}.
-
 All platforms get these values differently, and most of them are calculated in slightly 
-different ways as well.  The remainder of this section will outline these differences, as a 
+different ways as well.  About the only measurement that means the same thing on all 
+platforms is ``total physical ram''.
+
+The remainder of this section will outline these differences, as a 
 kind of angrily written reference standard, dedicated to the 
 sisyphean tragedy of multiplatform software development.
 
@@ -51,27 +50,39 @@ You're much better off having a program crash than sending you into a 40 hour sw
 the computer becomes completely inaccessible..  How swap is used and/or created itself is 
 platform dependent.  Swap is kind of the same thing as paging on 
 Windows, and so \code{Sys.swapinfo()} is aliased as \code{Sys.pageinfo()}.  The 
-two functions are identical within a given platform.  All operating systems basically treat 
-swap/page files the same.  There are minor differences in allocation; for example, Mac OS X 
-bizarrely uses unused space on the \code{/boot} partition for swap, for instance.
+two functions are identical within a given platform.
 
-Cache is very fast temporary storage that data gets stuffed into along its way to being operated on 
-by the processor.  For more information about cache, see the \pkg{pbdPAPI} package's vignette.  All 
-operating systems basically do a lookup in some table somewhere after identifying your processor to 
-find the cache sizes of your processor.  The same is true of cache line size, which is the size of 
-chunks of memory handled by cache lookups.
+All operating systems basically treat swap/page files the same.  There are minor 
+differences in allocation; for example, Mac OS X bizarrely uses unused space on 
+the \code{/boot} partition for swap.  But the basic principle is the same: dump 
+stuff to disk.
 
 
 
 \subsection{Sys.meminfo() and Sys.swapinfo()}
 
-These functions return the amount of available and free ram for the former, and the amount of 
-available and free swap for the latter.  How this happens is a labyrinthine mess.  Join me, won't 
-you?
+%%% FIXME
+As of \pkg{memuse}~$\geq 2.0$, we include the \code{Sys.meminfo()} and 
+\code{Sys.swapinfo()} utilities.  The former gathers some minimal 
+hardware information about available memory, and the latter does the same but 
+for swap.
+
+To use, simply call:
+\begin{lstlisting}
+Sys.meminfo()
+Sys.swapinfo()
+\end{lstlisting}
+
+And a list will be returned containing some information.  By default, this will 
+only contain a simplified profile of total and ``available'' (more on this 
+later) physical memory. 
 
 
-\subsubsection{Linux and FreeBSD}
-In Linux and FreeBSD, the total available ram can be broken down into
+
+
+
+\subsubsection{Linux}
+In Linux, the total available ram can be broken down into
 \begin{itemize}
   \item truly unused (freeram)
   \item used for buffer cache (bufferram)
@@ -79,12 +90,10 @@ In Linux and FreeBSD, the total available ram can be broken down into
   \item used by programs
 \end{itemize}
 
-By default, memuse will collapse the first three into \code{freeram}, because that's how most people 
-think about it; and if you open up some kind of system monitor program, they probably do the 
-exact same thing.  By \emph{truly unused}, we mean that nothing on the system has made any claim to 
-it (according to the kernel).  The memory allocated for buffers and file cache is, well, file 
-cache.  It's the stuff that makes loading a program the second time much faster than it is to load 
-it the first time.  For more details, see \url{https://www.redhat.com/advice/tips/meminfo.html}.
+By default, memuse will collapse the first three into \code{freeram}, because that's how most people think about it; and if you open up some kind of system monitor program, they do the same thing.  By \emph{truly unused}, we mean that nothing on the system has made any claim to it (according to the kernel\dots).  The memory allocated for buffers is .
+
+For more details, \href{https://www.redhat.com/advice/tips/meminfo.html}{Redhat} has a pretty good breakdown of the various items.
+
 
 These values should agree with (and in some cases, are taken directly from) those found in 
 \code{/proc/meminfo}, with a small sample of the file provided:
@@ -104,13 +113,22 @@ SwapCached:            8 kB
 The actual implementation of \code{meminfo()} uses \code{sysinfo} (see \code{man 2 sysinfo}) for everything but cached memory, which is read directly from \code{/proc/meminfo}.
 
 
-% \subsubsection{Windows}
-% 
-% Windows has a surprisingly good set of utilities.
-% 
-% 
-% \subsubsection{Mac OS X}
-% 
+\subsubsection{Windows}
+
+
+\subsubsection{Mac OS X}
+
+
+
+
+
+\subsubsection{FreeBSD}
+
+For some reason, FreeBSD doesn't support \code{_SC_AVPHYS_PAGES} in \code{sysconf} like Solaris and Linux do.  So for getting free memory, I have to make a call to \code{sysctlbyname}.
+
+Also, the only way I could see to support getting free swap on FreeBSD is to make libkvm a dependency, 
+which is kind of ridiculous.  Also, I figure you folks will just call \code{sysctl(8)} anyway and 
+wonder why I even went to all this trouble in the first place, so you get what you get.
 
 
 
@@ -119,7 +137,7 @@ The actual implementation of \code{meminfo()} uses \code{sysinfo} (see \code{man
 Everybody seems to have their own little wiggle to \code{sysctl} for getting 
 various memory statistics, and I just don't have the kind of time or resources 
 to set up 100 different BSD-variant vm's to test that the man pages aren't lying 
-to me.  As such, all *NIX's outside of Linux, FreeBSD, and Mac get only total ram and 
+to me.  As such, all *NIX's outside of Linux and Mac get only total ram and 
 ``free ram'', as reported by \code{sysconf}.
 
 \code{Sys.swapinfo()} is not supported on these platforms at this time.
