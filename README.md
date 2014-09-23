@@ -94,9 +94,20 @@ You can estimate memory storage requirements of a matrix without
 having to divide by some annoying power of 2:
 
 ```r
-howbig(10000, 10000)
-# 762.939 MiB
+howbig(10000, 500)
+# 38.147 MiB
 
+howbig(10000, 500, type="int")
+# 19.073 MiB
+
+howbig(10000, 500, representation="sparse", sparsity=.05)
+# 1.907 MiB
+```
+
+Alternatively, given a (memory) size, you can also find the dimensions
+of such a matrix:
+
+```r`
 howmany(mu(800, "mib"))
 # [1] 10240 10240
 howmany(mu(800, "mib"), ncol=500)
