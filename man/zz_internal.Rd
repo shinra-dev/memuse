@@ -10,14 +10,6 @@
 \alias{object.size,ANY-method}
 
 
-% Internal data structures
-\alias{.memuse_envir}
-\alias{.units}
-\alias{.numbers}
-\alias{.time}
-\alias{.units_bits}
-
-
 \title{ Internal Functions }
 \description{ Internal functions }
 \keyword{internal}

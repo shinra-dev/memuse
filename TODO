@@ -6,12 +6,3 @@
 * finish meminfo()
 * documentation is a mess
 
-
-
-== Next release ==
-
-* incorporate bits
-* add a time printer, replace system.time()
-* make 'approx' a formal class, give method exact
-* make arithmetic methods for 'approx'
-
