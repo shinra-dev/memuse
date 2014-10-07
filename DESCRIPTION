@@ -8,7 +8,7 @@ Description: How much ram do you need to store a 100,000 by 100,000 matrix?
   the memuse package.
 License: GPL (>= 2)
 Copyright: See memuse/inst/meminfo_LICENSE for the files in src/meminfo/.
-Depends: R (>= 2.14.0), utils, methods
+Depends: R (>= 2.15.1), utils, methods
 LinkingTo: RNACI
 LazyData: yes
 LazyLoad: yes
