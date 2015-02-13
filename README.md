@@ -23,32 +23,21 @@ how much ram is physically available on the host machine:
 
 ```r
 Sys.meminfo()
-# $totalram
-# 15.657 GiB
-# 
-# $freeram
-# 10.519 GiB
+# Totalram:  15.656 GiB 
+# Freeram:   10.504 GiB 
 
 Sys.swapinfo() ## same as Sys.pageinfo()
-# $totalswap
-# 32.596 GiB
-# 
-# $freeswap
-# 32.540 GiB
-# 
-# $cachedswap
-# 3.844 MiB
+# Totalswap:    32.596 GiB 
+# Freeswap:     32.595 GiB 
+# Cachedswap:  444.000 KiB 
 ```
 
 You can find the ram usage of the current R process:
 
 ```r
 Sys.procmem()
-# $size
-# 119.414 MiB
-# 
-# $peak
-# 119.414 MiB
+# Size:  258.426 MiB 
+# Peak:  258.426 MiB 
 
 x <- rnorm(1e8)
 object.size(x)
@@ -57,11 +46,8 @@ object.size(x)
 rm(x);invisible(gc())
 
 Sys.procmem()
-# $size
-# 119.414 MiB
-# 
-# $peak
-# 882.352 MiB
+# Size:   258.426 MiB 
+# Peak:  1021.363 MiB 
 ```
 
 Also, if you're working close to the metal, you may be interested
@@ -70,20 +56,13 @@ linesize is:
 
 ```r
 Sys.cachesize()
-# $L1I
-# 32.000 KiB
-# 
-# $L1D
-# 32.000 KiB
-# 
-# $L2
-# 256.000 KiB
-# 
-# $L3
-# 6.000 MiB
+# L1I:   32.000 KiB 
+# L1D:   32.000 KiB 
+# L2:   256.000 KiB 
+# L3:     6.000 MiB 
 
 Sys.cachelinesize()
-# 64 B
+# Linesize:  64 B 
 ```
 
 
