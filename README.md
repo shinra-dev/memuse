@@ -19,12 +19,18 @@ some are certainly more useful than others.
 
 #### Memory Lookups
 With this package you can get some information about
-how much ram is physically available on the host machine:
+how much memory is physically available on the host machine:
 
 ```r
 Sys.meminfo()
 # Totalram:  15.656 GiB 
 # Freeram:   10.504 GiB 
+
+Sys.meminfo(compact.free=FALSE) ### Linux and FreeBSD only
+# Totalram:   15.656 GiB 
+# Freeram:     1.067 GiB 
+# Bufferram:   1.332 GiB 
+# Cachedram:   8.207 GiB 
 
 Sys.swapinfo() ## same as Sys.pageinfo()
 # Totalswap:    32.596 GiB 
