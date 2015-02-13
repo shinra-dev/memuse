@@ -40,5 +40,6 @@ export(
   ### Approx stuff
   approx.size,
   ### Times
-  wc.time, print.timing
+  wc.time, print.timing,
+  print.sysinfo
 )
