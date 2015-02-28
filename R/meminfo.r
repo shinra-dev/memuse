@@ -175,6 +175,23 @@ cachelinesize <- function()
 }
 
 
+
+# ---------------------------------------------------------
+# Cache sizes
+# ---------------------------------------------------------
+
+filesize <- function(filename)
+{
+  filename <- tools::file_path_as_absolute(filename)
+  ret <- .Call(R_meminfo_filesize, filename)
+  
+  ret <- mu(ret)
+  
+  return( ret )
+}
+
+
+
 # ---------------------------------------------------------
 # Exported names
 # ---------------------------------------------------------
@@ -185,7 +202,7 @@ Sys.pageinfo <- swapinfo
 Sys.procmem <- meminfo.process
 Sys.cachesize <- cachesize
 Sys.cachelinesize <- cachelinesize
-
+Sys.filesize <- filesize
 
 
 # ---------------------------------------------------------

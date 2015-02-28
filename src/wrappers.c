@@ -165,3 +165,20 @@ SEXP R_meminfo_cacheinfo_linesize()
   return cachelinesize;
 }
 
+
+
+SEXP R_meminfo_filesize(SEXP filename)
+{
+  R_INIT;
+  SEXP filesize;
+  newRvec(filesize, 1, "dbl");
+  
+  memsize_t size;
+  meminfo_filesize(&size, STR(filename));
+  
+  DBL(filesize) = (double) size;
+  
+  R_END;
+  return filesize;
+}
+

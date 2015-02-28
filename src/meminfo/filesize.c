@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2014, Schmidt
+  Copyright (c) 2015, Schmidt
   All rights reserved.
   
   Redistribution and use in source and binary forms, with or without 
@@ -26,53 +26,40 @@
 */
 
 
-#ifndef __MEMINFO__
-#define __MEMINFO__
+#include "meminfo.h"
+#include "platform.h"
 
-
-#include <stdint.h>
-
-
-// Returns
-#define chkret(ret) if(ret)return(ret)
-
-#define MEMUSE_OK       0
-#define FAILURE         -1
-#define FILE_ERROR      -2
-#define PLATFORM_ERROR  -10
-
-
-typedef uint64_t memsize_t;
-typedef uint32_t cachesize_t;
-
-// cacheinfo.c
-int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level);
-int meminfo_cachelinesize(cachesize_t *totalcache);
-
-// fileinfo.c
-int meminfo_filesize(memsize_t *filesize, const char *filename);
-
-// getpid.c
-uint32_t meminfo_getpid();
-
-// print.c
-int meminfo_putval(memsize_t val);
-
-// process_meminfo.c
-int meminfo_process_size(memsize_t *size);
-int meminfo_process_peak(memsize_t *peak);
-
-// raminfo.c
-int meminfo_totalram(memsize_t *totalram);
-int meminfo_freeram(memsize_t *freeram);
-int meminfo_bufferram(memsize_t *bufferram);
-int meminfo_cachedram(memsize_t *cachedram);
-
-// swapinfo.c
-int meminfo_totalswap(memsize_t *totalswap);
-int meminfo_freeswap(memsize_t *freeswap);
-int meminfo_cachedswap(memsize_t *cachedswap);
-
-
-
+#if OS_NIX
+#include <sys/stat.h>
+#elif OS_WINDOWS
+#include <FileAPI.h>
 #endif
+
+
+int meminfo_filesize(memsize_t *filesize, const char *filename)
+{
+  #if OS_NIX
+  struct stat sb;
+  stat(filename, &sb);
+  
+  *filesize = (memsize_t) sb.st_size;
+  #elif OS_WINDOWS
+  LARGE_INTEGER size;
+  HANDLE fp = CreateFile(filename, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+  
+  if (fp == INVALID_HANDLE_VALUE)
+    return BAD_FILE;
+  
+  // ~yolo~
+  GetFileSizeEx(fp, &size)
+  
+  CloseHandle(fp);
+  
+  *filesize = size.QuadPart;
+  #else
+  return PLATFORM_ERROR;
+  #endif
+  
+  return 0;
+}
+
