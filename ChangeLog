@@ -1,5 +1,9 @@
+Release 2.3:
+	* Added process time lookups.
+
 Release 2.2:
 	* Added fancy printing.
+	* Added file size lookup Sys.filesize().
 
 Release 2.1:
 	* Added Sys.cacheinfo()
