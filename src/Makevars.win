@@ -12,10 +12,12 @@ PKG_LIBS = $(RNACI_LDFLAGS) -lpsapi
 
 MEMINFO_OBJS = \
 		meminfo/cacheinfo.o \
+		meminfo/filesize.o \
 		meminfo/platform.o \
 		meminfo/procinfo.o \
 		meminfo/raminfo.o \
-		meminfo/swapinfo.o
+		meminfo/swapinfo.o \
+		meminfo/sysinfo.o
 
 R_OBJS   = wrappers.o
 
