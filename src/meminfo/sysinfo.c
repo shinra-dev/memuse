@@ -55,14 +55,17 @@ int meminfo_system_uptime(uptime_t *uptime)
   *uptime = (uptime_t) tc/1000;
   #elif OS_MAC
   // https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/sysctl.3.html
-  uint64_t cache_size = 0;
-  size_t size = sizeof(*uptime);
+  time_t startdate, nowdate;
+  struct timeval t;
+  size_t size = sizeof(t);
   
-  ret = sysctlbyname("kern.boottime", uptime, &size, NULL, 0);
-  
+  ret = sysctlbyname("kern.boottime", &t, &size, NULL, 0);
   chkret(ret);
-  if (uptime == 0)
-    return FAILURE;
+  startdate = t.tv_sec;
+  
+  time(&nowdate);
+  
+  *uptime = (uptime_t) nowdate - startdate;
   #else
   return PLATFORM_ERROR;
   #endif
