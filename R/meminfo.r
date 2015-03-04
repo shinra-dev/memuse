@@ -193,6 +193,20 @@ filesize <- function(filename)
 
 
 # ---------------------------------------------------------
+# times
+# ---------------------------------------------------------
+
+uptime <- function()
+{
+  ret <- .Call(R_meminfo_system_uptime)
+  ret <- readable.time(ret)
+  
+  return( ret )
+}
+
+
+
+# ---------------------------------------------------------
 # Exported names
 # ---------------------------------------------------------
 
@@ -203,6 +217,7 @@ Sys.procmem <- meminfo.process
 Sys.cachesize <- cachesize
 Sys.cachelinesize <- cachelinesize
 Sys.filesize <- filesize
+Sys.uptime <- uptime
 
 
 # ---------------------------------------------------------

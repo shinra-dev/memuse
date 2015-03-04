@@ -89,16 +89,18 @@ int meminfo_process_peak(memsize_t *peak)
  *           Proc times
  */
 
-// http://man7.org/linux/man-pages/man5/proc.5.html
 
+// TODO
+#if 0
 int meminfo_process_utiltime(time_t *usr, time_t *sys)
 {
   int ret = 0;
-  *peak = 0L;
+  *usr = 0L;
+  *sys = 0L;
   
   
   #if OS_LINUX
-  // proc self stat, fields 14 and 15 (maybe also want 16 and 17 for forking?)
+  
   #elif OS_MAC
   struct task_thread_times_info info;
   mach_msg_type_number_t info_count = TASK_BASIC_INFO_COUNT;
@@ -113,19 +115,29 @@ int meminfo_process_utiltime(time_t *usr, time_t *sys)
   
   return ret;
 }
+#endif
 
 
 
-int meminfo_process_uptime(time_t *uptime)
+int meminfo_process_uptime(uptime_t *uptime)
 {
   int ret = 0;
-  *peak = 0L;
+  *uptime = 0L;
   
   
   #if OS_LINUX
+  // process uptime = system uptime - (process start time in jiffies / clock ticks per cycle (HZ))
   // proc self stat, field 22
+  // http://man7.org/linux/man-pages/man5/proc.5.html
+  uptime_t sys_uptime, proc_start_time;
+  ret = meminfo_system_uptime(&sys_uptime);
+  chkret(ret);
+  
+  // TODO read from /proc/self/stat
+  *uptime = (uptime_t) sys_uptime - (proc_start_time / sysconf(_SC_CLK_TCK));
   #elif OS_WINDOWS
   // https://msdn.microsoft.com/en-us/library/windows/desktop/ms683223%28v=vs.85%29.aspx
+  
   #else
   return PLATFORM_ERROR;
   #endif

@@ -44,6 +44,7 @@
 
 typedef uint64_t memsize_t;
 typedef uint32_t cachesize_t;
+typedef uint64_t uptime_t;
 
 // cacheinfo.c
 int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level);
@@ -73,6 +74,9 @@ int meminfo_totalswap(memsize_t *totalswap);
 int meminfo_freeswap(memsize_t *freeswap);
 int meminfo_cachedswap(memsize_t *cachedswap);
 
+// sysinfo.c
+int meminfo_system_uptime(uptime_t *uptime);
 
 
 #endif
+

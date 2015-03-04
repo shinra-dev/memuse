@@ -13,7 +13,8 @@ MEMINFO_OBJS = \
 		meminfo/platform.o \
 		meminfo/procinfo.o \
 		meminfo/raminfo.o \
-		meminfo/swapinfo.o
+		meminfo/swapinfo.o \
+		meminfo/sysinfo.o
 
 R_OBJS   = wrappers.o
 

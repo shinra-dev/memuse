@@ -182,3 +182,20 @@ SEXP R_meminfo_filesize(SEXP filename)
   return filesize;
 }
 
+
+
+SEXP R_meminfo_system_uptime()
+{
+  R_INIT;
+  SEXP uptime;
+  newRvec(uptime, 1, "dbl");
+  
+  uptime_t time;
+  meminfo_system_uptime(&time);
+  
+  DBL(uptime) = (double) time;
+  
+  R_END;
+  return uptime;
+}
+

@@ -30,18 +30,39 @@
 #include "meminfo.h"
 
 
-int meminfo_system_uptime(time_t *uptime)
+int meminfo_system_uptime(uptime_t *uptime)
 {
   int ret = 0;
-  *peak = 0L;
+  *uptime = 0L;
   
   
   #if OS_LINUX
-  // proc/uptime
+  struct sysinfo info;
+  ret = sysinfo(&info);
+  
+  chkret(ret);
+  
+  *uptime = (uptime_t) info.uptime;
   #elif OS_WINDOWS
-  // https://msdn.microsoft.com/en-us/library/windows/desktop/ms724408%28v=vs.85%29.aspx
+  ULONGLONG tc; // miliseconds
+  
+    #if defined(_WIN64)
+    tc = GetTickCount64();
+    #else
+    tc = GetTickCount(); // only good up to 49.7 days lol
+    #endif
+  
+  *uptime = (uptime_t) tc/1000;
   #elif OS_MAC
-  // sysctl's KERN_BOOTTIME https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/sysctl.3.html
+  // https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/sysctl.3.html
+  uint64_t cache_size = 0;
+  size_t size = sizeof(*uptime);
+  
+  ret = sysctlbyname("kern.boottime", uptime, &size, NULL, 0);
+  
+  chkret(ret);
+  if (uptime == 0)
+    return FAILURE;
   #else
   return PLATFORM_ERROR;
   #endif
