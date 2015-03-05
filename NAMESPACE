@@ -6,7 +6,8 @@ useDynLib("memuse",
   R_meminfo_cacheinfo_size,
   R_meminfo_cacheinfo_linesize,
   R_meminfo_filesize,
-  R_meminfo_system_uptime
+  R_meminfo_system_uptime,
+  R_meminfo_process_uptime
 )
 
 import(methods)
@@ -33,7 +34,7 @@ exportMethods(
 export(
   Sys.meminfo, Sys.swapinfo, Sys.pageinfo, Sys.procmem, 
   Sys.cachesize, Sys.cachelinesize, Sys.filesize,
-  Sys.uptime,
+  Sys.uptime, Sys.procuptime,
   ### Constructor
   memuse, mu,
   ### Arithmetic

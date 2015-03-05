@@ -199,6 +199,22 @@ filesize <- function(filename)
 uptime <- function()
 {
   ret <- .Call(R_meminfo_system_uptime)
+  
+  if (ret < 0)
+    stop("platform not supported at this time")
+  
+  ret <- readable.time(ret)
+  
+  return( ret )
+}
+
+procuptime <- function()
+{
+  ret <- .Call(R_meminfo_process_uptime)
+  
+  if (ret < 0)
+    stop("platform not supported at this time")
+  
   ret <- readable.time(ret)
   
   return( ret )
@@ -218,6 +234,8 @@ Sys.cachesize <- cachesize
 Sys.cachelinesize <- cachelinesize
 Sys.filesize <- filesize
 Sys.uptime <- uptime
+Sys.procuptime <- procuptime
+
 
 
 # ---------------------------------------------------------

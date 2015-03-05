@@ -187,13 +187,33 @@ SEXP R_meminfo_filesize(SEXP filename)
 SEXP R_meminfo_system_uptime()
 {
   R_INIT;
+  int ret;
   SEXP uptime;
   newRvec(uptime, 1, "dbl");
   
   uptime_t time;
-  meminfo_system_uptime(&time);
+  ret = meminfo_system_uptime(&time);
   
-  DBL(uptime) = (double) time;
+  DBL(uptime) = ret==MEMUSE_OK ? (double)time : (double)ret;
+  
+  R_END;
+  return uptime;
+}
+
+
+
+
+SEXP R_meminfo_process_uptime()
+{
+  R_INIT;
+  int ret;
+  SEXP uptime;
+  newRvec(uptime, 1, "dbl");
+  
+  uptime_t time;
+  ret = meminfo_process_uptime(&time);
+  
+  DBL(uptime) = ret==MEMUSE_OK ? (double)time : (double)ret;
   
   R_END;
   return uptime;
