@@ -9,7 +9,7 @@ PKG_LIBS = $(RNACI_LDFLAGS)
 
 MEMINFO_OBJS = \
 		meminfo/cacheinfo.o \
-		meminfo/filesize.o \
+		meminfo/fileinfo.o \
 		meminfo/platform.o \
 		meminfo/procinfo.o \
 		meminfo/raminfo.o \

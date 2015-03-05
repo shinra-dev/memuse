@@ -9,7 +9,7 @@ ifeq ($(OS),Windows_NT)
 endif
 
 
-OBJECTS = cacheinfo.c filesize.c platform.c print.c procinfo.c raminfo.c swapinfo.c
+OBJECTS = cacheinfo.c fileinfo.c platform.c print.c procinfo.c raminfo.c swapinfo.c sysinfo.c
 
 all: meminfo shared static
 
