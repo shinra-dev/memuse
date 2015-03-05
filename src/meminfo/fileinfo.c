@@ -53,7 +53,7 @@ int meminfo_filesize(memsize_t *filesize, const char *filename)
   
   ret = GetFileSizeEx(fp, &size)
   CloseHandle(fp);
-  chkret(ret);
+  winchkret(ret);
   
   *filesize = size.QuadPart;
   #else
