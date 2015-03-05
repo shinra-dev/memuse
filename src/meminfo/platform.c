@@ -66,7 +66,7 @@ int read_proc_file(const char *file, memsize_t *val, char *field, int fieldlen)
   return FAILURE;
 }
 
-int read_proc_self_stat(uptime_t *val, const int n)
+int read_proc_self_stat(runtime_t *val, const int n)
 {
   int i;
   int spaces = 0, last_space = 0;
@@ -75,7 +75,8 @@ int read_proc_self_stat(uptime_t *val, const int n)
   memsize_t value = FAILURE;
   char *end;
   
-  *val = 0L;
+  uint64_t tmp = 0L;
+  *val = 0.;
   
   FILE* fp = fopen("/proc/self/stat", "r");
   if (fp == NULL)
@@ -90,12 +91,13 @@ int read_proc_self_stat(uptime_t *val, const int n)
       spaces++;
       
       if (spaces == n)
-        *val = strtoull(line+last_space, &end, 10);
+        tmp = strtoull(line+last_space, &end, 10);
       else
         last_space = i;
     }
   }
   
+  *val = (runtime_t) tmp;
   
   free(line);
   fclose(fp);
@@ -138,16 +140,16 @@ void FILETIMEtoULI(FILETIME *ft, ULARGE_INTEGER *uli)
 }
 
 // ft1 - ft2
-uptime_t FILETIMEdiff(FILETIME *ft1, FILETIME *ft2)
+runtime_t FILETIMEdiff(FILETIME *ft1, FILETIME *ft2)
 {
-  uptime_t ut;
+  runtime_t ut;
   
   ULARGE_INTEGER uli1, uli2;
   
   FILETIMEtoULI(ft1, &uli1);
   FILETIMEtoULI(ft2, &uli2);
   
-  ut = (uptime_t) (uli1.QuadPart - uli2.QuadPart) * 1e-7;
+  ut = (runtime_t) (uli1.QuadPart - uli2.QuadPart) * 1e-7;
   
   return ut;
 }

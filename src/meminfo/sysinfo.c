@@ -30,7 +30,7 @@
 #include "meminfo.h"
 
 
-int meminfo_system_uptime(uptime_t *uptime)
+int meminfo_system_uptime(runtime_t *uptime)
 {
   int ret = 0;
   *uptime = 0.;
@@ -42,7 +42,7 @@ int meminfo_system_uptime(uptime_t *uptime)
   
   chkret(ret);
   
-  *uptime = (uptime_t) info.uptime;
+  *uptime = (runtime_t) info.uptime;
   #elif OS_WINDOWS
   ULONGLONG tc; // miliseconds
   
@@ -52,7 +52,7 @@ int meminfo_system_uptime(uptime_t *uptime)
     tc = GetTickCount(); // only good up to 49.7 days lol
     #endif
   
-  *uptime = (uptime_t) tc/1000;
+  *uptime = (runtime_t) tc/1000;
   #elif OS_MAC
   // https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/sysctl.3.html
   time_t startdate, nowdate;
@@ -65,7 +65,7 @@ int meminfo_system_uptime(uptime_t *uptime)
   
   time(&nowdate);
   
-  *uptime = (uptime_t) nowdate - startdate;
+  *uptime = (runtime_t) nowdate - startdate;
   #else
   return PLATFORM_ERROR;
   #endif

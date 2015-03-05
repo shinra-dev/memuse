@@ -90,7 +90,7 @@ int meminfo_process_peak(memsize_t *peak)
  */
 
 
-int meminfo_process_utiltime(uptime_t *usr, uptime_t *sys)
+int meminfo_process_utiltime(runtime_t *usr, runtime_t *sys)
 {
   int ret = 0;
   *usr = 0.;
@@ -103,16 +103,16 @@ int meminfo_process_utiltime(uptime_t *usr, uptime_t *sys)
   ret = read_proc_self_stat(sys, 15);
   chkret(ret);
   
-  *usr = (uptime_t) *usr / sysconf(_SC_CLK_TCK);
-  *sys = (uptime_t) *sys / sysconf(_SC_CLK_TCK);
+  *usr = (runtime_t) *usr / sysconf(_SC_CLK_TCK);
+  *sys = (runtime_t) *sys / sysconf(_SC_CLK_TCK);
   #elif OS_MAC
   struct task_thread_times_info info;
   mach_msg_type_number_t info_count = TASK_BASIC_INFO_COUNT;
   
   ret = task_info(mach_task_self(), TASK_THREAD_TIMES_INFO, (task_info_t)&info, &info_count);
   
-  *usr = (uptime_t) info.user_time; // time_value_t
-  *sys = (uptime_t) info.system_time;
+  *usr = (runtime_t) info.user_time; // time_value_t
+  *sys = (runtime_t) info.system_time;
   #elif OS_WINDOWS
   FILETIME create_ft, exit_ft, sys_ft, cpu_ft;
   ret = GetProcessTimes(GetCurrentProcess(), &create_ft, &exit_ft, &sys_ft, &cpu_ft); 
@@ -122,8 +122,8 @@ int meminfo_process_utiltime(uptime_t *usr, uptime_t *sys)
   FILETIMEtoULI(&cpu_ft, &usr_uli);
   FILETIMEtoULI(&sys_ft, &sys_uli);
   
-  *usr = (uptime_t) usr_uli.QuadPart * 1e-7;
-  *sys = (uptime_t) sys_uli.QuadPart * 1e-7;
+  *usr = (runtime_t) usr_uli.QuadPart * 1e-7;
+  *sys = (runtime_t) sys_uli.QuadPart * 1e-7;
   
   return 0;
   #else
@@ -135,7 +135,7 @@ int meminfo_process_utiltime(uptime_t *usr, uptime_t *sys)
 
 
 
-int meminfo_process_runtime(uptime_t *runtime)
+int meminfo_process_runtime(runtime_t *runtime)
 {
   int ret = 0;
   *runtime = 0.;
@@ -143,14 +143,14 @@ int meminfo_process_runtime(uptime_t *runtime)
   
   #if OS_LINUX
   // process runtime = system uptime - (time after boot process started in jiffies / clock ticks per cycle (HZ))
-  uptime_t sys_uptime, proc_start_time;
+  runtime_t sys_uptime, proc_start_time;
   ret = meminfo_system_uptime(&sys_uptime);
   chkret(ret);
   
   ret = read_proc_self_stat(&proc_start_time, 22);
   chkret(ret);
   
-  *runtime = (uptime_t) sys_uptime - (proc_start_time / sysconf(_SC_CLK_TCK));
+  *runtime = (runtime_t) sys_uptime - (proc_start_time / sysconf(_SC_CLK_TCK));
   #elif OS_WINDOWS
   // https://msdn.microsoft.com/en-us/library/windows/desktop/ms683223%28v=vs.85%29.aspx
   FILETIME create_ft, exit_ft, sys_ft, cpu_ft;

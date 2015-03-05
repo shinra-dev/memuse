@@ -191,7 +191,7 @@ SEXP R_meminfo_system_uptime()
   SEXP uptime;
   newRvec(uptime, 1, "dbl");
   
-  uptime_t time;
+  runtime_t time;
   ret = meminfo_system_uptime(&time);
   
   DBL(uptime) = ret==MEMUSE_OK ? (double)time : (double)ret;
@@ -209,7 +209,7 @@ SEXP R_meminfo_process_utiltime()
   SEXP utiltime;
   newRvec(utiltime, 2, "dbl");
   
-  uptime_t usr, sys;
+  runtime_t usr, sys;
   ret = meminfo_process_utiltime(&usr, &sys);
   
   if (ret == MEMUSE_OK)
@@ -233,7 +233,7 @@ SEXP R_meminfo_process_runtime()
   SEXP runtime;
   newRvec(runtime, 1, "dbl");
   
-  uptime_t time;
+  runtime_t time;
   ret = meminfo_process_runtime(&time);
   
   DBL(runtime) = ret==MEMUSE_OK ? (double)time : (double)ret;
