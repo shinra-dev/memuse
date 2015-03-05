@@ -43,7 +43,7 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
   
   
   #if OS_LINUX
-  int ret = 0;
+  int ret = MEMINFO_OK;
   
   if (level == 0)
     ret = sysconf(_SC_LEVEL1_ICACHE_SIZE);
@@ -62,7 +62,7 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
   
   *totalcache = ret;
   #elif OS_MAC
-  int ret = 0;
+  int ret = MEMINFO_OK;
   
   uint64_t cache_size = 0;
   size_t size = sizeof(cache_size);
@@ -121,7 +121,7 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
     if (slpi[i].Relationship == RelationCache && slpi[i].Cache.Level == winlevel)
     {
       *totalcache = slpi[i].Cache.Size;
-      return 0;
+      return MEMINFO_OK;
     }
   }
   
@@ -131,7 +131,7 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
   return PLATFORM_ERROR;
   #endif
   
-  return 0;
+  return MEMINFO_OK;
 }
 
 
@@ -190,7 +190,7 @@ int meminfo_cachelinesize(cachesize_t *linesize)
     if (slpi[i].Relationship == RelationCache && slpi[i].Cache.Level == 1)
     {
       *linesize = slpi[i].Cache.LineSize;
-      return 0;
+      return MEMINFO_OK;
     }
   }
   
@@ -200,6 +200,6 @@ int meminfo_cachelinesize(cachesize_t *linesize)
   return PLATFORM_ERROR;
   #endif
   
-  return 0;
+  return MEMINFO_OK;
 }
 

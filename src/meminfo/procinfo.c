@@ -36,7 +36,7 @@
 
 int meminfo_process_size(memsize_t *size)
 {
-  int ret = 0;
+  int ret = MEMINFO_OK;
   *size = 0L;
   
   
@@ -64,7 +64,7 @@ int meminfo_process_size(memsize_t *size)
 
 int meminfo_process_peak(memsize_t *peak)
 {
-  int ret = 0;
+  int ret = MEMINFO_OK;
   *peak = 0L;
   
   
@@ -92,7 +92,7 @@ int meminfo_process_peak(memsize_t *peak)
 
 int meminfo_process_utiltime(runtime_t *usr, runtime_t *sys)
 {
-  int ret = 0;
+  int ret = MEMINFO_OK;
   *usr = 0.;
   *sys = 0.;
   
@@ -125,7 +125,7 @@ int meminfo_process_utiltime(runtime_t *usr, runtime_t *sys)
   *usr = (runtime_t) usr_uli.QuadPart * 1e-7;
   *sys = (runtime_t) sys_uli.QuadPart * 1e-7;
   
-  return 0;
+  return MEMINFO_OK;
   #else
   return PLATFORM_ERROR;
   #endif
@@ -137,7 +137,7 @@ int meminfo_process_utiltime(runtime_t *usr, runtime_t *sys)
 
 int meminfo_process_runtime(runtime_t *runtime)
 {
-  int ret = 0;
+  int ret = MEMINFO_OK;
   *runtime = 0.;
   
   
@@ -161,7 +161,7 @@ int meminfo_process_runtime(runtime_t *runtime)
   GetSystemTimeAsFileTime(&nowtime_ft);
   
   *runtime = FILETIMEdiff(&nowtime_ft, &create_ft);
-  return 0;
+  return MEMINFO_OK;
   #else
   return PLATFORM_ERROR;
   #endif

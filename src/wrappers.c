@@ -23,7 +23,7 @@
 #define TRYFUNC(THEFUN) ret=meminfo_##THEFUN(&tmp); \
   newRvec(THEFUN, 1, "double"); \
   ct++; \
-  if (ret == MEMUSE_OK) \
+  if (ret == MEMINFO_OK) \
     DBL(THEFUN, 0) = (double) tmp; \
   else \
     DBL(THEFUN, 0) = (double) ret
@@ -31,7 +31,7 @@
 #define CACHEFUN(THEFUN, STORAGE, LEVEL) ret=meminfo_##THEFUN(&tmp, LEVEL); \
   newRvec(STORAGE, 1, "double"); \
   ct++; \
-  if (ret == MEMUSE_OK) \
+  if (ret == MEMINFO_OK) \
     DBL(STORAGE, 0) = (double) tmp; \
   else \
     DBL(STORAGE, 0) = (double) ret
@@ -45,7 +45,7 @@ SEXP R_meminfo_retvals(SEXP retval)
   SEXP RET;
   newRvec(RET, 1, "str");
   
-  if (INT(retval) == MEMUSE_OK)
+  if (INT(retval) == MEMINFO_OK)
     SET_STRING_ELT(RET, 0, mkChar("ok"));
   else if (INT(retval) == FAILURE)
     SET_STRING_ELT(RET, 0, mkChar("There were errors accessing hardware info; please report this to the package maintainer."));
@@ -194,7 +194,7 @@ SEXP R_meminfo_system_uptime()
   runtime_t time;
   ret = meminfo_system_uptime(&time);
   
-  DBL(uptime) = ret==MEMUSE_OK ? (double)time : (double)ret;
+  DBL(uptime) = ret==MEMINFO_OK ? (double)time : (double)ret;
   
   R_END;
   return uptime;
@@ -212,7 +212,7 @@ SEXP R_meminfo_process_utiltime()
   runtime_t usr, sys;
   ret = meminfo_process_utiltime(&usr, &sys);
   
-  if (ret == MEMUSE_OK)
+  if (ret == MEMINFO_OK)
   {
     DBL(utiltime, 0) = (double) usr;
     DBL(utiltime, 1) = (double) sys;
@@ -236,7 +236,7 @@ SEXP R_meminfo_process_runtime()
   runtime_t time;
   ret = meminfo_process_runtime(&time);
   
-  DBL(runtime) = ret==MEMUSE_OK ? (double)time : (double)ret;
+  DBL(runtime) = ret==MEMINFO_OK ? (double)time : (double)ret;
   
   R_END;
   return runtime;

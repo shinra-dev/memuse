@@ -32,7 +32,7 @@
 
 int meminfo_system_uptime(runtime_t *uptime)
 {
-  int ret = 0;
+  int ret = MEMINFO_OK;
   *uptime = 0.;
   
   

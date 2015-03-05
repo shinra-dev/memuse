@@ -59,7 +59,7 @@ int read_proc_file(const char *file, memsize_t *val, char *field, int fieldlen)
     if (value != FAILURE)
     {
       *val = value;
-      return 0;
+      return MEMINFO_OK;
     }
   }
   
@@ -102,7 +102,7 @@ int read_proc_self_stat(runtime_t *val, const int n)
   free(line);
   fclose(fp);
   
-  return 0;
+  return MEMINFO_OK;
 }
 
 

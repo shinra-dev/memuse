@@ -79,7 +79,7 @@ int meminfo_totalswap(memsize_t *totalswap)
   return PLATFORM_ERROR;
   #endif
   
-  return 0;
+  return MEMINFO_OK;
 }
 
 
@@ -147,7 +147,7 @@ int meminfo_freeswap(memsize_t *freeswap)
   return PLATFORM_ERROR;
   #endif
   
-  return 0;
+  return MEMINFO_OK;
 }
 
 
@@ -169,6 +169,6 @@ int meminfo_cachedswap(memsize_t *cachedswap)
   return PLATFORM_ERROR;
   #endif
   
-  return 0;
+  return MEMINFO_OK;
 }
 

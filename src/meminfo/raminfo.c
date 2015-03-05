@@ -88,7 +88,7 @@ int meminfo_totalram(memsize_t *totalram)
   return PLATFORM_ERROR;
   #endif
   
-  return 0;
+  return MEMINFO_OK;
 }
 
 
@@ -165,7 +165,7 @@ int meminfo_freeram(memsize_t *freeram)
   return PLATFORM_ERROR;
   #endif
   
-  return 0;
+  return MEMINFO_OK;
 }
 
 
@@ -195,7 +195,7 @@ int meminfo_bufferram(memsize_t *bufferram)
   return PLATFORM_ERROR;
   #endif
   
-  return 0;
+  return MEMINFO_OK;
 }
 
 
@@ -228,6 +228,6 @@ int meminfo_cachedram(memsize_t *cachedram)
   return PLATFORM_ERROR;
   #endif
   
-  return 0;
+  return MEMINFO_OK;
 }
 

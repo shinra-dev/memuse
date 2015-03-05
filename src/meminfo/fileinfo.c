@@ -38,7 +38,7 @@
 
 int meminfo_filesize(memsize_t *filesize, const char *filename)
 {
-  int ret = 0;
+  int ret = MEMINFO_OK;
   #if OS_NIX
   struct stat sb;
   stat(filename, &sb);

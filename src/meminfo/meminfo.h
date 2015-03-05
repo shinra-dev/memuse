@@ -40,7 +40,7 @@
 #define winchkret(ret) if(!ret)return(ret)
 #endif
 
-#define MEMUSE_OK       0
+#define MEMINFO_OK       0
 #define FAILURE         -1
 #define FILE_ERROR      -2
 #define PLATFORM_ERROR  -10

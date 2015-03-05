@@ -57,7 +57,7 @@ int meminfo_putval(uint64_t val)
   else
     printf("%.3f %s", dval, meminfo_names[ind]);
   
-  return 0;
+  return MEMINFO_OK;
 }
 
 
