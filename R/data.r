@@ -68,7 +68,7 @@
 
 
 .time <- list(
-                 unit=c("seconds", "minutes", "hours", "days"),
-                 factor=c(1.0, 60.0, 3600.0, 86400)
+                 unit=c("seconds", "minutes", "hours", "days", "years", "centuries"),
+                 factor=c(1.0, 60.0, 3600.0, 86400.0, 31557600, 3155760000)
 )
 
