@@ -33,7 +33,7 @@
 int meminfo_system_uptime(uptime_t *uptime)
 {
   int ret = 0;
-  *uptime = 0L;
+  *uptime = 0.;
   
   
   #if OS_LINUX

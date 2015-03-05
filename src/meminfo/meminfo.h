@@ -40,7 +40,7 @@
 #define winchkret(ret) if(!ret)return(ret)
 #endif
 
-#define MEMUSE_OK       0
+#define MEMINFO_OK      0
 #define FAILURE         -1
 #define FILE_ERROR      -2
 #define PLATFORM_ERROR  -10
@@ -48,7 +48,7 @@
 
 typedef uint64_t memsize_t;
 typedef uint32_t cachesize_t;
-typedef uint64_t uptime_t;
+typedef double uptime_t;
 
 // cacheinfo.c
 int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level);
@@ -67,6 +67,7 @@ int read_proc_self_stat(uptime_t *val, const int n);
 #elif OS_MAC
 int sysctl_val(char *name, uint64_t *val);
 #elif OS_WINDOWS
+void FILETIMEtoULI(FILETIME *ft, ULARGE_INTEGER *uli);
 uptime_t FILETIMEdiff(FILETIME *ft1, FILETIME *ft2);
 #elif OS_FREEBSD
 int sysctl_mib(char *name, int *mib, size_t *mibsize);
@@ -80,7 +81,7 @@ int meminfo_putval(memsize_t val);
 // procinfo.c
 int meminfo_process_size(memsize_t *size);
 int meminfo_process_peak(memsize_t *peak);
-
+int meminfo_process_utiltime(uptime_t *usr, uptime_t *sys);
 int meminfo_process_runtime(uptime_t *runtime);
 
 // raminfo.c
