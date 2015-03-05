@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2014, Schmidt
+  Copyright (c) 2014-2015, Schmidt
   FreeBSD support improved by Heckendorf, 2014
   All rights reserved.
   
@@ -125,6 +125,7 @@ int sysctl_val(char *name, memsize_t *val)
   
   return ret;
 }
+
 
 #endif
 

@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2014, Schmidt
+  Copyright (c) 2014-2015, Schmidt
   All rights reserved.
   
   Redistribution and use in source and binary forms, with or without
@@ -58,9 +58,6 @@
 #include <stdio.h>
 #include <string.h>
 
-int read_proc_file(const char* file, uint64_t *val, char *field, int fieldlen);
-
-
 
 #elif OS_MAC
 
@@ -74,9 +71,6 @@ int read_proc_file(const char* file, uint64_t *val, char *field, int fieldlen);
 #include <sys/param.h>
 #include <sys/mount.h>
 
-int sysctl_val(char *name, uint64_t *val);
-
-
 
 #elif OS_WINDOWS
 
@@ -85,10 +79,7 @@ int sysctl_val(char *name, uint64_t *val);
 #include <tchar.h>
 #include <Psapi.h>
 
-typedef BOOL (WINAPI *LPFN_GLPI)(
-  PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, 
-  PDWORD);
-
+typedef BOOL (WINAPI *LPFN_GLPI)(PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, PDWORD);
 
 
 #elif OS_FREEBSD
@@ -98,10 +89,6 @@ typedef BOOL (WINAPI *LPFN_GLPI)(
 #include <sys/types.h>
 #include <sys/sysctl.h>
 #include <vm/vm_param.h>
-
-int sysctl_mib(char *name, int *mib, size_t *mibsize);
-int sysctlmib_val(int *mib, size_t mibsize, void *data, size_t *datasize);
-int sysctl_val(char *name, uint64_t *val);
 
 
 

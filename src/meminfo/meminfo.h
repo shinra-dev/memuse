@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2014, Schmidt
+  Copyright (c) 2014-2015, Schmidt
   All rights reserved.
   
   Redistribution and use in source and binary forms, with or without 
@@ -34,11 +34,10 @@
 #include "platform.h"
 
 
-// Returns
-#if OS_WINDOWS
-#define chkret(ret) if(!ret)return(ret)
-#else
 #define chkret(ret) if(ret)return(ret)
+#if OS_WINDOWS
+// Windows.h functions return non-zero if successful IN SPITEFUL DEFIANCE OF THE FUCKING C STANDARD
+#define winchkret(ret) if(!ret)return(ret)
 #endif
 
 #define MEMUSE_OK       0
@@ -60,6 +59,18 @@ int meminfo_filesize(memsize_t *filesize, const char *filename);
 
 // getpid.c
 uint32_t meminfo_getpid();
+
+// platform.c
+#if OS_LINUX
+int read_proc_file(const char* file, uint64_t *val, char *field, int fieldlen);
+int read_proc_self_stat(uptime_t *val, const int n);
+#elif OS_MAC
+int sysctl_val(char *name, uint64_t *val);
+#elif OS_FREEBSD
+int sysctl_mib(char *name, int *mib, size_t *mibsize);
+int sysctlmib_val(int *mib, size_t mibsize, void *data, size_t *datasize);
+int sysctl_val(char *name, uint64_t *val);
+#endif
 
 // print.c
 int meminfo_putval(memsize_t val);
