@@ -214,6 +214,24 @@ Sys.runtime <- function()
 
 
 
+post.system.time <- function()
+{
+  usrsys <- .Call(R_meminfo_process_utiltime)
+  if (any(usrsys < 0))
+    stop("platform not supported at this time")
+  
+  elapsed <- .Call(R_meminfo_process_runtime)
+  if (elapsed < 0)
+    stop("platform not supported at this time")
+  
+  ret <- c(usrsys, elapsed)
+  names(ret) <- c("user.self", "sys.self", "elapsed")
+  class(ret) <- "proc_time"
+  
+  return(ret)
+}
+
+
 
 # ---------------------------------------------------------
 # Print handling
