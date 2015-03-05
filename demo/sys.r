@@ -25,5 +25,9 @@ Sys.uptime()
 cat("\n")
 
 ### How long has this R session been running?
-Sys.procuptime()
+Sys.runtime()
+cat("\n")
+
+### post-hot system.time()
+post.system.time()
 cat("\n")
