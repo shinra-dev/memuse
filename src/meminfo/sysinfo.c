@@ -56,12 +56,12 @@ int meminfo_system_uptime(uptime_t *uptime)
   #elif OS_MAC
   // https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/sysctl.3.html
   time_t startdate, nowdate;
-  struct timeval t;
-  size_t size = sizeof(t);
+  struct timeval tv;
+  size_t size = sizeof(tv);
   
-  ret = sysctlbyname("kern.boottime", &t, &size, NULL, 0);
+  ret = sysctlbyname("kern.boottime", &tv, &size, NULL, 0);
   chkret(ret);
-  startdate = t.tv_sec;
+  startdate = tv.tv_sec;
   
   time(&nowdate);
   
