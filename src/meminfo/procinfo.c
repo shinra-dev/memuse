@@ -137,8 +137,12 @@ int meminfo_process_uptime(uptime_t *uptime)
   *uptime = (uptime_t) sys_uptime - (proc_start_time / sysconf(_SC_CLK_TCK));
   #elif OS_WINDOWS
   // https://msdn.microsoft.com/en-us/library/windows/desktop/ms683223%28v=vs.85%29.aspx
-  GetProcessTimes()
+  FILETIME create, exit, sys, cpu;
   
+  ret = GetProcessTimes(GetCurrentProcess(), &create, &exit, &sys, &cpu); 
+  chkret(ret);
+  
+  *uptime = (uptime_t) create.dwLowDateTime/1000 + create.dwHighDateTime/1000;
   #else
   return PLATFORM_ERROR;
   #endif
