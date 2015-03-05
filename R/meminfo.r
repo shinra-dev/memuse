@@ -1,6 +1,3 @@
-get.os <- function() Sys.info()[1L]
-
-
 val_or_zero <- function(x)
 {
   if (is.null(x))
@@ -21,28 +18,7 @@ meminfo_retvals <- function(retval)
 
 
 
-meminfo <- function(compact.free=TRUE)
-{
-  os <- get.os()
-  
-  ret <- meminfo.c()
-  
-  
-  if (compact.free)
-  {
-    ret$freeram <- val_or_zero(ret$freeram) + val_or_zero(ret$bufferram) + val_or_zero(ret$cachedram)
-    ret$bufferram <- ret$cachedram <- NULL
-  }
-  
-  class(ret) <- "sysinfo"
-  
-  return( ret )
-}
-
-
-
-
-meminfo.c <- function()
+Sys.meminfo <- function(compact.free=TRUE)
 {
   out <- .Call(R_meminfo_raminfo)
   
@@ -58,17 +34,13 @@ meminfo.c <- function()
   
   ret <- lapply(out, mu)
   
-  return( ret )
-}
-
-
-
-
-swapinfo <- function()
-{
-  os <- get.os()
   
-  ret <- swapinfo.c()
+  
+  if (compact.free)
+  {
+    ret$freeram <- val_or_zero(ret$freeram) + val_or_zero(ret$bufferram) + val_or_zero(ret$cachedram)
+    ret$bufferram <- ret$cachedram <- NULL
+  }
   
   class(ret) <- "sysinfo"
   
@@ -76,7 +48,8 @@ swapinfo <- function()
 }
 
 
-swapinfo.c <- function()
+
+Sys.swapinfo <- function()
 {
   out <- .Call(R_meminfo_swapinfo)
   
@@ -91,12 +64,13 @@ swapinfo.c <- function()
     out <- out[tmp]
   
   ret <- lapply(out, mu)
+  class(ret) <- "sysinfo"
   
   return( ret )
 }
 
 
-pageinfo <- swapinfo
+Sys.pageinfo <- Sys.swapinfo
 
 
 
@@ -105,7 +79,7 @@ pageinfo <- swapinfo
 # ---------------------------------------------------------
 
 
-meminfo.process <- function(gcFirst=TRUE)
+Sys.procmem <- function(gcFirst=TRUE)
 {
   if (gcFirst)
     gc(FALSE)
@@ -137,7 +111,7 @@ meminfo.process <- function(gcFirst=TRUE)
 
 getcache <- function(level) .Call(R_meminfo_cacheinfo_size, level)
 
-cachesize <- function()
+Sys.cachesize <- function()
 {
   levels <- 0L:3L
   
@@ -159,7 +133,7 @@ cachesize <- function()
 
 
 
-cachelinesize <- function()
+Sys.cachelinesize <- function()
 {
   ret <- .Call(R_meminfo_cacheinfo_linesize)
   
@@ -177,10 +151,10 @@ cachelinesize <- function()
 
 
 # ---------------------------------------------------------
-# Cache sizes
+# File sizes
 # ---------------------------------------------------------
 
-filesize <- function(filename)
+Sys.filesize <- function(filename)
 {
   filename <- tools::file_path_as_absolute(filename)
   ret <- .Call(R_meminfo_filesize, filename)
@@ -193,10 +167,10 @@ filesize <- function(filename)
 
 
 # ---------------------------------------------------------
-# times
+# Uptimes
 # ---------------------------------------------------------
 
-uptime <- function()
+Sys.uptime <- function()
 {
   ret <- .Call(R_meminfo_system_uptime)
   
@@ -208,7 +182,7 @@ uptime <- function()
   return( ret )
 }
 
-procuptime <- function()
+Sys.procuptime <- function()
 {
   ret <- .Call(R_meminfo_process_uptime)
   
@@ -219,22 +193,6 @@ procuptime <- function()
   
   return( ret )
 }
-
-
-
-# ---------------------------------------------------------
-# Exported names
-# ---------------------------------------------------------
-
-Sys.meminfo <- meminfo
-Sys.swapinfo <- swapinfo
-Sys.pageinfo <- swapinfo
-Sys.procmem <- meminfo.process
-Sys.cachesize <- cachesize
-Sys.cachelinesize <- cachelinesize
-Sys.filesize <- filesize
-Sys.uptime <- uptime
-Sys.procuptime <- procuptime
 
 
 
