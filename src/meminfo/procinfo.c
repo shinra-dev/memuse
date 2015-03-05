@@ -137,12 +137,18 @@ int meminfo_process_uptime(uptime_t *uptime)
   *uptime = (uptime_t) sys_uptime - (proc_start_time / sysconf(_SC_CLK_TCK));
   #elif OS_WINDOWS
   // https://msdn.microsoft.com/en-us/library/windows/desktop/ms683223%28v=vs.85%29.aspx
-  FILETIME create, exit, sys, cpu;
+  FILETIME create_ft, exit_ft, sys_ft, cpu_ft;
+  ret = GetProcessTimes(GetCurrentProcess(), &create_ft, &exit_ft, &sys_ft, &cpu_ft); 
+  winchkret(ret);
   
-  ret = GetProcessTimes(GetCurrentProcess(), &create, &exit, &sys, &cpu); 
-  chkret(ret);
+  SYSTEMTIME nowtime_st;
+  GetSystemTime(&nowtime_st);
+  FILETIME nowtime_ft;
+  ret = SystemTimeToFileTime(&nowtime_st, &nowtime_ft);
+  winchkret(ret);
   
-  *uptime = (uptime_t) create.dwLowDateTime/1000 + create.dwHighDateTime/1000;
+  *uptime = FILETIMEdiff(&nowtime_ft, &create_ft);
+  return 0;
   #else
   return PLATFORM_ERROR;
   #endif
