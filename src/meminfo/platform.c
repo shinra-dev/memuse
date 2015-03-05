@@ -127,5 +127,25 @@ int sysctl_val(char *name, memsize_t *val)
 }
 
 
+
+
+#elif OS_WINDOWS
+
+// ft1 - ft2
+uptime_t FILETIMEdiff(FILETIME *ft1, FILETIME *ft2)
+{
+  uptime_t ut;
+  
+  ULARGE_INTEGER ft1_uli, ft2_uli;
+  ft1_uli.LowPart = ft1->dwLowDateTime;
+  ft1_uli.HighPart = ft1->dwHighDateTime;
+  ft2_uli.LowPart = ft2->dwLowDateTime;
+  ft2_uli.HighPart = ft2->dwHighDateTime;
+  
+  ut = (uptime_t) (ft1_uli.QuadPart - ft2_uli.QuadPart)/1e7;
+  
+  return ut;
+}
+
 #endif
 
