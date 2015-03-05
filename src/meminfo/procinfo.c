@@ -126,17 +126,18 @@ int meminfo_process_uptime(uptime_t *uptime)
   
   
   #if OS_LINUX
-  // process uptime = system uptime - (process start time in jiffies / clock ticks per cycle (HZ))
-  // proc self stat, field 22
-  // http://man7.org/linux/man-pages/man5/proc.5.html
+  // process uptime = system uptime - (time after boot process started in jiffies / clock ticks per cycle (HZ))
   uptime_t sys_uptime, proc_start_time;
   ret = meminfo_system_uptime(&sys_uptime);
   chkret(ret);
   
-  // TODO read from /proc/self/stat
+  ret = read_proc_self_stat(&proc_start_time, 22);
+  chkret(ret);
+  
   *uptime = (uptime_t) sys_uptime - (proc_start_time / sysconf(_SC_CLK_TCK));
   #elif OS_WINDOWS
   // https://msdn.microsoft.com/en-us/library/windows/desktop/ms683223%28v=vs.85%29.aspx
+  GetProcessTimes()
   
   #else
   return PLATFORM_ERROR;

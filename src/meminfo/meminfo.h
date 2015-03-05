@@ -59,9 +59,11 @@ uint32_t meminfo_getpid();
 // print.c
 int meminfo_putval(memsize_t val);
 
-// process_meminfo.c
+// procinfo.c
 int meminfo_process_size(memsize_t *size);
 int meminfo_process_peak(memsize_t *peak);
+
+int meminfo_process_uptime(uptime_t *uptime);
 
 // raminfo.c
 int meminfo_totalram(memsize_t *totalram);

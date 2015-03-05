@@ -34,7 +34,7 @@
 
 int read_proc_file(const char *file, memsize_t *val, char *field, int fieldlen)
 {
-  memsize_t tmplen = sizeof(char);
+  size_t len = 0;
   char *tmp;
   memsize_t value = FAILURE;
   
@@ -44,9 +44,7 @@ int read_proc_file(const char *file, memsize_t *val, char *field, int fieldlen)
   
   if (fp != NULL)
   {
-    tmp = malloc(tmplen);
-    
-    while (getline(&tmp, &tmplen, fp) >= 0)
+    while (getline(&tmp, &len, fp) >= 0)
     {
       if (strncmp(tmp, field, fieldlen) == 0)
       {
@@ -67,6 +65,44 @@ int read_proc_file(const char *file, memsize_t *val, char *field, int fieldlen)
   
   return FAILURE;
 }
+
+int read_proc_self_stat(uptime_t *val, const int n)
+{
+  int i;
+  int spaces = 0, last_space = 0;
+  char *line = NULL;
+  size_t linelen = 0;
+  memsize_t value = FAILURE;
+  char *end;
+  
+  *val = 0L;
+  
+  FILE* fp = fopen("/proc/self/stat", "r");
+  if (fp == NULL)
+    return FAILURE;
+  
+  linelen = getline(&line, &linelen, fp);
+  
+  for (i=0; i<linelen; i++)
+  {
+    if (line[i] == ' ')
+    {
+      spaces++;
+      
+      if (spaces == n)
+        *val = strtoull(line+last_space, &end, 10);
+      else
+        last_space = i;
+    }
+  }
+  
+  
+  free(line);
+  fclose(fp);
+  
+  return 0;
+}
+
 
 
 #elif OS_MAC || OS_FREEBSD
