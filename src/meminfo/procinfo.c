@@ -119,14 +119,14 @@ int meminfo_process_utiltime(time_t *usr, time_t *sys)
 
 
 
-int meminfo_process_uptime(uptime_t *uptime)
+int meminfo_process_runtime(uptime_t *runtime)
 {
   int ret = 0;
-  *uptime = 0L;
+  *runtime = 0L;
   
   
   #if OS_LINUX
-  // process uptime = system uptime - (time after boot process started in jiffies / clock ticks per cycle (HZ))
+  // process runtime = system uptime - (time after boot process started in jiffies / clock ticks per cycle (HZ))
   uptime_t sys_uptime, proc_start_time;
   ret = meminfo_system_uptime(&sys_uptime);
   chkret(ret);
@@ -134,7 +134,7 @@ int meminfo_process_uptime(uptime_t *uptime)
   ret = read_proc_self_stat(&proc_start_time, 22);
   chkret(ret);
   
-  *uptime = (uptime_t) sys_uptime - (proc_start_time / sysconf(_SC_CLK_TCK));
+  *runtime = (uptime_t) sys_uptime - (proc_start_time / sysconf(_SC_CLK_TCK));
   #elif OS_WINDOWS
   // https://msdn.microsoft.com/en-us/library/windows/desktop/ms683223%28v=vs.85%29.aspx
   FILETIME create_ft, exit_ft, sys_ft, cpu_ft;
@@ -147,7 +147,7 @@ int meminfo_process_uptime(uptime_t *uptime)
   ret = SystemTimeToFileTime(&nowtime_st, &nowtime_ft);
   winchkret(ret);
   
-  *uptime = FILETIMEdiff(&nowtime_ft, &create_ft);
+  *runtime = FILETIMEdiff(&nowtime_ft, &create_ft);
   return 0;
   #else
   return PLATFORM_ERROR;

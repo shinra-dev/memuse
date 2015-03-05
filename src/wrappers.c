@@ -203,7 +203,7 @@ SEXP R_meminfo_system_uptime()
 
 
 
-SEXP R_meminfo_process_uptime()
+SEXP R_meminfo_process_runtime()
 {
   R_INIT;
   int ret;
@@ -211,7 +211,7 @@ SEXP R_meminfo_process_uptime()
   newRvec(uptime, 1, "dbl");
   
   uptime_t time;
-  ret = meminfo_process_uptime(&time);
+  ret = meminfo_process_runtime(&time);
   
   DBL(uptime) = ret==MEMUSE_OK ? (double)time : (double)ret;
   

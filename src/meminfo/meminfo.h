@@ -81,7 +81,7 @@ int meminfo_putval(memsize_t val);
 int meminfo_process_size(memsize_t *size);
 int meminfo_process_peak(memsize_t *peak);
 
-int meminfo_process_uptime(uptime_t *uptime);
+int meminfo_process_runtime(uptime_t *runtime);
 
 // raminfo.c
 int meminfo_totalram(memsize_t *totalram);

@@ -182,9 +182,9 @@ Sys.uptime <- function()
   return( ret )
 }
 
-Sys.procuptime <- function()
+Sys.runtime <- function()
 {
-  ret <- .Call(R_meminfo_process_uptime)
+  ret <- .Call(R_meminfo_process_runtime)
   
   if (ret < 0)
     stop("platform not supported at this time")
