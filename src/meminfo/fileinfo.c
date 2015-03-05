@@ -38,6 +38,7 @@
 
 int meminfo_filesize(memsize_t *filesize, const char *filename)
 {
+  int ret = 0;
   #if OS_NIX
   struct stat sb;
   stat(filename, &sb);
@@ -50,16 +51,15 @@ int meminfo_filesize(memsize_t *filesize, const char *filename)
   if (fp == INVALID_HANDLE_VALUE)
     return BAD_FILE;
   
-  // ~yolo~
-  GetFileSizeEx(fp, &size)
-  
+  ret = GetFileSizeEx(fp, &size)
   CloseHandle(fp);
+  chkret(ret);
   
   *filesize = size.QuadPart;
   #else
   return PLATFORM_ERROR;
   #endif
   
-  return 0;
+  return ret;
 }
 

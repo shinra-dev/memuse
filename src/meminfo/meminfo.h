@@ -31,10 +31,15 @@
 
 
 #include <stdint.h>
+#include "platform.h"
 
 
 // Returns
+#if OS_WINDOWS
+#define chkret(ret) if(!ret)return(ret)
+#else
 #define chkret(ret) if(ret)return(ret)
+#endif
 
 #define MEMUSE_OK       0
 #define FAILURE         -1
