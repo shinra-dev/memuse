@@ -215,6 +215,8 @@ print.sysinfo <- function(x)
   prespaces <- simplify2array(lapply(x, function(y) paste0(rep(" ", maxlen-nchar(paste(y))), collapse="")))
   
   lapply(1:length(x), function(i) cat(paste(spacenames[i], prespaces[i], x[[i]], sep=" ", collapse="\n"), "\n"))
+#  cat("\n")
+  
   invisible()
 }
 
