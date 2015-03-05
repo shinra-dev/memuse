@@ -182,6 +182,24 @@ Sys.uptime <- function()
   return( ret )
 }
 
+
+
+Sys.utiltime <- function()
+{
+  ret <- .Call(R_meminfo_process_utiltime)
+  
+  if (any(ret < 0))
+    stop("platform not supported at this time")
+  
+  ret <- lapply(ret, function(i) capture.output(print(readable.time(i))))
+  names(ret) <- c("usr", "sys")
+  class(ret) <- "sysinfo"
+  
+  return( ret )
+}
+
+
+
 Sys.runtime <- function()
 {
   ret <- .Call(R_meminfo_process_runtime)
@@ -193,6 +211,7 @@ Sys.runtime <- function()
   
   return( ret )
 }
+
 
 
 
@@ -220,4 +239,17 @@ print.sysinfo <- function(x)
   invisible()
 }
 
+
+
+"[.sysinfo" <- function(x, i)
+{
+  class(x) <- NULL
+  ret <- x[i]
+  if (length(ret) > 0)
+    class(ret) <- "sysinfo"
+  else
+    return(numeric(0))
+  
+  return(ret)
+}
 

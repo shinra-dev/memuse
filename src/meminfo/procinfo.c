@@ -90,39 +90,55 @@ int meminfo_process_peak(memsize_t *peak)
  */
 
 
-// TODO
-#if 0
-int meminfo_process_utiltime(time_t *usr, time_t *sys)
+int meminfo_process_utiltime(uptime_t *usr, uptime_t *sys)
 {
   int ret = 0;
-  *usr = 0L;
-  *sys = 0L;
+  *usr = 0.;
+  *sys = 0.;
   
   
   #if OS_LINUX
+  ret = read_proc_self_stat(usr, 14);
+  chkret(ret);
+  ret = read_proc_self_stat(sys, 15);
+  chkret(ret);
   
+  *usr = (uptime_t) *usr / sysconf(_SC_CLK_TCK);
+  *sys = (uptime_t) *sys / sysconf(_SC_CLK_TCK);
   #elif OS_MAC
   struct task_thread_times_info info;
   mach_msg_type_number_t info_count = TASK_BASIC_INFO_COUNT;
   
   ret = task_info(mach_task_self(), TASK_THREAD_TIMES_INFO, (task_info_t)&info, &info_count);
   
-  *usr = (time_t) info.user_time; // time_value_t
-  *sys = (time_t) info.system_time;
+  *usr = (uptime_t) info.user_time; // time_value_t
+  *sys = (uptime_t) info.system_time;
+  #elif OS_WINDOWS
+  FILETIME create_ft, exit_ft, sys_ft, cpu_ft;
+  ret = GetProcessTimes(GetCurrentProcess(), &create_ft, &exit_ft, &sys_ft, &cpu_ft); 
+  winchkret(ret);
+  
+  ULARGE_INTEGER sys_uli, usr_uli;
+  FILETIMEtoULI(&cpu_ft, &usr_uli);
+  FILETIMEtoULI(&sys_ft, &sys_uli);
+  
+  *usr = (uptime_t) usr_uli.QuadPart * 1e-7;
+  *sys = (uptime_t) sys_uli.QuadPart * 1e-7;
+  
+  return 0;
   #else
   return PLATFORM_ERROR;
   #endif
   
   return ret;
 }
-#endif
 
 
 
 int meminfo_process_runtime(uptime_t *runtime)
 {
   int ret = 0;
-  *runtime = 0L;
+  *runtime = 0.;
   
   
   #if OS_LINUX
@@ -141,11 +157,8 @@ int meminfo_process_runtime(uptime_t *runtime)
   ret = GetProcessTimes(GetCurrentProcess(), &create_ft, &exit_ft, &sys_ft, &cpu_ft); 
   winchkret(ret);
   
-  SYSTEMTIME nowtime_st;
-  GetSystemTime(&nowtime_st);
   FILETIME nowtime_ft;
-  ret = SystemTimeToFileTime(&nowtime_st, &nowtime_ft);
-  winchkret(ret);
+  GetSystemTimeAsFileTime(&nowtime_ft);
   
   *runtime = FILETIMEdiff(&nowtime_ft, &create_ft);
   return 0;
@@ -155,6 +168,4 @@ int meminfo_process_runtime(uptime_t *runtime)
   
   return ret;
 }
-
-
 
