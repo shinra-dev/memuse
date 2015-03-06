@@ -14,8 +14,25 @@ static const char *meminfo_names[] =
   {"B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"};
 
 
-
-int meminfo_putval(uint64_t val)
+/**
+ * @file
+ * @brief 
+ * Memory printer.
+ *
+ * @details
+ * Prints memory values in their "most natural" unit.  For example,
+ * 100000 bytes will print as 97.656 KiB.
+ *
+ * @param val
+ * The memory size (in bytes) to be printed in its natural unit.
+ *
+ * @note
+ * Outputs are in IEC (as opposed to SI) prefix.
+ *
+ * @return
+ * Returns MEMINFO_OK.
+ */
+int meminfo_putval(memsize_t val)
 {
   double dval = (double) val;
   double tmp;
