@@ -6,7 +6,17 @@
 #include <stdint.h>
 #include "meminfo.h"
 
-
+/**
+ * @file
+ * @brief 
+ * Gets PID
+ *
+ * @details
+ * Gets the PID of the current process.
+ *
+ * @return
+ * The PID.
+ */
 uint32_t meminfo_getpid()
 {
   #if OS_WINDOWS
