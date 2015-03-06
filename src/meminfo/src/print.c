@@ -28,6 +28,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include "meminfo.h"
 
 
 #define SCALE 1024

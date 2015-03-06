@@ -9,12 +9,13 @@ ifeq ($(OS),Windows_NT)
 endif
 
 
-OBJECTS = cacheinfo.c fileinfo.c platform.c print.c procinfo.c raminfo.c swapinfo.c sysinfo.c
+OBJECTS = src/cacheinfo.c src/fileinfo.c src/platform.c src/print.c \
+					src/procinfo.c src/raminfo.c src/swapinfo.c src/sysinfo.c
 
 all: meminfo shared static
 
 meminfo:
-	$(CC) $(CFLAGS) $(OBJECTS) main.c -o meminfo $(LDFLAGS)
+	$(CC) $(CFLAGS) $(OBJECTS) src/main.c -o meminfo $(LDFLAGS)
 
 shared:
 	$(CC) -c $(CFLAGS) -fPIC $(OBJECTS) $(LDFLAGS)
@@ -25,8 +26,8 @@ static:
 	ar rcs libmeminfo.a *.o
 
 clean:
-	rm -f *.o
-	rm -f meminfo
+	rm -f *.o src/*.o
 	rm -f *.a
 	rm -f *.so
+	rm -f meminfo
 
