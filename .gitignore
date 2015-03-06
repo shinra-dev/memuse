@@ -15,3 +15,5 @@ src/meminfo/libmeminfo.a
 *.blg
 *.out
 *.toc
+
+src/meminfo/docs
