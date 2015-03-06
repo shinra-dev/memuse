@@ -3,6 +3,7 @@
  * that can be found in the LICENSE file. */
 
 
+#include <stdio.h>
 #include "meminfo.h"
 #include "platform.h"
 
@@ -14,17 +15,15 @@
 int meminfo_totalram(memsize_t *totalram)
 {
   int ret;
-  
   *totalram = 0L;
   
   
   #if OS_LINUX
   struct sysinfo info;
   ret = sysinfo(&info);
-  
   chkret(ret, FAILURE);
   
-  *totalram = info.totalram * info.mem_unit;
+  *totalram = (memsize_t) info.totalram * info.mem_unit;
   #elif OS_MAC
   ret = sysctl_val("hw.memsize", totalram);
   chkret(ret, FAILURE);
@@ -33,17 +32,13 @@ int meminfo_totalram(memsize_t *totalram)
   status.dwLength = sizeof(status);
   
   ret = GlobalMemoryStatusEx(&status);
+  winchkret(ret, FAILURE);
   
-  if (ret == 0)
-    return FAILURE;
-  
-  *totalram = status.ullTotalPhys;
+  *totalram = (memsize_t) status.ullTotalPhys;
   #elif OS_FREEBSD
   ret = sysconf(_SC_PAGESIZE);
-  if (ret == FAILURE)
-    return FAILURE;
+  chkret(ret, FAILURE);
   
-  *totalram = 0;
   ret = sysctl_val("hw.physmem", totalram);
   chkret(ret, FAILURE);
   #elif OS_NIX
@@ -57,7 +52,7 @@ int meminfo_totalram(memsize_t *totalram)
   if (pagesize == FAILURE)
     return FAILURE;
   
-  *totalram = npages * pagesize;
+  *totalram = (memsize_t) npages * pagesize;
   #else
   return PLATFORM_ERROR;
   #endif
@@ -70,17 +65,15 @@ int meminfo_totalram(memsize_t *totalram)
 int meminfo_freeram(memsize_t *freeram)
 {
   int ret;
-  
   *freeram = 0L;
   
   
   #if OS_LINUX
   struct sysinfo info;
   ret = sysinfo(&info);
-  
   chkret(ret, FAILURE);
   
-  *freeram = info.freeram * info.mem_unit;
+  *freeram = (memsize_t) info.freeram * info.mem_unit;
   #elif OS_MAC
   vm_size_t page_size;
   mach_port_t mach_port;
@@ -106,14 +99,12 @@ int meminfo_freeram(memsize_t *freeram)
   ret = GlobalMemoryStatusEx(&status);
   winchkret(ret, FAILURE);
   
-  *freeram = status.ullAvailPhys;
+  *freeram = (memsize_t) status.ullAvailPhys;
   #elif OS_FREEBSD
   int pagesize;
   ret = sysconf(_SC_PAGESIZE);
-  if (ret == FAILURE)
-    return FAILURE;
-  else
-    pagesize = ret;
+  chkret(ret, FAILURE);
+  pagesize = ret;
   
   ret = sysctl_val("vm.stats.vm.v_free_count", freeram);
   chkret(ret, FAILURE);
@@ -122,11 +113,11 @@ int meminfo_freeram(memsize_t *freeram)
   #elif OS_NIX
   memsize_t pagesize, freepages;
   
-  pagesize = sysconf(_SC_PAGESIZE);
+  pagesize = (memsize_t) sysconf(_SC_PAGESIZE);
   if (pagesize == FAILURE)
     return FAILURE;
   
-  freepages = sysconf(_SC_AVPHYS_PAGES);
+  freepages = (memsize_t) sysconf(_SC_AVPHYS_PAGES);
   if (freepages == FAILURE)
     return FAILURE;
   
@@ -139,14 +130,13 @@ int meminfo_freeram(memsize_t *freeram)
 }
 
 
-#include <stdio.h>
+
 int meminfo_bufferram(memsize_t *bufferram)
 {
+  int ret;
   *bufferram = 0L;
   
   #if OS_LINUX
-  int ret;
-  
   struct sysinfo info;
   ret = sysinfo(&info);
   
@@ -154,10 +144,9 @@ int meminfo_bufferram(memsize_t *bufferram)
   
   *bufferram = info.bufferram * info.mem_unit;
   #elif OS_FREEBSD
-  int ret;
-  memsize_t v=0;
+  memsize_t v = 0L;
   
-  ret = sysctl_val("vfs.bufspace",&v);
+  ret = sysctl_val("vfs.bufspace", &v);
   
   chkret(ret, FAILURE);
   *bufferram = v;
@@ -172,28 +161,26 @@ int meminfo_bufferram(memsize_t *bufferram)
 
 int meminfo_cachedram(memsize_t *cachedram)
 {
+  int ret;
   *cachedram = 0L;
   
   
   #if OS_LINUX
-  int ret;
-  
   ret = read_proc_file("/proc/meminfo", cachedram, "Cached:", 7);
-  
   chkret(ret, FAILURE);
+  
   *cachedram *= 1024L;
   #elif OS_FREEBSD
-  int ret,page;
+  int page;
   memsize_t v=0;
   
   page = sysconf(_SC_PAGESIZE);
-  if (page == FAILURE)
-    return FAILURE;
+  chkret(page, FAILURE);
   
   ret = sysctl_val("vm.stats.vm.v_cache_count",&v);
-  
   chkret(ret, FAILURE);
-  *cachedram = v*page;
+  
+  *cachedram = (memsize_t) v*page;
   #else
   return PLATFORM_ERROR;
   #endif

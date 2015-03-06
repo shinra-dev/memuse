@@ -33,7 +33,7 @@ int meminfo_filesize(memsize_t *filesize, const char *filename)
   CloseHandle(fp);
   winchkret(ret, FAILURE);
   
-  *filesize = size.QuadPart;
+  *filesize = (memsize_t) size.QuadPart;
   #else
   return PLATFORM_ERROR;
   #endif

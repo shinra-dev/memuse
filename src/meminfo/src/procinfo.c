@@ -24,13 +24,13 @@ int meminfo_process_size(memsize_t *size)
   PROCESS_MEMORY_COUNTERS pmc;
   
   GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
-  *size = (memsize_t)pmc.WorkingSetSize;
+  *size = (memsize_t) pmc.WorkingSetSize;
   #elif OS_MAC
   struct task_basic_info info;
   mach_msg_type_number_t info_count = TASK_BASIC_INFO_COUNT;
   
   ret = task_info(mach_task_self(), TASK_BASIC_INFO, (task_info_t)&info, &info_count);
-  *size = info.resident_size;
+  *size = (memsize_t) info.resident_size;
   #else
   return PLATFORM_ERROR;
   #endif
@@ -52,7 +52,7 @@ int meminfo_process_peak(memsize_t *peak)
   PROCESS_MEMORY_COUNTERS pmc;
   
   GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
-  *peak = (memsize_t)pmc.PeakWorkingSetSize;
+  *peak = (memsize_t) pmc.PeakWorkingSetSize;
   #else
   return PLATFORM_ERROR;
   #endif

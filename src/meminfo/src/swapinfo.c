@@ -13,42 +13,34 @@
 
 int meminfo_totalswap(memsize_t *totalswap)
 {
+  int ret;
   *totalswap = 0L;
   
   
   #if OS_LINUX
-  int ret;
   struct sysinfo info;
   ret = sysinfo(&info);
   
   chkret(ret, FAILURE);
   
-  *totalswap = info.totalswap * info.mem_unit;
+  *totalswap = (memsize_t) info.totalswap * info.mem_unit;
   #elif OS_MAC
   struct xsw_usage vmusage = {0};
   size_t size = sizeof(vmusage);
   sysctlbyname("vm.swapusage", &vmusage, &size, NULL, 0);
-  *totalswap = vmusage.xsu_total;
+  *totalswap = (memsize_t) vmusage.xsu_total;
   #elif OS_WINDOWS
-  int ret;
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
   
-  // "If the function succeeds, the return value is nonzero."
-  // Go fuck yourself, Windows.
   ret = GlobalMemoryStatusEx(&status);
+  winchkret(ret, FAILURE);
   
-  if (ret == 0)
-    return FAILURE;
-  
-  *totalswap = status.ullTotalPageFile;
+  *totalswap = (memsize_t) status.ullTotalPageFile;
   #elif OS_FREEBSD
-  int ret;
   ret = sysconf(_SC_PAGESIZE);
-  if (ret == FAILURE)
-    return FAILURE;
+  chkret(ret, FAILURE);
   
-  *totalswap = 0;
   ret = sysctl_val("vm.swap_total", totalswap);
   chkret(ret, FAILURE);
   #else
@@ -86,10 +78,9 @@ int meminfo_freeswap(memsize_t *freeswap)
   int mib[16];
   int i,n;
   int page=getpagesize();
-  memsize_t used=0;
+  memsize_t used = 0L;
   
-  *freeswap=0;
-  mibsize=sizeof(mib)/sizeof(mib[0]);
+  mibsize = sizeof(mib)/sizeof(mib[0]);
   if(sysctl_mib("vm.swap_info",mib,&mibsize)==-1)
     return FAILURE;
   
@@ -111,14 +102,10 @@ int meminfo_freeswap(memsize_t *freeswap)
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
   
-  // "If the function succeeds, the return value is nonzero."
-  // Go fuck yourself, Windows.
   ret = GlobalMemoryStatusEx(&status);
+  winchkret(ret, FAILURE);
   
-  if (ret == 0)
-    return FAILURE;
-  
-  *freeswap = status.ullAvailPageFile;
+  *freeswap = (memsize_t) status.ullAvailPageFile;
   #else
   return PLATFORM_ERROR;
   #endif

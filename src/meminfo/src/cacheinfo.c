@@ -15,27 +15,28 @@
 
 int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
 {
-  *totalcache = 0;
+  *totalcache = 0L;
+  cachesize_t cache_size = 0L;
   if (level > 3 || level < 0) return CACHE_ERROR;
   
   #if OS_LINUX
   int ret = MEMINFO_OK;
   
-  // TODO don't use ret here...
   if (level == 0)
-    ret = sysconf(_SC_LEVEL1_ICACHE_SIZE);
+    cache_size = (cachesize_t) sysconf(_SC_LEVEL1_ICACHE_SIZE);
   else if (level == 1)
-    ret = sysconf(_SC_LEVEL1_DCACHE_SIZE);
+    cache_size = (cachesize_t) sysconf(_SC_LEVEL1_DCACHE_SIZE);
   else if (level == 2)
-    ret = sysconf(_SC_LEVEL2_CACHE_SIZE);
+    cache_size = (cachesize_t) sysconf(_SC_LEVEL2_CACHE_SIZE);
   else if (level == 3)
-    ret = sysconf(_SC_LEVEL3_CACHE_SIZE);
+    cache_size = (cachesize_t) sysconf(_SC_LEVEL3_CACHE_SIZE);
   
-  *totalcache = ret;
+  if (cache_size == 0) return FAILURE;
+  
+  *totalcache = cache_size;
   #elif OS_MAC
   int ret = MEMINFO_OK;
   
-  uint64_t cache_size = 0;
   size_t size = sizeof(cache_size);
   
   if (level == 0)
@@ -49,10 +50,9 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
   
   chkret(ret, CACHE_ERROR);
   
-  if (cache_size == 0)
-    return FAILURE;
+  if (cache_size == 0) return FAILURE;
   
-  *totalcache = (cachesize_t) cache_size;
+  *totalcache = cache_size;
   #elif OS_WINDOWS
   int i, winlevel;
   BOOL winret;
@@ -89,7 +89,7 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
   {
     if (slpi[i].Relationship == RelationCache && slpi[i].Cache.Level == winlevel)
     {
-      *totalcache = slpi[i].Cache.Size;
+      *totalcache = (cachesize_t) slpi[i].Cache.Size;
       return MEMINFO_OK;
     }
   }
@@ -111,34 +111,29 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
 
 int meminfo_cachelinesize(cachesize_t *linesize)
 {
-  *linesize = 0;
-  
+  *linesize = 0L;
+  cachesize_t cache_size = 0L;
   
   #if OS_LINUX
   int ret;
   
-  ret = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
+  cache_size = (cachesize_t) sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
   
-  if (ret == 0)
-  {
-    *linesize = 0;
-    return FAILURE;
-  }
+  if (cache_size == 0) return FAILURE;
   
-  *linesize = (uint16_t) ret;
+  *linesize = cache_size;
   #elif OS_MAC
   int ret;
-  uint64_t cache_size = 0;
   size_t size = sizeof(cache_size);
   
   ret = sysctlbyname("hw.cachelinesize", &cache_size, &size, 0, 0);
   
-  chkret(ret);
-
+  chkret(ret, FAILURE);
+  
   if (cache_size == 0)
     return FAILURE;
   
-  *linesize = (cachesize_t) cache_size;
+  *linesize = cache_size;
   #elif OS_WINDOWS
   int i;
   BOOL winret;
@@ -158,7 +153,7 @@ int meminfo_cachelinesize(cachesize_t *linesize)
   {
     if (slpi[i].Relationship == RelationCache && slpi[i].Cache.Level == 1)
     {
-      *linesize = slpi[i].Cache.LineSize;
+      *linesize = (cachesize_t) slpi[i].Cache.LineSize;
       return MEMINFO_OK;
     }
   }
