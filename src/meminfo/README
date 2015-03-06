@@ -15,16 +15,16 @@
 What is this?
 ====================================================================
 This program/library is a platform independent solution for getting
-some basic hardware information about ram, swap, and cache.  This is
-essentially just a collection of a bunch of man page info cobbled
-together.
+some basic hardware information about ram, swap, and cache.  
+Increasingly, the library also has platform independent time lookup
+mechanisms, such as system uptime or process runtime. 
 
-The primary goals of this library are to be light, simple, and 
-portable.
+The primary goals of this library are to be light, simple, portable,
+and modular.
 
 
 
-What are the requirements?
+Requirements
 ====================================================================
 You will need clang, or to change line 1 of the Makefile to CC=gcc
 or whatever if you're some kind of plebian.  On Windows, I'm assuming
@@ -32,15 +32,15 @@ you have mingw.  All os's need GNU Make because of Windows nonesense.
 
 
 
-How do I install it?
+Installation
 ====================================================================
 make
 
 
 
-How do I use it?
+Usage
 ====================================================================
-Include meminfo.h.  Each function returns an int, one of MEMUSE_OK, 
+Include meminfo.h.  Each function returns an int, one of MEMINFO_OK, 
 FAILURE, or PLATFORM_ERROR.  The desired value is passed by reference, 
 and the "returned" value is always in bytes.  See main.c for 
 example usage.
