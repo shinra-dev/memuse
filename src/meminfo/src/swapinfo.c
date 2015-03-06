@@ -21,7 +21,7 @@ int meminfo_totalswap(memsize_t *totalswap)
   struct sysinfo info;
   ret = sysinfo(&info);
   
-  chkret(ret);
+  chkret(ret, FAILURE);
   
   *totalswap = info.totalswap * info.mem_unit;
   #elif OS_MAC
@@ -50,7 +50,7 @@ int meminfo_totalswap(memsize_t *totalswap)
   
   *totalswap = 0;
   ret = sysctl_val("vm.swap_total", totalswap);
-  chkret(ret);
+  chkret(ret, FAILURE);
   #else
   return PLATFORM_ERROR;
   #endif
@@ -71,7 +71,7 @@ int meminfo_freeswap(memsize_t *freeswap)
   struct sysinfo info;
   ret = sysinfo(&info);
   
-  chkret(ret);
+  chkret(ret, FAILURE);
   
   *freeswap = info.freeswap * info.mem_unit;
   #elif OS_MAC
@@ -139,7 +139,7 @@ int meminfo_cachedswap(memsize_t *cachedswap)
   
   ret = read_proc_file("/proc/meminfo", cachedswap, "SwapCached:", 11);
   
-  chkret(ret);
+  chkret(ret, FAILURE);
   *cachedswap *= 1024L;
   #else
   return PLATFORM_ERROR;

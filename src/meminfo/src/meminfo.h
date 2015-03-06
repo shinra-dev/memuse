@@ -11,16 +11,17 @@
 #include "platform.h"
 
 
-#define chkret(ret) if(ret)return(ret)
+#define chkret(ret,val) if(ret)return(val)
 #if OS_WINDOWS
 // Windows.h functions return non-zero if successful IN SPITEFUL DEFIANCE OF THE FUCKING C STANDARD
-#define winchkret(ret) if(!ret)return(ret)
+#define winchkret(ret,val) if(!ret)return(val)
 #endif
 
 #define MEMINFO_OK       0
-#define FAILURE         -1
-#define FILE_ERROR      -2
-#define PLATFORM_ERROR  -10
+#define FAILURE         -1   // internal error
+#define FILE_ERROR      -2   // bad file
+#define CACHE_ERROR     -3   // impossible cache value
+#define PLATFORM_ERROR  -10  // platform not supported
 
 
 typedef uint64_t memsize_t;

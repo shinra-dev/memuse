@@ -19,7 +19,7 @@ int meminfo_filesize(memsize_t *filesize, const char *filename)
   #if OS_NIX
   struct stat sb;
   ret = stat(filename, &sb);
-  if (ret) return BAD_FILE;
+  chkret(ret, FILE_ERROR);
   
   *filesize = (memsize_t) sb.st_size;
   #elif OS_WINDOWS
@@ -27,11 +27,11 @@ int meminfo_filesize(memsize_t *filesize, const char *filename)
   HANDLE fp = CreateFile(filename, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
   
   if (fp == INVALID_HANDLE_VALUE)
-    return BAD_FILE;
+    return FILE_ERROR;
   
   ret = GetFileSizeEx(fp, &size)
   CloseHandle(fp);
-  winchkret(ret);
+  winchkret(ret, FAILURE);
   
   *filesize = size.QuadPart;
   #else

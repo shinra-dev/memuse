@@ -17,7 +17,7 @@ int meminfo_system_uptime(runtime_t *uptime)
   struct sysinfo info;
   ret = sysinfo(&info);
   
-  chkret(ret);
+  chkret(ret, FAILURE);
   
   *uptime = (runtime_t) info.uptime;
   #elif OS_WINDOWS
@@ -37,7 +37,7 @@ int meminfo_system_uptime(runtime_t *uptime)
   size_t size = sizeof(tv);
   
   ret = sysctlbyname("kern.boottime", &tv, &size, NULL, 0);
-  chkret(ret);
+  chkret(ret, FAILURE);
   startdate = tv.tv_sec;
   
   time(&nowdate);

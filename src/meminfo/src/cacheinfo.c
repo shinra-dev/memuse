@@ -16,11 +16,12 @@
 int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
 {
   *totalcache = 0;
-  
+  if (level > 3 || level < 0) return CACHE_ERROR;
   
   #if OS_LINUX
   int ret = MEMINFO_OK;
   
+  // TODO don't use ret here...
   if (level == 0)
     ret = sysconf(_SC_LEVEL1_ICACHE_SIZE);
   else if (level == 1)
@@ -29,12 +30,6 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
     ret = sysconf(_SC_LEVEL2_CACHE_SIZE);
   else if (level == 3)
     ret = sysconf(_SC_LEVEL3_CACHE_SIZE);
-  
-  if (ret == 0)
-  {
-    *totalcache = 0;
-    return FAILURE;
-  }
   
   *totalcache = ret;
   #elif OS_MAC
@@ -51,10 +46,8 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
     ret = sysctlbyname("hw.l2cachesize", &cache_size, &size, NULL, 0);
   else if (level == 3)
     ret = sysctlbyname("hw.l3cachesize", &cache_size, &size, NULL, 0);
-  else
-    return FAILURE;
   
-  chkret(ret);
+  chkret(ret, CACHE_ERROR);
   
   if (cache_size == 0)
     return FAILURE;
@@ -140,7 +133,7 @@ int meminfo_cachelinesize(cachesize_t *linesize)
   
   ret = sysctlbyname("hw.cachelinesize", &cache_size, &size, 0, 0);
   
-  chkret(ret);  
+  chkret(ret);
 
   if (cache_size == 0)
     return FAILURE;

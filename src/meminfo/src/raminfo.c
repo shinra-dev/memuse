@@ -22,12 +22,12 @@ int meminfo_totalram(memsize_t *totalram)
   struct sysinfo info;
   ret = sysinfo(&info);
   
-  chkret(ret);
+  chkret(ret, FAILURE);
   
   *totalram = info.totalram * info.mem_unit;
   #elif OS_MAC
   ret = sysctl_val("hw.memsize", totalram);
-  chkret(ret);
+  chkret(ret, FAILURE);
   #elif OS_WINDOWS
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
@@ -45,7 +45,7 @@ int meminfo_totalram(memsize_t *totalram)
   
   *totalram = 0;
   ret = sysctl_val("hw.physmem", totalram);
-  chkret(ret);
+  chkret(ret, FAILURE);
   #elif OS_NIX
   memsize_t npages, pagesize;
   
@@ -78,7 +78,7 @@ int meminfo_freeram(memsize_t *freeram)
   struct sysinfo info;
   ret = sysinfo(&info);
   
-  chkret(ret);
+  chkret(ret, FAILURE);
   
   *freeram = info.freeram * info.mem_unit;
   #elif OS_MAC
@@ -103,12 +103,8 @@ int meminfo_freeram(memsize_t *freeram)
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
   
-  // "If the function succeeds, the return value is nonzero."
-  // Go fuck yourself, Windows.
   ret = GlobalMemoryStatusEx(&status);
-  
-  if (ret == 0)
-    return FAILURE;
+  winchkret(ret, FAILURE);
   
   *freeram = status.ullAvailPhys;
   #elif OS_FREEBSD
@@ -120,7 +116,7 @@ int meminfo_freeram(memsize_t *freeram)
     pagesize = ret;
   
   ret = sysctl_val("vm.stats.vm.v_free_count", freeram);
-  chkret(ret);
+  chkret(ret, FAILURE);
   
   *freeram *= (memsize_t) pagesize;
   #elif OS_NIX
@@ -154,7 +150,7 @@ int meminfo_bufferram(memsize_t *bufferram)
   struct sysinfo info;
   ret = sysinfo(&info);
   
-  chkret(ret);
+  chkret(ret, FAILURE);
   
   *bufferram = info.bufferram * info.mem_unit;
   #elif OS_FREEBSD
@@ -163,7 +159,7 @@ int meminfo_bufferram(memsize_t *bufferram)
   
   ret = sysctl_val("vfs.bufspace",&v);
   
-  chkret(ret);
+  chkret(ret, FAILURE);
   *bufferram = v;
   #else
   return PLATFORM_ERROR;
@@ -184,7 +180,7 @@ int meminfo_cachedram(memsize_t *cachedram)
   
   ret = read_proc_file("/proc/meminfo", cachedram, "Cached:", 7);
   
-  chkret(ret);
+  chkret(ret, FAILURE);
   *cachedram *= 1024L;
   #elif OS_FREEBSD
   int ret,page;
@@ -196,7 +192,7 @@ int meminfo_cachedram(memsize_t *cachedram)
   
   ret = sysctl_val("vm.stats.vm.v_cache_count",&v);
   
-  chkret(ret);
+  chkret(ret, FAILURE);
   *cachedram = v*page;
   #else
   return PLATFORM_ERROR;

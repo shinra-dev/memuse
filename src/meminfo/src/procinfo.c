@@ -76,9 +76,9 @@ int meminfo_process_utiltime(runtime_t *usr, runtime_t *sys)
   
   #if OS_LINUX
   ret = read_proc_self_stat(usr, 14);
-  chkret(ret);
+  chkret(ret, FAILURE);
   ret = read_proc_self_stat(sys, 15);
-  chkret(ret);
+  chkret(ret, FAILURE);
   
   *usr = (runtime_t) *usr / sysconf(_SC_CLK_TCK);
   *sys = (runtime_t) *sys / sysconf(_SC_CLK_TCK);
@@ -93,7 +93,7 @@ int meminfo_process_utiltime(runtime_t *usr, runtime_t *sys)
   #elif OS_WINDOWS
   FILETIME create_ft, exit_ft, sys_ft, cpu_ft;
   ret = GetProcessTimes(GetCurrentProcess(), &create_ft, &exit_ft, &sys_ft, &cpu_ft); 
-  winchkret(ret);
+  winchkret(ret, FAILURE);
   
   ULARGE_INTEGER sys_uli, usr_uli;
   FILETIMEtoULI(&cpu_ft, &usr_uli);
@@ -122,17 +122,17 @@ int meminfo_process_runtime(runtime_t *runtime)
   // process runtime = system uptime - (time after boot process started in jiffies / clock ticks per cycle (HZ))
   runtime_t sys_uptime, proc_start_time;
   ret = meminfo_system_uptime(&sys_uptime);
-  chkret(ret);
+  chkret(ret, FAILURE);
   
   ret = read_proc_self_stat(&proc_start_time, 22);
-  chkret(ret);
+  chkret(ret, FAILURE);
   
   *runtime = (runtime_t) sys_uptime - (proc_start_time / sysconf(_SC_CLK_TCK));
   #elif OS_WINDOWS
   // https://msdn.microsoft.com/en-us/library/windows/desktop/ms683223%28v=vs.85%29.aspx
   FILETIME create_ft, exit_ft, sys_ft, cpu_ft;
   ret = GetProcessTimes(GetCurrentProcess(), &create_ft, &exit_ft, &sys_ft, &cpu_ft); 
-  winchkret(ret);
+  winchkret(ret, FAILURE);
   
   FILETIME nowtime_ft;
   GetSystemTimeAsFileTime(&nowtime_ft);
