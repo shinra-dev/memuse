@@ -32,7 +32,7 @@ static const char *meminfo_names[] =
  * @return
  * Returns MEMINFO_OK.
  */
-int meminfo_putval(memsize_t val)
+int meminfo_print_memval(memsize_t val)
 {
   double dval = (double) val;
   double tmp;

@@ -19,7 +19,7 @@
   else if(ret==PLATFORM_ERROR) \
   printf("Operating system is not supported"); \
   else \
-  meminfo_putval(val);\
+  meminfo_print_memval(val);\
   putchar('\n')
 
 #define BLANKS printf("\n\n")

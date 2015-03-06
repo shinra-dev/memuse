@@ -54,7 +54,7 @@ int sysctl_val(char *name, uint64_t *val);
 #endif
 
 // print.c
-int meminfo_putval(memsize_t val);
+int meminfo_print_memval(memsize_t val);
 
 // procinfo.c
 int meminfo_process_size(memsize_t *size);
