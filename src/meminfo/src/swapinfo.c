@@ -141,7 +141,24 @@ int meminfo_freeswap(memsize_t *freeswap)
 
 
 
-
+/**
+ * @file
+ * @brief 
+ * Cached Swap
+ *
+ * @details
+ * TODO I forgot what this does ;_;
+ *
+ * @param totalswap
+ * Output, passed by reference.  On successful return, the value
+ * is set to the amount of cached swap (in bytes) on the system.
+ *
+ * @note
+ * Only available on Linux.
+ *
+ * @return
+ * The return value indicates the status of the function.
+ */
 int meminfo_cachedswap(memsize_t *cachedswap)
 {
   *cachedswap = 0L;
