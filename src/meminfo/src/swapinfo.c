@@ -7,10 +7,21 @@
 #include "platform.h"
 
 
-/*
- *           Swap
+/**
+ * @file
+ * @brief 
+ * Total Swap
+ *
+ * @details
+ * This function looks up up the total swap in bytes.
+ *
+ * @param totalswap
+ * Output, passed by reference.  On successful return, the value
+ * is set to the total swap (in bytes) available on the system.
+ *
+ * @return
+ * The return value indicates the status of the function.
  */
-
 int meminfo_totalswap(memsize_t *totalswap)
 {
   int ret;
