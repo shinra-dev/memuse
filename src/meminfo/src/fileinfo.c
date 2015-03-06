@@ -7,6 +7,7 @@
 #include "platform.h"
 
 #if OS_NIX
+#include <limits.h>
 #include <sys/stat.h>
 #elif OS_WINDOWS
 #include <FileAPI.h>
@@ -35,13 +36,24 @@
 int meminfo_filesize(memsize_t *filesize, const char *filename)
 {
   int ret = MEMINFO_OK;
+  
+  
   #if OS_NIX
+  char *resolved_path[PATH_MAX];
+  char *rpret;
+  
+  rpret = realpath(filename, resolved_path);
+  if (rpret == NULL)
+    return FILE_ERROR;
+  
   struct stat sb;
-  ret = stat(filename, &sb);
+  ret = stat(resolved_path, &sb);
   chkret(ret, FILE_ERROR);
   
   *filesize = (memsize_t) sb.st_size;
   #elif OS_WINDOWS
+  // TODO GetFullPathName
+  
   LARGE_INTEGER size;
   HANDLE fp = CreateFile(filename, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
   
