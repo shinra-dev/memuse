@@ -6,7 +6,27 @@
 #include "platform.h"
 #include "meminfo.h"
 
-
+/**
+ * @file
+ * @brief 
+ * System Uptime
+ *
+ * @details
+ * This function looks up up the number of seconds since system boot.
+ *
+ * @param uptime
+ * Input passed by reference.  On successful return, the value
+ * is set to the number of seconds since boot of the system.
+ *
+ * @note
+ * On 32-bit Windows platforms, the maximum possible uptime to
+ * be reported is 49.7 days.  If your Windows install has gone
+ * more than 50 days without a reboot, you're a fucking wizard
+ * and don't need this function anyway.
+ *
+ * @return
+ * The return value indicates the status of the function.
+ */
 int meminfo_system_uptime(runtime_t *uptime)
 {
   int ret = MEMINFO_OK;
@@ -21,7 +41,7 @@ int meminfo_system_uptime(runtime_t *uptime)
   
   *uptime = (runtime_t) info.uptime;
   #elif OS_WINDOWS
-  ULONGLONG tc; // miliseconds
+  ULONGLONG tc;
   
     #if defined(_WIN64)
     tc = GetTickCount64();
