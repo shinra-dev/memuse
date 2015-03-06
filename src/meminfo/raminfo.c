@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2014, Schmidt
+  Copyright (c) 2014-2015, Schmidt
   FreeBSD support improved by Heckendorf, 2014
   All rights reserved.
   
@@ -56,8 +56,6 @@ int meminfo_totalram(memsize_t *totalram)
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
   
-  // "If the function succeeds, the return value is nonzero."
-  // Go fuck yourself, Windows.
   ret = GlobalMemoryStatusEx(&status);
   
   if (ret == 0)
