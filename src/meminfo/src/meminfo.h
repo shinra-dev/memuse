@@ -33,6 +33,7 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level);
 int meminfo_cachelinesize(cachesize_t *totalcache);
 
 // fileinfo.c
+int meminfo_abspath(const char *relpath, char **abspath);
 int meminfo_filesize(memsize_t *filesize, const char *filename);
 
 // getpid.c
