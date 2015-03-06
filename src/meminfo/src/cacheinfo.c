@@ -11,8 +11,30 @@
  *           Cache sizes
  */ 
 
-// level=0 is level-1 instruction cache, level=1 is level-1 data cache
-
+/**
+ * @file
+ * @brief 
+ * Cache Size
+ *
+ * @details
+ * This function looks up the size of the requested cache level
+ * in bytes.  Levels may range from 0 to 3; level=0 is the level 1
+ * instruction cache, while level=1 is the level 1 data cache.
+ *
+ * @param totalcache
+ * Output, passed by reference.  On successful return, the value
+ * is set to the cache size (in bytes) of the requested level.
+ * @param level
+ * Input.  The desired cache level.
+ *
+ * @note
+ * Requesting a bad cache will result in the return of CACHE_ERROR.
+ * As usual, other internal failures will result in the return of
+ * FAILURE.
+ *
+ * @return
+ * The return value indicates the status of the function.
+ */
 int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
 {
   *totalcache = 0L;
@@ -109,6 +131,21 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
  *           Cache linesize
  */ 
 
+/**
+ * @file
+ * @brief 
+ * Cache Line Size
+ *
+ * @details
+ * This function looks up the cache line size in bytes.
+ *
+ * @param totalswap
+ * Output, passed by reference.  On successful return, the value
+ * is set to the cache line size (in bytes) for the system.
+ *
+ * @return
+ * The return value indicates the status of the function.
+ */
 int meminfo_cachelinesize(cachesize_t *linesize)
 {
   *linesize = 0L;
