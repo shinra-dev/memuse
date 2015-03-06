@@ -15,7 +15,7 @@
  * This function looks up up the number of seconds since system boot.
  *
  * @param uptime
- * Input passed by reference.  On successful return, the value
+ * Output, passed by reference.  On successful return, the value
  * is set to the number of seconds since boot of the system.
  *
  * @note
