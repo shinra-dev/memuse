@@ -18,7 +18,8 @@ int meminfo_filesize(memsize_t *filesize, const char *filename)
   int ret = MEMINFO_OK;
   #if OS_NIX
   struct stat sb;
-  stat(filename, &sb);
+  ret = stat(filename, &sb);
+  if (ret) return BAD_FILE;
   
   *filesize = (memsize_t) sb.st_size;
   #elif OS_WINDOWS
