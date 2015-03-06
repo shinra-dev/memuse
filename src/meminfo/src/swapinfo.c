@@ -13,7 +13,7 @@
  * Total Swap
  *
  * @details
- * This function looks up up the total swap in bytes.
+ * This function looks up the total swap in bytes.
  *
  * @param totalswap
  * Output, passed by reference.  On successful return, the value
@@ -63,6 +63,21 @@ int meminfo_totalswap(memsize_t *totalswap)
 
 
 
+/**
+ * @file
+ * @brief 
+ * Free Swap
+ *
+ * @details
+ * This function looks up the available swap in bytes.
+ *
+ * @param totalswap
+ * Output, passed by reference.  On successful return, the value
+ * is set to the free swap (in bytes) available on the system.
+ *
+ * @return
+ * The return value indicates the status of the function.
+ */
 int meminfo_freeswap(memsize_t *freeswap)
 {
   *freeswap = 0L;
