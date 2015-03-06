@@ -25,6 +25,9 @@ static:
 	$(CC) -c $(CFLAGS) $(OBJECTS) $(LDFLAGS)
 	ar rcs libmeminfo.a *.o
 
+documentation:
+	doxygen meminfo.conf
+
 clean:
 	rm -f *.o src/*.o
 	rm -f *.a
