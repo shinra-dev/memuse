@@ -12,7 +12,26 @@
 #include <FileAPI.h>
 #endif
 
-
+/**
+ * @file
+ * @brief 
+ * File Size
+ *
+ * @details
+ * This function looks up the size of a file in bytes.  It does so
+ * without scanning the file (just reports whatever the filesystem
+ * believes).
+ *
+ * @param filesize
+ * Output, passed by reference.  On successful return, the value
+ * is set to the file size (in bytes) of the file pointed to by
+ * 'filename'.
+ * @param filename
+ * Input.  The path to the file you want to inspect.
+ *
+ * @return
+ * The return value indicates the status of the function.
+ */
 int meminfo_filesize(memsize_t *filesize, const char *filename)
 {
   int ret = MEMINFO_OK;
