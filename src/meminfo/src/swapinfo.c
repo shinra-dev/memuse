@@ -19,6 +19,9 @@
  * Output, passed by reference.  On successful return, the value
  * is set to the total swap (in bytes) available on the system.
  *
+ * @note
+ * For Windows, s/swap/page/g.
+ *
  * @return
  * The return value indicates the status of the function.
  */
@@ -74,6 +77,9 @@ int meminfo_totalswap(memsize_t *totalswap)
  * @param totalswap
  * Output, passed by reference.  On successful return, the value
  * is set to the free swap (in bytes) available on the system.
+ *
+ * @note
+ * For Windows, s/swap/page/g.
  *
  * @return
  * The return value indicates the status of the function.
