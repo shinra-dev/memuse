@@ -11,6 +11,26 @@
  *           Mem sizes
  */
 
+/**
+ * @file
+ * @brief 
+ * Process Size
+ *
+ * @details
+ * This function looks up the amount of ram used by the current
+ * process in bytes.
+ *
+ * @param size
+ * Output, passed by reference.  On successful return, the value
+ * is set to the amount of ram used by the current process (in 
+ * bytes) available on the system.
+ *
+ * @notes
+ * TODO resident set size, etc.
+ *
+ * @return
+ * The return value indicates the status of the function.
+ */
 int meminfo_process_size(memsize_t *size)
 {
   int ret = MEMINFO_OK;
