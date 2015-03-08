@@ -8,10 +8,21 @@
 #include "platform.h"
 
 
-/*
- *           Ram
+/**
+ * @file
+ * @brief 
+ * Total Ram
+ *
+ * @details
+ * This function looks up the total ram in bytes.
+ *
+ * @param totalram
+ * Output, passed by reference.  On successful return, the value
+ * is set to the total ram (in bytes) available on the system.
+ *
+ * @return
+ * The return value indicates the status of the function.
  */
-
 int meminfo_totalram(memsize_t *totalram)
 {
   int ret;
@@ -62,6 +73,24 @@ int meminfo_totalram(memsize_t *totalram)
 
 
 
+/**
+ * @file
+ * @brief 
+ * Free Ram
+ *
+ * @details
+ * This function looks up the available ram in bytes.
+ *
+ * @param totalram
+ * Output, passed by reference.  On successful return, the value
+ * is set to the free ram (in bytes) available on the system.
+ *
+ * @note
+ * TODO explain "free"
+ *
+ * @return
+ * The return value indicates the status of the function.
+ */
 int meminfo_freeram(memsize_t *freeram)
 {
   int ret;
@@ -131,6 +160,21 @@ int meminfo_freeram(memsize_t *freeram)
 
 
 
+/**
+ * @file
+ * @brief 
+ * Buffer Ram
+ *
+ * @details
+ * This function looks up the amount of ram allocated for buffers in bytes.
+ *
+ * @param totalram
+ * Output, passed by reference.  On successful return, the value
+ * is set to the amount of ram used for buffers (in bytes) available on the system.
+ *
+ * @return
+ * The return value indicates the status of the function.
+ */
 int meminfo_bufferram(memsize_t *bufferram)
 {
   int ret;
@@ -159,6 +203,21 @@ int meminfo_bufferram(memsize_t *bufferram)
 
 
 
+/**
+ * @file
+ * @brief 
+ * Cached Ram
+ *
+ * @details
+ * This function looks up the amount of ram used for cache in bytes.
+ *
+ * @param totalram
+ * Output, passed by reference.  On successful return, the value
+ * is set to the amount of ram used for disk cache (in bytes) available on the system.
+ *
+ * @return
+ * The return value indicates the status of the function.
+ */
 int meminfo_cachedram(memsize_t *cachedram)
 {
   int ret;
