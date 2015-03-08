@@ -60,7 +60,8 @@ int meminfo_print_memval(memsize_t val);
 // procinfo.c
 int meminfo_process_size(memsize_t *size);
 int meminfo_process_peak(memsize_t *peak);
-int meminfo_process_utiltime(runtime_t *usr, runtime_t *sys);
+int meminfo_process_usrtime(runtime_t *usr);
+int meminfo_process_systime(runtime_t *sys);
 int meminfo_process_runtime(runtime_t *runtime);
 
 // raminfo.c
