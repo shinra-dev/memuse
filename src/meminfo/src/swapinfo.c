@@ -13,7 +13,7 @@
  * Total Swap
  *
  * @details
- * This function looks up the total swap in bytes.
+ * This function looks up the total swap (or pagefile on Windows) in bytes.
  *
  * @param totalswap
  * Output, passed by reference.  On successful return, the value
@@ -72,7 +72,7 @@ int meminfo_totalswap(memsize_t *totalswap)
  * Free Swap
  *
  * @details
- * This function looks up the available swap in bytes.
+ * This function looks up the available swap (or pagefile on Windows) in bytes.
  *
  * @param totalswap
  * Output, passed by reference.  On successful return, the value
