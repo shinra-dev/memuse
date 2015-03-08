@@ -219,6 +219,23 @@ int meminfo_process_systime(runtime_t *sys)
 
 
 
+/**
+ * @file
+ * @brief 
+ * Process Runtime
+ *
+ * @details
+ * This function looks up the 'real' (wallclock) runtime of the
+ * current process in seconds.
+ *
+ * @param usr
+ * Output, passed by reference.  On successful return, the value
+ * is set to the number of seconds the current process has been 
+ * in user mode.
+ *
+ * @return
+ * The return value indicates the status of the function.
+ */
 int meminfo_process_runtime(runtime_t *runtime)
 {
   int ret = MEMINFO_OK;
