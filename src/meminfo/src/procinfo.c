@@ -59,6 +59,24 @@ int meminfo_process_size(memsize_t *size)
 }
 
 
+
+/**
+ * @file
+ * @brief 
+ * Process Peak Size
+ *
+ * @details
+ * This function looks up the peak amount of ram used by the current
+ * process in bytes.
+ *
+ * @param size
+ * Output, passed by reference.  On successful return, the value
+ * is set to the maximum amount of ram used by the current process (in 
+ * bytes) available on the system.
+ *
+ * @return
+ * The return value indicates the status of the function.
+ */
 int meminfo_process_peak(memsize_t *peak)
 {
   int ret = MEMINFO_OK;
