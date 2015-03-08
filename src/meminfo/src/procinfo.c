@@ -105,21 +105,17 @@ int meminfo_process_peak(memsize_t *peak)
  */
 
 
-int meminfo_process_utiltime(runtime_t *usr, runtime_t *sys)
+int meminfo_process_usrtime(runtime_t *usr)
 {
   int ret = MEMINFO_OK;
   *usr = 0.;
-  *sys = 0.;
   
   
   #if OS_LINUX
   ret = read_proc_self_stat(usr, 14);
   chkret(ret, FAILURE);
-  ret = read_proc_self_stat(sys, 15);
-  chkret(ret, FAILURE);
   
   *usr = (runtime_t) *usr / sysconf(_SC_CLK_TCK);
-  *sys = (runtime_t) *sys / sysconf(_SC_CLK_TCK);
   #elif OS_MAC
   struct task_thread_times_info info;
   mach_msg_type_number_t info_count = TASK_BASIC_INFO_COUNT;
@@ -127,17 +123,52 @@ int meminfo_process_utiltime(runtime_t *usr, runtime_t *sys)
   ret = task_info(mach_task_self(), TASK_THREAD_TIMES_INFO, (task_info_t)&info, &info_count);
   
   *usr = (runtime_t) info.user_time; // time_value_t
+  #elif OS_WINDOWS
+  FILETIME create_ft, exit_ft, sys_ft, cpu_ft;
+  ret = GetProcessTimes(GetCurrentProcess(), &create_ft, &exit_ft, &sys_ft, &cpu_ft); 
+  winchkret(ret, FAILURE);
+  
+  ULARGE_INTEGER usr_uli;
+  FILETIMEtoULI(&cpu_ft, &usr_uli);
+  
+  *usr = (runtime_t) usr_uli.QuadPart * 1e-7;
+  
+  return MEMINFO_OK;
+  #else
+  return PLATFORM_ERROR;
+  #endif
+  
+  return ret;
+}
+
+
+
+int meminfo_process_systime(runtime_t *sys)
+{
+  int ret = MEMINFO_OK;
+  *sys = 0.;
+  
+  
+  #if OS_LINUX
+  ret = read_proc_self_stat(sys, 15);
+  chkret(ret, FAILURE);
+  
+  *sys = (runtime_t) *sys / sysconf(_SC_CLK_TCK);
+  #elif OS_MAC
+  struct task_thread_times_info info;
+  mach_msg_type_number_t info_count = TASK_BASIC_INFO_COUNT;
+  
+  ret = task_info(mach_task_self(), TASK_THREAD_TIMES_INFO, (task_info_t)&info, &info_count);
+  
   *sys = (runtime_t) info.system_time;
   #elif OS_WINDOWS
   FILETIME create_ft, exit_ft, sys_ft, cpu_ft;
   ret = GetProcessTimes(GetCurrentProcess(), &create_ft, &exit_ft, &sys_ft, &cpu_ft); 
   winchkret(ret, FAILURE);
   
-  ULARGE_INTEGER sys_uli, usr_uli;
-  FILETIMEtoULI(&cpu_ft, &usr_uli);
+  ULARGE_INTEGER sys_uli;
   FILETIMEtoULI(&sys_ft, &sys_uli);
   
-  *usr = (runtime_t) usr_uli.QuadPart * 1e-7;
   *sys = (runtime_t) sys_uli.QuadPart * 1e-7;
   
   return MEMINFO_OK;
