@@ -7,7 +7,8 @@ useDynLib("memuse",
   R_meminfo_cacheinfo_linesize,
   R_meminfo_filesize,
   R_meminfo_system_uptime,
-  R_meminfo_process_utiltime,
+  R_meminfo_process_usrtime,
+  R_meminfo_process_systime,
   R_meminfo_process_runtime
 )
 

@@ -213,26 +213,44 @@ SEXP R_meminfo_system_uptime()
 
 
 
-SEXP R_meminfo_process_utiltime()
+SEXP R_meminfo_process_usrtime()
 {
   R_INIT;
   int ret;
-  SEXP utiltime;
-  newRvec(utiltime, 2, "dbl");
+  SEXP usrtime;
+  newRvec(usrtime, 1, "dbl");
   
-  runtime_t usr, sys;
-  ret = meminfo_process_utiltime(&usr, &sys);
+  runtime_t usr;
+  ret = meminfo_process_usrtime(&usr);
   
   if (ret == MEMINFO_OK)
-  {
-    DBL(utiltime, 0) = (double) usr;
-    DBL(utiltime, 1) = (double) sys;
-  }
+    DBL(usrtime) = (double) usr;
   else
-    DBL(utiltime) = (double)ret;
+    DBL(usrtime) = (double) ret;
   
   R_END;
-  return utiltime;
+  return usrtime;
+}
+
+
+
+SEXP R_meminfo_process_systime()
+{
+  R_INIT;
+  int ret;
+  SEXP systime;
+  newRvec(systime, 1, "dbl");
+  
+  runtime_t sys;
+  ret = meminfo_process_systime(&sys);
+  
+  if (ret == MEMINFO_OK)
+    DBL(systime) = (double) sys;
+  else
+    DBL(systime) = (double) ret;
+  
+  R_END;
+  return systime;
 }
 
 

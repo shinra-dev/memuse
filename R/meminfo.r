@@ -184,16 +184,28 @@ Sys.uptime <- function()
 
 
 
-Sys.utiltime <- function()
+Sys.usrtime <- function()
 {
-  ret <- .Call(R_meminfo_process_utiltime)
+  ret <- .Call(R_meminfo_process_usrtime)
   
-  if (any(ret < 0))
+  if (ret < 0)
     stop("platform not supported at this time")
   
-  ret <- lapply(ret, function(i) capture.output(print(readable.time(i))))
-  names(ret) <- c("usr", "sys")
-  class(ret) <- "sysinfo"
+  ret <- readable.time(ret)
+  
+  return( ret )
+}
+
+
+
+Sys.systime <- function()
+{
+  ret <- .Call(R_meminfo_process_systime)
+  
+  if (ret < 0)
+    stop("platform not supported at this time")
+  
+  ret <- readable.time(ret)
   
   return( ret )
 }
@@ -216,15 +228,11 @@ Sys.runtime <- function()
 
 post.system.time <- function()
 {
-  usrsys <- .Call(R_meminfo_process_utiltime)
-  if (any(usrsys < 0))
-    stop("platform not supported at this time")
+  usr <- Sys.usrtime()
+  sys <- Sys.systime()
+  elapsed <- Sys.runtime()
   
-  elapsed <- .Call(R_meminfo_process_runtime)
-  if (elapsed < 0)
-    stop("platform not supported at this time")
-  
-  ret <- c(usrsys, elapsed)
+  ret <- c(usr, sys, elapsed)
   names(ret) <- c("user.self", "sys.self", "elapsed")
   class(ret) <- "proc_time"
   
