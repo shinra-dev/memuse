@@ -11,6 +11,7 @@
  *           Mem sizes
  */
 
+
 /**
  * @file
  * @brief 
@@ -105,6 +106,23 @@ int meminfo_process_peak(memsize_t *peak)
  */
 
 
+/**
+ * @file
+ * @brief 
+ * Process Utilization Time --- User
+ *
+ * @details
+ * This function looks up the user time of the current
+ * process in seconds.
+ *
+ * @param usr
+ * Output, passed by reference.  On successful return, the value
+ * is set to the number of seconds the current process has been 
+ * in user mode.
+ *
+ * @return
+ * The return value indicates the status of the function.
+ */
 int meminfo_process_usrtime(runtime_t *usr)
 {
   int ret = MEMINFO_OK;
@@ -143,6 +161,26 @@ int meminfo_process_usrtime(runtime_t *usr)
 
 
 
+/**
+ * @file
+ * @brief 
+ * Process Utilization Time --- System
+ *
+ * @details
+ * This function looks up the system time of the current
+ * process in seconds.
+ *
+ * @param sys
+ * Output, passed by reference.  On successful return, the value
+ * is set to the number of seconds the current process has been 
+ * in kernel mode.
+ *
+ * @notes
+ * TODO kernel mode, etc.
+ *
+ * @return
+ * The return value indicates the status of the function.
+ */
 int meminfo_process_systime(runtime_t *sys)
 {
   int ret = MEMINFO_OK;
