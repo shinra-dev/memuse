@@ -68,46 +68,84 @@
 #' 
 #' @name howmany
 #' @rdname howmany
-NULL
-
-#' @rdname howmany
-#' @export
-setMethod("howmany", signature(x="memuse"),
-  function(x, nrow, ncol, out.type="full", representation="dense", ..., sparsity=0.05, type="double", intsize=4, unit.names="short")
-  {
-    # Manage input arguments
-    out.type <- match.arg(arg=tolower(out.type), choices=c("full", "approximate"))
-    representation <- match.arg(tolower(representation), c("dense", "sparse"))
-    type <- match.arg(arg=tolower(type), choices=c("double", "integer"))
-    
-    bytes <- check_type(type=type, intsize=intsize)
-    
-    # Get the size
-    size <- convert_to_bytes(x)@size
-    
-    if (!missing(nrow)){
-      if (!is.int(nrow))
-        stop("argument 'nrow' must be an integer")
-      else if (!missing(ncol))
-        stop("you should supply at most one of 'nrow' and 'ncol'.  Perhaps you meant to use howbig()?")
-      else
-        ncol <- floor(size/(nrow*bytes))
-    }
-    else if (!missing(ncol)){
-      if (!is.int(ncol))
-        stop("argument 'ncol' must be an integer")
-      nrow <- floor(size/(ncol*bytes))
-    }
+howmay <- function(x, nrow, ncol, out.type="full", representation="dense", ..., sparsity=0.05, type="double", intsize=4, unit.names="short")
+{
+  if (class(x) != "memuse")
+    stop("input 'x' must be a memuse class object")
+  
+  # Manage input arguments
+  out.type <- match.arg(arg=tolower(out.type), choices=c("full", "approximate"))
+  representation <- match.arg(tolower(representation), c("dense", "sparse"))
+  type <- match.arg(arg=tolower(type), choices=c("double", "integer"))
+  
+  bytes <- check_type(type=type, intsize=intsize)
+  
+  # Get the size
+  size <- convert_to_bytes(x)@size
+  
+  if (!missing(nrow)){
+    if (!is.int(nrow))
+      stop("argument 'nrow' must be an integer")
+    else if (!missing(ncol))
+      stop("you should supply at most one of 'nrow' and 'ncol'.  Perhaps you meant to use howbig()?")
     else
-      nrow <- ncol <- floor(sqrt(size/bytes))
-    
-    # Return
-    ret <- c(nrow, ncol)
-    
-    if (out.type == "approximate")
-      ret <- approx.size(ret, unit.names=unit.names)
-    
-    return( ret )
+      ncol <- floor(size/(nrow*bytes))
   }
-)
+  else if (!missing(ncol)){
+    if (!is.int(ncol))
+      stop("argument 'ncol' must be an integer")
+    nrow <- floor(size/(ncol*bytes))
+  }
+  else
+    nrow <- ncol <- floor(sqrt(size/bytes))
+  
+  # Return
+  ret <- c(nrow, ncol)
+  
+  if (out.type == "approximate")
+    ret <- approx.size(ret, unit.names=unit.names)
+  
+  return( ret )
+}
 
+
+
+#' @param ICTXT
+#' BLACS ICTXT value.
+#' @param bldim
+#' Blocking dimension for 2d block-cyclic distribution.
+#' 
+#' @name howmany
+#' @rdname howmany
+howmany.par <- function(x, nrow, ncol, out.type="full", cores=1, par="row", ..., type="double", intsize=4, ICTXT=0, bldim=c(4, 4))
+{
+  if (class(x) != "memuse")
+    stop("input 'x' must be a memuse class object")
+  
+  out.type <- match.arg(arg=tolower(out.type), choices=c("full", "approximate"))
+  
+  # global
+  dim <- howmany(x=x, nrow=nrow, out.type="full", type=type, intsize=intsize)
+  
+  # local
+  par <- match.arg(tolower(par), c("row", "column", "dmat"))
+  if (par == "row") {
+    ldim <- c(floor(dim[1L]/cores), dim[2L])
+  }
+  else if (par == "column"){
+    ldim <- c(dim[1L], floor(dim[2L]/cores))
+  }
+  else if (par == "dmat") {
+    ldim <- numroc(nprocs=cores, dim=dim, bldim=bldim, ICTXT=ICTXT)
+  }
+  
+  # re-cast return as neededS
+  if (out.type == "approximate"){
+    dim <- approx.size(dim)
+    ldim <- approx.size(ldim)
+  }
+  
+  out <- list(global=dim, local=ldim)
+  
+  return( out )
+}
