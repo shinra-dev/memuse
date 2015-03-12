@@ -2,6 +2,42 @@
 # Addition
 # -------------------------------------------------
 
+#' Binary Arithmetic
+#' 
+#' Binary arithmetic operations for \code{memuse} objects.
+#' 
+#' Simple binary arithmetic for \code{memuse} objects.  Options include any
+#' combination of \code{memuse}, \code{object_size} (output from the
+#' \code{object.size()} function), and \code{numeric} objects.
+#' 
+#' 
+#' @param e1,e2
+#' \code{memuse}, \code{numeric}, or \code{object_size} objects.
+#' 
+#' @return Returns a \code{memuse} class object.
+#' 
+#' @seealso \code{ \link{Constructor}, \link{memuse-class} }
+#' 
+#' @keywords Methods
+#' 
+#' @examples
+#' \dontrun{
+#' x <- mu(200)
+#' y <- mu(100)
+#' 
+#' x+y
+#' x-y
+#' x*y
+#' x/y
+#' x^2
+#' }
+#' 
+#' @name Arithmetic
+#' @rdname arithmetic
+NULL
+
+#' @rdname arithmetic
+#' @export
 setMethod("+", signature(e1="memuse", e2="memuse"),
   function(e1, e2) 
   {
@@ -31,6 +67,9 @@ setMethod("+", signature(e1="memuse", e2="memuse"),
 )
 
 
+
+#' @rdname arithmetic
+#' @export
 setMethod("+", signature(e1="memuse", e2="numeric"),
   function(e1, e2) 
   {
@@ -48,6 +87,9 @@ setMethod("+", signature(e1="memuse", e2="numeric"),
 )
 
 
+
+#' @rdname arithmetic
+#' @export
 setMethod("+", signature(e1="numeric", e2="memuse"),
   function(e1, e2)
   {
@@ -59,7 +101,9 @@ setMethod("+", signature(e1="numeric", e2="memuse"),
 )
 
 
-# compatibility with object.size() returns
+
+#' @rdname arithmetic
+#' @export
 setMethod("+", signature(e1="memuse", e2="object_size"),
   function(e1, e2) 
   {
@@ -74,6 +118,9 @@ setMethod("+", signature(e1="memuse", e2="object_size"),
 )
 
 
+
+#' @rdname arithmetic
+#' @export
 setMethod("+", signature(e1="object_size", e2="memuse"),
   function(e1, e2)
     return( e2+e1 )
@@ -85,12 +132,18 @@ setMethod("+", signature(e1="object_size", e2="memuse"),
 # Subtraction
 # -------------------------------------------------
 
+
+#' @rdname arithmetic
+#' @export
 setMethod("-", signature(e1="memuse", e2="memuse"),
   function(e1, e2)
     return( e1+(-1*e2) )
 )
 
 
+
+#' @rdname arithmetic
+#' @export
 setMethod("-", signature(e1="memuse", e2="numeric"),
   function(e1, e2)
   {
@@ -102,6 +155,9 @@ setMethod("-", signature(e1="memuse", e2="numeric"),
 )
 
 
+
+#' @rdname arithmetic
+#' @export
 setMethod("-", signature(e1="numeric", e2="memuse"),
   function(e1, e2)
   {
@@ -113,13 +169,18 @@ setMethod("-", signature(e1="numeric", e2="memuse"),
 )
 
 
+
+#' @rdname arithmetic
+#' @export
 setMethod("-", signature(e1="memuse", e2="missing"),
   function(e1, e2)
     return( -1*e1 )
 )
 
 
-# compatibility with object.size() returns
+
+#' @rdname arithmetic
+#' @export
 setMethod("-", signature(e1="memuse", e2="object_size"),
   function(e1, e2) 
   {
@@ -134,6 +195,9 @@ setMethod("-", signature(e1="memuse", e2="object_size"),
 )
 
 
+
+#' @rdname arithmetic
+#' @export
 setMethod("-", signature(e1="object_size", e2="memuse"),
   function(e1, e2) 
   {
@@ -152,6 +216,8 @@ setMethod("-", signature(e1="object_size", e2="memuse"),
 # Multiplication
 # -------------------------------------------------
 
+#' @rdname arithmetic
+#' @export
 setMethod("*", signature(e1="memuse", e2="memuse"),
   function(e1, e2) 
   {
@@ -181,6 +247,9 @@ setMethod("*", signature(e1="memuse", e2="memuse"),
 )
 
 
+
+#' @rdname arithmetic
+#' @export
 setMethod("*", signature(e1="memuse", e2="numeric"),
   function(e1, e2) 
   {
@@ -198,6 +267,9 @@ setMethod("*", signature(e1="memuse", e2="numeric"),
 )
 
 
+
+#' @rdname arithmetic
+#' @export
 setMethod("*", signature(e1="numeric", e2="memuse"),
   function(e1, e2)
   {
@@ -210,7 +282,8 @@ setMethod("*", signature(e1="numeric", e2="memuse"),
 
 
 
-# compatibility with object.size() returns
+#' @rdname arithmetic
+#' @export
 setMethod("*", signature(e1="memuse", e2="object_size"),
   function(e1, e2) 
   {
@@ -225,6 +298,9 @@ setMethod("*", signature(e1="memuse", e2="object_size"),
 )
 
 
+
+#' @rdname arithmetic
+#' @export
 setMethod("*", signature(e1="object_size", e2="memuse"),
   function(e1, e2)
     return( e2*e1 )
@@ -237,6 +313,8 @@ setMethod("*", signature(e1="object_size", e2="memuse"),
 # Division
 # -------------------------------------------------
 
+#' @rdname arithmetic
+#' @export
 setMethod("/", signature(e1="memuse", e2="memuse"),
   function(e1, e2) 
   {
@@ -266,6 +344,9 @@ setMethod("/", signature(e1="memuse", e2="memuse"),
 )
 
 
+
+#' @rdname arithmetic
+#' @export
 setMethod("/", signature(e1="memuse", e2="numeric"),
   function(e1, e2) 
   {
@@ -283,6 +364,9 @@ setMethod("/", signature(e1="memuse", e2="numeric"),
 )
 
 
+
+#' @rdname arithmetic
+#' @export
 setMethod("/", signature(e1="numeric", e2="memuse"),
   function(e1, e2)
   {
@@ -294,7 +378,9 @@ setMethod("/", signature(e1="numeric", e2="memuse"),
 )
 
 
-# compatibility with object.size() returns
+
+#' @rdname arithmetic
+#' @export
 setMethod("/", signature(e1="memuse", e2="object_size"),
   function(e1, e2) 
   {
@@ -309,6 +395,9 @@ setMethod("/", signature(e1="memuse", e2="object_size"),
 )
 
 
+
+#' @rdname arithmetic
+#' @export
 setMethod("/", signature(e1="object_size", e2="memuse"),
   function(e1, e2) 
   {
@@ -328,6 +417,8 @@ setMethod("/", signature(e1="object_size", e2="memuse"),
 # Exponentiation
 # -------------------------------------------------
 
+#' @rdname arithmetic
+#' @export
 setMethod("^", signature(e1="memuse", e2="memuse"),
   function(e1, e2) 
   {
@@ -357,6 +448,9 @@ setMethod("^", signature(e1="memuse", e2="memuse"),
 )
 
 
+
+#' @rdname arithmetic
+#' @export
 setMethod("^", signature(e1="memuse", e2="numeric"),
   function(e1, e2) 
   {

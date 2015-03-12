@@ -1,4 +1,43 @@
-### print methods
+#' Printing
+#' 
+#' Print and show methods for \code{memuse} class objects.
+#' 
+#' 
+#' @name Print
+#' 
+#' @param x,object 
+#' \code{memuse} class object
+#' @param ... extra arguments
+#' @param unit 
+#' the unit to be used in printing; defaults to \code{x}'s unit
+#' @param unit.prefix 
+#' the unit prefix to be used in printing; defaults to
+#' \code{x}'s unit.prefix
+#' @param unit.names 
+#' the unit names (short or long) to be used in printing;
+#' defaults to \code{x}'s unit.names
+#' @param digits 
+#' the number of decimal digits to print; default is 3
+#' 
+#' @return Returns a string.
+#' 
+#' @seealso \code{\ link{Constructor} \link{memuse-class} }
+#' 
+#' @keywords Methods
+#' 
+#' @examples
+#' \dontrun{
+#' x <- mu(1e6)
+#' 
+#' print(x)
+#' x # same as show(x)
+#' }
+#' 
+#' @rdname print
+NULL
+
+#' @rdname print
+#' @export
 setMethod("print", signature(x="memuse"),
   function(x, ..., unit=x@unit, unit.prefix=x@unit.prefix, unit.names=x@unit.names, digits=3)
   {
@@ -22,23 +61,10 @@ setMethod("print", signature(x="memuse"),
   }
 )
 
-
-setMethod("print", signature(x="approx"),
-  function(x) 
-    cat(paste(paste(x, collapse=" "), "\n"))
-)
-
-
-
-### show methods
+#' @rdname print
+#' @export
 setMethod("show", signature(object="memuse"),
   function(object) 
     print(object, unit=object@unit, unit.prefix=object@unit.prefix, unit.names=object@unit.names, digits=3)
-)
-
-
-setMethod("show", signature(object="approx"),
-  function(object) 
-    cat(paste(paste(object, collapse=" "), "\n"))
 )
 

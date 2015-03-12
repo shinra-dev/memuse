@@ -1,5 +1,6 @@
 Release 2.3:
-	* Added process time lookups.
+	* Added process uptime lookup.
+	* Added system uptime lookup.
 
 Release 2.2:
 	* Added fancy printing.

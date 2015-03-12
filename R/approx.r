@@ -11,11 +11,35 @@ digits2zero <- function(str)
   return( ret )
 }
 
-#digits2zero("1234567891")
-#digits2zero("12345678912345678")
 
 
-
+#' approx.size
+#' 
+#' Approximate size of an integer; a poor man's exponential notation.
+#' 
+#' A simple printing system to make numbers readable.
+#' 
+#' @param x 
+#' A number.
+#' @param unit.names 
+#' "long", "short", or "comma"; determines wheter the output
+#' reads like "10 million", "10m", or "10,000,000", respectively.
+#' @param ... 
+#' Additional arguments
+#' @param digits 
+#' The number of decimal digits to retain.
+#' 
+#' @seealso \code{\link{howmany}}
+#' 
+#' @examples
+#' \dontrun{
+#' library(memuse)
+#' 
+#' approx.size(12345678)
+#' approx.size(12345678, unit.names="comma")
+#' }
+#' 
+#' @export approx.size
 approx.size <- function(x, unit.names="long", ..., digits=1)
 {
   #unit <- match.arg(tolower(unit), c("best"))
@@ -86,6 +110,29 @@ approx.size <- function(x, unit.names="long", ..., digits=1)
   class(ret) <- "approx"
   
   return( ret )
+}
+
+
+
+#' Prints approx objects.
+#' 
+#' @param x,object
+#' An \code{approx} object.
+#' @param ...
+#' Extra arguments (ignored).
+#' 
+#' @rdname print-approx
+#' @export
+print.approx <- function(x, ...)
+{
+  cat(paste(paste(x, collapse=" "), "\n"))
+}
+
+#' @rdname print-approx
+#' @export
+show.approx <- function(object)
+{
+  cat(paste(paste(object, collapse=" "), "\n"))
 }
 
 

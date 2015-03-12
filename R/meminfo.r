@@ -18,6 +18,40 @@ meminfo_retvals <- function(retval)
 
 
 
+#' meminfo
+#' 
+#' Platform memory information.
+#' 
+#' \code{Sys.meminfo()} returns some basic memory values, such as total ram,
+#' free ram, and ram used for buffers/cache (when applicable).
+#' 
+#' All of the C-level source code for these methods (in src/meminfo of the root
+#' directory of the memuse source tree) is licensed under the permissive
+#' 2-Clause BSD license.
+#' 
+#' @param compact.free 
+#' logical; determines whether various free memory values
+#' should be combined into a single value. See details section for more
+#' information.
+#' 
+#' @return 
+#' Returns a list, whose values are platform dependent in addition to
+#' being modified by input arguments.
+#' 
+#' @seealso \code{\link{procmem}}
+#' 
+#' @keywords Methods
+#' 
+#' @examples
+#' \dontrun{
+#' library(memuse)
+#' 
+#' Sys.meminfo()
+#' }
+#' 
+#' @name meminfo
+#' @rdname meminfo
+#' @export
 Sys.meminfo <- function(compact.free=TRUE)
 {
   out <- .Call(R_meminfo_raminfo)
@@ -49,6 +83,37 @@ Sys.meminfo <- function(compact.free=TRUE)
 
 
 
+#' swapinfo
+#' 
+#' Platform swap information.
+#' 
+#' \code{Sys.swapinfo()} returns basic swap/page (virtual memory) information.
+#' \code{Sys.pageinfo()} is identical to \code{swapinfo()} in every way but
+#' name (provided for Windows users who may be more comfortable/familiar with
+#' the 'pagefile' naming convention).
+#' 
+#' All of the C-level source code for these methods (in src/meminfo of the root
+#' directory of the memuse source tree) is licensed under the permissive
+#' 2-Clause BSD license.
+#' 
+#' @return 
+#' Returns a list, whose values are platform dependent in addition to
+#' being modified by input arguments.
+#' 
+#' @seealso \code{\link{procmem}}
+#' 
+#' @keywords Methods
+#' 
+#' @examples
+#' \dontrun{
+#' library(memuse)
+#' 
+#' Sys.swapinfo()
+#' }
+#' 
+#' @name swapinfo
+#' @rdname swapinfo
+#' @export
 Sys.swapinfo <- function()
 {
   out <- .Call(R_meminfo_swapinfo)
@@ -69,7 +134,8 @@ Sys.swapinfo <- function()
   return( ret )
 }
 
-
+#' @rdname swapinfo
+#' @export
 Sys.pageinfo <- Sys.swapinfo
 
 
@@ -78,7 +144,49 @@ Sys.pageinfo <- Sys.swapinfo
 # Current R process memory usage
 # ---------------------------------------------------------
 
-
+#' procmem
+#' 
+#' Shows the amount of ram used by the current R process.
+#' 
+#' \code{Sys.procmem()} returns the total memory usage of the current R
+#' process, and (if supported), the maximum memory usage as well.
+#' 
+#' All of the C-level source code for these methods (in src/meminfo of the root
+#' directory of the memuse source tree) is licensed under the permissive
+#' 2-Clause BSD license.
+#' 
+#' @param gcFirst 
+#' logical; determines if garbage collection should be called
+#' before getting process memory usage.
+#' 
+#' @return 
+#' Returns a list, whose values are platform dependent in addition to
+#' being modified by input arguments.
+#' 
+#' @seealso \code{\link{meminfo}}
+#' 
+#' @keywords Methods
+#' 
+#' @examples
+#' \dontrun{
+#' library(memuse)
+#' 
+#' ### How much is being used?
+#' Sys.procmem()
+#' 
+#' ### Use more.
+#' x <- rnorm(1e7)
+#' Sys.procmem()
+#' 
+#' ### Use less.
+#' rm(x)
+#' gc(FALSE)
+#' Sys.procmem()
+#' }
+#' 
+#' @name procmem
+#' @rdname procmem
+#' @export
 Sys.procmem <- function(gcFirst=TRUE)
 {
   if (gcFirst)
@@ -111,6 +219,32 @@ Sys.procmem <- function(gcFirst=TRUE)
 
 getcache <- function(level) .Call(R_meminfo_cacheinfo_size, level)
 
+
+#' Cache Sizes
+#' 
+#' Shows the sizes of the CPU caches.
+#' 
+#' \code{Sys.cachesize()} will check the various levels of cache and return all
+#' available cache information in a list.  If you don't have some kind of
+#' level-1 cache, then it will return an error.  If you have some kind of
+#' future space computer with more than 3 levels of cache, levels higher than 3
+#' will not be displayed.
+#' 
+#' @return 
+#' Returns a list, whose values are platform dependent.
+#' 
+#' @seealso \code{\link{meminfo}}
+#' 
+#' @examples
+#' \dontrun{
+#' library(memuse)
+#' 
+#' Sys.cachesize()
+#' }
+#' 
+#' @name cachesize
+#' @rdname cachesize
+#' @export
 Sys.cachesize <- function()
 {
   levels <- 0L:3L
@@ -133,6 +267,28 @@ Sys.cachesize <- function()
 
 
 
+#' Cache Sizes and Linesize
+#' 
+#' Shows the size of the cache line.
+#' 
+#' \code{Sys.cachelinesize()} will return the cache linesize.  It's almost
+#' certainly 32 or 64 bytes.
+#' 
+#' @return 
+#' Returns a list, whose values are platform dependent.
+#' 
+#' @seealso \code{\link{meminfo}}
+#' 
+#' @examples
+#' \dontrun{
+#' library(memuse)
+#' 
+#' Sys.cachelinesize()
+#' }
+#' 
+#' @name cachelinesize
+#' @rdname cachelinesize
+#' @export
 Sys.cachelinesize <- function()
 {
   ret <- .Call(R_meminfo_cacheinfo_linesize)
@@ -248,9 +404,10 @@ post.system.time <- function()
 title_case <- function(x) gsub(x, pattern="(^|[[:space:]])([[:alpha:]])", replacement="\\1\\U\\2", perl=TRUE)
 
 
-### So ugly it's beautiful
-print.sysinfo <- function(x)
+#' @export
+print.sysinfo <- function(x, ...)
 {
+  # So ugly it's beautiful
   maxlen <- max(sapply(names(x), nchar))
   names <- gsub(names(x), pattern="_", replacement=" ")
   names <- title_case(x=names)
@@ -267,6 +424,7 @@ print.sysinfo <- function(x)
 
 
 
+#' @export
 "[.sysinfo" <- function(x, i)
 {
   class(x) <- NULL

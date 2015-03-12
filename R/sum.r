@@ -1,4 +1,30 @@
-### Sum method - can handle mixed memuse/numeric
+#' memuse Arithmetic
+#' 
+#' Binary arithmetic operations for \code{memuse} objects.
+#' 
+#' Simple arithmetic reductions.
+#' 
+#' @name Reductions
+#' 
+#' @param x 
+#' A \code{memuse} object.
+#' @param ... 
+#' Additional arguments
+#' @param na.rm 
+#' Whether \code{NA}'s should be ignored.
+#' 
+#' @return 
+#' Returns a \code{memuse} class object.
+#' 
+#' @seealso \code{ \link{Constructor} \link{memuse-class} }
+#' 
+#' @keywords Methods
+#' 
+#' @rdname sum
+NULL
+
+#' @rdname sum
+#' @export
 setMethod("sum", signature(x="memuse"),
   function(x, ..., na.rm=FALSE)
   {
@@ -30,8 +56,4 @@ setMethod("sum", signature(x="memuse"),
     return( ret )
   }
 )
-
-
-
-# sum((mu(10)+mu(4)+mu(2)+mu(2)+mu(5)+mu(5))*c(1,0,7,0,0,7,11,8,0,10,0,8,0,14,15,10,4,15,8,12,16))
 

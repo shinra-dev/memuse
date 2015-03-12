@@ -1,8 +1,6 @@
 == This Release ==
 
-* add approx to howbig()
-* finish sum(), mean(), etc. methods
-* expand arithmetic to work on vectors/lists
-* finish meminfo()
-* documentation is a mess
+	* mean()
+	* Moved to roxygen2 for documentation.
+	* Added some plot methods for systems calls.
 

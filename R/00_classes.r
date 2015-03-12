@@ -27,6 +27,30 @@ valid.mu <- function(object)
    # unit --- the memuse unit (e.g., byte, kilobyte, etc.)
    # unit.prefix --- IEC or SI units
    # unit.names --- short (e.g., kb) or long (e.g., kilobyte)
+#' Class memuse
+#' 
+#' Memory usage class object.
+#' 
+#' 
+#' @name memuse-class
+#' @docType class
+#' @section Creating Objects: \code{new('memuse', size = ..., unit = ...,
+#' unit.prefix = ..., unit.names = ...)}
+#' 
+#' @slot size
+#' TODO
+#' @slot unit
+#' TODO
+#' @slot unit.prefix
+#' TODO
+#' @slot unit.names
+#' TODO
+#' 
+#' \code{memuse(size = ..., unit = ..., unit.prefix = ..., unit.names = ...)}
+#' 
+#' \code{mu(size = ..., unit = ..., unit.prefix = ..., unit.names = ...)}
+#' @seealso \code{ \link{Control} \link{Constructor} }
+#' @keywords Classes
 setClass("memuse", 
   representation(
     size="numeric",
