@@ -1,7 +1,7 @@
 Package: memuse
 Type: Package
 Title: Estimate the memory usage of dense, in-core, numeric objects.
-Version: 2.3
+Version: 2.4
 Description: How much ram do you need to store a 100,000 by 100,000 matrix?
     How much ram is your current R session using? How much ram do you even have?
     Learn the scintillating answer to these and many more such questions with
