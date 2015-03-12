@@ -1,4 +1,4 @@
-# memuse
+# memuse [![Build Status](https://travis-ci.org/wrathematics/memuse.png)](https://travis-ci.org/wrathematics/memuse) 
 
 Originally, this package was an over-engineered solution to a mostly 
 non-existent problem, as a sort of love letter to other needlessly complex 
