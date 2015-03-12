@@ -1,13 +1,3 @@
-val_or_zero <- function(x)
-{
-  if (is.null(x))
-    return(0)
-  else
-    return(x)
-}
-
-
-
 meminfo_retvals <- function(retval)
 {
   if (length(retval) > 1)

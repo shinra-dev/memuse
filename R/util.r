@@ -147,3 +147,30 @@ is.int <- function(x)
     return( abs(x - floor(x)) < tol )
 }
 
+
+
+# return the value or 0 if NULL
+val_or_zero <- function(x)
+{
+  if (is.null(x))
+    return(0)
+  else
+    return(x)
+}
+
+
+
+# Zero's digits of a string after the first 15 digits
+digits2zero <- function(str)
+{
+  if (nchar(str) <= 15)
+    return( str )
+  
+  split <- simplify2array(strsplit(x=str, split=""))
+  
+  n <- length(split) - 15L
+  ret <- paste(paste(split[1L:15L], collapse=""), paste(rep(0, n), collapse=""), collapse="", sep="")
+  
+  return( ret )
+}
+

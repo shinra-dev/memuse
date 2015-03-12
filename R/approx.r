@@ -1,18 +1,3 @@
-digits2zero <- function(str)
-{
-  split <- simplify2array(strsplit(x=str, split=""))
-  
-  if (length(split) <= 15)
-    return( str )
-  
-  n <- length(split) - 15L
-  ret <- paste(paste(split[1L:15L], collapse=""), paste(rep(0, n), collapse=""), collapse="", sep="")
-  
-  return( ret )
-}
-
-
-
 #' approx.size
 #' 
 #' Approximate size of an integer; a poor man's exponential notation.
