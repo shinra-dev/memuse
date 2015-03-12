@@ -303,6 +303,9 @@ Sys.cachelinesize <- function()
 #' directory of the memuse source tree) is licensed under the permissive
 #' 2-Clause BSD license.
 #' 
+#' @param filename
+#' Location of the file (as a string).
+#' 
 #' @return 
 #' A memuse class object.
 #' 
@@ -527,13 +530,15 @@ post.system.time <- function()
 title_case <- function(x) gsub(x, pattern="(^|[[:space:]])([[:alpha:]])", replacement="\\1\\U\\2", perl=TRUE)
 
 
-#' Print sysinfo objects.
+#' @title Print sysinfo objects.
 #' 
 #' @param x 
-#' A sysinfo object.
-#' @param ... 
-#' Extra arguments (currently ignored).
+#' An sysinfo object.
+#' @param ... Additional arguments (ignored).
 #' 
+#' @name print-sysinfo
+#' @rdname print-sysinfo
+#' @method print sysinfo
 #' @export
 print.sysinfo <- function(x, ...)
 {

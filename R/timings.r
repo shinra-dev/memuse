@@ -54,15 +54,18 @@ readable.time <- function(time, unit="seconds")
 
 
 
-#' Print readabletime objects.
+#' @title Print readabletime objects.
 #' 
 #' @param x 
-#' A count, in seconds, to be printed.
+#' An readabletime object.
 #' @param ... 
-#' Extra arguments (currently ignored).
-#' @param digits 
-#' The number of decimal digits to print.
+#' Additional arguments (ignored).
+#' @param digits
+#' The (max) number of digits to display.
 #' 
+#' @name print-readabletime
+#' @rdname print-readabletime
+#' @method print readabletime
 #' @export
 print.readabletime <- function(x, ..., digits=3)
 {

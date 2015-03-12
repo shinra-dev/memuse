@@ -99,25 +99,19 @@ approx.size <- function(x, unit.names="long", ..., digits=1)
 
 
 
-#' Prints approx objects.
+#' @title Print approx objects.
 #' 
-#' @param x,object
-#' An \code{approx} object.
-#' @param ...
-#' Extra arguments (ignored).
+#' @param x 
+#' An approx object.
+#' @param ... 
+#' Additional arguments (ignored).
 #' 
+#' @name print-approx
 #' @rdname print-approx
+#' @method print approx
 #' @export
 print.approx <- function(x, ...)
 {
   cat(paste(paste(x, collapse=" "), "\n"))
 }
-
-#' @rdname print-approx
-#' @export
-show.approx <- function(object)
-{
-  cat(paste(paste(object, collapse=" "), "\n"))
-}
-
 

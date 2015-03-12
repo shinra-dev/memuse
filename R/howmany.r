@@ -68,7 +68,7 @@
 #' 
 #' @name howmany
 #' @rdname howmany
-howmay <- function(x, nrow, ncol, out.type="full", representation="dense", ..., sparsity=0.05, type="double", intsize=4, unit.names="short")
+howmany <- function(x, nrow, ncol, out.type="full", representation="dense", ..., sparsity=0.05, type="double", intsize=4, unit.names="short")
 {
   if (class(x) != "memuse")
     stop("input 'x' must be a memuse class object")
@@ -110,6 +110,10 @@ howmay <- function(x, nrow, ncol, out.type="full", representation="dense", ..., 
 
 
 
+#' @param cores
+#' The number of cores.
+#' @param par
+#' The type of parallel distribution.
 #' @param ICTXT
 #' BLACS ICTXT value.
 #' @param bldim
