@@ -30,8 +30,6 @@ meminfo_retvals <- function(retval)
 #' 
 #' @seealso \code{\link{procmem}}
 #' 
-#' @keywords Methods
-#' 
 #' @examples
 #' \dontrun{
 #' library(memuse)
@@ -91,8 +89,6 @@ Sys.meminfo <- function(compact.free=TRUE)
 #' being modified by input arguments.
 #' 
 #' @seealso \code{\link{procmem}}
-#' 
-#' @keywords Methods
 #' 
 #' @examples
 #' \dontrun{
@@ -154,8 +150,6 @@ Sys.pageinfo <- Sys.swapinfo
 #' being modified by input arguments.
 #' 
 #' @seealso \code{\link{meminfo}}
-#' 
-#' @keywords Methods
 #' 
 #' @examples
 #' \dontrun{
@@ -300,6 +294,34 @@ Sys.cachelinesize <- function()
 # File sizes
 # ---------------------------------------------------------
 
+#' filesize
+#' 
+#' Returns size of a file as reported by the file system (the
+#' file is not scanned).
+#' 
+#' All of the C-level source code for these methods (in src/meminfo of the root
+#' directory of the memuse source tree) is licensed under the permissive
+#' 2-Clause BSD license.
+#' 
+#' @return 
+#' A memuse class object.
+#' 
+#' @examples
+#' \dontrun{
+#' library(memuse)
+#' 
+#' x <- rnorm(1e5)
+#' object.size(x) ### size in ram
+#' 
+#' tmp <- tempfile()
+#' saveRDS(x, file=tmp)
+#' Sys.filesize(tmp) ### size on disk
+#' unlink(tmp)
+#' }
+#' 
+#' @name filesize
+#' @rdname filesize
+#' @export
 Sys.filesize <- function(filename)
 {
   filename <- tools::file_path_as_absolute(filename)
@@ -316,6 +338,28 @@ Sys.filesize <- function(filename)
 # Uptimes
 # ---------------------------------------------------------
 
+#' uptime
+#' 
+#' Returns the amount of time, in human-readable units, since
+#' the system was booted.
+#' 
+#' All of the C-level source code for these methods (in src/meminfo of the root
+#' directory of the memuse source tree) is licensed under the permissive
+#' 2-Clause BSD license.
+#' 
+#' @return 
+#' A readabletime object.
+#' 
+#' @examples
+#' \dontrun{
+#' library(memuse)
+#' 
+#' Sys.uptime()
+#' }
+#' 
+#' @name uptime
+#' @rdname uptime
+#' @export
 Sys.uptime <- function()
 {
   ret <- .Call(R_meminfo_system_uptime)
@@ -330,6 +374,28 @@ Sys.uptime <- function()
 
 
 
+#' usrtime
+#' 
+#' Returns the amount of time, in human-readable units, the
+#' current process has been in user mode.
+#' 
+#' All of the C-level source code for these methods (in src/meminfo of the root
+#' directory of the memuse source tree) is licensed under the permissive
+#' 2-Clause BSD license.
+#' 
+#' @return 
+#' A readabletime object.
+#' 
+#' @examples
+#' \dontrun{
+#' library(memuse)
+#' 
+#' Sys.usrtime()
+#' }
+#' 
+#' @name usrtime
+#' @rdname usrtime
+#' @export
 Sys.usrtime <- function()
 {
   ret <- .Call(R_meminfo_process_usrtime)
@@ -344,6 +410,28 @@ Sys.usrtime <- function()
 
 
 
+#' systime
+#' 
+#' Returns the amount of time, in human-readable units, the
+#' current process has been in kernel mode.
+#' 
+#' All of the C-level source code for these methods (in src/meminfo of the root
+#' directory of the memuse source tree) is licensed under the permissive
+#' 2-Clause BSD license.
+#' 
+#' @return 
+#' A readabletime object.
+#' 
+#' @examples
+#' \dontrun{
+#' library(memuse)
+#' 
+#' Sys.systime()
+#' }
+#' 
+#' @name systime
+#' @rdname systime
+#' @export
 Sys.systime <- function()
 {
   ret <- .Call(R_meminfo_process_systime)
@@ -358,6 +446,29 @@ Sys.systime <- function()
 
 
 
+#' runtime
+#' 
+#' Returns the amount of time, in human-readable units, the
+#' current R process has been active (the wall-clock time of the
+#' process).
+#' 
+#' All of the C-level source code for these methods (in src/meminfo of the root
+#' directory of the memuse source tree) is licensed under the permissive
+#' 2-Clause BSD license.
+#' 
+#' @return 
+#' A readabletime object.
+#' 
+#' @examples
+#' \dontrun{
+#' library(memuse)
+#' 
+#' Sys.runtime()
+#' }
+#' 
+#' @name usrtime
+#' @rdname usrtime
+#' @export
 Sys.runtime <- function()
 {
   ret <- .Call(R_meminfo_process_runtime)
@@ -372,6 +483,28 @@ Sys.runtime <- function()
 
 
 
+#' post.system.time
+#' 
+#' Returns the user, kernel, and wallclock time that the current
+#' process has been active.  Like a kind of post-hoc \code{system.time()}.
+#' 
+#' All of the C-level source code for these methods (in src/meminfo of the root
+#' directory of the memuse source tree) is licensed under the permissive
+#' 2-Clause BSD license.
+#' 
+#' @return 
+#' A proc_time object (same as \code{system.time()}).
+#' 
+#' @examples
+#' \dontrun{
+#' library(memuse)
+#' 
+#' post.system.time()
+#' }
+#' 
+#' @name post-system-time
+#' @rdname post-system-time
+#' @export
 post.system.time <- function()
 {
   usr <- Sys.usrtime()
