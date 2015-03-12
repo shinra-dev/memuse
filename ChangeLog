@@ -1,3 +1,7 @@
+Release 2.4:
+	* Major documentation refactor; switched to roxygen2.
+	* Numerous improvements to the clarity and quality of the documentation.
+
 Release 2.3:
 	* Added process uptime lookup.
 	* Added system uptime lookup.
