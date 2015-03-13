@@ -1,26 +1,28 @@
 Release 2.4:
 	* Major documentation refactor; switched to roxygen2.
 	* Numerous improvements to the clarity and quality of the documentation.
+	* Added comparators for memuse objects.
 
 Release 2.3:
-	* Added process uptime lookup.
 	* Added system uptime lookup.
+	* Added process user, system, and wallclock runtime lookups.
 
 Release 2.2:
-	* Added fancy printing.
-	* Added file size lookup Sys.filesize().
+	* Added fancy printing for memuse objects.
+	* Added file size lookup.
 
 Release 2.1:
-	* Added Sys.cacheinfo()
+	* Added cache size lookup.
+	* Added cache linesize lookup.
 	* Rewrote package demos to be more meaningful.
 
 Release 2.0:
-	* Added Sys.procmem()
-	* Added Sys.swapinfo()
-	* Added Sys.meminfo()
+	* Added system memory lookup.
+	* Added system swap lookup.
+	* Added process memory usage lookup.
 	* Fixed approx_size() bugs.
-	* Added as.character() method.
-	* Added sparse matrix handling for howbig().
+	* Added as.character() memuse method.
+	* Added sparse matrix estimation for howbig().
 
 Release 1.1:
 	* Cleaned up the docs.
