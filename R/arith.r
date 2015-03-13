@@ -137,7 +137,12 @@ setMethod("+", signature(e1="object_size", e2="memuse"),
 #' @export
 setMethod("-", signature(e1="memuse", e2="memuse"),
   function(e1, e2)
-    return( e1+(-1*e2) )
+  {
+    ret <- e1+(-1*e2)
+    mu.nonneg(ret)
+    
+    return( ret )
+  }
 )
 
 
@@ -149,8 +154,11 @@ setMethod("-", signature(e1="memuse", e2="numeric"),
   {
     if (length(e2) != 1)
       stop("memuse - numeric : vector must be of length 1")
-    else
-      return( e1+(-1*e2) )
+    
+    ret <- e1+(-1*e2)
+    mu.nonneg(ret)
+    
+    return( ret )
   }
 )
 
@@ -163,8 +171,11 @@ setMethod("-", signature(e1="numeric", e2="memuse"),
   {
     if (length(e1) != 1)
       stop("vector - numeric : vector must be of length 1")
-    else
-      return( e1+(-1*e2) )
+    
+    ret <- e1+(-1*e2)
+    mu.nonneg(ret)
+    
+    return( ret )
   }
 )
 
@@ -189,6 +200,7 @@ setMethod("-", signature(e1="memuse", e2="object_size"),
     e1@size <- e1@size - unclass(e2)
     
     ret <- swap.unit(e1, .UNIT)
+    mu.nonneg(ret)
     
     return( ret )
   }
@@ -206,6 +218,7 @@ setMethod("-", signature(e1="object_size", e2="memuse"),
     e2@size <- unclass(e1) - e2@size
     
     ret <- swap.unit(e2, .UNIT)
+    mu.nonneg(ret)
     
     return( ret )
   }

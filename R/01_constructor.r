@@ -105,6 +105,16 @@ check.mu <- function(x)
 
 
 
+mu.nonneg <- function(x)
+{
+  if (x@size < 0)
+    warning("memuse object contsructed with negative value")
+  
+  invisible()
+}
+
+
+
 ### constructor
 internal.memuse <- function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)#, precedence=.PRECEDENCE)
 {
@@ -113,11 +123,14 @@ internal.memuse <- function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=
   else
     u <- unit
   
+  
   # construct
   x <- new("memuse", size=size, unit=u, unit.prefix=unit.prefix, unit.names=unit.names)
   
   # sanity check
   x <- check.mu(x)
+  
+  mu.nonneg(x)
   
 #  # convert to the correct unit
 #  precedence <- match.arg(tolower(precedence), c("unit", "prefix"))

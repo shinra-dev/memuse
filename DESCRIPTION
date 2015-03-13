@@ -10,7 +10,6 @@ License: GPL (>= 2)
 Copyright: See memuse/inst/meminfo_LICENSE for the files in src/meminfo/.
 Depends:
     R (>= 2.15.1),
-    utils,
     methods
 LinkingTo: RNACI
 LazyData: yes
