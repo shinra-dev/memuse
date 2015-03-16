@@ -68,6 +68,7 @@
 #' 
 #' @name howmany
 #' @rdname howmany
+#' @export
 howmany <- function(x, nrow, ncol, out.type="full", representation="dense", ..., sparsity=0.05, type="double", intsize=4, unit.names="short")
 {
   if (class(x) != "memuse")
@@ -121,6 +122,7 @@ howmany <- function(x, nrow, ncol, out.type="full", representation="dense", ...,
 #' 
 #' @name howmany
 #' @rdname howmany
+#' @export
 howmany.par <- function(x, nrow, ncol, out.type="full", cores=1, par="row", ..., type="double", intsize=4, ICTXT=0, bldim=c(4, 4))
 {
   if (class(x) != "memuse")

@@ -1,5 +1,4 @@
 Package: memuse
-Type: Package
 Title: Estimate the memory usage of dense, in-core, numeric objects.
 Version: 2.4
 Description: How much ram do you need to store a 100,000 by 100,000 matrix?
@@ -8,14 +7,13 @@ Description: How much ram do you need to store a 100,000 by 100,000 matrix?
     the memuse package.
 License: GPL (>= 2)
 Copyright: See memuse/inst/meminfo_LICENSE for the files in src/meminfo/.
-Depends:
-    R (>= 2.15.1),
-    methods
+Depends: R (>= 2.15.1)
+Imports: methods
 LinkingTo: RNACI
-LazyData: yes
-LazyLoad: yes
-NeedsCompilation: yes
-ByteCompile: yes
-Author: Drew Schmidt [aut, cre], Christian Heckendorf [ctb], Wei-Chen
-    Chen [ctb]
+NeedsCompilation: Yes
+ByteCompile: Yes
+Authors@R: c(
+        person("Drew", "Schmidt", email="wrathematics@gmail.com", role=c("aut", "cre")),
+        person("Christian", "Heckendorf", role="ctb"),
+        person("Wei-Chen", "Chen", role="ctb"))
 Maintainer: Drew Schmidt <wrathematics@gmail.com>
