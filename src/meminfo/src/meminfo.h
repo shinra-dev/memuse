@@ -26,7 +26,6 @@
 
 typedef uint64_t memsize_t;
 typedef uint32_t cachesize_t;
-typedef double runtime_t;
 
 // cacheinfo.c
 int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level);
@@ -60,9 +59,6 @@ int meminfo_print_memval(memsize_t val);
 // procinfo.c
 int meminfo_process_size(memsize_t *size);
 int meminfo_process_peak(memsize_t *peak);
-int meminfo_process_usrtime(runtime_t *usr);
-int meminfo_process_systime(runtime_t *sys);
-int meminfo_process_runtime(runtime_t *runtime);
 
 // raminfo.c
 int meminfo_totalram(memsize_t *totalram);
@@ -74,9 +70,6 @@ int meminfo_cachedram(memsize_t *cachedram);
 int meminfo_totalswap(memsize_t *totalswap);
 int meminfo_freeswap(memsize_t *freeswap);
 int meminfo_cachedswap(memsize_t *cachedswap);
-
-// sysinfo.c
-int meminfo_system_uptime(runtime_t *uptime);
 
 
 #endif

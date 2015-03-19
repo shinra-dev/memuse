@@ -29,8 +29,7 @@
 #' @useDynLib memuse,
 #'   R_meminfo_retvals, R_meminfo_raminfo, R_meminfo_swapinfo,
 #'   R_meminfo_procinfo, R_meminfo_cacheinfo_size, R_meminfo_cacheinfo_linesize,
-#'   R_meminfo_filesize, R_meminfo_system_uptime, R_meminfo_process_usrtime,
-#'   R_meminfo_process_systime, R_meminfo_process_runtime
+#'   R_meminfo_filesize
 #' 
 #' @keywords Package
 NULL
