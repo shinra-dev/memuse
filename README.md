@@ -99,54 +99,11 @@ howmany(mu(800, "mib"), ncol=500)
 # [1] 209715    500
 ```
 
-
-
-#### Other Utilities
-
-My brain hates staring at large numbers, and scientific
-notation isn't always how I want to think about orders of magnitude.
-That's why I added the approximate sizer:
-
-```r
-approx.size(12345)
-# 12.3 Thousand
- 
-approx.size(123456789)
-# 123.5 Million
- 
-approx.size(123456789, unit.names="short")
-# 123.5m
- 
-approx.size(123456789, unit.names="comma")
-# 123,456,789
-```
-
-
-I also hate staring at timings in seconds.  I don't got all day
-to be dividing by WHO KNOWS what kind of numbers to make the output
-of `system.time()` readable!  That's why I added this simple wrapper
-to get the wall-clock time in a readable format:
-
-```r
-wc.time(1+1)
-# 0 seconds
- 
-wc.time(Sys.sleep(12.34567))
-# 12.351 seconds
- 
-wc.time(Sys.sleep(123.4567))
-# 2.059 minutes
-```
-
-
 For more information, see the package vignette.
 
 
 
-## How do I install it?
-
-The easiest way is to use the
-[devtools package](https://github.com/hadley/devtools):
+## Installation
 
 ```r
 library(devtools)
