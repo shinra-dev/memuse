@@ -41,7 +41,6 @@ uint32_t meminfo_getpid();
 // platform.c
 #if OS_LINUX
 int read_proc_file(const char* file, uint64_t *val, char *field, int fieldlen);
-int read_proc_self_stat(runtime_t *val, const int n);
 #elif OS_MAC
 int sysctl_val(char *name, uint64_t *val);
 #elif OS_WINDOWS

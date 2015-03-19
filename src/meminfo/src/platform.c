@@ -43,45 +43,6 @@ int read_proc_file(const char *file, memsize_t *val, char *field, int fieldlen)
   return FAILURE;
 }
 
-int read_proc_self_stat(runtime_t *val, const int n)
-{
-  int i;
-  int spaces = 0, last_space = 0;
-  char *line = NULL;
-  size_t linelen = 0;
-  memsize_t value = FAILURE;
-  char *end;
-  
-  uint64_t tmp = 0L;
-  *val = 0.;
-  
-  FILE* fp = fopen("/proc/self/stat", "r");
-  if (fp == NULL)
-    return FAILURE;
-  
-  linelen = getline(&line, &linelen, fp);
-  
-  for (i=0; i<linelen; i++)
-  {
-    if (line[i] == ' ')
-    {
-      spaces++;
-      
-      if (spaces == n)
-        tmp = strtoull(line+last_space, &end, 10);
-      else
-        last_space = i;
-    }
-  }
-  
-  *val = (runtime_t) tmp;
-  
-  free(line);
-  fclose(fp);
-  
-  return MEMINFO_OK;
-}
-
 
 
 #elif OS_MAC || OS_FREEBSD
