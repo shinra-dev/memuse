@@ -3,7 +3,7 @@ RNACI_CPPFLAGS = `$(R_HOME)/bin/Rscript -e "RNACI:::cppflags()"`
 RNACI_LDFLAGS = `$(R_HOME)/bin/Rscript -e "RNACI:::ldflags()"`
 
 PKG_CPPFLAGS = $(RNACI_CPPFLAGS)
-PKG_CFLAGS = -g -w
+PKG_CFLAGS = -w
 PKG_LIBS = $(RNACI_LDFLAGS)
 
 

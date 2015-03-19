@@ -16,8 +16,7 @@ MEMINFO_OBJS = \
 		meminfo/src/platform.o \
 		meminfo/src/procinfo.o \
 		meminfo/src/raminfo.o \
-		meminfo/src/swapinfo.o \
-		meminfo/src/sysinfo.o
+		meminfo/src/swapinfo.o 
 
 R_OBJS   = wrappers.o
 
