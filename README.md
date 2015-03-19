@@ -102,6 +102,25 @@ howmany(mu(800, "mib"), ncol=500)
 For more information, see the package vignette.
 
 
+#### Misc
+
+The package also has some miscellaneous helpful utilities:
+
+```r
+approx.size(12345)
+# 12.3 Thousand
+ 
+approx.size(123456789)
+# 123.5 Million
+ 
+approx.size(123456789, unit.names="short")
+# 123.5m
+ 
+approx.size(123456789, unit.names="comma")
+# 123,456,789
+```
+
+
 
 ## Installation
 
