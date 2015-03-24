@@ -13,8 +13,6 @@
 \alias{mu,missing-method}
 \alias{mu,numeric-method}
 \alias{mu,object_size-method}
-\alias{object.size}
-\alias{object.size,ANY-method}
 \title{memuse Constructor}
 \usage{
 mu(size, unit = .UNIT, unit.prefix = .PREFIX, unit.names = .NAMES)
@@ -44,10 +42,6 @@ memuse(size, unit = .UNIT, unit.prefix = .PREFIX, unit.names = .NAMES)
 
 \S4method{memuse}{object_size}(size, unit = .UNIT, unit.prefix = .PREFIX,
   unit.names = .NAMES)
-
-object.size(x)
-
-\S4method{object.size}{ANY}(x)
 }
 \arguments{
 \item{size}{\code{numeric}; indicates the unit-multiple number of bytes used
@@ -62,8 +56,6 @@ is ignored.}
 \item{unit.names}{\code{string}; control for whether the unit names should
 be printed out or their abbreviation should be used.  Options are "long" and
 "short", respectively.  Case is ignored.}
-
-\item{x}{An R object.}
 }
 \value{
 Returns a \code{memuse} class object.

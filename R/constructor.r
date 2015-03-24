@@ -126,23 +126,17 @@ setMethod("memuse", signature(size="object_size"),
 
 
 
+#' object.size
+#' 
 #' @param x
 #' An R object.
 #' 
-#' @rdname constructor
+#' @name object.size
+#' @rdname object.size
 #' @export
-setGeneric(name="object.size", 
-  function(x)
-    standardGeneric("object.size"), 
-  package="memuse"
-)
+object.size <- function(x)
+{
+  return( mu(utils::object.size(x)) )
+}
 
-#' @rdname constructor
-#' @export
-setMethod("object.size", signature(x="ANY"),
-  function(x)
-  {
-    return( mu(utils::object.size(x)) )
-  }
-)
 
