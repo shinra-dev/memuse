@@ -3,12 +3,12 @@ library(memuse)
 
 f <- function(x, y)
 {
-  print(x<y)
-  print(x<=y)
-  print(!(x>y))
-  print(!(x>=y))
-  print(!(x==y))
-  print(x!=y)
+  stopifnot(x<y)
+  stopifnot(x<=y)
+  stopifnot(!(x>y))
+  stopifnot(!(x>=y))
+  stopifnot(!(x==y))
+  stopifnot(x!=y)
 }
 
 
