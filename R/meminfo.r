@@ -231,11 +231,11 @@ getcache <- function(level) .Call(R_meminfo_cacheinfo_size, level)
 #' @export
 Sys.cachesize <- function()
 {
-  levels <- 0L:3L
+  levels <- 0L:4L
   
   ret <- sapply(levels, getcache)
   
-  names(ret) <- c("L1I", "L1D", "L2", "L3")
+  names(ret) <- c("L1I", "L1D", "L2", "L3", "L4")
   
   if (all(ret < 0))
     stop("platform not supported at this time")

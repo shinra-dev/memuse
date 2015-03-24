@@ -10,7 +10,7 @@ endif
 
 
 OBJECTS = src/cacheinfo.c src/fileinfo.c src/platform.c src/print.c \
-					src/procinfo.c src/raminfo.c src/swapinfo.c src/sysinfo.c
+					src/procinfo.c src/raminfo.c src/swapinfo.c
 
 all: meminfo shared static
 

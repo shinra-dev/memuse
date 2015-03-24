@@ -52,6 +52,8 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
     cache_size = (cachesize_t) sysconf(_SC_LEVEL2_CACHE_SIZE);
   else if (level == 3)
     cache_size = (cachesize_t) sysconf(_SC_LEVEL3_CACHE_SIZE);
+  else if (level == 4)
+    cache_size = (cachesize_t) sysconf(_SC_LEVEL4_CACHE_SIZE);
   
   if (cache_size == 0) return FAILURE;
   
