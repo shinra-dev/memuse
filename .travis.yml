@@ -4,6 +4,9 @@ warnings_are_errors: true
 r_github_packages:
   - wrathematics/RNACI
 
+r_build_args: 
+  - "--no-build-vignettes --no-manual --no-resave-data"
+
 notifications:
   email:
     on_success: change
