@@ -10,12 +10,16 @@
 #' @param unit 
 #' \code{string}; the unit of storage, such as "MiB" or "MB",
 #' depending on prefix.  Case is ignored.
-#' @param unit.prefix \code{string}; the unit prefix, namely IEC or SI.  Case
+#' @param unit.prefix 
+#' \code{string}; the unit prefix, namely IEC or SI.  Case
 #' is ignored.
-#' @param unit.names \code{string}; control for whether the unit names should
+#' @param unit.names 
+#' \code{string}; control for whether the unit names should
 #' be printed out or their abbreviation should be used.  Options are "long" and
 #' "short", respectively.  Case is ignored.
-#' @return Returns a \code{memuse} class object.
+#' 
+#' @return 
+#' Returns a \code{memuse} class object.
 #' 
 #' @seealso \code{ \link{memuse-class} \link{Accessors} \link{Converters} }
 #' 
