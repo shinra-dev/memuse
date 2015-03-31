@@ -4,9 +4,6 @@ warnings_are_errors: true
 r_github_packages:
   - wrathematics/RNACI
 
-r_build_args: 
-  - "--no-build-vignettes --no-manual --no-resave-data"
-
 notifications:
   email:
     on_success: change
@@ -14,5 +11,9 @@ notifications:
 env:
   - global:
     - _R_CHECK_FORCE_SUGGESTS_=0
+    - R_BUILD_ARGS="--no-build-vignettes --no-manual --no-resave-data"
+    - R_CHECK_ARGS="--no-build-vignettes --no-manual --timings"
+    - R_CHECK_TIME="TRUE"
+    - R_CHECK_TESTS="TRUE"
 
 sudo: required
