@@ -1,3 +1,4 @@
+PKG_CPPFLAGS = -I../inst/RNACI
 PKG_CFLAGS = -w
 
 

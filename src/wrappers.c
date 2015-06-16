@@ -27,7 +27,7 @@
 */
 
 
-#include "RNACI2.h"
+#include <RNACI.h>
 #include "meminfo/src/meminfo.h"
 
 
