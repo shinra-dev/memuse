@@ -2,42 +2,42 @@ Release 2.5:
   * Switched to a header-only RNACI.
 
 Release 2.4:
-	* Major documentation refactor; switched to roxygen2.
-	* Numerous improvements to the clarity and quality of the documentation.
-	* Added comparators for memuse objects.
+  * Major documentation refactor; switched to roxygen2.
+  * Numerous improvements to the clarity and quality of the documentation.
+  * Added comparators for memuse objects.
 
 Release 2.3:
-	* Added system uptime lookup.
-	* Added process user, system, and wallclock runtime lookups.
+  * Added system uptime lookup.
+  * Added process user, system, and wallclock runtime lookups.
 
 Release 2.2:
-	* Added fancy printing for memuse objects.
-	* Added file size lookup.
+  * Added fancy printing for memuse objects.
+  * Added file size lookup.
 
 Release 2.1:
-	* Added cache size lookup.
-	* Added cache linesize lookup.
-	* Rewrote package demos to be more meaningful.
+  * Added cache size lookup.
+  * Added cache linesize lookup.
+  * Rewrote package demos to be more meaningful.
 
 Release 2.0:
-	* Added system memory lookup.
-	* Added system swap lookup.
-	* Added process memory usage lookup.
-	* Fixed approx_size() bugs.
-	* Added as.character() memuse method.
-	* Added sparse matrix estimation for howbig().
+  * Added system memory lookup.
+  * Added system swap lookup.
+  * Added process memory usage lookup.
+  * Fixed approx_size() bugs.
+  * Added as.character() memuse method.
+  * Added sparse matrix estimation for howbig().
 
 Release 1.1:
-	* Cleaned up the docs.
-	* Added howbig.par().
-	* Added better print handling of approximate returns.
-	* Enhanced the vignette and added cover.
-	* Method "object.size()" now returns memuse objects.
-	* Added approximate sizes for howmany() output.
-	* Made internals more consistent.
-	* Better internal documentation.
+  * Cleaned up the docs.
+  * Added howbig.par().
+  * Added better print handling of approximate returns.
+  * Enhanced the vignette and added cover.
+  * Method "object.size()" now returns memuse objects.
+  * Added approximate sizes for howmany() output.
+  * Made internals more consistent.
+  * Better internal documentation.
 
 Release 1.0:
-	* Started with a 10 line function that was more than sufficient.
-	* The joke got tastelessly out of hand.
+  * Started with a 10 line function that was more than sufficient.
+  * The joke got tastelessly out of hand.
 
