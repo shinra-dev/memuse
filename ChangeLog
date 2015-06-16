@@ -1,3 +1,6 @@
+Release 2.5:
+  * Switched to a header-only RNACI.
+
 Release 2.4:
 	* Major documentation refactor; switched to roxygen2.
 	* Numerous improvements to the clarity and quality of the documentation.

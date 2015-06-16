@@ -131,10 +131,7 @@ approx.size(123456789, unit.names="comma")
 ## Installation
 
 ```r
-library(devtools)
-
-install_github("wrathematics/RNACI") # dependency
-install_github("wrathematics/memuse")
+devtools::install_github("wrathematics/memuse")
 ```
 
 
@@ -145,3 +142,14 @@ The R package is licensed under the GNU General Public License, version
 2 or greater.  The C library 'meminfo' located in src/meminfo of the
 memuse package source tree is additionally licensed under the 
 permissive 2-clause BSD license.
+
+
+## Authors
+
+memuse is authored and maintained by:
+* Drew Schmidt
+
+With additional contributions from:
+* Wei-Chen Chen
+* Christian Heckendorf
+
