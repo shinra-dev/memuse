@@ -7,10 +7,18 @@
 #include "platform.h"
 
 #if OS_NIX
-#include <limits.h>
 #include <sys/stat.h>
+#endif
+
+// PATH_MAX --- should probably do something custom to be more portable
+#if OS_LINUX
+#include <linux/limits.h>
+#elif OS_MAC
+#include <sys/syslimits.h>
+#elif OS_NIX
+#define PATH_MAX 1024
 #elif OS_WINDOWS
-#define WINPATH_MAX 4096
+#define PATH_MAX 4096
 #endif
 
 
@@ -57,9 +65,9 @@ int meminfo_abspath(const char *relpath, char **abspath)
   
   #elif OS_WINDOWS
   DWORD len;
-  *abspath = malloc(WINPATH_MAX);
+  *abspath = malloc(PATH_MAX);
   
-  len = GetFullPathName(relpath, WINPATH_MAX, abspath, NULL);
+  len = GetFullPathName(relpath, PATH_MAX, abspath, NULL);
   
   if (len > PATH_MAX)
   {
