@@ -67,30 +67,5 @@ int sysctl_val(char *name, memsize_t *val)
 }
 
 
-
-
-#elif OS_WINDOWS
-
-void FILETIMEtoULI(FILETIME *ft, ULARGE_INTEGER *uli)
-{
-  uli->LowPart   = ft->dwLowDateTime;
-  uli->HighPart  = ft->dwHighDateTime;
-}
-
-// ft1 - ft2
-runtime_t FILETIMEdiff(FILETIME *ft1, FILETIME *ft2)
-{
-  runtime_t ut;
-  
-  ULARGE_INTEGER uli1, uli2;
-  
-  FILETIMEtoULI(ft1, &uli1);
-  FILETIMEtoULI(ft2, &uli2);
-  
-  ut = (runtime_t) (uli1.QuadPart - uli2.QuadPart) * 1e-7;
-  
-  return ut;
-}
-
 #endif
 

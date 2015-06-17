@@ -43,9 +43,6 @@ uint32_t meminfo_getpid();
 int read_proc_file(const char* file, uint64_t *val, char *field, int fieldlen);
 #elif OS_MAC
 int sysctl_val(char *name, uint64_t *val);
-#elif OS_WINDOWS
-void FILETIMEtoULI(FILETIME *ft, ULARGE_INTEGER *uli);
-runtime_t FILETIMEdiff(FILETIME *ft1, FILETIME *ft2);
 #elif OS_FREEBSD
 int sysctl_mib(char *name, int *mib, size_t *mibsize);
 int sysctlmib_val(int *mib, size_t mibsize, void *data, size_t *datasize);
