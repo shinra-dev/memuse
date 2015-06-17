@@ -139,7 +139,8 @@ devtools::install_github("wrathematics/memuse")
 ## Software license and disclaimer
 
 The R package is licensed under the GNU General Public License, version
-2 or greater.  The C library 'meminfo' located in src/meminfo of the
+2 or greater, basically as a joke (see the vignette for details).
+The C library 'meminfo' located in src/meminfo of the
 memuse package source tree is additionally licensed under the 
 permissive 2-clause BSD license.
 
