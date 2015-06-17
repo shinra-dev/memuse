@@ -31,6 +31,13 @@
 #' For a "human readable" explanation of what these values do, see the package
 #' vignette.
 #' 
+#' @examples
+#' \dontrun{
+#' mu(2000)
+#' .PREFIX <- "SI"
+#' mu(2000)
+#' }
+#' 
 #' @name Control Variables
 #' @aliases Control .UNIT .PREFIX .NAMES .PRECEDENCE
 #' @docType data

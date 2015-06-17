@@ -28,8 +28,6 @@ meminfo_retvals <- function(retval)
 #' Returns a list, whose values are platform dependent in addition to
 #' being modified by input arguments.
 #' 
-#' @seealso \code{\link{procmem}}
-#' 
 #' @examples
 #' \dontrun{
 #' library(memuse)
@@ -37,6 +35,7 @@ meminfo_retvals <- function(retval)
 #' Sys.meminfo()
 #' }
 #' 
+#' @seealso \code{\link{procmem}}
 #' @name meminfo
 #' @rdname meminfo
 #' @export
@@ -88,8 +87,6 @@ Sys.meminfo <- function(compact.free=TRUE)
 #' Returns a list, whose values are platform dependent in addition to
 #' being modified by input arguments.
 #' 
-#' @seealso \code{\link{procmem}}
-#' 
 #' @examples
 #' \dontrun{
 #' library(memuse)
@@ -97,6 +94,7 @@ Sys.meminfo <- function(compact.free=TRUE)
 #' Sys.swapinfo()
 #' }
 #' 
+#' @seealso \code{\link{procmem}}
 #' @name swapinfo
 #' @rdname swapinfo
 #' @export
@@ -149,8 +147,6 @@ Sys.pageinfo <- Sys.swapinfo
 #' Returns a list, whose values are platform dependent in addition to
 #' being modified by input arguments.
 #' 
-#' @seealso \code{\link{meminfo}}
-#' 
 #' @examples
 #' \dontrun{
 #' library(memuse)
@@ -168,6 +164,7 @@ Sys.pageinfo <- Sys.swapinfo
 #' Sys.procmem()
 #' }
 #' 
+#' @seealso \code{\link{meminfo}}
 #' @name procmem
 #' @rdname procmem
 #' @export
@@ -217,8 +214,6 @@ getcache <- function(level) .Call(R_meminfo_cacheinfo_size, level)
 #' @return 
 #' Returns a list, whose values are platform dependent.
 #' 
-#' @seealso \code{\link{meminfo}}
-#' 
 #' @examples
 #' \dontrun{
 #' library(memuse)
@@ -226,6 +221,7 @@ getcache <- function(level) .Call(R_meminfo_cacheinfo_size, level)
 #' Sys.cachesize()
 #' }
 #' 
+#' @seealso \code{\link{meminfo}}
 #' @name cachesize
 #' @rdname cachesize
 #' @export
@@ -261,8 +257,6 @@ Sys.cachesize <- function()
 #' @return 
 #' Returns a list, whose values are platform dependent.
 #' 
-#' @seealso \code{\link{meminfo}}
-#' 
 #' @examples
 #' \dontrun{
 #' library(memuse)
@@ -270,6 +264,7 @@ Sys.cachesize <- function()
 #' Sys.cachelinesize()
 #' }
 #' 
+#' @seealso \code{\link{meminfo}}
 #' @name cachelinesize
 #' @rdname cachelinesize
 #' @export

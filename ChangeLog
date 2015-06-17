@@ -1,6 +1,7 @@
 Release 2.5:
   * Switched to a header-only RNACI.
   * Fixed some portability issues in meminfo.
+  * Fixed bad documentation.
 
 Release 2.4:
   * Major documentation refactor; switched to roxygen2.

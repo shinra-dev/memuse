@@ -21,12 +21,6 @@ valid.mu <- function(object)
 }
 
 
-### memory usage (memuse) class
-# slots are:  
-   # size --- the actual size in some memuse units
-   # unit --- the memuse unit (e.g., byte, kilobyte, etc.)
-   # unit.prefix --- IEC or SI units
-   # unit.names --- short (e.g., kb) or long (e.g., kilobyte)
 #' Class memuse
 #' 
 #' Memory usage class object.
@@ -38,13 +32,13 @@ valid.mu <- function(object)
 #' unit.prefix = ..., unit.names = ...)}
 #' 
 #' @slot size
-#' TODO
+#' The actual size in some memuse units.
 #' @slot unit
-#' TODO
+#' The mem unit (e.g., byte, kilobyte, etc.)
 #' @slot unit.prefix
-#' TODO
+#' IEC or SI units
 #' @slot unit.names
-#' TODO
+#' short (e.g., kb) or long (e.g., kilobyte)
 #' 
 #' \code{memuse(size = ..., unit = ..., unit.prefix = ..., unit.names = ...)}
 #' 

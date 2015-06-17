@@ -23,10 +23,6 @@
 #' @return Returns a numeric value in the case of \code{size()}, and
 #' \code{as.numeric()}, otherwise a string is returned.
 #' 
-#' @seealso \code{ \link{memuse-class} \link{Replacers} }
-#' 
-#' @keywords Methods
-#' 
 #' @examples
 #' \dontrun{
 #' x <- mu(1e6)
@@ -38,6 +34,8 @@
 #' unit.names(x)
 #' }
 #' 
+#' @seealso \code{ \link{memuse-class} \link{Replacers} }
+#' @keywords Methods
 #' @name Accessors
 #' @rdname accessors
 NULL
@@ -133,10 +131,6 @@ setMethod("unit.names", signature(x="memuse"),
 #' @return Returns a numeric element in the case of \code{size()}, otherwise a
 #' string is returned.
 #' 
-#' @seealso \code{ \link{Accessors} \link{memuse-class} }
-#' 
-#' @keywords Methods
-#' 
 #' @examples
 #' \dontrun{
 #' x <- mu(2000, unit="bytes")
@@ -146,6 +140,8 @@ setMethod("unit.names", signature(x="memuse"),
 #' x
 #' }
 #' 
+#' @seealso \code{ \link{Accessors} \link{memuse-class} }
+#' @keywords Methods
 #' @rdname replacers
 NULL
 

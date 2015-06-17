@@ -2,9 +2,6 @@
 #' 
 #' Print and show methods for \code{memuse} class objects.
 #' 
-#' 
-#' @name Print
-#' 
 #' @param x,object 
 #' \code{memuse} class object
 #' @param ... extra arguments
@@ -19,11 +16,8 @@
 #' @param digits 
 #' the number of decimal digits to print; default is 3
 #' 
-#' @return Returns a string.
-#' 
-#' @seealso \code{\ link{Constructor} \link{memuse-class} }
-#' 
-#' @keywords Methods
+#' @return 
+#' Returns a string.
 #' 
 #' @examples
 #' \dontrun{
@@ -33,6 +27,9 @@
 #' x # same as show(x)
 #' }
 #' 
+#' @seealso \code{\ link{Constructor} \link{memuse-class} }
+#' @keywords Methods
+#' @name Print
 #' @rdname print
 NULL
 

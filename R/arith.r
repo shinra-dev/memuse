@@ -10,15 +10,10 @@
 #' combination of \code{memuse}, \code{object_size} (output from the
 #' \code{object.size()} function), and \code{numeric} objects.
 #' 
-#' 
 #' @param e1,e2
 #' \code{memuse}, \code{numeric}, or \code{object_size} objects.
 #' 
 #' @return Returns a \code{memuse} class object.
-#' 
-#' @seealso \code{ \link{Constructor}, \link{memuse-class} }
-#' 
-#' @keywords Methods
 #' 
 #' @examples
 #' \dontrun{
@@ -32,6 +27,8 @@
 #' x^2
 #' }
 #' 
+#' @seealso \code{ \link{Constructor}, \link{memuse-class} }
+#' @keywords Methods
 #' @name Arithmetic
 #' @rdname arithmetic
 NULL

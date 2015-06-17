@@ -15,7 +15,6 @@
 #' \code{swap.names} will change from short to long, or long to short printing.
 #' The size and prefix of the object are unchanged.
 #' 
-#' 
 #' @param x 
 #' memuse object
 #' @param unit 
@@ -23,11 +22,8 @@
 #' @param precedence
 #' Currently does nothing.
 #' 
-#' @return Returns a \code{memuse} class object.
-#' 
-#' @seealso \code{ \link{Constructor} \link{memuse-class} }
-#' 
-#' @keywords Methods
+#' @return 
+#' Returns a \code{memuse} class object.
 #' 
 #' @examples
 #' \dontrun{
@@ -39,6 +35,8 @@
 #' swap.unit(x, "bytes")
 #' }
 #' 
+#' @seealso \code{ \link{Constructor} \link{memuse-class} }
+#' @keywords Methods
 #' @name Swaps
 #' @rdname swaps
 NULL

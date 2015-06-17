@@ -24,8 +24,6 @@
 #' @param digits 
 #' The number of decimal digits to retain.
 #' 
-#' @seealso \code{\link{howmany}}
-#' 
 #' @examples
 #' \dontrun{
 #' library(memuse)
@@ -34,6 +32,7 @@
 #' approx.size(12345678, unit.names="comma")
 #' }
 #' 
+#' @seealso \code{\link{howmany}}
 #' @export approx.size
 approx.size <- function(x, unit.names="long", ..., digits=1)
 {

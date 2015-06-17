@@ -9,10 +9,6 @@
 #' 
 #' @return Returns a \code{memuse} class object.
 #' 
-#' @seealso \code{ \link{Constructor}, \link{memuse-class} }
-#' 
-#' @keywords Methods
-#' 
 #' @examples
 #' \dontrun{
 #' x <- mu(2000)
@@ -26,6 +22,8 @@
 #' x != y
 #' }
 #' 
+#' @seealso \code{ \link{Constructor}, \link{memuse-class} }
+#' @keywords Methods
 #' @name Comparators
 #' @rdname comparators
 NULL

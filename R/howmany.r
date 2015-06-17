@@ -47,14 +47,11 @@
 #' The size (in bytes) of an integer.  Default is 4, but this is
 #' platform dependent.
 #' 
-#' @return \code{howmany()} returns a numeric pair, the dimensions of a matrix.
+#' @return 
+#' \code{howmany()} returns a numeric pair, the dimensions of a matrix.
 #' 
 #' \code{howmany.par()} returns a list (the global and local dimensions), each
 #' of which is a numeric pair.
-#' 
-#' @seealso \code{\link{howbig}}
-#' 
-#' @keywords Methods
 #' 
 #' @examples
 #' \dontrun{
@@ -66,6 +63,8 @@
 #' howmany(mu(1, "gib"), out.type="approx")
 #' }
 #' 
+#' @seealso \code{\link{howbig}}
+#' @keywords Methods
 #' @name howmany
 #' @rdname howmany
 #' @export
@@ -120,7 +119,6 @@ howmany <- function(x, nrow, ncol, out.type="full", representation="dense", ...,
 #' @param bldim
 #' Blocking dimension for 2d block-cyclic distribution.
 #' 
-#' @name howmany
 #' @rdname howmany
 #' @export
 howmany.par <- function(x, nrow, ncol, out.type="full", cores=1, par="row", ..., type="double", intsize=4, ICTXT=0, bldim=c(4, 4))

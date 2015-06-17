@@ -18,15 +18,13 @@
 #' @return 
 #' Returns a \code{memuse} object.
 #' 
-#' @seealso \code{ \link{memuse-class} \link{Accessors} }
-#' 
-#' @keywords Methods
-#' 
 #' @examples
 #' \dontrun{
 #' as.memuse(10)
 #' }
 #' 
+#' @seealso \code{ \link{memuse-class} \link{Accessors} }
+#' @keywords Methods
 #' @name Converters
 #' @rdname converters
 NULL

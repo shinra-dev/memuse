@@ -16,10 +16,17 @@
 #' @return 
 #' Returns a \code{memuse} class object.
 #' 
+#' @examples
+#' \dontrun{
+#' ### This will work
+#' sum(mu(10), 10)
+#' 
+#' ### This will not
+#' sum(10, mu(10))
+#' }
+#' 
 #' @seealso \code{ \link{Constructor} \link{memuse-class} }
-#' 
 #' @keywords Methods
-#' 
 #' @rdname sum
 NULL
 

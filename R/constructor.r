@@ -21,10 +21,6 @@
 #' @return 
 #' Returns a \code{memuse} class object.
 #' 
-#' @seealso \code{ \link{memuse-class} \link{Accessors} \link{Converters} }
-#' 
-#' @keywords Methods
-#' 
 #' @examples
 #' \dontrun{
 #' x <- mu(100, unit="kb")
@@ -34,6 +30,8 @@
 #' y
 #' }
 #' 
+#' @seealso \code{ \link{memuse-class} \link{Accessors} \link{Converters} }
+#' @keywords Methods
 #' @name Constructor
 #' @rdname constructor
 NULL

@@ -9,7 +9,6 @@
 #' distributed analogue.  The latter returns the memory usage of a
 #' \emph{distributed}, object
 #' 
-#' @aliases howbig howbig.par
 #' @param nrow,ncol 
 #' Number of (global) rows/columns of the matrix.
 #' @param representation 
@@ -52,15 +51,15 @@
 #' \code{howbig.par()} returns a list of 2 elements, each of class
 #' \code{memuse}.  One is the total memory usage, the other is the local memory
 #' usage.
-#' @seealso \code{\link{howmany}}
-#' @keywords Methods
-#' @examples
 #' 
+#' @examples
 #' \dontrun{
 #' # size of a 1000x1000 matrix
 #' howbig(1000, 1000)
 #' }
 #' 
+#' @seealso \code{\link{howmany}}
+#' @keywords Methods
 #' @name howbig
 #' @rdname howbig
 #' @export howbig
