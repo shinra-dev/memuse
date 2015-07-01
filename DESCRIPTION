@@ -4,7 +4,7 @@ Version: 2.5
 Description: How much ram do you need to store a 100,000 by 100,000 matrix?
     How much ram is your current R session using? How much ram do you even have?
     Learn the scintillating answer to these and many more such questions with
-    the memuse package.
+    the 'memuse' package.
 License: GPL (>= 2)
 Copyright: See memuse/inst/meminfo_LICENSE for the files in src/meminfo/.
 Depends: R (>= 2.15.1)
