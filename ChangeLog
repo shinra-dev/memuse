@@ -22,6 +22,7 @@ Release 2.1:
   * Rewrote package demos to be more meaningful.
 
 Release 2.0:
+  * Switched to RNACI for internals.
   * Added system memory lookup.
   * Added system swap lookup.
   * Added process memory usage lookup.
