@@ -154,3 +154,5 @@ With additional contributions from:
 * Wei-Chen Chen
 * Christian Heckendorf
 
+We would also specially like to thank Dan Burgess for contributing
+a Mac for development and testing.
