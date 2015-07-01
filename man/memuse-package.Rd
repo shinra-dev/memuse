@@ -28,8 +28,6 @@ Drew Schmidt
 }
 \references{
 Project home page: \url{http://github.com/wrathematics/memuse}
-
-CRAN listing: \url{http://cran.r-project.org/web/packages/memuse/index.html}
 }
 \keyword{Package}
 

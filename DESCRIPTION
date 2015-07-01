@@ -16,3 +16,5 @@ Authors@R: c(
         person("Christian", "Heckendorf", role="ctb"),
         person("Wei-Chen", "Chen", role="ctb"))
 Maintainer: Drew Schmidt <wrathematics@gmail.com>
+URL: https://github.com/shinra-dev/memuse
+BugReports: https://github.com/shinra-dev/memuse/issues
