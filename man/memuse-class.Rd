@@ -16,16 +16,8 @@ Memory usage class object.
 
 \item{\code{unit.prefix}}{IEC or SI units}
 
-\item{\code{unit.names}}{short (e.g., kb) or long (e.g., kilobyte)
-
-\code{memuse(size = ..., unit = ..., unit.prefix = ..., unit.names = ...)}
-
-\code{mu(size = ..., unit = ..., unit.prefix = ..., unit.names = ...)}}
+\item{\code{unit.names}}{short (e.g., kb) or long (e.g., kilobyte)}
 }}
-\section{Creating Objects}{
- \code{new('memuse', size = ..., unit = ...,
-unit.prefix = ..., unit.names = ...)}
-}
 \seealso{
 \code{ \link{Control} \link{Constructor} }
 }
