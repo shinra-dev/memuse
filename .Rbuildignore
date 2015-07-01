@@ -2,3 +2,5 @@ redocument
 ^\.travis\.yml$
 
 src/meminfo/Makefile
+
+vignettes/cover
