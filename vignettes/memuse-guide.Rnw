@@ -10,7 +10,7 @@
 \myauthor{Drew Schmidt\\ \texttt{wrathematics@gmail.com} }
 \mytitle{Guide to the \thispackage Package}
 \mysubtitle{A Package for Estimating Memory Usage}
-\myversion{2.1}
+\myversion{2.5}
 
 
 
