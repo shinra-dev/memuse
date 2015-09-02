@@ -11,3 +11,4 @@ stopifnot(all.equal(swap.names(x), mu(n, unit.names="long")))
 ### TODO
 #y <- swap.unit(x, "kib")
 #stopifnot(all.equal(y, z))
+
