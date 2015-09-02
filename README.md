@@ -98,7 +98,7 @@ howbig(10000, 500, representation="sparse", sparsity=.05)
 Alternatively, given a (memory) size, you can also find the dimensions
 of such a matrix:
 
-```r`
+```r
 howmany(mu(800, "mib"))
 # [1] 10240 10240
 howmany(mu(800, "mib"), ncol=500)
@@ -145,14 +145,17 @@ memuse package source tree is additionally licensed under the
 permissive 2-clause BSD license.
 
 
+
 ## Authors
 
 memuse is authored and maintained by:
+
 * Drew Schmidt
 
 With additional contributions from:
-* Wei-Chen Chen
-* Christian Heckendorf
+
+* Christian Heckendorf (FreeBSD improvements to meminfo)
+* Wei-Chen Chen (Windows build fixes for memuse)
 
 We would also specially like to thank Dan Burgess for contributing
 a Mac for development and testing.
