@@ -4,11 +4,13 @@
 \name{Constructor}
 \alias{Constructor}
 \alias{memuse}
+\alias{memuse,ANY-method}
 \alias{memuse,NULL-method}
 \alias{memuse,missing-method}
 \alias{memuse,numeric-method}
 \alias{memuse,object_size-method}
 \alias{mu}
+\alias{mu,ANY-method}
 \alias{mu,NULL-method}
 \alias{mu,missing-method}
 \alias{mu,numeric-method}
@@ -16,6 +18,9 @@
 \title{memuse Constructor}
 \usage{
 mu(size, unit = .UNIT, unit.prefix = .PREFIX, unit.names = .NAMES)
+
+\S4method{mu}{ANY}(size = 0, unit = .UNIT, unit.prefix = .PREFIX,
+  unit.names = .NAMES)
 
 \S4method{mu}{`NULL`}(size = 0, unit = .UNIT, unit.prefix = .PREFIX,
   unit.names = .NAMES)
@@ -30,6 +35,9 @@ mu(size, unit = .UNIT, unit.prefix = .PREFIX, unit.names = .NAMES)
   unit.names = .NAMES)
 
 memuse(size, unit = .UNIT, unit.prefix = .PREFIX, unit.names = .NAMES)
+
+\S4method{memuse}{ANY}(size = 0, unit = .UNIT, unit.prefix = .PREFIX,
+  unit.names = .NAMES)
 
 \S4method{memuse}{`NULL`}(size = 0, unit = .UNIT, unit.prefix = .PREFIX,
   unit.names = .NAMES)
@@ -64,15 +72,21 @@ Returns a \code{memuse} class object.
 Constructor for objects of class \code{memuse}.
 }
 \details{
-Simple constructor for \code{memuse} objects.
+For numeric objects, if the length is 1, then its value is used
+as the number of bytes.  Otherwise, the object's memory usage
+in R is taken for the size parameter.
 }
 \examples{
 \dontrun{
-x <- mu(100, unit="kb")
+### The value passed as 'size' is the number of bytes
+x <- memuse(100, unit="kb")
 x
 
-y <- mu(100, unit="kb", unit.prefix="SI")
+y <- memuse(100, unit="kb", unit.prefix="SI")
 y
+
+### Use the memory usage of object 'size'
+memuse(rnorm(1e4))
 }
 }
 \seealso{

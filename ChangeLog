@@ -1,5 +1,5 @@
-Release 2.6:
-  *
+Release 3.0:
+  * Changed memuse() behavior significantly; see help("memuse").
 
 Release 2.5:
   * Switched to a header-only RNACI.

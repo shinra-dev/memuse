@@ -2,7 +2,9 @@
 #' 
 #' Constructor for objects of class \code{memuse}.
 #' 
-#' Simple constructor for \code{memuse} objects.
+#' For numeric objects, if the length is 1, then its value is used
+#' as the number of bytes.  Otherwise, the object's memory usage
+#' in R is taken for the size parameter.
 #' 
 #' @param size 
 #' \code{numeric}; indicates the unit-multiple number of bytes used
@@ -23,12 +25,18 @@
 #' 
 #' @examples
 #' \dontrun{
-#' x <- mu(100, unit="kb")
+#' ### The value passed as 'size' is the number of bytes
+#' x <- memuse(100, unit="kb")
 #' x
 #' 
-#' y <- mu(100, unit="kb", unit.prefix="SI")
+#' y <- memuse(100, unit="kb", unit.prefix="SI")
 #' y
+#' 
+#' ### Use the memory usage of object 'size'
+#' memuse(rnorm(1e4))
 #' }
+#' 
+#' @importFrom utils object.size
 #' 
 #' @seealso \code{ \link{memuse-class} \link{Accessors} \link{Converters} }
 #' @keywords Methods
@@ -36,12 +44,21 @@
 #' @rdname constructor
 NULL
 
+
+
 #' @rdname constructor
 #' @export
 setGeneric(name="mu", 
   function(size, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
     standardGeneric("mu"), 
   package="memuse"
+)
+
+#' @rdname constructor
+#' @export
+setMethod("mu", signature(size="ANY"),
+  function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+    mu(utils::object.size(size), unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
 )
 
 #' @rdname constructor
@@ -58,7 +75,10 @@ setMethod("mu", signature(size="NULL"),
 setMethod("mu", signature(size="numeric"),
   function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
   {
-    return( internal.mu(size=size, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names) )
+    if (NROW(size) == 1 && NCOL(size) == 1)
+      internal.mu(size=size, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
+    else
+      mu(utils::object.size(size), unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
   }
 )
 
@@ -92,53 +112,36 @@ setGeneric(name="memuse",
 
 #' @rdname constructor
 #' @export
+setMethod("memuse", signature(size="ANY"),
+  function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+    mu(utils::object.size(size), unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
+)
+
+#' @rdname constructor
+#' @export
 setMethod("memuse", signature(size="NULL"),
   function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
-  {
-    return( NULL )
-  }
+    mu(size, unit, unit.prefix, unit.names)
 )
 
 #' @rdname constructor
 #' @export
 setMethod("memuse", signature(size="missing"),
   function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
-  {
-    return( mu(0, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names) )
-  }
+    mu(size, unit, unit.prefix, unit.names)
 )
 
 #' @rdname constructor
 #' @export
 setMethod("memuse", signature(size="numeric"),
   function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
-  {
-    return( internal.mu(size=size, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names) )
-  }
+    mu(size, unit, unit.prefix, unit.names)
 )
 
 #' @rdname constructor
 #' @export
 setMethod("memuse", signature(size="object_size"),
   function(size, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
-  {
-    return( internal.mu(size=unclass(size), unit=unit, unit.prefix=unit.prefix, unit.names=unit.names) )
-  }
+    mu(size, unit, unit.prefix, unit.names)
 )
-
-
-
-#' object.size
-#' 
-#' @param x
-#' An R object.
-#' 
-#' @name object.size
-#' @rdname object.size
-#' @export
-object.size <- function(x)
-{
-  return( mu(utils::object.size(x)) )
-}
-
 
