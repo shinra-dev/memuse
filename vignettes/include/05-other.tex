@@ -11,8 +11,8 @@ on this later).
 So say we have the vector \code{x <- 1.0}.  This should be using 8 bytes to 
 store that \code{1.0} as a double, right?  Well\dots
 \begin{lstlisting}[language=rr]
-> object.size(1.0)
-48 bytes
+object.size(1.0)
+## 48 bytes
 \end{lstlisting}
 
 So where is all that extra space coming from?  Simply put, \R objects 
@@ -28,16 +28,17 @@ worth noting that this overhead does not scale; it is on a per-object basis.  So
 we don't need 40 bytes for each element of a vector when just 8 would do (in the 
 case of double precision values).  We need 40 plus 8 per element:
 \begin{lstlisting}[language=rr]
-> # 2 elements
-> 40+8*2
-[1] 56
-> object.size(rnorm(2))
-56 bytes
-> # 100.000 elements
-> 40+1e5*8
-[1] 800040
-`> object.size(rnorm(1e5))
-800040 bytes
+# 2 elements
+40+8*2
+## [1] 56
+object.size(rnorm(2))
+## 56 bytes
+
+# 100.000 elements
+40+1e5*8
+## [1] 800040
+object.size(rnorm(1e5))
+## 800040 bytes
 \end{lstlisting}
 
 The story is slightly more complicated for integer data (and a lot more 
@@ -45,10 +46,10 @@ complicated for strings; see the following section).  On my machine (and
 probably yours, but not necessarily), \code{int}s costs 4 bytes.  However, 
 \R does some aggressive allocation:
 \begin{lstlisting}[language=rr]
-> object.size(1L:3L)
-56 bytes
-> object.size(1L:4L)
-56 bytes
+object.size(1L:3L)
+## 56 bytes
+object.size(1L:4L)
+## 56 bytes
 \end{lstlisting}
 Here we see \R allocating more bytes than it needs for integer vectors 
 sometimes, choosing to allocate in 16 byte chunks rather than 8 byte chunks.
@@ -61,19 +62,21 @@ bytes); so you would need a billion objects to use just about a GiB ($1024^3$
 bytes) on overhead.  And if you're doing that kind of silly shit, my advice 
 would be to learn how to properly use data structures.
 
-All that said, the \pkg{memuse} package actually overwrites the default 
-behavior of \code{object.size()}.  By default, the return is an object of class 
+All that said, the main \code{memuse()} (\code{mu()} for short) function
+will offer a better version of \code{object.size()}.  In previous 
+version, the package overwrote the default functionality, but as of
+package version 3.0.0, that is no longer the case. 
+
+The \code{object.size()} function returns an object of class 
 \code{object_size}, which is a not-so-useful S3 class provided by core 
-\R.  Once you load \pkg{memuse}, the return for the 
-\code{object.size()} function will automatically be cast as a \code{memuse} 
-object.  So in reality, if you execute the code from the example above, you 
-will actually get:
+\R.  If you instead use \code{memuse()}, then \code{object.size()} will
+be called and automatically be cast as a \code{memuse} 
+object.  So revisiting the code above:
 \begin{lstlisting}[language=rr]
-> object.size(rnorm(1e5))
-781.289 KiB
+memuse(rnorm(1e5))
+## 781.289 KiB
 \end{lstlisting}
-The output at the top of this subsection is the output from 
-\code{utils::object.size()}.
+
 
 
 \subsection{Strings}
@@ -89,10 +92,10 @@ for the null terminator.  So for example, recall that a vector allocates 40
 bytes of overhead, so the vector string \code{letters} should use $56\times 26 + 
 40$ bytes.  We can easily verify that this is the case:
 \begin{lstlisting}[language=rr]
-> 56*26+40
-[1] 1496
-> object.size(letters)
-1496 bytes
+56*26+40
+## [1] 1496
+memuse(letters)
+## 1.461 KiB
 \end{lstlisting}
 
 If you have a string with more than 7 chars, \R will allocate extra 
@@ -102,22 +105,25 @@ this is probably a contiguous 16 byte allocation; I have not bothered to check).
  Beyond that, storage is allocate in 16 byte blocks for each string.  For 
 example:
 \begin{lstlisting}[language=rr]
->  object.size(c(paste(rep("a", 7), collapse=""), "a")) 
-152 bytes
->  object.size(c(paste(rep("a", 7+1), collapse=""), "a")) 
-160 bytes
->  object.size(c(paste(rep("a", 7+8+1), collapse=""), "a")) 
-176 bytes
->  object.size(c(paste(rep("a", 7+8+16+1), collapse=""), "a")) 
-192 bytes
+memuse(c(paste(rep("a", 7), collapse=""), "a")) 
+## 152 B
+
+  memuse(c(paste(rep("a", 7+1), collapse=""), "a")) 
+## 160 B
+
+  memuse(c(paste(rep("a", 7+8+1), collapse=""), "a")) 
+## 176 B
+
+  memuse(c(paste(rep("a", 7+8+16+1), collapse=""), "a")) 
+## 192 B
 \end{lstlisting}
 
 If you have a vector of strings with them of varying lengths, the allocation of 
 individual elements is handled on a case-by-case basis.  Consider the 
 following:
 \begin{lstlisting}[language=rr]
-> object.size(c(paste(rep("a", 7+8+16+1), collapse=""), "a")) 
-192 bytes
+  memuse(c(paste(rep("a", 7+8+16+1), collapse=""), "a")) 
+## 192 B
 \end{lstlisting}
 
 This object (the vector of 2 elements with first element 
