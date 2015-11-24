@@ -1,31 +1,24 @@
 # memuse 
 
-* **Version:** 2.6
+* **Version:** 3.0.0
 * **Status:** [![Build Status](https://travis-ci.org/shinra-dev/memuse.png)](https://travis-ci.org/shinra-dev/memuse) 
 * **License:** [![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-orange.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
 * **Author:** Drew Schmidt
 
 
-Originally, this package was an over-engineered solution to a mostly 
-non-existent problem, as a sort of love letter to other needlessly complex 
-programs like the
-[Enterprise Fizzbuzz](https://github.com/Mikkeren/FizzBuzzEnterpriseEdition)
+Originally, this package was an over-engineered solution to a mostly non-existent problem, as a sort of love letter to other needlessly complex programs like the [Enterprise Fizzbuzz](https://github.com/Mikkeren/FizzBuzzEnterpriseEdition)
 
-However, as of version 2.0, I'm sad to report that the package is actually
-becoming quite useful.
+However, as of version 2.0.0, I'm sad to report that the package is actually becoming quite useful.
 
 
 
 ## Package Utilities
 
-The package comes with several classes of utilities.  I find all
-of them very useful during the course of benchmarking, but 
-some are certainly more useful than others.
+The package comes with several classes of utilities.  I find all of them very useful during the course of benchmarking, but some are certainly more useful than others.
 
 
 #### Memory Lookups
-With this package you can get some information about
-how much memory is physically available on the host machine:
+With this package you can get some information about how much memory is physically available on the host machine:
 
 ```r
 Sys.meminfo()
@@ -62,9 +55,7 @@ Sys.procmem()
 # Peak:  1021.363 MiB 
 ```
 
-Also, if you're working close to the metal, you may be interested
-in seeing how large the CPU caches are and/or how big the cache
-linesize is:
+Also, if you're working close to the metal, you may be interested in seeing how large the CPU caches are and/or how big the cache linesize is:
 
 ```r
 Sys.cachesize()
@@ -81,8 +72,7 @@ Sys.cachelinesize()
 
 #### Estimating Memory Usage
 
-You can estimate memory storage requirements of a matrix without
-having to divide by some annoying power of 2:
+You can estimate memory storage requirements of a matrix without having to divide by some annoying power of 2:
 
 ```r
 howbig(10000, 500)
@@ -95,8 +85,7 @@ howbig(10000, 500, representation="sparse", sparsity=.05)
 # 1.907 MiB
 ```
 
-Alternatively, given a (memory) size, you can also find the dimensions
-of such a matrix:
+Alternatively, given a (memory) size, you can also find the dimensions of such a matrix:
 
 ```r
 howmany(mu(800, "mib"))
@@ -138,11 +127,7 @@ devtools::install_github("wrathematics/memuse")
 
 ## Software license and disclaimer
 
-The R package is licensed under the GNU General Public License, version
-2 or greater, basically as a joke (see the vignette for details).
-The C library 'meminfo' located in src/meminfo of the
-memuse package source tree is additionally licensed under the 
-permissive 2-clause BSD license.
+The R package is licensed under the GNU General Public License, version 2 or greater, basically as a joke (see the vignette for details). The C library 'meminfo' located in src/meminfo of the memuse package source tree is additionally licensed under the permissive 2-clause BSD license.
 
 
 
@@ -155,7 +140,5 @@ memuse is authored and maintained by:
 With additional contributions from:
 
 * Christian Heckendorf (FreeBSD improvements to meminfo)
-* Wei-Chen Chen (Windows build fixes for memuse)
-
-We would also specially like to thank Dan Burgess for contributing
-a Mac for development and testing.
+* Wei-Chen Chen (Windows build fixes)
+* Dan Burgess (donation of a Mac for development and testing)

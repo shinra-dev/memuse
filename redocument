@@ -1,4 +1,0 @@
-#!/bin/sh
-
-Rscript --vanilla -e "roxygen2::roxygenize()"
-

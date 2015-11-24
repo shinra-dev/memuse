@@ -7,15 +7,19 @@ Description: How much ram do you need to store a 100,000 by 100,000 matrix?
     the 'memuse' package.
 License: GPL (>= 2)
 Copyright: See memuse/inst/meminfo_LICENSE for the files in src/meminfo/.
-Depends: R (>= 2.15.1)
-Imports: methods,
+Depends:
+    R (>= 2.15.1)
+Imports:
+    methods,
     utils
 NeedsCompilation: yes
 ByteCompile: yes
 Authors@R: c(
         person("Drew", "Schmidt", email="wrathematics@gmail.com", role=c("aut", "cre")),
-        person("Christian", "Heckendorf", role="ctb"),
-        person("Wei-Chen", "Chen", role="ctb"))
+        person("Christian", "Heckendorf", role="ctb", comment="FreeBSD improvements to meminfo"),
+        person("Wei-Chen", "Chen", role="ctb", comment="Windows build fixes"),
+        person("Dan", "Burgess", role="ctb", comment="donation of a Mac for development and testing"))
 Maintainer: Drew Schmidt <wrathematics@gmail.com>
 URL: https://github.com/shinra-dev/memuse
 BugReports: https://github.com/shinra-dev/memuse/issues
+RoxygenNote: 5.0.1
