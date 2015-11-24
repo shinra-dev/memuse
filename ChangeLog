@@ -1,6 +1,8 @@
 Release 3.0.0:
-  * Changed version numbering.
+  * Changed version numbering from Major.Minor to Major.Minor.Patch.
+  * Fixed numerous documentation errors.
   * Changed memuse() behavior significantly; see help("memuse").
+  * Deprecated memuse::object.size().
 
 Release 2.5:
   * Switched to a header-only RNACI.
@@ -47,4 +49,3 @@ Release 1.1:
 Release 1.0:
   * Started with a 10 line function that was more than sufficient.
   * The joke got tastelessly out of hand.
-

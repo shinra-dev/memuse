@@ -16,9 +16,6 @@
 #' @param digits 
 #' the number of decimal digits to print; default is 3
 #' 
-#' @return 
-#' Returns a string.
-#' 
 #' @examples
 #' \dontrun{
 #' x <- mu(1e6)
@@ -29,11 +26,13 @@
 #' 
 #' @seealso \code{\ link{Constructor} \link{memuse-class} }
 #' @keywords Methods
-#' @name Print
-#' @rdname print
+#' @name print-memuse
+#' @rdname print-memuse
 NULL
 
-#' @rdname print
+
+
+#' @rdname print-memuse
 #' @export
 setMethod("print", signature(x="memuse"),
   function(x, ..., unit=x@unit, unit.prefix=x@unit.prefix, unit.names=x@unit.names, digits=3)
@@ -58,10 +57,11 @@ setMethod("print", signature(x="memuse"),
   }
 )
 
-#' @rdname print
+
+
+#' @rdname print-memuse
 #' @export
 setMethod("show", signature(object="memuse"),
   function(object) 
     print(object, unit=object@unit, unit.prefix=object@unit.prefix, unit.names=object@unit.names, digits=3)
 )
-

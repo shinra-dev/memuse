@@ -339,12 +339,10 @@ Sys.filesize <- function(filename)
 title_case <- function(x) gsub(x, pattern="(^|[[:space:]])([[:alpha:]])", replacement="\\1\\U\\2", perl=TRUE)
 
 
-#' @title Print sysinfo objects.
-#' 
-#' @param x 
-#' An sysinfo object.
-#' @param ... Additional arguments (ignored).
-#' 
+#' @title Print \code{sysinfo} objects
+#' @description Printing for \code{sysinfo} objects.
+#' @param x \code{sysinfo} object
+#' @param ... unused
 #' @name print-sysinfo
 #' @rdname print-sysinfo
 #' @method print sysinfo
@@ -380,4 +378,3 @@ print.sysinfo <- function(x, ...)
   
   return(ret)
 }
-
