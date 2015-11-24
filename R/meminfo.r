@@ -309,7 +309,7 @@ Sys.cachelinesize <- function()
 #' library(memuse)
 #' 
 #' x <- rnorm(1e5)
-#' object.size(x) ### size in ram
+#' memuse(x) ### size in ram
 #' 
 #' tmp <- tempfile()
 #' saveRDS(x, file=tmp)

@@ -19,4 +19,6 @@ howmany(x, ncol=500)
 
 # Compare with object.size()
 howbig(1000, 500)
-object.size(matrix(runif(1000*500), 1000, 500))
+obj <- matrix(runif(1000*500), 1000, 500)
+utils::object.size(obj)
+memuse(obj)
