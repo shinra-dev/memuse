@@ -45,7 +45,7 @@ Sys.procmem()
 # Peak:  258.426 MiB 
 
 x <- rnorm(1e8)
-object.size(x)
+memuse(x)
 # 762.939 MiB
 
 rm(x);invisible(gc())
