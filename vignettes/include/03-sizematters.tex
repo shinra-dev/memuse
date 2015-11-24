@@ -29,14 +29,12 @@ There is a great deal of ambiguity in the public regarding the meaning of these 
 
 Another example of this confusion is when people talk about \twiddle{big data}.  Often I/O people will use the term ``terabytes'' or ``exabytes'' and mean it, even though many file-on-disk-size reporting utilities (such as \code{du}) use the IEC prefix.  Rescaling reported SI units into IEC units --- the ones people are generally more familiar with --- is simple with the \code{memuse} package:
 \begin{lstlisting}[language=rr]
-> swap.prefix(mu(size=1, unit="tb", unit.prefix="SI"))
-0.909 TiB
-> swap.prefix(mu(size=1, unit="pb", unit.prefix="SI"))
-0.888 PiB
+swap.prefix(mu(size=1, unit="tb", unit.prefix="SI"))
+## 0.909 TiB
+swap.prefix(mu(size=1, unit="pb", unit.prefix="SI"))
+## 0.888 PiB
 \end{lstlisting}
 
 These sizes represent an impressive amount of data, but this ambiguity in naming conventions allows people to lie a bit.  For all of these reasons, since the package is meant to be useful for understanding R object size, the default behavior is somewhat complicated, but can be summarized as trying to provide what most people meant in the first place.  We achieve this by offering several default string objects which the user can easily control.  These units are \code{.UNIT}, \code{.PREFIX}, and \code{.NAMES}.  
 
 In the sections to follow, we will further examine the above \pkg{memuse} functions, as well as the other utilities the package offers.
-
-

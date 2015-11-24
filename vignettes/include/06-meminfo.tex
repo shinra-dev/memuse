@@ -154,36 +154,35 @@ Sys.procmem()
 Just as an example, on my machine, this produces:
 \vspace{-.6cm}
 \begin{Output}
-> Sys.procmem()
-$size
-134.488 MiB
+Sys.procmem()
+## $size
+## 134.488 MiB
+## 
+## $peak
+## 134.488 MiB
 
-$peak
-134.488 MiB
+x <- rnorm(1e7)
 
-> x <- rnorm(1e7)
+object.size(x)
+## 76.294 MiB
 
-> object.size(x)
-76.294 MiB
+Sys.procmem()
+## $size
+## 210.785 MiB
+## 
+## $peak
+## 210.785 MiB
 
-> Sys.procmem()
-$size
-210.785 MiB
+rm(x)
+gc(FALSE)
+##          used (Mb) gc trigger (Mb) max used (Mb)
+## Ncells 324437 17.4     597831 32.0   407500 21.8
+## Vcells 578176  4.5    9599428 73.3 10582203 80.8
 
-$peak
-210.785 MiB
-
-> rm(x)
-> gc(FALSE)
-         used (Mb) gc trigger (Mb) max used (Mb)
-Ncells 324437 17.4     597831 32.0   407500 21.8
-Vcells 578176  4.5    9599428 73.3 10582203 80.8
-
-> Sys.procmem()
-$size
-134.488 MiB
-
-$peak
-210.785 MiB
-
+Sys.procmem()
+## $size
+## 134.488 MiB
+## 
+## $peak
+## 210.785 MiB
 \end{Output}

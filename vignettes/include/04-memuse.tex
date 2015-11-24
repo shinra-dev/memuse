@@ -48,17 +48,17 @@ since the default \code{.UNIT=best} will make the choice to switch the units fro
 \subsection{Methods}
 Aside from the constructor, you have already seen one very useful method:  \code{swap.prefix()}.  In addition to these, we have several other obvious methods, such as \code{swap.unit()}, \code{swap.names()}, \code{print()}, \code{show()}, etc.  But we also have some simple arithmetic, namely \code{`+`} (addition), \code{`*`} (multiplication), and \code{`\^{}`} (exponentiation).  So for example:
 \begin{lstlisting}[language=rr]
-> mu(100) + mu(200)
-300.000 B
-> mu(100) * mu(200) # 100*200/1024
-19.531 KiB
+mu(100) + mu(200)
+## 300.000 B
+mu(100) * mu(200) # 100*200/1024
+## 19.531 KiB
 \end{lstlisting}
 Other arithmetic of memuse objects is available, including division, as well as 
 
 Finally, we have the methods that inspired the creation of this entire dumb thing in the first place:  \code{howbig()} and \code{howmany()}.  The former takes in the dimensions of a matrix (\code{nrow} rows and \code{ncol} columns) and returns the memory usage (as the package namesake would imply) of the object.  So for example, if you wanted to perform a principal components decomposition on a 100,000 by 100,000 matrix via SVD (as we have), then you would need:
 \begin{lstlisting}
-> howbig(100000, 100000)
-74.506 GiB
+howbig(100000, 100000)
+## 74.506 GiB
 \end{lstlisting}
 Of ram just to store the data.  Another interesting anecdote about this sized matrix is that we were able to generate it in just over a tenth of a second.  Pretty cool, eh?
 
