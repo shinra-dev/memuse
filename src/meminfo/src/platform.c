@@ -9,6 +9,8 @@
 
 #if OS_LINUX
 
+#include <inttypes.h>
+
 int read_proc_file(const char *file, memsize_t *val, char *field, int fieldlen)
 {
   size_t len = 0;
@@ -25,7 +27,7 @@ int read_proc_file(const char *file, memsize_t *val, char *field, int fieldlen)
     {
       if (strncmp(tmp, field, fieldlen) == 0)
       {
-        sscanf(tmp, "%*s%ld", &value);
+        sscanf(tmp, "%*s%" SCNu64, &value);
         break;
       }
     }
@@ -68,4 +70,3 @@ int sysctl_val(char *name, memsize_t *val)
 
 
 #endif
-
