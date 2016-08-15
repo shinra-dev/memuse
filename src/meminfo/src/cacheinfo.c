@@ -41,9 +41,7 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
   cachesize_t cache_size = 0L;
   if (level > 3 || level < 0) return CACHE_ERROR;
   
-  #if OS_LINUX
-  int ret = MEMINFO_OK;
-  
+#if OS_LINUX
   if (level == 0)
     cache_size = (cachesize_t) sysconf(_SC_LEVEL1_ICACHE_SIZE);
   else if (level == 1)
@@ -58,9 +56,7 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
   if (cache_size == 0) return FAILURE;
   
   *totalcache = cache_size;
-  #elif OS_MAC
-  int ret = MEMINFO_OK;
-  
+#elif OS_MAC
   size_t size = sizeof(cache_size);
   
   if (level == 0)
@@ -77,7 +73,7 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
   if (cache_size == 0) return FAILURE;
   
   *totalcache = cache_size;
-  #elif OS_WINDOWS
+#elif OS_WINDOWS
   int i, winlevel;
   BOOL winret;
   DWORD size = 0;
@@ -120,9 +116,9 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
   
   return FAILURE;
   
-  #else
+#else
   return PLATFORM_ERROR;
-  #endif
+#endif
   
   return MEMINFO_OK;
 }
@@ -153,15 +149,13 @@ int meminfo_cachelinesize(cachesize_t *linesize)
   *linesize = 0L;
   cachesize_t cache_size = 0L;
   
-  #if OS_LINUX
-  int ret;
-  
+#if OS_LINUX
   cache_size = (cachesize_t) sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
   
   if (cache_size == 0) return FAILURE;
   
   *linesize = cache_size;
-  #elif OS_MAC
+#elif OS_MAC
   int ret;
   size_t size = sizeof(cache_size);
   
@@ -173,7 +167,7 @@ int meminfo_cachelinesize(cachesize_t *linesize)
     return FAILURE;
   
   *linesize = cache_size;
-  #elif OS_WINDOWS
+#elif OS_WINDOWS
   int i;
   BOOL winret;
   DWORD size = 0;
@@ -199,10 +193,9 @@ int meminfo_cachelinesize(cachesize_t *linesize)
   
   return FAILURE;
   
-  #else
+#else
   return PLATFORM_ERROR;
-  #endif
+#endif
   
   return MEMINFO_OK;
 }
-
