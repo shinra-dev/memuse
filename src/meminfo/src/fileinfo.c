@@ -59,7 +59,6 @@ int meminfo_abspath(const char *relpath, char **abspath)
   if (ptr == NULL)
   {
     free(abspath);
-    *abspath = NULL;
     return FILE_ERROR;
   }
   
@@ -143,4 +142,3 @@ int meminfo_filesize(memsize_t *filesize, const char *filename)
   
   return ret;
 }
-
