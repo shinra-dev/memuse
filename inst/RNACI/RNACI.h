@@ -22,11 +22,23 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
+/* Changelog:
+  Version 0.3.0:
+    * Fixed warnings visible with -Wall -pedantic.
+    * Use strnlen() over strlen(); shorten string checks in allocator.
+    * Simplify initializer in allocator using memset().
+  
+  Version 0.2.0:
+    * Converted to header only.
+  
+  Version 0.1.0:
+    * Initial release.
+*/
+
 #ifndef __RNACI_H__
 #define __RNACI_H__
 
-#define RNACI_VERSION 0.2.0
-
+#define RNACI_VERSION 0.3.0
 
 #include <R.h>
 #include <Rinternals.h>
@@ -34,28 +46,25 @@
 #include <stdarg.h>
 #include <string.h>
 #include <stdbool.h>
-
 #include <math.h>
 #include <float.h>
 
 
 #define RNACIMAX(m,n) m<n?n:m
-
-
 #define RNULL R_NilValue
 
-// Voodoo Args
-#define OPTIONALARG1(a,b,...) (a),(b)
 
 // R data accessors
+#define IGNORED -1
+
 #define __RNACI_INT(x,y,...) INTEGER(x)[y]
-#define INT(x,...) __RNACI_INT(x,##__VA_ARGS__,0)
+#define INT(...) __RNACI_INT(__VA_ARGS__,0,IGNORED)
 
 #define __RNACI_DBL(x,y,...) REAL(x)[y]
-#define DBL(x,...) __RNACI_DBL(x,##__VA_ARGS__,0)
+#define DBL(...) __RNACI_DBL(__VA_ARGS__,0,IGNORED)
 
 #define __RNACI_STR(x,y,...) ((char*)CHAR(STRING_ELT(x,y)))
-#define STR(x,...) __RNACI_STR(x,##__VA_ARGS__,0)
+#define STR(...) __RNACI_STR(__VA_ARGS__,0,IGNORED)
 
 
 #define MatINT(x,i,j) (INTEGER(x)[i+nrows(x)*j])
@@ -88,11 +97,13 @@ static void FNAME(SEXP ptr) \
 
 
 // Allocations
+#define OPTIONALARG1(a,b,c,...) (a),(b),(c)
+
 #define newRlist(x,n) PT(x=__Rvecalloc(n, "vec", false))
-//#define newRvec(x,n,type) PT(x=__Rvecalloc(n, type))
-#define newRvec(x,n,...) PT(x=__Rvecalloc(n,OPTIONALARG1(__VA_ARGS__,false)))
-//#define newRmat(x,m,n,type) PT(x=__Rmatalloc(m,n,type))
-#define newRmat(x,m,n,...) PT(x=__Rmatalloc(m,n,OPTIONALARG1(__VA_ARGS__,false)))
+// #define newRvec(x,n,type) PT(x=__Rvecalloc(n, type,false))
+#define newRvec(x,...) PT(x=__Rvecalloc(OPTIONALARG1(__VA_ARGS__,false,IGNORED)))
+// #define newRmat(x,m,n,type) PT(x=__Rmatalloc(m,n,type,false))
+#define newRmat(x,m,...) PT(x=__Rmatalloc(m,OPTIONALARG1(__VA_ARGS__,false,IGNORED)))
 
 
 /* Misc stuff */
@@ -116,42 +127,28 @@ static void FNAME(SEXP ptr) \
  ***************************************************/
 
 
-
 // alloc.c
 static inline SEXP __Rvecalloc(int n, char *type, int init)
 {
   SEXP RET;
-  int i;
   
-  if (strcmp(type, "vec") == 0)
+  if (strncmp(type, "vec", 1) == 0)
     PROTECT(RET = allocVector(VECSXP, n));
-  else if (strcmp(type, "int") == 0)
+  else if (strncmp(type, "int", 1) == 0)
   {
     PROTECT(RET = allocVector(INTSXP, n));
     
     if (init)
-    {
-      #if defined( _OPENMP_SUPPORT_SIMD)
-      #pragma omp for simd
-      #endif
-      for (i=0; i<n; i++)
-        INT(RET, i) = 0;
-    }
+      memset(INTP(RET), 0, n*sizeof(int));
   }
-  else if (strcmp(type, "double") == 0 || strcmp(type, "dbl") == 0)
+  else if (strncmp(type, "double", 1) == 0)
   {
     PROTECT(RET = allocVector(REALSXP, n));
     
     if (init)
-    {
-      #if defined( _OPENMP_SUPPORT_SIMD)
-      #pragma omp for simd
-      #endif
-      for (i=0; i<n; i++)
-        DBL(RET, i) = 0.0;
-    }
+      memset(DBLP(RET), 0, n*sizeof(double));
   }
-  else if (strcmp(type, "str") == 0 || strcmp(type, "char*") == 0)
+  else if (strncmp(type, "str", 1) == 0 || strncmp(type, "char*", 1) == 0)
     PROTECT(RET = allocVector(STRSXP, n));
   else
     return NULL;
@@ -163,43 +160,24 @@ static inline SEXP __Rvecalloc(int n, char *type, int init)
 static inline SEXP __Rmatalloc(int m, int n, char *type, int init)
 {
   SEXP RET;
-  int i, j;
   
-  if (strcmp(type, "vec") == 0)
+  if (strncmp(type, "vec", 1) == 0)
     PROTECT(RET = allocMatrix(VECSXP, m, n));
-  else if (strcmp(type, "int") == 0)
+  else if (strncmp(type, "int", 1) == 0)
   {
     PROTECT(RET = allocMatrix(INTSXP, m, n));
     
     if (init)
-    {
-      for (j=0; j<n; j++)
-      {
-        #if defined( _OPENMP_SUPPORT_SIMD)
-        #pragma omp for simd
-        #endif
-        for (i=0; i<m; i++)
-          MatINT(RET, i, j) = 0;
-      }
-    }
+      memset(INTP(RET), 0, m*n*sizeof(int));
   }
-  else if (strcmp(type, "double") == 0 || strcmp(type, "dbl") == 0)
+  else if (strncmp(type, "double", 1) == 0)
   {
     PROTECT(RET = allocMatrix(REALSXP, m, n));
     
     if (init)
-    {
-      for (j=0; j<n; j++)
-      {
-        #if defined( _OPENMP_SUPPORT_SIMD)
-        #pragma omp for simd
-        #endif
-        for (i=0; i<m; i++)
-          MatDBL(RET, i, j) = 0.0;
-      }
-    }
+      memset(DBLP(RET), 0, m*n*sizeof(double));
   }
-  else if (strcmp(type, "str") == 0 || strcmp(type, "char*") == 0)
+  else if (strncmp(type, "str", 1) == 0 || strncmp(type, "char*", 1) == 0)
     PROTECT(RET = allocMatrix(STRSXP, m, n));
   else
     return NULL;

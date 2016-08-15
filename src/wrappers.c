@@ -66,7 +66,6 @@ SEXP R_meminfo_raminfo()
   R_list_names = make_list_names(ct, "totalram", "freeram", "bufferram", "cachedram");
   R_list = make_list(R_list_names, ct, totalram, freeram, bufferram, cachedram);
   
-  
   R_END;
   return R_list;
 }
