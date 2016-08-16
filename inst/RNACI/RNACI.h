@@ -23,15 +23,15 @@
 
 
 /* Changelog:
-  Version 0.3.0:
+  Version 0.3-0:
     * Fixed warnings visible with -Wall -pedantic.
     * Use strnlen() over strlen(); shorten string checks in allocator.
     * Simplify initializer in allocator using memset().
   
-  Version 0.2.0:
+  Version 0.2-0:
     * Converted to header only.
   
-  Version 0.1.0:
+  Version 0.1-0:
     * Initial release.
 */
 
