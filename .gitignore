@@ -1,13 +1,12 @@
 *.o
 *.so
+*.a
 *.log
 *.status
 *~
 *.swp
 
 src/meminfo/meminfo
-src/meminfo/libmeminfo.so
-src/meminfo/libmeminfo.a
 
 *.aux
 *.bbl
@@ -16,3 +15,5 @@ src/meminfo/libmeminfo.a
 *.toc
 
 src/meminfo/docs
+
+inst/doc/

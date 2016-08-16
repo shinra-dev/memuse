@@ -1,33 +1,35 @@
-Release 3.0.0:
-  * Changed version numbering from Major.Minor to Major.Minor.Patch.
+Release 3.0-0:
+  * Changed version numbering from Major.Minor to Major.Minor-Patch.
   * Fixed numerous documentation errors.
   * Changed memuse() behavior significantly; see help("memuse").
   * Deprecated memuse::object.size().
+  * Fixed compiler warnings.
+  * Relicense as BSD.
 
-Release 2.5:
+Release 2.5-0:
   * Switched to a header-only RNACI.
   * Fixed some portability issues in meminfo.
   * Fixed bad documentation.
 
-Release 2.4:
+Release 2.4-0:
   * Major documentation refactor; switched to roxygen2.
   * Numerous improvements to the clarity and quality of the documentation.
   * Added comparators for memuse objects.
 
-Release 2.3:
+Release 2.3-0:
   * Added system uptime lookup.
   * Added process user, system, and wallclock runtime lookups.
 
-Release 2.2:
+Release 2.2-0:
   * Added fancy printing for memuse objects.
   * Added file size lookup.
 
-Release 2.1:
+Release 2.1-0:
   * Added cache size lookup.
   * Added cache linesize lookup.
   * Rewrote package demos to be more meaningful.
 
-Release 2.0:
+Release 2.0-0:
   * Switched to RNACI for internals.
   * Added system memory lookup.
   * Added system swap lookup.
@@ -36,7 +38,7 @@ Release 2.0:
   * Added as.character() memuse method.
   * Added sparse matrix estimation for howbig().
 
-Release 1.1:
+Release 1.1-0:
   * Cleaned up the docs.
   * Added howbig.par().
   * Added better print handling of approximate returns.
@@ -46,6 +48,6 @@ Release 1.1:
   * Made internals more consistent.
   * Better internal documentation.
 
-Release 1.0:
+Release 1.0-0:
   * Started with a 10 line function that was more than sufficient.
   * The joke got tastelessly out of hand.

@@ -1,14 +1,35 @@
 # memuse 
 
-* **Version:** 3.0.0
+* **Version:** 3.0-0
 * **Status:** [![Build Status](https://travis-ci.org/shinra-dev/memuse.png)](https://travis-ci.org/shinra-dev/memuse) 
-* **License:** [![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-orange.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
+* **License:** [![License](http://img.shields.io/badge/license-BSD%202--Clause-orange.svg?style=flat)](http://opensource.org/licenses/BSD-2-Clause)
 * **Author:** Drew Schmidt
 
 
 Originally, this package was an over-engineered solution to a mostly non-existent problem, as a sort of love letter to other needlessly complex programs like the [Enterprise Fizzbuzz](https://github.com/Mikkeren/FizzBuzzEnterpriseEdition)
 
-However, as of version 2.0.0, I'm sad to report that the package is actually becoming quite useful.
+However, as of version 2.0-0, I'm sad to report that the package is actually becoming quite useful.
+
+
+
+## Installation
+
+To install the R package, run:
+
+```r
+install.package("memuse")
+```
+
+The development version is maintained on GitHub, and can easily be installed by any of the packages that offer installations from GitHub:
+
+```r
+### Pick your preference
+devtools::install_github("shinra-dev/memuse")
+ghit::install_github("shinra-dev/memuse")
+remotes::install_github("shinra-dev/memuse")
+```
+
+The C internals are completely separated from the R wrapper code.  So if you prefer, you can easily build this as a C shared library after removing the file `src/wrapper.c`.
 
 
 
@@ -114,20 +135,6 @@ approx.size(123456789, unit.names="short")
 approx.size(123456789, unit.names="comma")
 # 123,456,789
 ```
-
-
-
-## Installation
-
-```r
-devtools::install_github("wrathematics/memuse")
-```
-
-
-
-## Software license and disclaimer
-
-The R package is licensed under the GNU General Public License, version 2 or greater, basically as a joke (see the vignette for details). The C library 'meminfo' located in src/meminfo of the memuse package source tree is additionally licensed under the permissive 2-clause BSD license.
 
 
 

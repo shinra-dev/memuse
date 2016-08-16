@@ -1,12 +1,11 @@
 Package: memuse
 Title: Memory Estimation Utilities
-Version: 3.0.0
+Version: 3.0-0
 Description: How much ram do you need to store a 100,000 by 100,000 matrix?
     How much ram is your current R session using? How much ram do you even have?
     Learn the scintillating answer to these and many more such questions with
     the 'memuse' package.
-License: GPL (>= 2)
-Copyright: See memuse/inst/meminfo_LICENSE for the files in src/meminfo/.
+License: BSD 2-clause License + file LICENSE
 Depends:
     R (>= 3.0.0)
 Imports:
@@ -15,10 +14,10 @@ Imports:
 NeedsCompilation: yes
 ByteCompile: yes
 Authors@R: c(
-        person("Drew", "Schmidt", email="wrathematics@gmail.com", role=c("aut", "cre")),
-        person("Christian", "Heckendorf", role="ctb", comment="FreeBSD improvements to meminfo"),
-        person("Wei-Chen", "Chen", role="ctb", comment="Windows build fixes"),
-        person("Dan", "Burgess", role="ctb", comment="donation of a Mac for development and testing"))
+    person("Drew", "Schmidt", email="wrathematics@gmail.com", role=c("aut", "cre")),
+    person("Christian", "Heckendorf", role="ctb", comment="FreeBSD improvements to meminfo"),
+    person("Wei-Chen", "Chen", role="ctb", comment="Windows build fixes"),
+    person("Dan", "Burgess", role="ctb", comment="donation of a Mac for development and testing"))
 Maintainer: Drew Schmidt <wrathematics@gmail.com>
 URL: https://github.com/shinra-dev/memuse
 BugReports: https://github.com/shinra-dev/memuse/issues
