@@ -69,9 +69,8 @@ package version 3.0.0, that is no longer the case.
 
 The \code{object.size()} function returns an object of class 
 \code{object_size}, which is a not-so-useful S3 class provided by core 
-\R.  If you instead use \code{memuse()}, then \code{object.size()} will
-be called and automatically be cast as a \code{memuse} 
-object.  So revisiting the code above:
+\R.  If you instead use \code{memuse()}, then you will get a much more useful
+\code{memuse} object.  So revisiting the code above:
 \begin{lstlisting}[language=rr]
 memuse(rnorm(1e5))
 ## 781.289 KiB
