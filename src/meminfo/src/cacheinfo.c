@@ -35,7 +35,7 @@
  * @return
  * The return value indicates the status of the function.
  */
-int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
+int meminfo_cachesize(cachesize_t *totalcache, const int level)
 {
   *totalcache = 0L;
   cachesize_t cache_size = 0L;

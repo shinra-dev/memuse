@@ -28,7 +28,7 @@ typedef uint64_t memsize_t;
 typedef uint32_t cachesize_t;
 
 // cacheinfo.c
-int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level);
+int meminfo_cachesize(cachesize_t *totalcache, const int level);
 int meminfo_cachelinesize(cachesize_t *totalcache);
 
 // fileinfo.c
