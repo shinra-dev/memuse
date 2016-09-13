@@ -25,29 +25,28 @@
  */
 int meminfo_totalram(memsize_t *totalram)
 {
-  int ret;
   *totalram = 0L;
   
   
 #if OS_LINUX
   struct sysinfo info;
-  ret = sysinfo(&info);
+  int ret = sysinfo(&info);
   chkret(ret, FAILURE);
   
   *totalram = (memsize_t) info.totalram * info.mem_unit;
 #elif OS_MAC
-  ret = sysctl_val("hw.memsize", totalram);
+  int ret = sysctl_val("hw.memsize", totalram);
   chkret(ret, FAILURE);
 #elif OS_WINDOWS
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
   
-  ret = GlobalMemoryStatusEx(&status);
+  int ret = GlobalMemoryStatusEx(&status);
   winchkret(ret, FAILURE);
   
   *totalram = (memsize_t) status.ullTotalPhys;
 #elif OS_FREEBSD
-  ret = sysconf(_SC_PAGESIZE);
+  int ret = sysconf(_SC_PAGESIZE);
   chkret(ret, FAILURE);
   
   ret = sysctl_val("hw.physmem", totalram);
@@ -93,13 +92,12 @@ int meminfo_totalram(memsize_t *totalram)
  */
 int meminfo_freeram(memsize_t *freeram)
 {
-  int ret;
   *freeram = 0L;
   
   
 #if OS_LINUX
   struct sysinfo info;
-  ret = sysinfo(&info);
+  int ret = sysinfo(&info);
   chkret(ret, FAILURE);
   
   *freeram = (memsize_t) info.freeram * info.mem_unit;
@@ -112,7 +110,7 @@ int meminfo_freeram(memsize_t *freeram)
   mach_port = mach_host_self();
   count = sizeof(vm_stats) / sizeof(natural_t);
   
-  ret = host_page_size(mach_port, &page_size);
+  int ret = host_page_size(mach_port, &page_size);
   if (ret != KERN_SUCCESS)
     return FAILURE;
   
@@ -125,13 +123,13 @@ int meminfo_freeram(memsize_t *freeram)
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
   
-  ret = GlobalMemoryStatusEx(&status);
+  int ret = GlobalMemoryStatusEx(&status);
   winchkret(ret, FAILURE);
   
   *freeram = (memsize_t) status.ullAvailPhys;
 #elif OS_FREEBSD
   int pagesize;
-  ret = sysconf(_SC_PAGESIZE);
+  int ret = sysconf(_SC_PAGESIZE);
   chkret(ret, FAILURE);
   pagesize = ret;
   

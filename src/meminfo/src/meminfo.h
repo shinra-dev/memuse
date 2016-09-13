@@ -25,7 +25,7 @@
 
 
 typedef uint64_t memsize_t;
-typedef uint32_t cachesize_t;
+typedef uint64_t cachesize_t; // this was uint32_t, but it breaks macs...
 
 // cacheinfo.c
 int meminfo_cachesize(cachesize_t *totalcache, const int level);

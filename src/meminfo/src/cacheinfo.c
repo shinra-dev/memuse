@@ -42,7 +42,7 @@ int meminfo_cachesize(cachesize_t *totalcache, const int level)
     return CACHE_ERROR;
   
 #if OS_LINUX
-  cachesize_t cache_size = 0L;
+  cachesize_t cache_size;
   
   if (level == 0)
     cache_size = (cachesize_t) sysconf(_SC_LEVEL1_ICACHE_SIZE);
@@ -60,7 +60,7 @@ int meminfo_cachesize(cachesize_t *totalcache, const int level)
   
   *totalcache = cache_size;
 #elif OS_MAC
-  uint64_t cache_size = 0L; // 64-bit on macs for some reason
+  cachesize_t cache_size;
   size_t size = sizeof(cache_size);
   char *name;
   
@@ -162,7 +162,7 @@ int meminfo_cachelinesize(cachesize_t *linesize)
   
   *linesize = cache_size;
 #elif OS_MAC
-  uint64_t cache_size;
+  cachesize_t cache_size;
   size_t size = sizeof(cache_size);
   
   int ret = sysctlbyname("hw.cachelinesize", &cache_size, &size, 0, 0);

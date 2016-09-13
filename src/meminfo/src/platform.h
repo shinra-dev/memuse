@@ -18,7 +18,6 @@
 #define OS_HURD (defined(__GNU__) || defined(__gnu_hurd__)) // why the hell not
 #define OS_NIX (OS_BSD || OS_HURD || OS_LINUX || OS_MAC || OS_SOLARIS)
 
-
 #include <stdint.h>
 
 
@@ -70,6 +69,7 @@ typedef BOOL (WINAPI *LPFN_GLPI)(PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, PDWORD);
 
 #elif OS_NIX
 
+#include <stdlib.h> 
 #include <unistd.h>
 
 #endif
