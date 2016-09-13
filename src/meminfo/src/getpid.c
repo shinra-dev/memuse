@@ -19,14 +19,13 @@
  */
 uint32_t meminfo_getpid()
 {
-  #if OS_WINDOWS
+#if OS_WINDOWS
   DWORD pid = GetCurrentProcessId();
-  #elif OS_NIX
+#elif OS_NIX
   uint32_t pid = getpid();
-  #else
+#else
   return PLATFORM_ERROR;
-  #endif
+#endif
   
   return (uint32_t) pid;
 }
-

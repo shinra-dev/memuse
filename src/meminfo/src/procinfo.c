@@ -38,23 +38,23 @@ int meminfo_process_size(memsize_t *size)
   *size = 0L;
   
   
-  #if OS_LINUX
+#if OS_LINUX
   ret = read_proc_file("/proc/self/status", size, "VmSize:", 7);
   *size *= 1024L;
-  #elif OS_WINDOWS
+#elif OS_WINDOWS
   PROCESS_MEMORY_COUNTERS pmc;
   
   GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
   *size = (memsize_t) pmc.WorkingSetSize;
-  #elif OS_MAC
+#elif OS_MAC
   struct task_basic_info info;
   mach_msg_type_number_t info_count = TASK_BASIC_INFO_COUNT;
   
   ret = task_info(mach_task_self(), TASK_BASIC_INFO, (task_info_t)&info, &info_count);
   *size = (memsize_t) info.resident_size;
-  #else
+#else
   return PLATFORM_ERROR;
-  #endif
+#endif
   
   return ret;
 }
@@ -84,18 +84,17 @@ int meminfo_process_peak(memsize_t *peak)
   *peak = 0L;
   
   
-  #if OS_LINUX
+#if OS_LINUX
   ret = read_proc_file("/proc/self/status", peak, "VmPeak:", 7);
   *peak *= 1024L;
-  #elif OS_WINDOWS
+#elif OS_WINDOWS
   PROCESS_MEMORY_COUNTERS pmc;
   
   GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
   *peak = (memsize_t) pmc.PeakWorkingSetSize;
-  #else
+#else
   return PLATFORM_ERROR;
-  #endif
+#endif
   
   return ret;
 }
-

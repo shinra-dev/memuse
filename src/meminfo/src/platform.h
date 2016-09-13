@@ -34,6 +34,8 @@
 
 #elif OS_MAC
 
+#include <stdlib.h>
+
 #include <mach/vm_statistics.h>
 #include <mach/mach.h>
 #include <mach/mach_types.h>
@@ -57,6 +59,7 @@ typedef BOOL (WINAPI *LPFN_GLPI)(PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, PDWORD);
 
 #elif OS_FREEBSD
 
+#include <stdlib.h>
 #include <unistd.h>
 
 #include <sys/types.h>

@@ -35,13 +35,15 @@
  * @return
  * The return value indicates the status of the function.
  */
-int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
+int meminfo_cachesize(cachesize_t *totalcache, const int level)
 {
   *totalcache = 0L;
-  cachesize_t cache_size = 0L;
-  if (level > 3 || level < 0) return CACHE_ERROR;
+  if (level > 3 || level < 0)
+    return CACHE_ERROR;
   
 #if OS_LINUX
+  cachesize_t cache_size = 0L;
+  
   if (level == 0)
     cache_size = (cachesize_t) sysconf(_SC_LEVEL1_ICACHE_SIZE);
   else if (level == 1)
@@ -50,27 +52,32 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
     cache_size = (cachesize_t) sysconf(_SC_LEVEL2_CACHE_SIZE);
   else if (level == 3)
     cache_size = (cachesize_t) sysconf(_SC_LEVEL3_CACHE_SIZE);
-  else if (level == 4)
-    cache_size = (cachesize_t) sysconf(_SC_LEVEL4_CACHE_SIZE);
+  // else if (level == 4)
+  //   cache_size = (cachesize_t) sysconf(_SC_LEVEL4_CACHE_SIZE);
   
-  if (cache_size == 0) return FAILURE;
+  if (cache_size == 0)
+    return FAILURE;
   
   *totalcache = cache_size;
 #elif OS_MAC
+  uint64_t cache_size = 0L; // 64-bit on macs for some reason
   size_t size = sizeof(cache_size);
+  char *name;
   
   if (level == 0)
-    ret = sysctlbyname("hw.l1icachesize", &cache_size, &size, NULL, 0);
+    name = "hw.l1icachesize";
   else if (level == 1)
-    ret = sysctlbyname("hw.l1dcachesize", &cache_size, &size, NULL, 0);
+    name = "hw.l1dcachesize";
   else if (level == 2)
-    ret = sysctlbyname("hw.l2cachesize", &cache_size, &size, NULL, 0);
-  else if (level == 3)
-    ret = sysctlbyname("hw.l3cachesize", &cache_size, &size, NULL, 0);
+    name = "hw.l2cachesize";
+  else // if (level == 3)
+    name = "hw.l3cachesize";
   
+  int ret = sysctlbyname(name, &cache_size, &size, NULL, 0);
   chkret(ret, CACHE_ERROR);
   
-  if (cache_size == 0) return FAILURE;
+  if (cache_size == 0)
+    return FAILURE;
   
   *totalcache = cache_size;
 #elif OS_WINDOWS
@@ -147,20 +154,18 @@ int meminfo_cachesize(cachesize_t *totalcache, const unsigned int level)
 int meminfo_cachelinesize(cachesize_t *linesize)
 {
   *linesize = 0L;
-  cachesize_t cache_size = 0L;
   
 #if OS_LINUX
-  cache_size = (cachesize_t) sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
+  cachesize_t cache_size = (cachesize_t) sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
   
   if (cache_size == 0) return FAILURE;
   
   *linesize = cache_size;
 #elif OS_MAC
-  int ret;
+  uint64_t cache_size;
   size_t size = sizeof(cache_size);
   
-  ret = sysctlbyname("hw.cachelinesize", &cache_size, &size, 0, 0);
-  
+  int ret = sysctlbyname("hw.cachelinesize", &cache_size, &size, 0, 0);
   chkret(ret, FAILURE);
   
   if (cache_size == 0)

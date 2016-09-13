@@ -51,7 +51,7 @@ int meminfo_abspath(const char *relpath, char **abspath)
   int ret = MEMINFO_OK;
   
   
-  #if OS_NIX
+#if OS_NIX
   char *ptr;
   *abspath = malloc(PATH_MAX);
   
@@ -62,7 +62,7 @@ int meminfo_abspath(const char *relpath, char **abspath)
     return FILE_ERROR;
   }
   
-  #elif OS_WINDOWS
+#elif OS_WINDOWS
   DWORD len;
   *abspath = malloc(PATH_MAX);
   
@@ -79,9 +79,9 @@ int meminfo_abspath(const char *relpath, char **abspath)
     return FILE_ERROR;
   }
   
-  #else
+#else
   return PLATFORM_ERROR;
-  #endif
+#endif
   
   return ret;
 }
@@ -118,13 +118,13 @@ int meminfo_filesize(memsize_t *filesize, const char *filename)
   int ret = MEMINFO_OK;
   
   
-  #if OS_NIX
+#if OS_NIX
   struct stat sb;
   ret = stat(filename, &sb);
   chkret(ret, FILE_ERROR);
   
   *filesize = (memsize_t) sb.st_size;
-  #elif OS_WINDOWS
+#elif OS_WINDOWS
   LARGE_INTEGER size;
   HANDLE fp = CreateFile(filename, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
   
@@ -136,9 +136,9 @@ int meminfo_filesize(memsize_t *filesize, const char *filename)
   winchkret(ret, FAILURE);
   
   *filesize = (memsize_t) size.QuadPart;
-  #else
+#else
   return PLATFORM_ERROR;
-  #endif
+#endif
   
   return ret;
 }
