@@ -1,6 +1,28 @@
-/* Copyright (c) 2014-2016, Schmidt.  All rights reserved.
- * Use of this source code is governed by a BSD-style license
- * that can be found in the LICENSE file. */
+/*  Copyright (c) 2014-2016 Drew Schmidt
+    All rights reserved.
+    
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+    
+    1. Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+    
+    2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+    
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+    "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+    TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+    PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+    CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+    EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+    PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+    PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+    LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+    NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
 
 
 #include "meminfo.h"
@@ -38,10 +60,12 @@
 int meminfo_cachesize(cachesize_t *totalcache, const int level)
 {
   *totalcache = 0L;
-  cachesize_t cache_size = 0L;
-  if (level > 3 || level < 0) return CACHE_ERROR;
+  if (level > 3 || level < 0)
+    return CACHE_ERROR;
   
 #if OS_LINUX
+  cachesize_t cache_size;
+  
   if (level == 0)
     cache_size = (cachesize_t) sysconf(_SC_LEVEL1_ICACHE_SIZE);
   else if (level == 1)
@@ -50,27 +74,32 @@ int meminfo_cachesize(cachesize_t *totalcache, const int level)
     cache_size = (cachesize_t) sysconf(_SC_LEVEL2_CACHE_SIZE);
   else if (level == 3)
     cache_size = (cachesize_t) sysconf(_SC_LEVEL3_CACHE_SIZE);
-  else if (level == 4)
-    cache_size = (cachesize_t) sysconf(_SC_LEVEL4_CACHE_SIZE);
+  // else if (level == 4)
+  //   cache_size = (cachesize_t) sysconf(_SC_LEVEL4_CACHE_SIZE);
   
-  if (cache_size == 0) return FAILURE;
+  if (cache_size == 0)
+    return FAILURE;
   
   *totalcache = cache_size;
 #elif OS_MAC
+  cachesize_t cache_size;
   size_t size = sizeof(cache_size);
+  char *name;
   
   if (level == 0)
-    ret = sysctlbyname("hw.l1icachesize", &cache_size, &size, NULL, 0);
+    name = "hw.l1icachesize";
   else if (level == 1)
-    ret = sysctlbyname("hw.l1dcachesize", &cache_size, &size, NULL, 0);
+    name = "hw.l1dcachesize";
   else if (level == 2)
-    ret = sysctlbyname("hw.l2cachesize", &cache_size, &size, NULL, 0);
-  else if (level == 3)
-    ret = sysctlbyname("hw.l3cachesize", &cache_size, &size, NULL, 0);
+    name = "hw.l2cachesize";
+  else // if (level == 3)
+    name = "hw.l3cachesize";
   
+  int ret = sysctlbyname(name, &cache_size, &size, NULL, 0);
   chkret(ret, CACHE_ERROR);
   
-  if (cache_size == 0) return FAILURE;
+  if (cache_size == 0)
+    return FAILURE;
   
   *totalcache = cache_size;
 #elif OS_WINDOWS
@@ -78,22 +107,22 @@ int meminfo_cachesize(cachesize_t *totalcache, const int level)
   BOOL winret;
   DWORD size = 0;
   SYSTEM_LOGICAL_PROCESSOR_INFORMATION *slpi;
-  PROCESSOR_CACHE_TYPE cachetype;
+  // PROCESSOR_CACHE_TYPE cachetype;
   
   if (level == 0)
   {
     winlevel = 1;
-    cachetype = CacheInstruction;
+    // cachetype = CacheInstruction;
   }
   else if (level == 1)
   {
     winlevel = 1;
-    cachetype= CacheData;
+    // cachetype= CacheData;
   }
   else
   {
     winlevel = level;
-    cachetype = CacheUnified;
+    // cachetype = CacheUnified;
   }
   
   *totalcache = 0L;
@@ -147,20 +176,18 @@ int meminfo_cachesize(cachesize_t *totalcache, const int level)
 int meminfo_cachelinesize(cachesize_t *linesize)
 {
   *linesize = 0L;
-  cachesize_t cache_size = 0L;
   
 #if OS_LINUX
-  cache_size = (cachesize_t) sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
+  cachesize_t cache_size = (cachesize_t) sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
   
   if (cache_size == 0) return FAILURE;
   
   *linesize = cache_size;
 #elif OS_MAC
-  int ret;
+  cachesize_t cache_size;
   size_t size = sizeof(cache_size);
   
-  ret = sysctlbyname("hw.cachelinesize", &cache_size, &size, 0, 0);
-  
+  int ret = sysctlbyname("hw.cachelinesize", &cache_size, &size, 0, 0);
   chkret(ret, FAILURE);
   
   if (cache_size == 0)

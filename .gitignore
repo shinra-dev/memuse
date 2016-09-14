@@ -17,3 +17,4 @@ src/meminfo/meminfo
 src/meminfo/docs
 
 inst/doc/
+*.pdf

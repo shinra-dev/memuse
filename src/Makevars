@@ -2,14 +2,14 @@ PKG_CPPFLAGS = -I../inst/RNACI
 
 
 MEMINFO_OBJS = \
-		meminfo/src/cacheinfo.o \
-		meminfo/src/fileinfo.o \
-		meminfo/src/platform.o \
-		meminfo/src/procinfo.o \
-		meminfo/src/raminfo.o \
-		meminfo/src/swapinfo.o 
+	meminfo/src/cacheinfo.o \
+	meminfo/src/fileinfo.o \
+	meminfo/src/platform.o \
+	meminfo/src/procinfo.o \
+	meminfo/src/raminfo.o \
+	meminfo/src/swapinfo.o 
 
-R_OBJS   = wrappers.o
+R_OBJS = wrappers.o
 
 OBJECTS = $(MEMINFO_OBJS) $(R_OBJS)
 
@@ -19,5 +19,5 @@ all: $(SHLIB)
 $(SHLIB): $(OBJECTS)
 
 clean:
-		@rm -rf *.o *.d *.rc *.so* *.dylib *.dll *.a *.lib \
-				$(SHLIB) $(OBJECTS) $(ROBJECTS)
+	@rm -rf *.o *.d *.rc *.so* *.dylib *.dll *.a *.lib \
+		$(SHLIB) $(OBJECTS) $(ROBJECTS)
