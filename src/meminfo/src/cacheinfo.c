@@ -64,18 +64,21 @@ int meminfo_cachesize(cachesize_t *totalcache, const int level)
     return CACHE_ERROR;
   
 #if OS_LINUX
-  cachesize_t cache_size;
+  cachesize_t cache_size = 0;
+  int name;
   
   if (level == 0)
-    cache_size = (cachesize_t) sysconf(_SC_LEVEL1_ICACHE_SIZE);
+    name = _SC_LEVEL1_ICACHE_SIZE;
   else if (level == 1)
-    cache_size = (cachesize_t) sysconf(_SC_LEVEL1_DCACHE_SIZE);
+    name = _SC_LEVEL1_DCACHE_SIZE;
   else if (level == 2)
-    cache_size = (cachesize_t) sysconf(_SC_LEVEL2_CACHE_SIZE);
-  else if (level == 3)
-    cache_size = (cachesize_t) sysconf(_SC_LEVEL3_CACHE_SIZE);
+    name = _SC_LEVEL2_CACHE_SIZE;
+  else // if (level == 3)
+    name = _SC_LEVEL3_CACHE_SIZE;
   // else if (level == 4)
-  //   cache_size = (cachesize_t) sysconf(_SC_LEVEL4_CACHE_SIZE);
+  //   name = _SC_LEVEL4_CACHE_SIZE;
+  
+  cache_size = (cachesize_t) sysconf(name);
   
   if (cache_size == 0)
     return FAILURE;
