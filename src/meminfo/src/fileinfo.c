@@ -25,6 +25,11 @@
 */
 
 
+// for realpath()
+#ifndef _XOPEN_SOURCE
+#define _XOPEN_SOURCE 500
+#endif
+
 #include "meminfo.h"
 #include "platform.h"
 

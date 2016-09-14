@@ -25,6 +25,11 @@
 */
 
 
+// for getline()
+#ifndef _XOPEN_SOURCE
+#define _XOPEN_SOURCE 700
+#endif
+
 #include "meminfo.h"
 #include "platform.h"
 
