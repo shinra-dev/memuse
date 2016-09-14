@@ -10,15 +10,16 @@
 #include <sys/stat.h>
 #endif
 
-// PATH_MAX --- should probably do something custom to be more portable
 #if OS_LINUX
 #include <linux/limits.h>
+#define MEMUSE_PATH_MAX PATH_MAX
 #elif OS_MAC
 #include <sys/syslimits.h>
+#define MEMUSE_PATH_MAX PATH_MAX
 #elif OS_NIX
-#define PATH_MAX 1024
+#define MEMUSE_PATH_MAX 1024
 #elif OS_WINDOWS
-#define PATH_MAX 4096
+#define MEMUSE_PATH_MAX 4096
 #endif
 
 
@@ -38,7 +39,7 @@
  * absolute path of relpath.  Otherwise, this is set to NULL.
  *
  * @note
- * For *NIX OS's, this uses PATH_MAX and realpath(), which I'm convinced 
+ * For *NIX OS's, this uses MEMUSE_PATH_MAX and realpath(), which I'm convinced 
  * is actually very unsafe.  But this is portable and easy.  If you
  * know you're prone to large file paths, then you should use
  * something more resiliant.
@@ -53,7 +54,7 @@ int meminfo_abspath(const char *relpath, char **abspath)
   
 #if OS_NIX
   char *ptr;
-  *abspath = malloc(PATH_MAX);
+  *abspath = malloc(MEMUSE_PATH_MAX);
   
   ptr = realpath(relpath, *abspath);
   if (ptr == NULL)
@@ -64,11 +65,10 @@ int meminfo_abspath(const char *relpath, char **abspath)
   
 #elif OS_WINDOWS
   DWORD len;
-  *abspath = malloc(PATH_MAX);
+  *abspath = malloc(MEMUSE_PATH_MAX);
+  len = GetFullPathName(relpath, MEMUSE_PATH_MAX, (LPTSTR) *abspath, NULL);
   
-  len = GetFullPathName(relpath, PATH_MAX, abspath, NULL);
-  
-  if (len > PATH_MAX)
+  if (len > MEMUSE_PATH_MAX)
   {
     free(abspath);
     return FAILURE;

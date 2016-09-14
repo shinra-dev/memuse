@@ -85,22 +85,22 @@ int meminfo_cachesize(cachesize_t *totalcache, const int level)
   BOOL winret;
   DWORD size = 0;
   SYSTEM_LOGICAL_PROCESSOR_INFORMATION *slpi;
-  PROCESSOR_CACHE_TYPE cachetype;
+  // PROCESSOR_CACHE_TYPE cachetype;
   
   if (level == 0)
   {
     winlevel = 1;
-    cachetype = CacheInstruction;
+    // cachetype = CacheInstruction;
   }
   else if (level == 1)
   {
     winlevel = 1;
-    cachetype= CacheData;
+    // cachetype= CacheData;
   }
   else
   {
     winlevel = level;
-    cachetype = CacheUnified;
+    // cachetype = CacheUnified;
   }
   
   *totalcache = 0L;
