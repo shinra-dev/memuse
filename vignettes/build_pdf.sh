@@ -19,7 +19,12 @@ pdflatex memuse-guide.Rnw
 
 Rscript -e "tools::compactPDF('memuse-guide.pdf', gs_quality='ebook')"
 
-rm *.aux *.bbl *.blg *.log *.out *.toc *.dvi
+rm -f *.aux *.bbl *.blg *.log *.out *.toc *.dvi
 
-mv -f *.pdf ../inst/doc/
-cp -f *.Rnw ../inst/doc/
+INSTPATH="../inst/doc/"
+if [ ! -d $INSTPATH ];then
+  mkdir $INSTPATH
+fi
+
+mv -f *.pdf $INSTPATH
+cp -f *.Rnw $INSTPATH

@@ -27,6 +27,9 @@
 
 #include "os.h"
 
+// For some platforms, this is an empty file. The dummy typedef should shut them up
+typedef int dummy_typedef;
+
 
 #if OS_LINUX
 
