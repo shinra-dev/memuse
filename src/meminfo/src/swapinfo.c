@@ -26,7 +26,6 @@
 
 
 #include "meminfo.h"
-#include "platform.h"
 
 
 /**

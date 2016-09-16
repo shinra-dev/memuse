@@ -26,12 +26,14 @@
 
 
 // for realpath()
-#ifndef _XOPEN_SOURCE
-#define _XOPEN_SOURCE 500
+#include "os.h"
+
+#if !OS_WINDOWS
+#include "conf.h"
 #endif
 
+
 #include "meminfo.h"
-#include "platform.h"
 
 #if OS_NIX
 #include <sys/stat.h>
@@ -40,7 +42,7 @@
 #if OS_LINUX
 #include <linux/limits.h>
 #define MEMUSE_PATH_MAX PATH_MAX
-#elif OS_MAC
+#elif OS_MAC || OS_FREEBSD
 #include <sys/syslimits.h>
 #define MEMUSE_PATH_MAX PATH_MAX
 #elif OS_NIX
@@ -57,7 +59,7 @@
  *
  * @details
  * This function returns the absolute path of a file, given a relative
- * path.  So '~/' turns into '/home/user'.
+ * path.  So '../whatever' becomes '/path/to/wherever/'.
  *
  * @param relpath
  * Input.  The (possibly relative) path to a file.

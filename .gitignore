@@ -6,6 +6,7 @@
 *~
 *.swp
 
+src/meminfo/src/conf.h
 src/meminfo/meminfo
 
 *.aux
@@ -15,6 +16,7 @@ src/meminfo/meminfo
 *.toc
 
 src/meminfo/docs
+
 
 inst/doc/
 *.pdf

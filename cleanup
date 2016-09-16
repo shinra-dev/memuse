@@ -7,4 +7,6 @@ rm -rf ./src/*.d
 rm -rf ./src/*.dll
 rm -rf ./man/*.pdf
 
+rm -rf ./src/meminfo/src/conf.h
+
 cd ./src/meminfo && make clean

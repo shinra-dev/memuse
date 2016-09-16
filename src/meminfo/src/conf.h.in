@@ -1,4 +1,4 @@
-/*  Copyright (c) 2014-2016 Drew Schmidt
+/*  Copyright (c) 2016 Drew Schmidt
     All rights reserved.
     
     Redistribution and use in source and binary forms, with or without
@@ -25,66 +25,17 @@
 */
 
 
-#ifndef __MEMINFO_PLATFORM__
-#define __MEMINFO_PLATFORM__
+#ifndef __MEMINFO_CONF__
+#define __MEMINFO_CONF__
 
-#include "os.h"
+#define HAS_FEATURES_H @HAS_FEATURES_H@
 
-#include <stdint.h>
-
-
-#if OS_LINUX
-
-#include <sys/sysinfo.h>
-
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
-
-#elif OS_MAC
-
-#include <stdlib.h>
-
-#include <mach/vm_statistics.h>
-#include <mach/mach.h>
-#include <mach/mach_types.h>
-#include <mach/mach_init.h>
-#include <mach/mach_host.h>
-#include <sys/types.h>
-#include <sys/sysctl.h>
-#include <sys/param.h>
-#include <sys/mount.h>
-
-
-#elif OS_WINDOWS
-
-#include <windows.h>
-#include <stdio.h>
-#include <tchar.h>
-#include <Psapi.h>
-
-typedef BOOL (WINAPI *LPFN_GLPI)(PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, PDWORD);
-
-
-#elif OS_FREEBSD
-
-#include <stdlib.h>
-#include <unistd.h>
-
-#include <sys/types.h>
-#include <sys/sysctl.h>
-#include <vm/vm_param.h>
-
-
-
-#elif OS_NIX
-
-#include <stdlib.h> 
-#include <unistd.h>
-
+#if HAS_FEATURES_H
+#include <features.h>
+#ifdef __GLIBC__
+#undef _XOPEN_SOURCE
+#define _XOPEN_SOURCE 500
 #endif
-
+#endif
 
 #endif

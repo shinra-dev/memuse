@@ -25,7 +25,6 @@
 */
 
 #include "meminfo.h"
-#include "platform.h"
 
 
 #define CHECKRET(ret) if(ret==FAILURE)\

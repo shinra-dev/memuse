@@ -25,16 +25,16 @@
 */
 
 
-// for getline()
-#ifndef _XOPEN_SOURCE
-#define _XOPEN_SOURCE 700
-#endif
-
-#include "meminfo.h"
-#include "platform.h"
+#include "os.h"
 
 
 #if OS_LINUX
+
+// for getline()
+#undef _XOPEN_SOURCE
+#define _XOPEN_SOURCE 700
+
+#include "meminfo.h"
 
 #include <inttypes.h>
 
@@ -75,6 +75,9 @@ int read_proc_file(const char *file, memsize_t *val, char *field, int fieldlen)
 
 
 #elif OS_MAC || OS_FREEBSD
+
+#include "meminfo.h"
+#include "platform.h"
 
 int sysctl_mib(char *name, int *mib, size_t *mibsize){
   return sysctlnametomib(name,mib,mibsize);

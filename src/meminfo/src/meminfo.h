@@ -28,9 +28,9 @@
 #ifndef __MEMINFO__
 #define __MEMINFO__
 
-
-#include <stdint.h>
+#include "os.h"
 #include "platform.h"
+#include <stdint.h>
 
 
 #define chkret(ret,val) if(ret)return(val)
