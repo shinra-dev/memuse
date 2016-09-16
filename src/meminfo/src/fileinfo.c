@@ -46,7 +46,7 @@
   #include <sys/syslimits.h>
   #define MEMUSE_PATH_MAX PATH_MAX
 #elif OS_FREEBSD
-  #include <limts.h>
+  #include <limits.h>
   #define MEMUSE_PATH_MAX PATH_MAX
 #elif OS_NIX
   #define MEMUSE_PATH_MAX 1024
