@@ -257,8 +257,8 @@ int meminfo_cachedram(memsize_t *cachedram)
   page = sysconf(_SC_PAGESIZE);
   chkret(page, FAILURE);
   
-  int ret = sysctl_val("vm.stats.vm.v_cache_count",&v);
-  chkret(ret, FAILURE);
+  int test = sysctl_val("vm.stats.vm.v_cache_count",&v);
+  chkret(test, FAILURE);
   
   *cachedram = (memsize_t) v*page;
 #else
