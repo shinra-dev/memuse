@@ -46,32 +46,33 @@
  */
 int meminfo_totalram(memsize_t *totalram)
 {
+  int ret = MEMINFO_OK;
   *totalram = 0L;
   
   
 #if OS_LINUX
   struct sysinfo info;
-  int ret = sysinfo(&info);
-  chkret(ret, FAILURE);
+  int test = sysinfo(&info);
+  chkret(test, FAILURE);
   
   *totalram = (memsize_t) info.totalram * info.mem_unit;
 #elif OS_MAC
-  int ret = sysctl_val("hw.memsize", totalram);
-  chkret(ret, FAILURE);
+  int test = sysctl_val("hw.memsize", totalram);
+  chkret(test, FAILURE);
 #elif OS_WINDOWS
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
   
-  int ret = GlobalMemoryStatusEx(&status);
-  winchkret(ret, FAILURE);
+  int test = GlobalMemoryStatusEx(&status);
+  winchkret(test, FAILURE);
   
   *totalram = (memsize_t) status.ullTotalPhys;
 #elif OS_FREEBSD
-  int ret = sysconf(_SC_PAGESIZE);
-  chkret(ret, FAILURE);
+  int test = sysconf(_SC_PAGESIZE);
+  chkret(test, FAILURE);
   
-  ret = sysctl_val("hw.physmem", totalram);
-  chkret(ret, FAILURE);
+  test = sysctl_val("hw.physmem", totalram);
+  chkret(test, FAILURE);
 #elif OS_NIX
   memsize_t npages, pagesize;
   
@@ -85,10 +86,10 @@ int meminfo_totalram(memsize_t *totalram)
   
   *totalram = (memsize_t) npages * pagesize;
 #else
-  return PLATFORM_ERROR;
+  ret = PLATFORM_ERROR;
 #endif
   
-  return MEMINFO_OK;
+  return ret;
 }
 
 
@@ -113,13 +114,14 @@ int meminfo_totalram(memsize_t *totalram)
  */
 int meminfo_freeram(memsize_t *freeram)
 {
+  int ret = MEMINFO_OK;
   *freeram = 0L;
   
   
 #if OS_LINUX
   struct sysinfo info;
-  int ret = sysinfo(&info);
-  chkret(ret, FAILURE);
+  int test = sysinfo(&info);
+  chkret(test, FAILURE);
   
   *freeram = (memsize_t) info.freeram * info.mem_unit;
 #elif OS_MAC
@@ -131,12 +133,12 @@ int meminfo_freeram(memsize_t *freeram)
   mach_port = mach_host_self();
   count = sizeof(vm_stats) / sizeof(natural_t);
   
-  int ret = host_page_size(mach_port, &page_size);
-  if (ret != KERN_SUCCESS)
+  int test = host_page_size(mach_port, &page_size);
+  if (test != KERN_SUCCESS)
     return FAILURE;
   
-  ret = host_statistics(mach_port, HOST_VM_INFO, (host_info_t)&vm_stats, &count);
-  if (ret != KERN_SUCCESS)
+  test = host_statistics(mach_port, HOST_VM_INFO, (host_info_t)&vm_stats, &count);
+  if (test != KERN_SUCCESS)
     return FAILURE;
   
   *freeram = (memsize_t) vm_stats.free_count * (memsize_t) page_size;
@@ -144,18 +146,18 @@ int meminfo_freeram(memsize_t *freeram)
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
   
-  int ret = GlobalMemoryStatusEx(&status);
-  winchkret(ret, FAILURE);
+  int test = GlobalMemoryStatusEx(&status);
+  winchkret(test, FAILURE);
   
   *freeram = (memsize_t) status.ullAvailPhys;
 #elif OS_FREEBSD
   int pagesize;
-  int ret = sysconf(_SC_PAGESIZE);
-  chkret(ret, FAILURE);
-  pagesize = ret;
+  int test = sysconf(_SC_PAGESIZE);
+  chkret(test, FAILURE);
+  pagesize = test;
   
-  ret = sysctl_val("vm.stats.vm.v_free_count", freeram);
-  chkret(ret, FAILURE);
+  test = sysctl_val("vm.stats.vm.v_free_count", freeram);
+  chkret(test, FAILURE);
   
   *freeram *= (memsize_t) pagesize;
 #elif OS_NIX
@@ -171,10 +173,10 @@ int meminfo_freeram(memsize_t *freeram)
   
   *freeram = pagesize * freepages;
 #else
-  return PLATFORM_ERROR;
+  ret = PLATFORM_ERROR;
 #endif
   
-  return MEMINFO_OK;
+  return ret;
 }
 
 
@@ -196,27 +198,28 @@ int meminfo_freeram(memsize_t *freeram)
  */
 int meminfo_bufferram(memsize_t *bufferram)
 {
+  int ret = MEMINFO_OK;
   *bufferram = 0L;
   
 #if OS_LINUX
   struct sysinfo info;
   
-  int ret = sysinfo(&info);
-  chkret(ret, FAILURE);
+  int test = sysinfo(&info);
+  chkret(test, FAILURE);
   
   *bufferram = info.bufferram * info.mem_unit;
 #elif OS_FREEBSD
   memsize_t v = 0L;
   
-  int ret = sysctl_val("vfs.bufspace", &v);
-  chkret(ret, FAILURE);
+  int test = sysctl_val("vfs.bufspace", &v);
+  chkret(test, FAILURE);
   
   *bufferram = v;
 #else
-  return PLATFORM_ERROR;
+  ret = PLATFORM_ERROR;
 #endif
   
-  return MEMINFO_OK;
+  return ret;
 }
 
 
@@ -238,12 +241,13 @@ int meminfo_bufferram(memsize_t *bufferram)
  */
 int meminfo_cachedram(memsize_t *cachedram)
 {
+  int ret = MEMINFO_OK;
   *cachedram = 0L;
   
   
 #if OS_LINUX
-  int ret = read_proc_file("/proc/meminfo", cachedram, "Cached:", 7);
-  chkret(ret, FAILURE);
+  int test = read_proc_file("/proc/meminfo", cachedram, "Cached:", 7);
+  chkret(test, FAILURE);
   
   *cachedram *= 1024L;
 #elif OS_FREEBSD
@@ -258,8 +262,8 @@ int meminfo_cachedram(memsize_t *cachedram)
   
   *cachedram = (memsize_t) v*page;
 #else
-  return PLATFORM_ERROR;
+  ret = PLATFORM_ERROR;
 #endif
   
-  return MEMINFO_OK;
+  return ret;
 }

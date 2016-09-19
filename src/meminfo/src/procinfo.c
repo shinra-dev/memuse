@@ -28,11 +28,6 @@
 #include "meminfo.h"
 
 
-/* 
- *           Mem sizes
- */
-
-
 /**
  * @file
  * @brief 
@@ -74,7 +69,7 @@ int meminfo_process_size(memsize_t *size)
   ret = task_info(mach_task_self(), TASK_BASIC_INFO, (task_info_t)&info, &info_count);
   *size = (memsize_t) info.resident_size;
 #else
-  return PLATFORM_ERROR;
+  ret = PLATFORM_ERROR;
 #endif
   
   return ret;
@@ -114,7 +109,7 @@ int meminfo_process_peak(memsize_t *peak)
   GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
   *peak = (memsize_t) pmc.PeakWorkingSetSize;
 #else
-  return PLATFORM_ERROR;
+  ret = PLATFORM_ERROR;
 #endif
   
   return ret;

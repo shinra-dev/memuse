@@ -40,4 +40,10 @@
 #define OS_HURD (defined(__GNU__) || defined(__gnu_hurd__)) // why the hell not
 #define OS_NIX (OS_BSD || OS_HURD || OS_LINUX || OS_MAC || OS_SOLARIS)
 
+// For testing only!
+// #undef OS_LINUX
+// #define OS_LINUX 0
+// #undef OS_NIX
+// #define OS_NIX 1
+
 #endif

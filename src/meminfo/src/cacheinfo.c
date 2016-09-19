@@ -28,10 +28,6 @@
 #include "meminfo.h"
 
 
-/* 
- *           Cache sizes
- */ 
-
 /**
  * @file
  * @brief 
@@ -58,6 +54,7 @@
  */
 int meminfo_cachesize(cachesize_t *totalcache, const int level)
 {
+  int ret = MEMINFO_OK;
   *totalcache = 0L;
   if (level > 3 || level < 0)
     return CACHE_ERROR;
@@ -97,8 +94,8 @@ int meminfo_cachesize(cachesize_t *totalcache, const int level)
   else // if (level == 3)
     name = "hw.l3cachesize";
   
-  int ret = sysctlbyname(name, &cache_size, &size, NULL, 0);
-  chkret(ret, CACHE_ERROR);
+  int test = sysctlbyname(name, &cache_size, &size, NULL, 0);
+  chkret(test, CACHE_ERROR);
   
   if (cache_size == 0)
     return FAILURE;
@@ -145,13 +142,13 @@ int meminfo_cachesize(cachesize_t *totalcache, const int level)
     }
   }
   
-  return FAILURE;
+  ret = FAILURE;
   
 #else
-  return PLATFORM_ERROR;
+  ret = PLATFORM_ERROR;
 #endif
   
-  return MEMINFO_OK;
+  return ret;
 }
 
 
@@ -177,6 +174,7 @@ int meminfo_cachesize(cachesize_t *totalcache, const int level)
  */
 int meminfo_cachelinesize(cachesize_t *linesize)
 {
+  int ret = MEMINFO_OK;
   *linesize = 0L;
   
 #if OS_LINUX
@@ -189,8 +187,8 @@ int meminfo_cachelinesize(cachesize_t *linesize)
   cachesize_t cache_size;
   size_t size = sizeof(cache_size);
   
-  int ret = sysctlbyname("hw.cachelinesize", &cache_size, &size, 0, 0);
-  chkret(ret, FAILURE);
+  int test = sysctlbyname("hw.cachelinesize", &cache_size, &size, 0, 0);
+  chkret(test, FAILURE);
   
   if (cache_size == 0)
     return FAILURE;
@@ -220,11 +218,11 @@ int meminfo_cachelinesize(cachesize_t *linesize)
     }
   }
   
-  return FAILURE;
+  ret = FAILURE;
   
 #else
-  return PLATFORM_ERROR;
+  ret = PLATFORM_ERROR;
 #endif
   
-  return MEMINFO_OK;
+  return ret;
 }

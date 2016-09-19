@@ -48,14 +48,15 @@
  */
 int meminfo_totalswap(memsize_t *totalswap)
 {
+  int ret = MEMINFO_OK;
   *totalswap = 0L;
   
   
 #if OS_LINUX
   struct sysinfo info;
   
-  int ret = sysinfo(&info);
-  chkret(ret, FAILURE);
+  int test = sysinfo(&info);
+  chkret(test, FAILURE);
   
   *totalswap = (memsize_t) info.totalswap * info.mem_unit;
 #elif OS_MAC
@@ -67,23 +68,23 @@ int meminfo_totalswap(memsize_t *totalswap)
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
   
-  int ret = GlobalMemoryStatusEx(&status);
-  winchkret(ret, FAILURE);
+  int test = GlobalMemoryStatusEx(&status);
+  winchkret(test, FAILURE);
   
   *totalswap = (memsize_t) status.ullTotalPageFile;
 #elif OS_FREEBSD
-  int ret;
+  int test;
   
-  ret = sysconf(_SC_PAGESIZE);
-  chkret(ret, FAILURE);
+  test = sysconf(_SC_PAGESIZE);
+  chkret(test, FAILURE);
   
-  ret = sysctl_val("vm.swap_total", totalswap);
-  chkret(ret, FAILURE);
+  test = sysctl_val("vm.swap_total", totalswap);
+  chkret(test, FAILURE);
 #else
-  return PLATFORM_ERROR;
+  ret = PLATFORM_ERROR;
 #endif
   
-  return MEMINFO_OK;
+  return ret;
 }
 
 
@@ -108,16 +109,15 @@ int meminfo_totalswap(memsize_t *totalswap)
  */
 int meminfo_freeswap(memsize_t *freeswap)
 {
+  int ret = MEMINFO_OK;
   *freeswap = 0L;
   
   
 #if OS_LINUX
-  int ret;
-  
   struct sysinfo info;
-  ret = sysinfo(&info);
+  int test = sysinfo(&info);
   
-  chkret(ret, FAILURE);
+  chkret(test, FAILURE);
   
   *freeswap = info.freeswap * info.mem_unit;
 #elif OS_MAC
@@ -134,37 +134,38 @@ int meminfo_freeswap(memsize_t *freeswap)
   int page=getpagesize();
   memsize_t used = 0L;
   
-  mibsize = sizeof(mib)/sizeof(mib[0]);
-  if(sysctl_mib("vm.swap_info",mib,&mibsize)==-1)
+  mibsize = sizeof(mib) / sizeof(mib[0]);
+  if (sysctl_mib("vm.swap_info", mib, &mibsize) == -1)
     return FAILURE;
   
-  for(i=0;;i++){
-    mib[mibsize]=i;
-    size=sizeof(xsw);
+  for (i=0; ; i++)
+  {
+    mib[mibsize] = i;
+    size = sizeof(xsw);
     
-    if(sysctlmib_val(mib,mibsize,&xsw,&size)==-1)
+    if (sysctlmib_val(mib, mibsize, &xsw, &size) == -1)
       break;
     
-    used+=xsw.xsw_used*page;
+    used += xsw.xsw_used*page;
   }
-  if(meminfo_totalswap(freeswap))
+  
+  if (meminfo_totalswap(freeswap))
     return FAILURE;
   
-  *freeswap-=used;
+  *freeswap -= used;
 #elif OS_WINDOWS
-  int ret;
   MEMORYSTATUSEX status;
   status.dwLength = sizeof(status);
   
-  ret = GlobalMemoryStatusEx(&status);
-  winchkret(ret, FAILURE);
+  int test = GlobalMemoryStatusEx(&status);
+  winchkret(test, FAILURE);
   
   *freeswap = (memsize_t) status.ullAvailPageFile;
 #else
-  return PLATFORM_ERROR;
+  ret = PLATFORM_ERROR;
 #endif
   
-  return MEMINFO_OK;
+  return ret;
 }
 
 
@@ -189,19 +190,18 @@ int meminfo_freeswap(memsize_t *freeswap)
  */
 int meminfo_cachedswap(memsize_t *cachedswap)
 {
+  int ret = MEMINFO_OK;
   *cachedswap = 0L;
   
   
   #if OS_LINUX
-  int ret;
+  int test = read_proc_file("/proc/meminfo", cachedswap, "SwapCached:", 11);
   
-  ret = read_proc_file("/proc/meminfo", cachedswap, "SwapCached:", 11);
-  
-  chkret(ret, FAILURE);
+  chkret(test, FAILURE);
   *cachedswap *= 1024L;
   #else
-  return PLATFORM_ERROR;
+  ret = PLATFORM_ERROR;
   #endif
   
-  return MEMINFO_OK;
+  return ret;
 }

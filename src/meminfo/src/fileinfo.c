@@ -112,7 +112,7 @@ int meminfo_abspath(const char *relpath, char **abspath)
   }
   
 #else
-  return PLATFORM_ERROR;
+  ret = PLATFORM_ERROR;
 #endif
   
   return ret;
@@ -169,7 +169,7 @@ int meminfo_filesize(memsize_t *filesize, const char *filename)
   
   *filesize = (memsize_t) size.QuadPart;
 #else
-  return PLATFORM_ERROR;
+  ret = PLATFORM_ERROR;
 #endif
   
   return ret;
