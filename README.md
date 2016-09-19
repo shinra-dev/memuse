@@ -6,10 +6,11 @@
 * **Author:** Drew Schmidt
 
 
-Originally, this package was an over-engineered solution to a mostly non-existent problem, as a sort of love letter to other needlessly complex programs like the [Enterprise Fizzbuzz](https://github.com/Mikkeren/FizzBuzzEnterpriseEdition)
+**memuse** is an R package for memory estimation.  It has tools for estimating the size of a matrix (that doesn't exist), showing the size of an existing object in a nicer way than `object.size()`.  It also has tools for showing how much memory the current R process is consuming, how much ram is available on the system, and more.
 
-However, as of version 2.0-0, I'm sad to report that the package is actually becoming quite useful.
+Originally, this package was an over-engineered solution to a mostly non-existent problem, as a sort of love letter to other needlessly complex programs like the [Enterprise Fizzbuzz](https://github.com/Mikkeren/FizzBuzzEnterpriseEdition).  However, as of version 2.0-0, I'm sad to report that the package is actually becoming quite useful.
 
+The package has been exhaustively tested on Linux, FreeBSD, Windows, Mac, and "other"-NIX.  That is also roughly the platforms in descending order of support for the various operations.  However, if you have a problem installing or using the package, please open an issue on the project's GitHub repository.
 
 
 ## Installation
@@ -29,7 +30,7 @@ ghit::install_github("shinra-dev/memuse")
 remotes::install_github("shinra-dev/memuse")
 ```
 
-The C internals are completely separated from the R wrapper code.  So if you prefer, you can easily build this as a C shared library after removing the file `src/wrapper.c`.
+The C internals, found in `memuse/src/meminfo/` are completely separated from the R wrapper code.  So if you prefer, you can easily build this as a standalone C shared library.
 
 
 
@@ -92,7 +93,6 @@ Sys.cachelinesize()
 
 
 #### Estimating Memory Usage
-
 You can estimate memory storage requirements of a matrix without having to divide by some annoying power of 2:
 
 ```r
@@ -119,7 +119,6 @@ For more information, see the package vignette.
 
 
 #### Misc
-
 The package also has some miscellaneous helpful utilities:
 
 ```r

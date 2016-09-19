@@ -1,6 +1,8 @@
 Release 3.0-1:
   * Fixed installation issues on some platforms.
+  * Fixed all compiler warnings; even the dumb ones.
   * Fixed Sys.cachesize() and Sys.cachelinesize() on Macs. 
+  * Tweaked the README.
 
 Release 3.0-0:
   * Changed version numbering from Major.Minor to Major.Minor-Patch.
