@@ -7,9 +7,9 @@ MEMINFO_OBJS = \
 	meminfo/src/platform.o \
 	meminfo/src/procinfo.o \
 	meminfo/src/raminfo.o \
-	meminfo/src/swapinfo.o 
+	meminfo/src/swapinfo.o
 
-R_OBJS = wrappers.o
+R_OBJS = wrappers.o memuse_native.o
 
 OBJECTS = $(MEMINFO_OBJS) $(R_OBJS)
 
