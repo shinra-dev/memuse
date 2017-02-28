@@ -66,7 +66,7 @@ setMethod("mu", signature(size="ANY"),
 setMethod("mu", signature(size="NULL"),
   function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
   {
-    return( NULL )
+    memuse(0, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
   }
 )
 
@@ -87,7 +87,7 @@ setMethod("mu", signature(size="numeric"),
 setMethod("mu", signature(size="object_size"),
   function(size, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
   {
-    return( internal.mu(size=unclass(size), unit=unit, unit.prefix=unit.prefix, unit.names=unit.names) )
+    internal.mu(size=unclass(size), unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
   }
 )
 
@@ -96,7 +96,7 @@ setMethod("mu", signature(size="object_size"),
 setMethod("mu", signature(size="missing"),
   function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
   {
-    return( memuse(0, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names) )
+    memuse(0, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
   }
 )
 
@@ -144,4 +144,3 @@ setMethod("memuse", signature(size="object_size"),
   function(size, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
     mu(size, unit, unit.prefix, unit.names)
 )
-

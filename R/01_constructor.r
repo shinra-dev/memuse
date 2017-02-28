@@ -124,22 +124,14 @@ internal.memuse <- function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=
     u <- unit
   
   
-  # construct
-  x <- new("memuse", size=size, unit=u, unit.prefix=unit.prefix, unit.names=unit.names)
-  
-  # sanity check
+  x <- new("memuse", size=size, unit="B", unit.prefix=unit.prefix, unit.names=unit.names)
   x <- check.mu(x)
   
   mu.nonneg(x)
   
-#  # convert to the correct unit
-#  precedence <- match.arg(tolower(precedence), c("unit", "prefix"))
+  x <- swap.unit(x=x, unit=unit)
   
-#  if (precedence == "unit")
-  x <- swap.unit(x=x, unit="best")#, precedence=precedence)
-  
-  return( x )
+  x
 }
 
 internal.mu <- internal.memuse
-
