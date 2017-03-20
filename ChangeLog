@@ -1,5 +1,6 @@
 Release 3.0-2:
-  * Register native routines.
+  * Registered native routines.
+  * Fixed clang compiler warning in os detection.
 
 Release 3.0-1:
   * Fixed installation issues on some platforms.
