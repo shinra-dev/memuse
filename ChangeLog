@@ -1,4 +1,4 @@
-Release 3.0-2:
+Release 3.1-0:
   * Registered native routines.
   * Fixed clang compiler warning in os detection.
   * Added hr() ("human readable") alias for approx.size()
