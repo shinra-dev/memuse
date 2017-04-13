@@ -342,14 +342,10 @@ setMethod("/", signature(e1="memuse", e2="memuse"),
         e1 <- swap.names(e1)
     }
     
-    e1 <- convert_to_bytes(e1)
-    e2 <- convert_to_bytes(e2)
+    e1 <- convert_to_bytes(e1)@size
+    e2 <- convert_to_bytes(e2)@size
     
-    e1@size <- e1@size / e2@size
-    
-    ret <- swap.unit(e1, .UNIT)
-    
-    return( ret )
+    e1 / e2
   }
 )
 
@@ -476,4 +472,3 @@ setMethod("^", signature(e1="memuse", e2="numeric"),
     return( ret )
   }
 )
-
