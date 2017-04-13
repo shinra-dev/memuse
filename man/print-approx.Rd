@@ -15,4 +15,3 @@
 \description{
 Printing for \code{approx.size()}
 }
-

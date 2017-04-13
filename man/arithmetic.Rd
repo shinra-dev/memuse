@@ -2,28 +2,28 @@
 % Please edit documentation in R/arithmetic.r
 \docType{methods}
 \name{Arithmetic}
-\alias{*,memuse,memuse-method}
-\alias{*,memuse,numeric-method}
-\alias{*,memuse,object_size-method}
-\alias{*,numeric,memuse-method}
-\alias{*,object_size,memuse-method}
+\alias{Arithmetic}
 \alias{+,memuse,memuse-method}
 \alias{+,memuse,numeric-method}
-\alias{+,memuse,object_size-method}
 \alias{+,numeric,memuse-method}
+\alias{+,memuse,object_size-method}
 \alias{+,object_size,memuse-method}
 \alias{-,memuse,memuse-method}
-\alias{-,memuse,missing-method}
 \alias{-,memuse,numeric-method}
-\alias{-,memuse,object_size-method}
 \alias{-,numeric,memuse-method}
+\alias{-,memuse,missing-method}
+\alias{-,memuse,object_size-method}
 \alias{-,object_size,memuse-method}
+\alias{*,memuse,memuse-method}
+\alias{*,memuse,numeric-method}
+\alias{*,numeric,memuse-method}
+\alias{*,memuse,object_size-method}
+\alias{*,object_size,memuse-method}
 \alias{/,memuse,memuse-method}
 \alias{/,memuse,numeric-method}
-\alias{/,memuse,object_size-method}
 \alias{/,numeric,memuse-method}
+\alias{/,memuse,object_size-method}
 \alias{/,object_size,memuse-method}
-\alias{Arithmetic}
 \alias{^,memuse,memuse-method}
 \alias{^,memuse,numeric-method}
 \title{Binary Arithmetic}
@@ -105,4 +105,3 @@ x^2
 \code{ \link{Constructor}, \link{memuse-class} }
 }
 \keyword{Methods}
-

@@ -2,25 +2,25 @@
 % Please edit documentation in R/comparators.r
 \docType{methods}
 \name{Comparators}
-\alias{!=,memuse,memuse-method}
-\alias{!=,memuse,numeric-method}
-\alias{!=,numeric,memuse-method}
-\alias{<,memuse,memuse-method}
-\alias{<,memuse,numeric-method}
-\alias{<,numeric,memuse-method}
-\alias{<=,memuse,memuse-method}
-\alias{<=,memuse,numeric-method}
-\alias{<=,numeric,memuse-method}
-\alias{==,memuse,memuse-method}
-\alias{==,memuse,numeric-method}
-\alias{==,numeric,memuse-method}
-\alias{>,memuse,memuse-method}
-\alias{>,memuse,numeric-method}
-\alias{>,numeric,memuse-method}
-\alias{>=,memuse,memuse-method}
-\alias{>=,memuse,numeric-method}
-\alias{>=,numeric,memuse-method}
 \alias{Comparators}
+\alias{==,memuse,memuse-method}
+\alias{<,memuse,memuse-method}
+\alias{<=,memuse,memuse-method}
+\alias{>,memuse,memuse-method}
+\alias{>=,memuse,memuse-method}
+\alias{!=,memuse,memuse-method}
+\alias{==,memuse,numeric-method}
+\alias{<,memuse,numeric-method}
+\alias{<=,memuse,numeric-method}
+\alias{>,memuse,numeric-method}
+\alias{>=,memuse,numeric-method}
+\alias{!=,memuse,numeric-method}
+\alias{==,numeric,memuse-method}
+\alias{<,numeric,memuse-method}
+\alias{<=,numeric,memuse-method}
+\alias{>,numeric,memuse-method}
+\alias{>=,numeric,memuse-method}
+\alias{!=,numeric,memuse-method}
 \title{Comparators}
 \usage{
 \S4method{==}{memuse,memuse}(e1, e2)
@@ -89,4 +89,3 @@ x != y
 \code{ \link{Constructor}, \link{memuse-class} }
 }
 \keyword{Methods}
-

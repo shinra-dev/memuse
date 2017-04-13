@@ -14,11 +14,10 @@ usage of the current R process, as well as some other niceties.
 If you do a lot of benchmarking, this is the package you've been waiting
 for.  Maybe.  I mean, I don't want to be too pushy about it.
 }
-\author{
-Drew Schmidt
-}
 \references{
 Project home page: \url{https://shinra-dev.github.io}
 }
+\author{
+Drew Schmidt
+}
 \keyword{Package}
-

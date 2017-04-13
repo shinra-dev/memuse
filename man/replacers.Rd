@@ -4,13 +4,13 @@
 \name{Replacers}
 \alias{Replacers}
 \alias{size<-}
-\alias{size<-,memuse-method}
-\alias{unit.names<-}
-\alias{unit.names<-,memuse-method}
-\alias{unit.prefix<-}
-\alias{unit.prefix<-,memuse-method}
 \alias{unit<-}
+\alias{unit.prefix<-}
+\alias{unit.names<-}
+\alias{size<-,memuse-method}
 \alias{unit<-,memuse-method}
+\alias{unit.prefix<-,memuse-method}
+\alias{unit.names<-,memuse-method}
 \title{Replacers}
 \usage{
 size(x) <- value
@@ -64,4 +64,3 @@ x
 \code{ \link{Accessors} \link{memuse-class} }
 }
 \keyword{Methods}
-

@@ -3,11 +3,11 @@
 \docType{methods}
 \name{Converters}
 \alias{Converters}
-\alias{as.character,memuse-method}
 \alias{as.memuse}
-\alias{as.memuse,character-method}
 \alias{as.memuse,numeric-method}
 \alias{as.memuse,object_size-method}
+\alias{as.memuse,character-method}
+\alias{as.character,memuse-method}
 \alias{as.numeric,memuse-method}
 \title{Converters}
 \usage{
@@ -68,4 +68,3 @@ as.memuse(10)
 \code{ \link{memuse-class} \link{Accessors} }
 }
 \keyword{Methods}
-

@@ -80,4 +80,3 @@ howbig(1000, 1000)
 \code{\link{howmany}}
 }
 \keyword{Methods}
-

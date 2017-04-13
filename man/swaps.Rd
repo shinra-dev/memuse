@@ -3,10 +3,10 @@
 \docType{methods}
 \name{Swaps}
 \alias{Swaps}
-\alias{swap.names}
-\alias{swap.names,memuse-method}
 \alias{swap.prefix}
 \alias{swap.prefix,memuse-method}
+\alias{swap.names}
+\alias{swap.names,memuse-method}
 \alias{swap.unit}
 \alias{swap.unit,memuse-method}
 \title{Swaps}
@@ -65,4 +65,3 @@ swap.unit(x, "bytes")
 \code{ \link{Constructor} \link{memuse-class} }
 }
 \keyword{Methods}
-

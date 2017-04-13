@@ -89,4 +89,3 @@ howmany(mu(1, "gib"), out.type="approx")
 \code{\link{howbig}}
 }
 \keyword{Methods}
-

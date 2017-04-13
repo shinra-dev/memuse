@@ -38,4 +38,3 @@ sum(10, mu(10))
 \code{ \link{Constructor} \link{memuse-class} }
 }
 \keyword{Methods}
-

@@ -2,9 +2,12 @@
 % Please edit documentation in R/approx.r
 \name{approx.size}
 \alias{approx.size}
+\alias{hr}
 \title{approx.size}
 \usage{
 approx.size(x, unit.names = "long", ..., digits = 1)
+
+hr(x)
 }
 \arguments{
 \item{x}{A number.}
@@ -20,10 +23,13 @@ reads like "10 million", "10m", or "10,000,000", respectively.}
 An object of class \code{approx}.
 }
 \description{
-Approximate size of an integer; a poor man's exponential notation.
+A simple printing system to make numbers readable.
+
+\code{hr()}, short for "human readable", is an alias for \code{approx.size()}
+with \code{unit.names="comma"}.
 }
 \details{
-A simple printing system to make numbers readable.
+Approximate size of an integer; a poor man's exponential notation.
 }
 \examples{
 \dontrun{
@@ -37,4 +43,3 @@ approx.size(12345678, unit.names="comma")
 \seealso{
 \code{\link{howmany}}
 }
-

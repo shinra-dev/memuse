@@ -18,8 +18,8 @@ Memory usage class object.
 
 \item{\code{unit.names}}{short (e.g., kb) or long (e.g., kilobyte)}
 }}
+
 \seealso{
 \code{ \link{Control} \link{Constructor} }
 }
 \keyword{Classes}
-

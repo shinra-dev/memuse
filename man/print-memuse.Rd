@@ -2,8 +2,8 @@
 % Please edit documentation in R/print.r
 \docType{methods}
 \name{print-memuse}
-\alias{print,memuse-method}
 \alias{print-memuse}
+\alias{print,memuse-method}
 \alias{show,memuse-method}
 \title{Printing}
 \usage{
@@ -43,4 +43,3 @@ x # same as show(x)
 \code{\ link{Constructor} \link{memuse-class} }
 }
 \keyword{Methods}
-

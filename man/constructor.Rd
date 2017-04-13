@@ -3,18 +3,18 @@
 \docType{methods}
 \name{Constructor}
 \alias{Constructor}
+\alias{mu}
+\alias{mu,ANY-method}
+\alias{mu,NULL-method}
+\alias{mu,numeric-method}
+\alias{mu,object_size-method}
+\alias{mu,missing-method}
 \alias{memuse}
 \alias{memuse,ANY-method}
 \alias{memuse,NULL-method}
 \alias{memuse,missing-method}
 \alias{memuse,numeric-method}
 \alias{memuse,object_size-method}
-\alias{mu}
-\alias{mu,ANY-method}
-\alias{mu,NULL-method}
-\alias{mu,missing-method}
-\alias{mu,numeric-method}
-\alias{mu,object_size-method}
 \title{memuse Constructor}
 \usage{
 mu(size, unit = .UNIT, unit.prefix = .PREFIX, unit.names = .NAMES)
@@ -94,4 +94,3 @@ memuse(rnorm(1e4))
 \code{ \link{memuse-class} \link{Accessors} \link{Converters} }
 }
 \keyword{Methods}
-

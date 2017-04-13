@@ -2,12 +2,15 @@
 % Please edit documentation in R/data.r
 \docType{data}
 \name{Control Variables}
-\alias{.NAMES}
-\alias{.PRECEDENCE}
-\alias{.PREFIX}
+\alias{Control Variables}
 \alias{.UNIT}
 \alias{Control}
-\alias{Control Variables}
+\alias{.PREFIX}
+\alias{.NAMES}
+\alias{.PRECEDENCE}
+\alias{.NAMES}
+\alias{.PREFIX}
+\alias{.PRECEDENCE}
 \title{Control Variables for the memuse Package.}
 \format{An object of class \code{character} of length 1.}
 \usage{
@@ -63,4 +66,3 @@ mu(2000)
 }
 \keyword{Data}
 \keyword{datasets}
-

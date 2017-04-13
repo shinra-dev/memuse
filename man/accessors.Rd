@@ -4,13 +4,13 @@
 \name{Accessors}
 \alias{Accessors}
 \alias{size}
-\alias{size,memuse-method}
 \alias{unit}
-\alias{unit,memuse-method}
-\alias{unit.names}
-\alias{unit.names,memuse-method}
 \alias{unit.prefix}
+\alias{unit.names}
+\alias{size,memuse-method}
+\alias{unit,memuse-method}
 \alias{unit.prefix,memuse-method}
+\alias{unit.names,memuse-method}
 \title{Accessors}
 \usage{
 size(x, as.is = TRUE)
@@ -70,4 +70,3 @@ unit.names(x)
 \code{ \link{memuse-class} \link{Replacers} }
 }
 \keyword{Methods}
-
