@@ -12,7 +12,11 @@
 #' 
 #' Approximate size of an integer; a poor man's exponential notation.
 #' 
+#' @description
 #' A simple printing system to make numbers readable.
+#' 
+#' \code{hr()}, short for "human readable", is an alias for \code{approx.size()}
+#' with \code{unit.names="comma"}.
 #' 
 #' @param x 
 #' A number.
@@ -37,6 +41,7 @@
 #' 
 #' @seealso \code{\link{howmany}}
 #' @export approx.size
+#' @rdname approx.size
 approx.size <- function(x, unit.names="long", ..., digits=1)
 {
   #unit <- match.arg(tolower(unit), c("best"))
@@ -105,6 +110,13 @@ approx.size <- function(x, unit.names="long", ..., digits=1)
   
   return(ret)
 }
+
+
+
+#' @export
+#' @rdname approx.size
+hr <- function(x) approx.size(x, unit.names='comma')
+
 
 
 
