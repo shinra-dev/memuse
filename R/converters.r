@@ -57,7 +57,7 @@ setGeneric(name="as.memuse",
 #' @rdname converters
 #' @export
 setMethod("as.memuse", signature(x="numeric"),
-  function(x, unit="best", unit.prefix=.PREFIX, unit.names=.NAMES)
+  function(x, unit="best", unit.prefix=.PREFIX, unit.names="short")
   {
     ret <- internal.mu(size=x, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
     
@@ -70,7 +70,7 @@ setMethod("as.memuse", signature(x="numeric"),
 #' @rdname converters
 #' @export
 setMethod("as.memuse", signature(x="object_size"),
-  function(x, unit="best", unit.prefix=.PREFIX, unit.names=.NAMES)
+  function(x, unit="best", unit.prefix=.PREFIX, unit.names="short")
   {
     ret <- as.memuse(x=unclass(x), unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
     
@@ -83,7 +83,7 @@ setMethod("as.memuse", signature(x="object_size"),
 #' @rdname converters
 #' @export
 setMethod("as.memuse", signature(x="character"),
-  function(x, unit="best", unit.prefix=.PREFIX, unit.names=.NAMES)
+  function(x, unit="best", unit.prefix=.PREFIX, unit.names="short")
   {
     y <- unlist(strsplit(x=x, split=" "))
     

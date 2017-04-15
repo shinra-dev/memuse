@@ -38,14 +38,10 @@
 #' mu(2000)
 #' }
 #' 
-#' @name Control Variables
-#' @aliases Control .UNIT .PREFIX .NAMES .PRECEDENCE
-#' @docType data
-#' @seealso \code{ \link{memuse-class} \link{Constructor} }
-#' @rdname control
+
+
+
 #' @keywords Data
-.NAMES <- "short"
-#' @rdname control
 .PREFIX <- "IEC"
 #' @rdname control
 .PRECEDENCE <- "prefix"

@@ -63,7 +63,7 @@
 #' @name howbig
 #' @rdname howbig
 #' @export howbig
-howbig <- function(nrow, ncol, representation="dense", unit="best", unit.prefix=.PREFIX, unit.names=.NAMES, ..., sparsity=0.05, type="double", intsize=4)
+howbig <- function(nrow, ncol, representation="dense", unit="best", unit.prefix=.PREFIX, unit.names="short", ..., sparsity=0.05, type="double", intsize=4)
 {
   type <- match.arg(tolower(type), c("double", "integer"))
   
@@ -92,7 +92,7 @@ howbig <- function(nrow, ncol, representation="dense", unit="best", unit.prefix=
 
 #' @rdname howbig
 #' @export
-howbig.par <- function(nrow, ncol, cores=1, par="balanced", unit="best", unit.prefix=.PREFIX, unit.names=.NAMES, ..., type="double", intsize=4, ICTXT=0, bldim=c(4, 4))
+howbig.par <- function(nrow, ncol, cores=1, par="balanced", unit="best", unit.prefix=.PREFIX, unit.names="short", ..., type="double", intsize=4, ICTXT=0, bldim=c(4, 4))
 {
   par <- match.arg(arg=tolower(par), choices=c("dmat", "balanced"))
   

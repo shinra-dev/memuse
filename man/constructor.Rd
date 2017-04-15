@@ -17,39 +17,39 @@
 \alias{memuse,object_size-method}
 \title{memuse Constructor}
 \usage{
-mu(size, unit = "best", unit.prefix = .PREFIX, unit.names = .NAMES)
+mu(size, unit = "best", unit.prefix = .PREFIX, unit.names = "short")
 
 \S4method{mu}{ANY}(size = 0, unit = "best", unit.prefix = .PREFIX,
-  unit.names = .NAMES)
+  unit.names = "short")
 
 \S4method{mu}{`NULL`}(size = 0, unit = "best", unit.prefix = .PREFIX,
-  unit.names = .NAMES)
+  unit.names = "short")
 
 \S4method{mu}{numeric}(size, unit = "best", unit.prefix = .PREFIX,
-  unit.names = .NAMES)
+  unit.names = "short")
 
 \S4method{mu}{object_size}(size, unit = "best", unit.prefix = .PREFIX,
-  unit.names = .NAMES)
+  unit.names = "short")
 
 \S4method{mu}{missing}(size = 0, unit = "best", unit.prefix = .PREFIX,
-  unit.names = .NAMES)
+  unit.names = "short")
 
-memuse(size, unit = "best", unit.prefix = .PREFIX, unit.names = .NAMES)
+memuse(size, unit = "best", unit.prefix = .PREFIX, unit.names = "short")
 
 \S4method{memuse}{ANY}(size = 0, unit = "best", unit.prefix = .PREFIX,
-  unit.names = .NAMES)
+  unit.names = "short")
 
 \S4method{memuse}{`NULL`}(size = 0, unit = "best", unit.prefix = .PREFIX,
-  unit.names = .NAMES)
+  unit.names = "short")
 
 \S4method{memuse}{missing}(size = 0, unit = "best", unit.prefix = .PREFIX,
-  unit.names = .NAMES)
+  unit.names = "short")
 
 \S4method{memuse}{numeric}(size = size, unit = "best",
-  unit.prefix = .PREFIX, unit.names = .NAMES)
+  unit.prefix = .PREFIX, unit.names = "short")
 
 \S4method{memuse}{object_size}(size, unit = "best", unit.prefix = .PREFIX,
-  unit.names = .NAMES)
+  unit.names = "short")
 }
 \arguments{
 \item{size}{\code{numeric}; indicates the unit-multiple number of bytes used

@@ -46,9 +46,9 @@ setMethod("+", signature(e1="memuse", e2="memuse"),
         e2 <- swap.prefix(e2)
     }
     
-    # if names disagree, use .NAMES
+    # if names disagree, use "short"
     if (e1@unit.names != e2@unit.names){
-      if (e1@unit.names != .NAMES)
+      if (e1@unit.names != "short")
         e1 <- swap.names(e1)
     }
     
@@ -239,9 +239,9 @@ setMethod("*", signature(e1="memuse", e2="memuse"),
         e2 <- swap.prefix(e2)
     }
     
-    # if names disagree, use .NAMES
+    # if names disagree, use "short"
     if (e1@unit.names != e2@unit.names){
-      if (e1@unit.names != .NAMES)
+      if (e1@unit.names != "short")
         e1 <- swap.names(e1)
     }
     
@@ -336,9 +336,9 @@ setMethod("/", signature(e1="memuse", e2="memuse"),
         e2 <- swap.prefix(e2)
     }
     
-    # if names disagree, use .NAMES
+    # if names disagree, use "short"
     if (e1@unit.names != e2@unit.names){
-      if (e1@unit.names != .NAMES)
+      if (e1@unit.names != "short")
         e1 <- swap.names(e1)
     }
     
@@ -436,9 +436,9 @@ setMethod("^", signature(e1="memuse", e2="memuse"),
         e2 <- swap.prefix(e2)
     }
     
-    # if names disagree, use .NAMES
+    # if names disagree, use "short"
     if (e1@unit.names != e2@unit.names){
-      if (e1@unit.names != .NAMES)
+      if (e1@unit.names != "short")
         e1 <- swap.names(e1)
     }
     
