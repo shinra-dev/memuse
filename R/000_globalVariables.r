@@ -6,6 +6,6 @@
 ### Suggested by Prof Brian Ripley
 ### ?globalVariables
 
-utils::globalVariables(c(".PREFIX", ".PRECEDENCE",
+utils::globalVariables(c(".PRECEDENCE",
   ".units", ".units_bits", ".numbers", ".time")
 )

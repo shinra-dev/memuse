@@ -116,7 +116,7 @@ mu.nonneg <- function(x)
 
 
 ### constructor
-internal.memuse <- function(size=0, unit="best", unit.prefix=.PREFIX, unit.names="short")
+internal.memuse <- function(size=0, unit="best", unit.prefix="IEC", unit.names="short")
 {
   if (unit == "best")
     u <- "B"

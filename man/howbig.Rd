@@ -6,11 +6,11 @@
 \title{howbig}
 \usage{
 howbig(nrow, ncol, representation = "dense", unit = "best",
-  unit.prefix = .PREFIX, unit.names = "short", ..., sparsity = 0.05,
+  unit.prefix = "IEC", unit.names = "short", ..., sparsity = 0.05,
   type = "double", intsize = 4)
 
 howbig.par(nrow, ncol, cores = 1, par = "balanced", unit = "best",
-  unit.prefix = .PREFIX, unit.names = "short", ..., type = "double",
+  unit.prefix = "IEC", unit.names = "short", ..., type = "double",
   intsize = 4, ICTXT = 0, bldim = c(4, 4))
 }
 \arguments{

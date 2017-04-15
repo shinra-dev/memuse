@@ -38,11 +38,11 @@ NULL
 setMethod("+", signature(e1="memuse", e2="memuse"),
   function(e1, e2) 
   {
-    # if unit prefices disagree, use .PREFIX
+    # if unit prefices disagree, use "IEC"
     if (e1@unit.prefix != e2@unit.prefix){
-      if (e1@unit.prefix != .PREFIX)
+      if (e1@unit.prefix != "IEC")
         e1 <- swap.prefix(e1)
-      if (e2@unit.prefix != .PREFIX)
+      if (e2@unit.prefix != "IEC")
         e2 <- swap.prefix(e2)
     }
     
@@ -231,11 +231,11 @@ setMethod("-", signature(e1="object_size", e2="memuse"),
 setMethod("*", signature(e1="memuse", e2="memuse"),
   function(e1, e2) 
   {
-    # if unit prefices disagree, use .PREFIX
+    # if unit prefices disagree, use "IEC"
     if (e1@unit.prefix != e2@unit.prefix){
-      if (e1@unit.prefix != .PREFIX)
+      if (e1@unit.prefix != "IEC")
         e1 <- swap.prefix(e1)
-      if (e2@unit.prefix != .PREFIX)
+      if (e2@unit.prefix != "IEC")
         e2 <- swap.prefix(e2)
     }
     
@@ -328,11 +328,11 @@ setMethod("*", signature(e1="object_size", e2="memuse"),
 setMethod("/", signature(e1="memuse", e2="memuse"),
   function(e1, e2) 
   {
-    # if unit prefices disagree, use .PREFIX
+    # if unit prefices disagree, use "IEC"
     if (e1@unit.prefix != e2@unit.prefix){
-      if (e1@unit.prefix != .PREFIX)
+      if (e1@unit.prefix != "IEC")
         e1 <- swap.prefix(e1)
-      if (e2@unit.prefix != .PREFIX)
+      if (e2@unit.prefix != "IEC")
         e2 <- swap.prefix(e2)
     }
     
@@ -428,11 +428,11 @@ setMethod("/", signature(e1="object_size", e2="memuse"),
 setMethod("^", signature(e1="memuse", e2="memuse"),
   function(e1, e2) 
   {
-    # if unit prefices disagree, use .PREFIX
+    # if unit prefices disagree, use "IEC"
     if (e1@unit.prefix != e2@unit.prefix){
-      if (e1@unit.prefix != .PREFIX)
+      if (e1@unit.prefix != "IEC")
         e1 <- swap.prefix(e1)
-      if (e2@unit.prefix != .PREFIX)
+      if (e2@unit.prefix != "IEC")
         e2 <- swap.prefix(e2)
     }
     
