@@ -116,7 +116,7 @@ mu.nonneg <- function(x)
 
 
 ### constructor
-internal.memuse <- function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)#, precedence=.PRECEDENCE)
+internal.memuse <- function(size=0, unit="best", unit.prefix=.PREFIX, unit.names=.NAMES)
 {
   if (unit == "best")
     u <- "B"
@@ -124,7 +124,7 @@ internal.memuse <- function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=
     u <- unit
   
   
-  x <- new("memuse", size=size, unit="B", unit.prefix=unit.prefix, unit.names=unit.names)
+  x <- new("memuse", size=size, unit=u, unit.prefix=unit.prefix, unit.names=unit.names)
   x <- check.mu(x)
   
   mu.nonneg(x)

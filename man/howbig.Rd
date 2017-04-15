@@ -5,11 +5,11 @@
 \alias{howbig.par}
 \title{howbig}
 \usage{
-howbig(nrow, ncol, representation = "dense", unit = .UNIT,
+howbig(nrow, ncol, representation = "dense", unit = "best",
   unit.prefix = .PREFIX, unit.names = .NAMES, ..., sparsity = 0.05,
   type = "double", intsize = 4)
 
-howbig.par(nrow, ncol, cores = 1, par = "balanced", unit = .UNIT,
+howbig.par(nrow, ncol, cores = 1, par = "balanced", unit = "best",
   unit.prefix = .PREFIX, unit.names = .NAMES, ..., type = "double",
   intsize = 4, ICTXT = 0, bldim = c(4, 4))
 }

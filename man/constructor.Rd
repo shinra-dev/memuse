@@ -17,38 +17,38 @@
 \alias{memuse,object_size-method}
 \title{memuse Constructor}
 \usage{
-mu(size, unit = .UNIT, unit.prefix = .PREFIX, unit.names = .NAMES)
+mu(size, unit = "best", unit.prefix = .PREFIX, unit.names = .NAMES)
 
-\S4method{mu}{ANY}(size = 0, unit = .UNIT, unit.prefix = .PREFIX,
+\S4method{mu}{ANY}(size = 0, unit = "best", unit.prefix = .PREFIX,
   unit.names = .NAMES)
 
-\S4method{mu}{`NULL`}(size = 0, unit = .UNIT, unit.prefix = .PREFIX,
+\S4method{mu}{`NULL`}(size = 0, unit = "best", unit.prefix = .PREFIX,
   unit.names = .NAMES)
 
-\S4method{mu}{numeric}(size, unit = .UNIT, unit.prefix = .PREFIX,
+\S4method{mu}{numeric}(size, unit = "best", unit.prefix = .PREFIX,
   unit.names = .NAMES)
 
-\S4method{mu}{object_size}(size, unit = .UNIT, unit.prefix = .PREFIX,
+\S4method{mu}{object_size}(size, unit = "best", unit.prefix = .PREFIX,
   unit.names = .NAMES)
 
-\S4method{mu}{missing}(size = 0, unit = .UNIT, unit.prefix = .PREFIX,
+\S4method{mu}{missing}(size = 0, unit = "best", unit.prefix = .PREFIX,
   unit.names = .NAMES)
 
-memuse(size, unit = .UNIT, unit.prefix = .PREFIX, unit.names = .NAMES)
+memuse(size, unit = "best", unit.prefix = .PREFIX, unit.names = .NAMES)
 
-\S4method{memuse}{ANY}(size = 0, unit = .UNIT, unit.prefix = .PREFIX,
+\S4method{memuse}{ANY}(size = 0, unit = "best", unit.prefix = .PREFIX,
   unit.names = .NAMES)
 
-\S4method{memuse}{`NULL`}(size = 0, unit = .UNIT, unit.prefix = .PREFIX,
+\S4method{memuse}{`NULL`}(size = 0, unit = "best", unit.prefix = .PREFIX,
   unit.names = .NAMES)
 
-\S4method{memuse}{missing}(size = 0, unit = .UNIT, unit.prefix = .PREFIX,
+\S4method{memuse}{missing}(size = 0, unit = "best", unit.prefix = .PREFIX,
   unit.names = .NAMES)
 
-\S4method{memuse}{numeric}(size = size, unit = .UNIT,
+\S4method{memuse}{numeric}(size = size, unit = "best",
   unit.prefix = .PREFIX, unit.names = .NAMES)
 
-\S4method{memuse}{object_size}(size, unit = .UNIT, unit.prefix = .PREFIX,
+\S4method{memuse}{object_size}(size, unit = "best", unit.prefix = .PREFIX,
   unit.names = .NAMES)
 }
 \arguments{

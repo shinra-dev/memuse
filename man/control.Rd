@@ -3,19 +3,16 @@
 \docType{data}
 \name{Control Variables}
 \alias{Control Variables}
-\alias{.UNIT}
+\alias{.NAMES}
 \alias{Control}
+\alias{.UNIT}
 \alias{.PREFIX}
-\alias{.NAMES}
 \alias{.PRECEDENCE}
-\alias{.NAMES}
 \alias{.PREFIX}
 \alias{.PRECEDENCE}
 \title{Control Variables for the memuse Package.}
 \format{An object of class \code{character} of length 1.}
 \usage{
-.UNIT
-
 .NAMES
 
 .PREFIX

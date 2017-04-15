@@ -57,7 +57,7 @@ setMethod("+", signature(e1="memuse", e2="memuse"),
     
     e1@size <- e1@size + e2@size
     
-    ret <- swap.unit(e1, .UNIT)
+    ret <- swap.unit(e1, "best")
     
     return( ret )
   }
@@ -77,7 +77,7 @@ setMethod("+", signature(e1="memuse", e2="numeric"),
     
     e1@size <- e1@size + e2
     
-    ret <- swap.unit(e1, .UNIT)
+    ret <- swap.unit(e1, "best")
     
     return( ret )
   }
@@ -108,7 +108,7 @@ setMethod("+", signature(e1="memuse", e2="object_size"),
     
     e1@size <- e1@size + unclass(e2)
     
-    ret <- swap.unit(e1, .UNIT)
+    ret <- swap.unit(e1, "best")
     
     return( ret )
   }
@@ -196,7 +196,7 @@ setMethod("-", signature(e1="memuse", e2="object_size"),
     
     e1@size <- e1@size - unclass(e2)
     
-    ret <- swap.unit(e1, .UNIT)
+    ret <- swap.unit(e1, "best")
     mu.nonneg(ret)
     
     return( ret )
@@ -214,7 +214,7 @@ setMethod("-", signature(e1="object_size", e2="memuse"),
     
     e2@size <- unclass(e1) - e2@size
     
-    ret <- swap.unit(e2, .UNIT)
+    ret <- swap.unit(e2, "best")
     mu.nonneg(ret)
     
     return( ret )
@@ -250,7 +250,7 @@ setMethod("*", signature(e1="memuse", e2="memuse"),
     
     e1@size <- e1@size * e2@size
     
-    ret <- swap.unit(e1, .UNIT)
+    ret <- swap.unit(e1, "best")
     
     return( ret )
   }
@@ -270,7 +270,7 @@ setMethod("*", signature(e1="memuse", e2="numeric"),
     
     e1@size <- e1@size * e2
     
-    ret <- swap.unit(e1, .UNIT)
+    ret <- swap.unit(e1, "best")
     
     return( ret )
   }
@@ -301,7 +301,7 @@ setMethod("*", signature(e1="memuse", e2="object_size"),
     
     e1@size <- e1@size * unclass(e2)
     
-    ret <- swap.unit(e1, .UNIT)
+    ret <- swap.unit(e1, "best")
     
     return( ret )
   }
@@ -363,7 +363,7 @@ setMethod("/", signature(e1="memuse", e2="numeric"),
     
     e1@size <- e1@size / e2
     
-    ret <- swap.unit(e1, .UNIT)
+    ret <- swap.unit(e1, "best")
     
     return( ret )
   }
@@ -394,7 +394,7 @@ setMethod("/", signature(e1="memuse", e2="object_size"),
     
     e1@size <- e1@size / unclass(e2)
     
-    ret <- swap.unit(e1, .UNIT)
+    ret <- swap.unit(e1, "best")
     
     return( ret )
   }
@@ -411,7 +411,7 @@ setMethod("/", signature(e1="object_size", e2="memuse"),
     
     e2@size <- unclass(e1) / e2@size
     
-    ret <- swap.unit(e2, .UNIT)
+    ret <- swap.unit(e2, "best")
     
     return( ret )
   }
@@ -447,7 +447,7 @@ setMethod("^", signature(e1="memuse", e2="memuse"),
     
     e1@size <- e1@size ^ e2@size
     
-    ret <- swap.unit(e1, .UNIT)
+    ret <- swap.unit(e1, "best")
     
     return( ret )
   }
@@ -467,7 +467,7 @@ setMethod("^", signature(e1="memuse", e2="numeric"),
     
     e1@size <- e1@size ^ e2
     
-    ret <- swap.unit(e1, .UNIT)
+    ret <- swap.unit(e1, "best")
     
     return( ret )
   }

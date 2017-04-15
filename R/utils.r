@@ -105,25 +105,6 @@ best.unit <- function(x)
 
 
 
-# get the control unit
-ct.unit <- function(x)
-{
-  .UNIT <- tolower(.UNIT)
-  
-  if (.UNIT == "best")
-    x <- best.unit(x)
-  else {
-    x <- check.mu(x)
-    
-    if (tolower(x@unit) != .UNIT)
-      x <- swap.unit(x, .UNIT)
-  }
-  
-  return( x )
-}
-
-
-
 # stable a*b^c with c an integer
 abc <- function(a, b, c)
 {

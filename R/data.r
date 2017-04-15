@@ -44,8 +44,6 @@
 #' @seealso \code{ \link{memuse-class} \link{Constructor} }
 #' @rdname control
 #' @keywords Data
-.UNIT <- "best"
-#' @rdname control
 .NAMES <- "short"
 #' @rdname control
 .PREFIX <- "IEC"
@@ -101,5 +99,3 @@
     )
   )
 )
-
-

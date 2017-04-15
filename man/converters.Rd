@@ -13,13 +13,13 @@
 \usage{
 as.memuse(x, ...)
 
-\S4method{as.memuse}{numeric}(x, unit = .UNIT, unit.prefix = .PREFIX,
+\S4method{as.memuse}{numeric}(x, unit = "best", unit.prefix = .PREFIX,
   unit.names = .NAMES)
 
-\S4method{as.memuse}{object_size}(x, unit = .UNIT, unit.prefix = .PREFIX,
+\S4method{as.memuse}{object_size}(x, unit = "best", unit.prefix = .PREFIX,
   unit.names = .NAMES)
 
-\S4method{as.memuse}{character}(x, unit = .UNIT, unit.prefix = .PREFIX,
+\S4method{as.memuse}{character}(x, unit = "best", unit.prefix = .PREFIX,
   unit.names = .NAMES)
 
 \S4method{as.character}{memuse}(x, ...)
