@@ -187,7 +187,7 @@ setReplaceMethod("size", signature(x="memuse"),
     x@size <- value
     x <- check.mu(x)
     
-#    x <- swap.unit(x=x, unit=.UNIT)
+#    x <- swap.unit(x=x, unit="best")
     
     return( x )
   }
