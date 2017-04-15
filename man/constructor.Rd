@@ -25,7 +25,7 @@ mu(size, unit = .UNIT, unit.prefix = .PREFIX, unit.names = .NAMES)
 \S4method{mu}{`NULL`}(size = 0, unit = .UNIT, unit.prefix = .PREFIX,
   unit.names = .NAMES)
 
-\S4method{mu}{numeric}(size = 0, unit = .UNIT, unit.prefix = .PREFIX,
+\S4method{mu}{numeric}(size, unit = .UNIT, unit.prefix = .PREFIX,
   unit.names = .NAMES)
 
 \S4method{mu}{object_size}(size, unit = .UNIT, unit.prefix = .PREFIX,
@@ -45,8 +45,8 @@ memuse(size, unit = .UNIT, unit.prefix = .PREFIX, unit.names = .NAMES)
 \S4method{memuse}{missing}(size = 0, unit = .UNIT, unit.prefix = .PREFIX,
   unit.names = .NAMES)
 
-\S4method{memuse}{numeric}(size = 0, unit = .UNIT, unit.prefix = .PREFIX,
-  unit.names = .NAMES)
+\S4method{memuse}{numeric}(size = size, unit = .UNIT,
+  unit.prefix = .PREFIX, unit.names = .NAMES)
 
 \S4method{memuse}{object_size}(size, unit = .UNIT, unit.prefix = .PREFIX,
   unit.names = .NAMES)

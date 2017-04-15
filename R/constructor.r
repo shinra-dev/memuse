@@ -73,7 +73,7 @@ setMethod("mu", signature(size="NULL"),
 #' @rdname constructor
 #' @export
 setMethod("mu", signature(size="numeric"),
-  function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+  function(size, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
   {
     if (NROW(size) == 1 && NCOL(size) == 1)
       internal.mu(size=size, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
@@ -134,7 +134,7 @@ setMethod("memuse", signature(size="missing"),
 #' @rdname constructor
 #' @export
 setMethod("memuse", signature(size="numeric"),
-  function(size=0, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
+  function(size=size, unit=.UNIT, unit.prefix=.PREFIX, unit.names=.NAMES)
     mu(size, unit, unit.prefix, unit.names)
 )
 
