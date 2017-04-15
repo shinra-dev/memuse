@@ -42,7 +42,7 @@ setMethod("print", signature(x="memuse"),
     if (unit.prefix != x@unit.prefix)
       x <- swap.prefix(x=x)
     if (unit != x@unit)
-      x <- swap.unit(x=x, unit=unit, )
+      x <- swap.unit(x=x, unit=unit)
     
     unit <- tolower(x@unit)
     if (unit == "b" || unit == "bytes")
