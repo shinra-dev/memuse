@@ -1,6 +1,0 @@
-== This Release ==
-
-	* mean()
-	* Moved to roxygen2 for documentation.
-	* Added some plot methods for systems calls.
-
