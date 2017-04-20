@@ -6,3 +6,5 @@ vignettes/cover/build_cover
 vignettes/cover/.*.tex
 vignettes/cover/.*.jpg
 vignettes/cover/.*.png
+
+LICENSE.md
