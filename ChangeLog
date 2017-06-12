@@ -3,6 +3,8 @@ Release 3.1-0:
   * Fixed clang compiler warning in os detection.
   * Added hr() ("human readable") alias for approx.size()
   * Changed division to be unitless.
+  * Fixed int comparison warning.
+  * Modified RNACI checks to satisfy rchk.
 
 Release 3.0-1:
   * Fixed installation issues on some platforms.
