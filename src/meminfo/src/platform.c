@@ -65,7 +65,7 @@ int read_proc_file(const char *file, memsize_t *val, char *field, int fieldlen)
     fclose(fp);
     free(tmp);
     
-    if (value != FAILURE)
+    if (value != (memsize_t)FAILURE)
     {
       *val = value;
       return MEMINFO_OK;
