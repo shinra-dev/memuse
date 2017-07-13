@@ -1,5 +1,0 @@
-basics      memuse  Simple test cases (with fancy printing).
-arithmetic  memuse  Arithmetic (with fancy printing).
-howbig      memuse  The howbig() and howmany() methods (with fancy printing).
-sys         memuse  The new Sys.* functionality for accessing hardware ram info.
-misc        memuse  Some miscellaneous "ease of use" functionality.
