@@ -3,6 +3,7 @@
 #' Determines the memory usage for a dense, in-core, numeric matrix of
 #' specified rows/columns.
 #' 
+#' @details
 #' These functions provide the memory usage of an unallocated, dense, in-core,
 #' numeric matrix.  As the names suggest, \code{howbig()} simply returns the
 #' size (as a \code{memuse} object), while \code{howbig.par()} is the parallel,
@@ -62,6 +63,11 @@
 #' @keywords Methods
 #' @name howbig
 #' @rdname howbig
+NULL
+
+
+
+#' @rdname howbig
 #' @export howbig
 howbig <- function(nrow, ncol, representation="dense", unit="best", unit.prefix="IEC", unit.names="short", ..., sparsity=0.05, type="double", intsize=4)
 {
@@ -83,9 +89,7 @@ howbig <- function(nrow, ncol, representation="dense", unit="best", unit.prefix=
       x <- sparsity * x
   }
   
-  x <- swap.unit(x, unit)
-  
-  return( x )
+  swap.unit(x, unit)
 }
 
 
@@ -115,5 +119,5 @@ howbig.par <- function(nrow, ncol, cores=1, par="balanced", unit="best", unit.pr
     out <- list(total=x, local=z)
   } 
   
-  return( out )
+  out
 }

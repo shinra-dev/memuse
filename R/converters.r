@@ -59,9 +59,7 @@ setGeneric(name="as.memuse",
 setMethod("as.memuse", signature(x="numeric"),
   function(x, unit="best", unit.prefix="IEC", unit.names="short")
   {
-    ret <- internal.mu(size=x, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
-    
-    return( ret )
+    internal.mu(size=x, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
   }
 )
 
@@ -72,9 +70,7 @@ setMethod("as.memuse", signature(x="numeric"),
 setMethod("as.memuse", signature(x="object_size"),
   function(x, unit="best", unit.prefix="IEC", unit.names="short")
   {
-    ret <- as.memuse(x=unclass(x), unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
-    
-    return( ret )
+    as.memuse(x=unclass(x), unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
   }
 )
 
@@ -93,9 +89,7 @@ setMethod("as.memuse", signature(x="character"),
     size <- as.numeric(y[1L])
     unit <- y[2L]
     
-    ret <- mu(size=size, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
-    
-    return( ret )
+    mu(size=size, unit=unit, unit.prefix=unit.prefix, unit.names=unit.names)
   }
 )
 
@@ -110,9 +104,7 @@ setMethod("as.memuse", signature(x="character"),
 setMethod("as.character", signature(x="memuse"),
   function(x, ...)
   {
-    ret <- utils::capture.output(print(x))
-    
-    return( ret )
+    utils::capture.output(print(x))
   }
 )
 
@@ -126,6 +118,6 @@ setMethod("as.character", signature(x="memuse"),
 setMethod("as.numeric", signature(x="memuse"),
   function(x, as.is=FALSE)
   {
-    return( size(x, as.is=as.is) )
+    mu.size(x, as.is=as.is)
   }
 )

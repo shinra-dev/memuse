@@ -28,9 +28,6 @@
 #' @seealso \code{ \link{Constructor} \link{memuse-class} }
 #' @keywords Methods
 #' @rdname sum
-NULL
-
-#' @rdname sum
 #' @export
 setMethod("sum", signature(x="memuse"),
   function(x, ..., na.rm=FALSE)
@@ -58,9 +55,6 @@ setMethod("sum", signature(x="memuse"),
       ret <- ret + other
     }
     
-    ret <- mu(ret)
-    
-    return( ret )
+    mu(ret)
   }
 )
-
