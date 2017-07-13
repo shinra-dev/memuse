@@ -4,27 +4,25 @@
 \alias{hr}
 \title{hr}
 \usage{
-hr(x, unit.names = "comma", digits = 1)
+hr(x, names = "comma", digits = 1)
 }
 \arguments{
 \item{x}{A number.}
 
-\item{unit.names}{"long", "short", or "comma"; determines wheter the output
+\item{names}{"long", "short", or "comma"; determines wheter the output
 reads like "10 million", "10m", or "10,000,000", respectively.}
 
 \item{digits}{The number of decimal digits to retain.}
 }
 \value{
-An object of class \code{approx}.
+An object of class \code{humanreadable}.
 }
 \description{
-A simple printing system to make numbers readable.
-
-\code{hr()}, short for "human readable", is an alias for \code{approx.size()}
-with \code{unit.names="comma"}.
+A poor man's exponential notation.
 }
 \details{
-Approximate size of an integer; a poor man's exponential notation.
+Approximate size of an integer.  Very useful when dealing with potentially
+large values, such as those from \code{howmany()}.
 }
 \examples{
 \dontrun{

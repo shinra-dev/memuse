@@ -4,24 +4,22 @@ setClass("humanreadable", representation="VIRTUAL")
 
 #' hr
 #' 
-#' Approximate size of an integer; a poor man's exponential notation.
+#' Approximate size of an integer.  Very useful when dealing with potentially
+#' large values, such as those from \code{howmany()}.
 #' 
 #' @description
-#' A simple printing system to make numbers readable.
-#' 
-#' \code{hr()}, short for "human readable", is an alias for \code{approx.size()}
-#' with \code{unit.names="comma"}.
+#' A poor man's exponential notation.
 #' 
 #' @param x 
 #' A number.
-#' @param unit.names 
+#' @param names 
 #' "long", "short", or "comma"; determines wheter the output
 #' reads like "10 million", "10m", or "10,000,000", respectively.
 #' @param digits 
 #' The number of decimal digits to retain.
 #' 
 #' @return
-#' An object of class \code{approx}.
+#' An object of class \code{humanreadable}.
 #' 
 #' @examples
 #' \dontrun{
@@ -32,17 +30,16 @@ setClass("humanreadable", representation="VIRTUAL")
 #' }
 #' 
 #' @seealso \code{\link{howmany}}
-#' @rdname approx.size
 #' @export
-hr <- function(x, unit.names="comma", digits=1)
+hr <- function(x, names="comma", digits=1)
 {
   #unit <- match.arg(tolower(unit), c("best"))
   unit <- "best" ### FIXME
-  unit.names <- match.arg(tolower(unit.names), c("long", "short", "comma"))
+  names <- match.arg(tolower(names), c("long", "short", "comma"))
   
   if (length(x) > 1)
   {
-    ret <- sapply(x, approx.size)
+    ret <- sapply(x, hr)
     class(ret) <- "approx"
     
     return( ret )
@@ -56,16 +53,16 @@ hr <- function(x, unit.names="comma", digits=1)
     sepchar <- " "
     unit <- ""
   }
-  else if (unit.names != "comma")
+  else if (names != "comma")
   {
     index <- max(1, min(which(.numbers$exponent > ordmag)) - 1)
     
-    if (unit.names == "long")
+    if (names == "long")
     {
       sepchar <- " "
       unit <- .numbers$name[index]
     }
-    else if (unit.names == "short")
+    else if (names == "short")
     {
       sepchar <- ""
       unit <- .numbers$shorthand[index]
@@ -97,6 +94,7 @@ hr <- function(x, unit.names="comma", digits=1)
   }
   
   ret <- paste(printsize, unit, sep=sepchar)
+  ret <- gsub(ret, pattern=" $", replacement="", perl=TRUE)
   class(ret) <- "humanreadable"
   
   return(ret)
@@ -106,7 +104,7 @@ hr <- function(x, unit.names="comma", digits=1)
 
 #' @title Print \code{humanreadable} objects
 #' @description Printing for \code{hr()} 
-#' @param x \code{approx} object
+#' @param x \code{humanreadable} object
 #' @param ... unused
 #' @name print-hr
 #' @rdname print-hr

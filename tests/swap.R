@@ -1,14 +1,11 @@
 library(memuse)
 
+same = function(x, y) stopifnot(all.equal(x, y))
+
 n <- 9000000
 x <- mu(n)
 
-stopifnot(all.equal(swap.prefix(x), mu(n, unit.prefix="SI")))
+same(swap.prefix(x), mu(n, prefix="SI"))
+same(swap.names(x), mu(n, names="long"))
 
-stopifnot(all.equal(swap.names(x), mu(n, unit.names="long")))
-
-
-### TODO
-#y <- swap.unit(x, "kib")
-#stopifnot(all.equal(y, z))
-
+same(mu.size(swap.unit(x, "kib")), mu.size(x)*1024)

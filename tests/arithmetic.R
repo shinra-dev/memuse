@@ -2,8 +2,8 @@ library(memuse)
 
 same = function(x, y) stopifnot(all.equal(x, y))
 
-x = mu(5000, unit.prefix="SI")
-y = mu(4001, unit.prefix="SI")
+x = mu(5000, prefix="SI")
+y = mu(4001, prefix="SI")
 z = object.size(x)
 
 same(mu.size(x+y), 9.001)
@@ -32,3 +32,7 @@ same(z/x, as.numeric(z)/5000)
 
 same(mu.size(x^2), 25)
 same(mu.size(x^x), Inf)
+
+
+
+same(mu.size(sum(x, y, 999)), 10)

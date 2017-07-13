@@ -13,18 +13,18 @@
 \usage{
 as.memuse(x, ...)
 
-\S4method{as.memuse}{numeric}(x, unit = "best", unit.prefix = "IEC",
-  unit.names = "short")
+\S4method{as.memuse}{numeric}(x, unit = "best", prefix = "IEC",
+  names = "short")
 
-\S4method{as.memuse}{object_size}(x, unit = "best", unit.prefix = "IEC",
-  unit.names = "short")
+\S4method{as.memuse}{object_size}(x, unit = "best", prefix = "IEC",
+  names = "short")
 
-\S4method{as.memuse}{character}(x, unit = "best", unit.prefix = "IEC",
-  unit.names = "short")
+\S4method{as.memuse}{character}(x, unit = "best", prefix = "IEC",
+  names = "short")
 
 \S4method{as.character}{memuse}(x, ...)
 
-\S4method{as.numeric}{memuse}(x, as.is = FALSE)
+\S4method{as.numeric}{memuse}(x, ...)
 }
 \arguments{
 \item{x}{Numeric value, object_size data, or appropriate string (see details
@@ -35,24 +35,25 @@ section for more information).}
 \item{unit}{\code{string}; the unit of storage, such as "MiB" or "MB",
 depending on prefix.  Case is ignored.}
 
-\item{unit.prefix}{\code{string}; the unit prefix, namely IEC or SI.  Case
+\item{prefix}{\code{string}; the unit prefix, namely IEC or SI.  Case
 is ignored.}
 
-\item{unit.names}{\code{string}; control for whether the unit names should
+\item{names}{\code{string}; control for whether the unit names should
 be printed out or their abbreviation should be used.  Options are "long" and
 "short", respectively.  Case is ignored.}
-
-\item{as.is}{logical; should the size be "as-is", or converted to bytes first.}
 }
 \value{
-Returns a \code{memuse} object.
+Returns a character, numeric, or \code{memuse} object, depending on the call.
 }
 \description{
-Converter methods.
+Converter methods between memuse and base R objects.
 }
 \details{
 These methods convert numeric, \code{object_size}, and string (character)
-objects into \code{memuse} objects.
+objects to/from \code{memuse} objects.
+
+\code{as.numeric(x)} for a memuse object \code{x} is just sugar for
+\code{mu.size(x, as.is=FALSE)}
 
 Strings must be of the same form as the printed output of a a memuse object.
 For example, "100 KiB" is valid, but "100 (KiB)" is not.  As always, case of

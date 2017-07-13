@@ -2,6 +2,7 @@
 #' 
 #' How many rows/columns of a matrix can be stored for a given memory size.
 #' 
+#' @details
 #' This function provides the maximum dimension of an unallocated, dense,
 #' in-core, numeric matrix of known byte size. For example, it will show the
 #' largest possible square matrix which is 16 GiB (46340x46340).
@@ -48,10 +49,7 @@
 #' platform dependent.
 #' 
 #' @return 
-#' \code{howmany()} returns a numeric pair, the dimensions of a matrix.
-#' 
-#' \code{howmany.par()} returns a list (the global and local dimensions), each
-#' of which is a numeric pair.
+#' A numeric pair, the dimensions of a matrix.
 #' 
 #' @examples
 #' \dontrun{
@@ -65,8 +63,6 @@
 #' 
 #' @seealso \code{\link{howbig}}
 #' @keywords Methods
-#' @name howmany
-#' @rdname howmany
 #' @export
 howmany <- function(x, nrow, ncol, out.type="full", representation="dense", ..., sparsity=0.05, type="double", intsize=4, unit.names="short")
 {
@@ -106,49 +102,4 @@ howmany <- function(x, nrow, ncol, out.type="full", representation="dense", ...,
     ret <- hr(ret, unit.names=unit.names)
   
   ret
-}
-
-
-
-#' @param cores
-#' The number of cores.
-#' @param par
-#' The type of parallel distribution.
-#' @param ICTXT
-#' BLACS ICTXT value.
-#' @param bldim
-#' Blocking dimension for 2d block-cyclic distribution.
-#' 
-#' @rdname howmany
-#' @export
-howmany.par <- function(x, nrow, ncol, out.type="full", cores=1, par="row", ..., type="double", intsize=4, ICTXT=0, bldim=c(4, 4))
-{
-  if (class(x) != "memuse")
-    stop("input 'x' must be a memuse class object")
-  
-  out.type <- match.arg(arg=tolower(out.type), choices=c("full", "approximate"))
-  
-  # global
-  dim <- howmany(x=x, nrow=nrow, out.type="full", type=type, intsize=intsize)
-  
-  # local
-  par <- match.arg(tolower(par), c("row", "column", "dmat"))
-  if (par == "row") {
-    ldim <- c(floor(dim[1L]/cores), dim[2L])
-  }
-  else if (par == "column"){
-    ldim <- c(dim[1L], floor(dim[2L]/cores))
-  }
-  else if (par == "dmat") {
-    ldim <- numroc(nprocs=cores, dim=dim, bldim=bldim, ICTXT=ICTXT)
-  }
-  
-  # re-cast return as neededS
-  if (out.type == "approximate"){
-    dim <- hr(dim)
-    ldim <- hr(ldim)
-  }
-  
-  
-  list(global=dim, local=ldim)
 }

@@ -2,17 +2,11 @@
 % Please edit documentation in R/howbig.r
 \name{howbig}
 \alias{howbig}
-\alias{howbig}
-\alias{howbig.par}
 \title{howbig}
 \usage{
 howbig(nrow, ncol, representation = "dense", unit = "best",
-  unit.prefix = "IEC", unit.names = "short", ..., sparsity = 0.05,
+  prefix = "IEC", names = "short", ..., sparsity = 0.05,
   type = "double", intsize = 4)
-
-howbig.par(nrow, ncol, cores = 1, par = "balanced", unit = "best",
-  unit.prefix = "IEC", unit.names = "short", ..., type = "double",
-  intsize = 4, ICTXT = 0, bldim = c(4, 4))
 }
 \arguments{
 \item{nrow, ncol}{Number of (global) rows/columns of the matrix.}
@@ -22,9 +16,9 @@ howbig.par(nrow, ncol, cores = 1, par = "balanced", unit = "best",
 \item{unit}{string; the unit of storage, such as "MiB" or "MB", depending on
 prefix.  Case is ignored.}
 
-\item{unit.prefix}{string; the unit prefix, namely IEC or SI.  Case is ignored.}
+\item{prefix}{string; the unit prefix, namely IEC or SI.  Case is ignored.}
 
-\item{unit.names}{string; control for whether the unit names should be
+\item{names}{string; control for whether the unit names should be
 printed out or their abbreviation should be used.  Options are "long" and
 "short", respectively.  Case is ignored.}
 
@@ -39,25 +33,9 @@ will suffice.}
 
 \item{intsize}{The size (in bytes) of an integer.  Default is 4, but this is
 platform dependent.}
-
-\item{cores}{The number of cores/processors}
-
-\item{par}{Type of data distribution. Choices are "dmat" or "balanced". The
-former is for \pkg{pbdDMAT} objects, the latter is the simple, locally
-load-balanced block partitioning.}
-
-\item{ICTXT}{BLACS context number; only used with \code{howbig.par()} with
-\code{par="dmat"}.}
-
-\item{bldim}{Blocking factor for block-cyclically decomposed (dmat) data.}
 }
 \value{
-\code{howbig()} 
 returns a \code{memuse} class object.
-
-\code{howbig.par()} returns a list of 2 elements, each of class
-\code{memuse}.  One is the total memory usage, the other is the local memory
-usage.
 }
 \description{
 Determines the memory usage for a dense, in-core, numeric matrix of
@@ -65,10 +43,8 @@ specified rows/columns.
 }
 \details{
 These functions provide the memory usage of an unallocated, dense, in-core,
-numeric matrix.  As the names suggest, \code{howbig()} simply returns the
-size (as a \code{memuse} object), while \code{howbig.par()} is the parallel,
-distributed analogue.  The latter returns the memory usage of a
-\emph{distributed}, object
+numeric matrix.  As the name suggests, \code{howbig()} simply returns the
+size (as a \code{memuse} object).
 }
 \examples{
 \dontrun{
@@ -80,4 +56,3 @@ howbig(1000, 1000)
 \seealso{
 \code{\link{howmany}}
 }
-\keyword{Methods}

@@ -8,7 +8,7 @@
 \method{print}{humanreadable}(x, ...)
 }
 \arguments{
-\item{x}{\code{approx} object}
+\item{x}{\code{humanreadable} object}
 
 \item{...}{unused}
 }

@@ -4,8 +4,6 @@
 #' 
 #' Simple arithmetic reductions.
 #' 
-#' @name Reductions
-#' 
 #' @param x 
 #' A \code{memuse} object.
 #' @param ... 
@@ -18,43 +16,50 @@
 #' 
 #' @examples
 #' \dontrun{
-#' ### This will work
-#' sum(mu(10), 10)
+#' x = mu(2000)
+#' y = mu(5000)
 #' 
-#' ### This will not
-#' sum(10, mu(10))
+#' sum(x, y)
+#' 
+#' ### Mixing numeric and memuse objects will work, but the first one must be a
+#' ### memuse object.
+#' sum(mu(10), 10) # This will work
+#' sum(10, mu(10)) # This will not
 #' }
 #' 
 #' @seealso \code{ \link{Constructor} \link{memuse-class} }
 #' @keywords Methods
-#' @rdname sum
 #' @export
 setMethod("sum", signature(x="memuse"),
   function(x, ..., na.rm=FALSE)
   {
-    ret <- size(x, as.is=F)
+    ret <- mu.size(x, as.is=FALSE)
     
     other <- list(...)
     
     # checking type of inputs
-    typecheck <- sapply(other, function(i)
-    {
-      if ( !is.memuse(i) && !(is.numeric(i) && is.vector(i))) 
-        stop("method 'sum' can only work with combinations of memuse and vector objects")
-    })
+    typecheck <- sapply(other, sumargcheck)
     
-    if (length(other) > 0){
-      other <- sum(sapply(other, function(i) 
-      {
-        if (is.memuse(i))
-          size(i, as.is=F)
-        else
-          sum(i)
-      }))
-      
+    if (length(other) > 0)
+    {
+      other <- sum(sapply(other, vectorizedsum))
       ret <- ret + other
     }
     
-    mu(ret)
+    internal.mu(ret, unit.prefix=mu.prefix(x), unit.names=mu.names(x))
   }
 )
+
+sumargcheck = function(i)
+{
+  if ( !is.memuse(i) && !(is.numeric(i) && is.vector(i)) ) 
+    stop("method 'sum' can only work with combinations of memuse and vector objects")
+}
+
+vectorizedsum = function(i) 
+{
+  if (is.memuse(i))
+    mu.size(i, as.is=FALSE)
+  else
+    sum(i)
+}

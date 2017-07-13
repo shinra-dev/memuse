@@ -1,3 +1,7 @@
+setClass("sysinfo", representation="VIRTUAL")
+
+
+
 meminfo_retvals <- function(retval)
 {
   if (length(retval) > 1)
