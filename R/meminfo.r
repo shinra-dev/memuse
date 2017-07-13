@@ -8,6 +8,36 @@ meminfo_retvals <- function(retval)
 
 
 
+#' @export
+"[.sysinfo" <- function(x, i)
+{
+  class(x) <- NULL
+  ret <- x[i]
+  if (length(ret) > 0)
+    class(ret) <- "sysinfo"
+  else
+    return(numeric(0))
+  
+  return(ret)
+}
+
+
+
+meminfo_check = function(out)
+{
+  if (any(unlist(out) == -1))
+    stop("There were errors accessing hardware info")
+  
+  if (all(unlist(out) == -10))
+    stop("platform not supported at this time")
+}
+
+
+
+# ---------------------------------------------------------
+# ram
+# ---------------------------------------------------------
+
 #' meminfo
 #' 
 #' Platform memory information.
@@ -43,19 +73,13 @@ Sys.meminfo <- function(compact.free=TRUE)
 {
   out <- .Call(R_meminfo_raminfo)
   
-  if (any(unlist(out) == -1))
-    stop("There were errors accessing hardware info")
-  
-  if (all(unlist(out) == -10))
-    stop("platform not supported at this time")
+  meminfo_check(out)
   
   tmp <- -which(out == -10)
   if (length(tmp) > 0)
     out <- out[tmp]
   
   ret <- lapply(out, mu)
-  
-  
   
   if (compact.free)
   {
@@ -64,11 +88,14 @@ Sys.meminfo <- function(compact.free=TRUE)
   }
   
   class(ret) <- "sysinfo"
-  
-  return( ret )
+  ret
 }
 
 
+
+# ---------------------------------------------------------
+# swap
+# ---------------------------------------------------------
 
 #' swapinfo
 #' 
@@ -102,21 +129,19 @@ Sys.swapinfo <- function()
 {
   out <- .Call(R_meminfo_swapinfo)
   
-  if (any(unlist(out) == -1))
-    stop("There were errors accessing hardware info")
-  
-  if (all(unlist(out) == -10))
-    stop("platform not supported at this time")
-  
+  meminfo_check(out)
+
   tmp <- -which(out == -10)
   if (length(tmp) > 0)
     out <- out[tmp]
   
   ret <- lapply(out, mu)
+
   class(ret) <- "sysinfo"
-  
-  return( ret )
+  ret
 }
+
+
 
 #' @rdname swapinfo
 #' @export
@@ -175,11 +200,7 @@ Sys.procmem <- function(gcFirst=TRUE)
   
   out <- .Call(R_meminfo_procinfo)
   
-  if (any(unlist(out) == -1))
-    stop("There were errors accessing process info")
-  
-  if (all(unlist(out) == -10))
-    stop("platform not supported at this time")
+  meminfo_check(out)
   
   tmp <- -which(out == -10)
   if (length(tmp) > 0)
@@ -188,8 +209,7 @@ Sys.procmem <- function(gcFirst=TRUE)
   ret <- lapply(out, mu)
   
   class(ret) <- "sysinfo"
-  
-  return( ret )
+  ret
 }
 
 
@@ -199,7 +219,6 @@ Sys.procmem <- function(gcFirst=TRUE)
 # ---------------------------------------------------------
 
 getcache <- function(level) .Call(R_meminfo_cacheinfo_size, level)
-
 
 #' Cache Sizes
 #' 
@@ -241,8 +260,7 @@ Sys.cachesize <- function()
   ret <- sapply(ret, mu)
   
   class(ret) <- "sysinfo"
-  
-  return( ret )
+  ret
 }
 
 
@@ -272,15 +290,13 @@ Sys.cachelinesize <- function()
 {
   ret <- .Call(R_meminfo_cacheinfo_linesize)
   
-  
   if (ret < 0)
     stop("platform not supported at this time")
   
   ret <- list(Linesize=mu(ret))
   
   class(ret) <- "sysinfo"
-  
-  return( ret )
+  ret
 }
 
 
@@ -326,18 +342,16 @@ Sys.filesize <- function(filename)
   ret <- .Call(R_meminfo_filesize, filename)
   
   ret <- mu(ret)
-  
-  return( ret )
+  ret
 }
 
 
 
 # ---------------------------------------------------------
-# Print handling
+# printing
 # ---------------------------------------------------------
 
 title_case <- function(x) gsub(x, pattern="(^|[[:space:]])([[:alpha:]])", replacement="\\1\\U\\2", perl=TRUE)
-
 
 #' @title Print \code{sysinfo} objects
 #' @description Printing for \code{sysinfo} objects.
@@ -362,19 +376,4 @@ print.sysinfo <- function(x, ...)
 #  cat("\n")
   
   invisible()
-}
-
-
-
-#' @export
-"[.sysinfo" <- function(x, i)
-{
-  class(x) <- NULL
-  ret <- x[i]
-  if (length(ret) > 0)
-    class(ret) <- "sysinfo"
-  else
-    return(numeric(0))
-  
-  return(ret)
 }
