@@ -1,14 +1,8 @@
-# From: https://en.wikipedia.org/wiki/Names_of_large_numbers
-.numbers <- data.frame(
-  name=c("Thousand", "Million", "Billion", "Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion", "Nonillion", "Decillion", "Undecillion", "Duodecillion", "Tredecillion", "Quattuordecillion", "Quindecillion", "Sexdecillion", "Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion", "Googol", "Centillion"),
-  shorthand=c("k", "m", "b", "t", "q", "qt", "sx", "sp", "ot", "n", "d", "u", "dd", "td", "qtd", "qd", "sxd", "spd", "otd", "nd", "vg", "g", "ct"),
-  exponent=c(3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 100, 303),
-  stringsAsFactors=F
-)
+setClass("humanreadable", representation="VIRTUAL")
 
 
 
-#' approx.size
+#' hr
 #' 
 #' Approximate size of an integer; a poor man's exponential notation.
 #' 
@@ -23,8 +17,6 @@
 #' @param unit.names 
 #' "long", "short", or "comma"; determines wheter the output
 #' reads like "10 million", "10m", or "10,000,000", respectively.
-#' @param ... 
-#' Additional arguments
 #' @param digits 
 #' The number of decimal digits to retain.
 #' 
@@ -35,14 +27,14 @@
 #' \dontrun{
 #' library(memuse)
 #' 
-#' approx.size(12345678)
-#' approx.size(12345678, unit.names="comma")
+#' hr(12345678)
+#' hr(12345678, "long")
 #' }
 #' 
 #' @seealso \code{\link{howmany}}
-#' @export approx.size
 #' @rdname approx.size
-approx.size <- function(x, unit.names="long", ..., digits=1)
+#' @export
+hr <- function(x, unit.names="comma", digits=1)
 {
   #unit <- match.arg(tolower(unit), c("best"))
   unit <- "best" ### FIXME
@@ -60,7 +52,6 @@ approx.size <- function(x, unit.names="long", ..., digits=1)
   
   if (ordmag < 3)
   {
-    size <- x
     printsize <- as.character(x)
     sepchar <- " "
     unit <- ""
@@ -106,29 +97,22 @@ approx.size <- function(x, unit.names="long", ..., digits=1)
   }
   
   ret <- paste(printsize, unit, sep=sepchar)
-  class(ret) <- "approx"
+  class(ret) <- "humanreadable"
   
   return(ret)
 }
 
 
 
-#' @export
-#' @rdname approx.size
-hr <- function(x) approx.size(x, unit.names='comma')
-
-
-
-
-#' @title Print \code{approx} objects
-#' @description Printing for \code{approx.size()} 
+#' @title Print \code{humanreadable} objects
+#' @description Printing for \code{hr()} 
 #' @param x \code{approx} object
 #' @param ... unused
-#' @name print-approx
-#' @rdname print-approx
-#' @method print approx
+#' @name print-hr
+#' @rdname print-hr
+#' @method print humanreadable
 #' @export
-print.approx <- function(x, ...)
+print.humanreadable <- function(x, ...)
 {
   cat(paste(paste(x, collapse=" "), "\n"))
 }
