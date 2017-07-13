@@ -1,9 +1,7 @@
-# class detection
 is.memuse <- function(x) class(x)=="memuse"
 
 
 
-### sanity checks
 check.unit <- function(x)
 {
   # Essentially correct unit (up to case)
@@ -115,7 +113,6 @@ mu.nonneg <- function(x)
 
 
 
-### constructor
 internal.memuse <- function(size=0, unit="best", unit.prefix="IEC", unit.names="short")
 {
   if (unit == "best")

@@ -1,4 +1,3 @@
-### validObject check
 valid.mu <- function(object)
 {
   if (!class(object) == "memuse")
@@ -19,6 +18,7 @@ valid.mu <- function(object)
        !(unit %in% .units[["long"]][["SI"]][["check"]]) )
     return( "invalid slot 'unit'.  See help('memuse')" )
 }
+
 
 
 #' Class memuse
@@ -55,11 +55,6 @@ setClass("memuse",
 )
 
 
-### Virtual classes
 
 # to prevent R whining during package installation
 setClass("object_size") 
-
-# for nice printing
-setClass("approx", representation="VIRTUAL")
-
