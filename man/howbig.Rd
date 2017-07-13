@@ -2,6 +2,7 @@
 % Please edit documentation in R/howbig.r
 \name{howbig}
 \alias{howbig}
+\alias{howbig}
 \alias{howbig.par}
 \title{howbig}
 \usage{

@@ -3,31 +3,31 @@
 \docType{methods}
 \name{Replacers}
 \alias{Replacers}
-\alias{size<-}
-\alias{unit<-}
-\alias{unit.prefix<-}
-\alias{unit.names<-}
-\alias{size<-,memuse-method}
-\alias{unit<-,memuse-method}
-\alias{unit.prefix<-,memuse-method}
-\alias{unit.names<-,memuse-method}
+\alias{mu.size<-}
+\alias{mu.unit<-}
+\alias{mu.prefix<-}
+\alias{mu.names<-}
+\alias{mu.size<-,memuse-method}
+\alias{mu.unit<-,memuse-method}
+\alias{mu.prefix<-,memuse-method}
+\alias{mu.names<-,memuse-method}
 \title{Replacers}
 \usage{
-size(x) <- value
+mu.size(x) <- value
 
-unit(x) <- value
+mu.unit(x) <- value
 
-unit.prefix(x) <- value
+mu.prefix(x) <- value
 
-unit.names(x) <- value
+mu.names(x) <- value
 
-\S4method{size}{memuse}(x) <- value
+\S4method{mu.size}{memuse}(x) <- value
 
-\S4method{unit}{memuse}(x) <- value
+\S4method{mu.unit}{memuse}(x) <- value
 
-\S4method{unit.prefix}{memuse}(x) <- value
+\S4method{mu.prefix}{memuse}(x) <- value
 
-\S4method{unit.names}{memuse}(x) <- value
+\S4method{mu.names}{memuse}(x) <- value
 }
 \arguments{
 \item{x}{memuse object}
@@ -55,7 +55,7 @@ of a \code{memuse} class object, you should probably be using the
 x <- mu(2000, unit="bytes")
 x
 
-size(x) <- 1000
+mu.size(x) <- 1000
 x
 }
 

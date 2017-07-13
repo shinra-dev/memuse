@@ -3,7 +3,6 @@
 \docType{methods}
 \name{Reductions}
 \alias{Reductions}
-\alias{sum,memuse-method}
 \title{memuse Arithmetic}
 \usage{
 \S4method{sum}{memuse}(x, ..., na.rm = FALSE)
