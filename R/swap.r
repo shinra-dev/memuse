@@ -70,9 +70,7 @@ setMethod("swap.prefix", signature(x="memuse"),
     
     x@unit.prefix <- new.prefix
     
-    x <- check.unit(x)
-    
-    return( x )
+    check.unit(x)
   }
 )
 
@@ -104,7 +102,7 @@ setMethod("swap.names", signature(x="memuse"),
     
     x@unit.names <- new.names
     
-    return( x )
+    x
   }
 )
 
@@ -172,6 +170,6 @@ setMethod("swap.unit", signature(x="memuse"),
         stop("invalid argument 'unit'.  See help('memuse')")
     }
     
-    return( x )
+    x
   }
 )
