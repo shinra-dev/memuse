@@ -103,9 +103,9 @@ howmany <- function(x, nrow, ncol, out.type="full", representation="dense", ...,
   ret <- c(nrow, ncol)
   
   if (out.type == "approximate")
-    ret <- approx.size(ret, unit.names=unit.names)
+    ret <- hr(ret, unit.names=unit.names)
   
-  return( ret )
+  ret
 }
 
 
@@ -145,11 +145,10 @@ howmany.par <- function(x, nrow, ncol, out.type="full", cores=1, par="row", ...,
   
   # re-cast return as neededS
   if (out.type == "approximate"){
-    dim <- approx.size(dim)
-    ldim <- approx.size(ldim)
+    dim <- hr(dim)
+    ldim <- hr(ldim)
   }
   
-  out <- list(global=dim, local=ldim)
   
-  return( out )
+  list(global=dim, local=ldim)
 }
