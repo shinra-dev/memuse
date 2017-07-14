@@ -31,7 +31,7 @@
 #' @param representation 
 #' The kind of storage the object would be in, i.e.
 #' "dense" or "sparse".
-#' @param unit.names 
+#' @param names 
 #' string; control for whether the unit names should be
 #' printed out or their abbreviation should be used.  Options are "long" and
 #' "short", respectively.  Case is ignored.
@@ -64,7 +64,7 @@
 #' @seealso \code{\link{howbig}}
 #' @keywords Methods
 #' @export
-howmany <- function(x, nrow, ncol, out.type="full", representation="dense", ..., sparsity=0.05, type="double", intsize=4, unit.names="short")
+howmany <- function(x, nrow, ncol, out.type="full", representation="dense", ..., sparsity=0.05, type="double", intsize=4, names="short")
 {
   if (class(x) != "memuse")
     stop("input 'x' must be a memuse class object")
@@ -99,7 +99,7 @@ howmany <- function(x, nrow, ncol, out.type="full", representation="dense", ...,
   ret <- c(nrow, ncol)
   
   if (out.type == "approximate")
-    ret <- hr(ret, unit.names=unit.names)
+    ret <- hr(ret, names=names)
   
   ret
 }

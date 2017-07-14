@@ -5,7 +5,7 @@
 \title{howmany}
 \usage{
 howmany(x, nrow, ncol, out.type = "full", representation = "dense", ...,
-  sparsity = 0.05, type = "double", intsize = 4, unit.names = "short")
+  sparsity = 0.05, type = "double", intsize = 4, names = "short")
 }
 \arguments{
 \item{x}{The size of a matrix stored as a \code{memuse} class object.}
@@ -31,7 +31,7 @@ will suffice.}
 \item{intsize}{The size (in bytes) of an integer.  Default is 4, but this is
 platform dependent.}
 
-\item{unit.names}{string; control for whether the unit names should be
+\item{names}{string; control for whether the unit names should be
 printed out or their abbreviation should be used.  Options are "long" and
 "short", respectively.  Case is ignored.}
 }
