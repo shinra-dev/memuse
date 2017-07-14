@@ -1,9 +1,11 @@
 # memuse 
 
-* **Version:** 3.1-0
+* **Version:** 4.0-0
 * **Status:** [![Build Status](https://travis-ci.org/shinra-dev/memuse.png)](https://travis-ci.org/shinra-dev/memuse) 
-* **License:** [![License](http://img.shields.io/badge/license-BSD%202--Clause-orange.svg?style=flat)](http://opensource.org/licenses/BSD-2-Clause)
+* **License:** [BSD 2-Clause](http://opensource.org/licenses/BSD-2-Clause)
 * **Author:** Drew Schmidt
+* **Project home**: https://github.com/shinra-dev/memuse
+* **Bug reports**: https://github.com/shinra-dev/memuse/issues
 
 
 **memuse** is an R package for memory estimation.  It has tools for estimating the size of a matrix (that doesn't exist), showing the size of an existing object in a nicer way than `object.size()`.  It also has tools for showing how much memory the current R process is consuming, how much ram is available on the system, and more.

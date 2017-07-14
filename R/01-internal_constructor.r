@@ -1,9 +1,7 @@
-# class detection
 is.memuse <- function(x) class(x)=="memuse"
 
 
 
-### sanity checks
 check.unit <- function(x)
 {
   # Essentially correct unit (up to case)
@@ -90,15 +88,15 @@ check.mu <- function(x)
 {
   x <- check.names(x)
   if (is.logical(x))
-    stop("cannot construct 'memuse' object; bad 'unit.names'", call.=F)
+    stop("cannot construct 'memuse' object; bad 'unit.names'", call.=FALSE)
   
   x <- check.prefix(x)
   if (is.logical(x))
-    stop("cannot construct 'memuse' object; bad 'unit.prefix'", call.=F)
+    stop("cannot construct 'memuse' object; bad 'unit.prefix'", call.=FALSE)
   
   x <- check.unit(x)
   if (is.logical(x))
-    stop("cannot construct 'memuse' object; bad 'unit'", call.=F)
+    stop("cannot construct 'memuse' object; bad 'unit'", call.=FALSE)
   
   return( x )
 }
@@ -115,8 +113,7 @@ mu.nonneg <- function(x)
 
 
 
-### constructor
-internal.memuse <- function(size=0, unit="best", unit.prefix="IEC", unit.names="short")
+internal.mu <- function(size=0, unit="best", unit.prefix="IEC", unit.names="short")
 {
   if (unit == "best")
     u <- "B"
@@ -133,5 +130,3 @@ internal.memuse <- function(size=0, unit="best", unit.prefix="IEC", unit.names="
   
   x
 }
-
-internal.mu <- internal.memuse

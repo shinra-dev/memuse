@@ -17,7 +17,7 @@ y <- mu(3000)
 f(x, y)
 
 x <- mu(2000)
-y <- mu(3000, unit.prefix="SI")
+y <- mu(3000, prefix="SI")
 f(x, y)
 
 x <- mu(2000)

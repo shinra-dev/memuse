@@ -2,14 +2,10 @@
 % Please edit documentation in R/howmany.r
 \name{howmany}
 \alias{howmany}
-\alias{howmany.par}
 \title{howmany}
 \usage{
 howmany(x, nrow, ncol, out.type = "full", representation = "dense", ...,
-  sparsity = 0.05, type = "double", intsize = 4, unit.names = "short")
-
-howmany.par(x, nrow, ncol, out.type = "full", cores = 1, par = "row", ...,
-  type = "double", intsize = 4, ICTXT = 0, bldim = c(4, 4))
+  sparsity = 0.05, type = "double", intsize = 4, names = "short")
 }
 \arguments{
 \item{x}{The size of a matrix stored as a \code{memuse} class object.}
@@ -35,23 +31,12 @@ will suffice.}
 \item{intsize}{The size (in bytes) of an integer.  Default is 4, but this is
 platform dependent.}
 
-\item{unit.names}{string; control for whether the unit names should be
+\item{names}{string; control for whether the unit names should be
 printed out or their abbreviation should be used.  Options are "long" and
 "short", respectively.  Case is ignored.}
-
-\item{cores}{The number of cores.}
-
-\item{par}{The type of parallel distribution.}
-
-\item{ICTXT}{BLACS ICTXT value.}
-
-\item{bldim}{Blocking dimension for 2d block-cyclic distribution.}
 }
 \value{
-\code{howmany()} returns a numeric pair, the dimensions of a matrix.
-
-\code{howmany.par()} returns a list (the global and local dimensions), each
-of which is a numeric pair.
+A numeric pair, the dimensions of a matrix.
 }
 \description{
 How many rows/columns of a matrix can be stored for a given memory size.

@@ -416,7 +416,7 @@ static inline SEXP make_dataframe(SEXP R_rownames, SEXP R_colnames, int n, ...)
   // Set names
   set_list_as_df(R_df);
   
-  if (is_Rnull(R_rownames))
+  if (R_rownames == R_NilValue)
   {
     R_default_rownames = make_dataframe_default_rownames(n);
     set_df_rownames(R_df, R_default_rownames);
@@ -424,7 +424,7 @@ static inline SEXP make_dataframe(SEXP R_rownames, SEXP R_colnames, int n, ...)
   else
     set_df_rownames(R_df, R_rownames);
   
-  if (is_Rnull(R_colnames))
+  if (R_colnames == R_NilValue)
   {
     R_default_colnames = make_dataframe_default_colnames(n);
     set_df_colnames(R_df, R_default_colnames);

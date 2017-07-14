@@ -1,8 +1,16 @@
-Release 3.1-0:
-  * Registered native routines.
-  * Fixed clang compiler warning in os detection.
-  * Added hr() ("human readable") alias for approx.size()
+Release 4.0-0:
+  * API change: renamed accessors to avoid conflicts with some other well-known packages.
+  * API change: "unit." part of constructor arguments dropped to better conform to new accessors. 
+  * API change: Deprecated howbig.par() and howmany.par().
+  * API change: Renamed approx.size() to hr() ("human readable")
+  * Fixed several other small, strange API choices.
   * Changed division to be unitless.
+  * Registered native routines.
+  * Fixed gcc7/clang4 compiler warning in os detection.
+  * Fixed int comparison warning with -Wall -pedantic -Wextra.
+  * Modified RNACI checks to satisfy rchk.
+  * Removed demos.
+  * Fixed bug in sum() not respecting prefix.
 
 Release 3.0-1:
   * Fixed installation issues on some platforms.

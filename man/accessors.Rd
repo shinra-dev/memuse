@@ -3,31 +3,31 @@
 \docType{methods}
 \name{Accessors}
 \alias{Accessors}
-\alias{size}
-\alias{unit}
-\alias{unit.prefix}
-\alias{unit.names}
-\alias{size,memuse-method}
-\alias{unit,memuse-method}
-\alias{unit.prefix,memuse-method}
-\alias{unit.names,memuse-method}
+\alias{mu.size}
+\alias{mu.unit}
+\alias{mu.prefix}
+\alias{mu.names}
+\alias{mu.size,memuse-method}
+\alias{mu.unit,memuse-method}
+\alias{mu.prefix,memuse-method}
+\alias{mu.names,memuse-method}
 \title{Accessors}
 \usage{
-size(x, as.is = TRUE)
+mu.size(x, as.is = TRUE)
 
-unit(x)
+mu.unit(x)
 
-unit.prefix(x)
+mu.prefix(x)
 
-unit.names(x)
+mu.names(x)
 
-\S4method{size}{memuse}(x, as.is = TRUE)
+\S4method{mu.size}{memuse}(x, as.is = TRUE)
 
-\S4method{unit}{memuse}(x)
+\S4method{mu.unit}{memuse}(x)
 
-\S4method{unit.prefix}{memuse}(x)
+\S4method{mu.prefix}{memuse}(x)
 
-\S4method{unit.names}{memuse}(x)
+\S4method{mu.names}{memuse}(x)
 }
 \arguments{
 \item{x}{memuse object}
@@ -60,9 +60,9 @@ x <- mu(1e6)
 
 size(x)
 as.numeric(x)
-unit(x)
-unit.prefix(x)
-unit.names(x)
+mu.unit(x)
+mu.prefix(x)
+mu.names(x)
 }
 
 }

@@ -17,39 +17,39 @@
 \alias{memuse,object_size-method}
 \title{memuse Constructor}
 \usage{
-mu(size, unit = "best", unit.prefix = "IEC", unit.names = "short")
+mu(size, unit = "best", prefix = "IEC", names = "short")
 
-\S4method{mu}{ANY}(size = 0, unit = "best", unit.prefix = "IEC",
-  unit.names = "short")
+\S4method{mu}{ANY}(size = 0, unit = "best", prefix = "IEC",
+  names = "short")
 
-\S4method{mu}{`NULL`}(size = 0, unit = "best", unit.prefix = "IEC",
-  unit.names = "short")
+\S4method{mu}{`NULL`}(size = 0, unit = "best", prefix = "IEC",
+  names = "short")
 
-\S4method{mu}{numeric}(size, unit = "best", unit.prefix = "IEC",
-  unit.names = "short")
+\S4method{mu}{numeric}(size, unit = "best", prefix = "IEC",
+  names = "short")
 
-\S4method{mu}{object_size}(size, unit = "best", unit.prefix = "IEC",
-  unit.names = "short")
+\S4method{mu}{object_size}(size, unit = "best", prefix = "IEC",
+  names = "short")
 
-\S4method{mu}{missing}(size = 0, unit = "best", unit.prefix = "IEC",
-  unit.names = "short")
+\S4method{mu}{missing}(size = 0, unit = "best", prefix = "IEC",
+  names = "short")
 
-memuse(size, unit = "best", unit.prefix = "IEC", unit.names = "short")
+memuse(size, unit = "best", prefix = "IEC", names = "short")
 
-\S4method{memuse}{ANY}(size = 0, unit = "best", unit.prefix = "IEC",
-  unit.names = "short")
+\S4method{memuse}{ANY}(size = 0, unit = "best", prefix = "IEC",
+  names = "short")
 
-\S4method{memuse}{`NULL`}(size = 0, unit = "best", unit.prefix = "IEC",
-  unit.names = "short")
+\S4method{memuse}{`NULL`}(size = 0, unit = "best", prefix = "IEC",
+  names = "short")
 
-\S4method{memuse}{missing}(size = 0, unit = "best", unit.prefix = "IEC",
-  unit.names = "short")
+\S4method{memuse}{missing}(size = 0, unit = "best", prefix = "IEC",
+  names = "short")
 
-\S4method{memuse}{numeric}(size = size, unit = "best",
-  unit.prefix = "IEC", unit.names = "short")
+\S4method{memuse}{numeric}(size = size, unit = "best", prefix = "IEC",
+  names = "short")
 
-\S4method{memuse}{object_size}(size, unit = "best", unit.prefix = "IEC",
-  unit.names = "short")
+\S4method{memuse}{object_size}(size, unit = "best", prefix = "IEC",
+  names = "short")
 }
 \arguments{
 \item{size}{\code{numeric}; indicates the unit-multiple number of bytes used
@@ -58,10 +58,10 @@ by the object.}
 \item{unit}{\code{string}; the unit of storage, such as "MiB" or "MB",
 depending on prefix.  Case is ignored.}
 
-\item{unit.prefix}{\code{string}; the unit prefix, namely IEC or SI.  Case
+\item{prefix}{\code{string}; the unit prefix, namely IEC or SI.  Case
 is ignored.}
 
-\item{unit.names}{\code{string}; control for whether the unit names should
+\item{names}{\code{string}; control for whether the unit names should
 be printed out or their abbreviation should be used.  Options are "long" and
 "short", respectively.  Case is ignored.}
 }
@@ -82,7 +82,7 @@ in R is taken for the size parameter.
 x <- memuse(100, unit="kb")
 x
 
-y <- memuse(100, unit="kb", unit.prefix="SI")
+y <- memuse(100, unit="kb", prefix="SI")
 y
 
 ### Use the memory usage of object 'size'

@@ -7,8 +7,8 @@
 \alias{show,memuse-method}
 \title{Printing}
 \usage{
-\S4method{print}{memuse}(x, ..., unit = x@unit, unit.prefix = x@unit.prefix,
-  unit.names = x@unit.names, digits = 3)
+\S4method{print}{memuse}(x, ..., unit = mu.unit(x), prefix = mu.prefix(x),
+  names = mu.names(x), digits = 3)
 
 \S4method{show}{memuse}(object)
 }
@@ -19,11 +19,11 @@
 
 \item{unit}{the unit to be used in printing; defaults to \code{x}'s unit}
 
-\item{unit.prefix}{the unit prefix to be used in printing; defaults to
-\code{x}'s unit.prefix}
+\item{prefix}{the unit prefix to be used in printing; defaults to
+\code{x}'s prefix}
 
-\item{unit.names}{the unit names (short or long) to be used in printing;
-defaults to \code{x}'s unit.names}
+\item{names}{the unit names (short or long) to be used in printing;
+defaults to \code{x}'s names}
 
 \item{digits}{the number of decimal digits to print; default is 3}
 }
