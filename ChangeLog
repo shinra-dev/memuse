@@ -3,6 +3,7 @@ Release 4.0-0:
   * API change: "unit." part of constructor arguments dropped to better conform to new accessors. 
   * API change: Deprecated howbig.par() and howmany.par().
   * API change: Renamed approx.size() to hr() ("human readable")
+  * API change: retire setters (e.g. mu.size(x) <- something). Use existing swap API instead.
   * Fixed several other small, strange API choices.
   * Changed division to be unitless.
   * Registered native routines.
