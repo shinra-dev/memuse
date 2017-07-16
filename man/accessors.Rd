@@ -67,6 +67,6 @@ mu.names(x)
 
 }
 \seealso{
-\code{ \link{memuse-class} \link{Replacers} }
+\code{ \link{memuse-class} }
 }
 \keyword{Methods}
