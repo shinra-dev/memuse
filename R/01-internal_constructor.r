@@ -126,7 +126,8 @@ internal.mu <- function(size=0, unit="best", unit.prefix="IEC", unit.names="shor
   
   mu.nonneg(x)
   
-  x <- swap.unit(x=x, unit=unit)
+  if (size > 0)
+    x <- swap.unit(x=x, unit=unit)
   
   x
 }
