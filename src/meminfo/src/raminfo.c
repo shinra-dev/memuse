@@ -68,7 +68,7 @@ int meminfo_totalram(memsize_t *totalram)
   
   *totalram = (memsize_t) status.ullTotalPhys;
 #elif OS_FREEBSD
-  test = sysctl_val("hw.physmem", totalram);
+  int test = sysctl_val("hw.physmem", totalram);
   chkret(test, FAILURE);
 #elif OS_NIX
   memsize_t npages, pagesize;
@@ -152,7 +152,7 @@ int meminfo_freeram(memsize_t *freeram)
   if (page == -1)
     return FAILURE;
   
-  test = sysctl_val("vm.stats.vm.v_free_count", freeram);
+  int test = sysctl_val("vm.stats.vm.v_free_count", freeram);
   chkret(test, FAILURE);
   
   *freeram *= (memsize_t) page;

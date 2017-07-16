@@ -1,16 +1,14 @@
 CC=clang
-CFLAGS=-O0 -w
 
-ifeq ($(OS),Windows_NT)
-  CC=gcc
-  LDFLAGS=-lpsapi
-  TKLIB="-L/opt/tcl/lib -ltk -ltcl"
-  TKINC="-I/opt/tcl/include"
-endif
-
+# ifeq ($(OS),Windows_NT)
+#   CC=gcc
+#   LDFLAGS=-lpsapi
+#   TKLIB="-L/opt/tcl/lib -ltk -ltcl"
+#   TKINC="-I/opt/tcl/include"
+# endif
 
 OBJECTS = src/cacheinfo.c src/fileinfo.c src/platform.c src/print.c \
-					src/procinfo.c src/raminfo.c src/swapinfo.c
+	src/procinfo.c src/raminfo.c src/swapinfo.c
 
 all: meminfo shared static
 
@@ -33,4 +31,3 @@ clean:
 	rm -f *.a
 	rm -f *.so
 	rm -f meminfo
-
