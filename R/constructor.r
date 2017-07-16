@@ -57,14 +57,17 @@ setGeneric(name="mu",
 #' @rdname constructor
 #' @export
 setMethod("mu", signature(size="ANY"),
-  function(size=0, unit="best", prefix="IEC", names="short")
-    internal.mu(utils::object.size(size), unit=unit, unit.prefix=prefix, unit.names=names)
+  function(size, unit="best", prefix="IEC", names="short")
+  {
+    size = utils::object.size(size)
+    internal.mu(unclass(size), unit=unit, unit.prefix=prefix, unit.names=names)
+  }
 )
 
 #' @rdname constructor
 #' @export
 setMethod("mu", signature(size="NULL"),
-  function(size=0, unit="best", prefix="IEC", names="short")
+  function(size, unit="best", prefix="IEC", names="short")
   {
     internal.mu(0, unit=unit, unit.prefix=prefix, unit.names=names)
   }
@@ -78,7 +81,10 @@ setMethod("mu", signature(size="numeric"),
     if (NROW(size) == 1 && NCOL(size) == 1)
       internal.mu(size=size, unit=unit, unit.prefix=prefix, unit.names=names)
     else
-      internal.mu(utils::object.size(size), unit=unit, unit.prefix=prefix, unit.names=names)
+    {
+      size = utils::object.size(size)
+      internal.mu(unclass(size), unit=unit, unit.prefix=prefix, unit.names=names)
+    }
   }
 )
 
@@ -94,7 +100,7 @@ setMethod("mu", signature(size="object_size"),
 #' @rdname constructor
 #' @export
 setMethod("mu", signature(size="missing"),
-  function(size=0, unit="best", prefix="IEC", names="short")
+  function(size, unit="best", prefix="IEC", names="short")
   {
     internal.mu(0, unit=unit, unit.prefix=prefix, unit.names=names)
   }
@@ -113,34 +119,34 @@ setGeneric(name="memuse",
 #' @rdname constructor
 #' @export
 setMethod("memuse", signature(size="ANY"),
-  function(size=0, unit="best", prefix="IEC", names="short")
-    internal.mu(utils::object.size(size), unit=unit, unit.prefix=prefix, unit.names=names)
+  function(size, unit="best", prefix="IEC", names="short")
+    mu(size, unit, prefix, names)
 )
 
 #' @rdname constructor
 #' @export
 setMethod("memuse", signature(size="NULL"),
-  function(size=0, unit="best", prefix="IEC", names="short")
-    internal.mu(size, unit, prefix, names)
+  function(size, unit="best", prefix="IEC", names="short")
+    mu(0, unit, prefix, names)
 )
 
 #' @rdname constructor
 #' @export
 setMethod("memuse", signature(size="missing"),
-  function(size=0, unit="best", prefix="IEC", names="short")
-    internal.mu(size, unit, prefix, names)
+  function(size, unit="best", prefix="IEC", names="short")
+    mu(0, unit, prefix, names)
 )
 
 #' @rdname constructor
 #' @export
 setMethod("memuse", signature(size="numeric"),
   function(size=size, unit="best", prefix="IEC", names="short")
-    internal.mu(size, unit, prefix, names)
+    mu(size, unit, prefix, names)
 )
 
 #' @rdname constructor
 #' @export
 setMethod("memuse", signature(size="object_size"),
   function(size, unit="best", prefix="IEC", names="short")
-    internal.mu(size, unit, prefix, names)
+    mu(size, unit, prefix, names)
 )

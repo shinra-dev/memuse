@@ -73,12 +73,7 @@ int meminfo_totalswap(memsize_t *totalswap)
   
   *totalswap = (memsize_t) status.ullTotalPageFile;
 #elif OS_FREEBSD
-  int test;
-  
-  test = sysconf(_SC_PAGESIZE);
-  chkret(test, FAILURE);
-  
-  test = sysctl_val("vm.swap_total", totalswap);
+  int test = sysctl_val("vm.swap_total", totalswap);
   chkret(test, FAILURE);
 #else
   ret = PLATFORM_ERROR;
@@ -130,7 +125,7 @@ int meminfo_freeswap(memsize_t *freeswap)
   struct xswdev xsw;
   size_t mibsize,size;
   int mib[16];
-  int i,n;
+  int i;
   int page=getpagesize();
   memsize_t used = 0L;
   

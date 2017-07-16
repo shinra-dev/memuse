@@ -19,10 +19,9 @@
 \usage{
 mu(size, unit = "best", prefix = "IEC", names = "short")
 
-\S4method{mu}{ANY}(size = 0, unit = "best", prefix = "IEC",
-  names = "short")
+\S4method{mu}{ANY}(size, unit = "best", prefix = "IEC", names = "short")
 
-\S4method{mu}{`NULL`}(size = 0, unit = "best", prefix = "IEC",
+\S4method{mu}{`NULL`}(size, unit = "best", prefix = "IEC",
   names = "short")
 
 \S4method{mu}{numeric}(size, unit = "best", prefix = "IEC",
@@ -31,18 +30,18 @@ mu(size, unit = "best", prefix = "IEC", names = "short")
 \S4method{mu}{object_size}(size, unit = "best", prefix = "IEC",
   names = "short")
 
-\S4method{mu}{missing}(size = 0, unit = "best", prefix = "IEC",
+\S4method{mu}{missing}(size, unit = "best", prefix = "IEC",
   names = "short")
 
 memuse(size, unit = "best", prefix = "IEC", names = "short")
 
-\S4method{memuse}{ANY}(size = 0, unit = "best", prefix = "IEC",
+\S4method{memuse}{ANY}(size, unit = "best", prefix = "IEC",
   names = "short")
 
-\S4method{memuse}{`NULL`}(size = 0, unit = "best", prefix = "IEC",
+\S4method{memuse}{`NULL`}(size, unit = "best", prefix = "IEC",
   names = "short")
 
-\S4method{memuse}{missing}(size = 0, unit = "best", prefix = "IEC",
+\S4method{memuse}{missing}(size, unit = "best", prefix = "IEC",
   names = "short")
 
 \S4method{memuse}{numeric}(size = size, unit = "best", prefix = "IEC",

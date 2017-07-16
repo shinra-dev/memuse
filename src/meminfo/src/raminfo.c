@@ -68,10 +68,7 @@ int meminfo_totalram(memsize_t *totalram)
   
   *totalram = (memsize_t) status.ullTotalPhys;
 #elif OS_FREEBSD
-  int test = sysconf(_SC_PAGESIZE);
-  chkret(test, FAILURE);
-  
-  test = sysctl_val("hw.physmem", totalram);
+  int test = sysctl_val("hw.physmem", totalram);
   chkret(test, FAILURE);
 #elif OS_NIX
   memsize_t npages, pagesize;
@@ -151,15 +148,14 @@ int meminfo_freeram(memsize_t *freeram)
   
   *freeram = (memsize_t) status.ullAvailPhys;
 #elif OS_FREEBSD
-  int pagesize;
-  int test = sysconf(_SC_PAGESIZE);
-  chkret(test, FAILURE);
-  pagesize = test;
+  int page = sysconf(_SC_PAGESIZE);
+  if (page == -1)
+    return FAILURE;
   
-  test = sysctl_val("vm.stats.vm.v_free_count", freeram);
+  int test = sysctl_val("vm.stats.vm.v_free_count", freeram);
   chkret(test, FAILURE);
   
-  *freeram *= (memsize_t) pagesize;
+  *freeram *= (memsize_t) page;
 #elif OS_NIX
   memsize_t pagesize, freepages;
   
@@ -252,12 +248,13 @@ int meminfo_cachedram(memsize_t *cachedram)
   *cachedram *= 1024L;
 #elif OS_FREEBSD
   int page;
-  memsize_t v=0;
+  memsize_t v = 0;
   
   page = sysconf(_SC_PAGESIZE);
-  chkret(page, FAILURE);
+  if (page == -1)
+    return FAILURE;
   
-  int test = sysctl_val("vm.stats.vm.v_cache_count",&v);
+  int test = sysctl_val("vm.stats.vm.v_cache_count", &v);
   chkret(test, FAILURE);
   
   *cachedram = (memsize_t) v*page;

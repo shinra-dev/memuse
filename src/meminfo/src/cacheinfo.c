@@ -102,7 +102,8 @@ int meminfo_cachesize(cachesize_t *totalcache, const int level)
   
   *totalcache = cache_size;
 #elif OS_WINDOWS
-  int i, winlevel;
+  DWORD i; 
+  int winlevel;
   BOOL winret;
   DWORD size = 0;
   SYSTEM_LOGICAL_PROCESSOR_INFORMATION *slpi;
@@ -195,7 +196,7 @@ int meminfo_cachelinesize(cachesize_t *linesize)
   
   *linesize = cache_size;
 #elif OS_WINDOWS
-  int i;
+  DWORD i;
   BOOL winret;
   DWORD size = 0;
   SYSTEM_LOGICAL_PROCESSOR_INFORMATION *slpi;
