@@ -1,3 +1,4 @@
+library(methods)
 library(memuse)
 
 same = function(x, y) stopifnot(identical(x, y))
