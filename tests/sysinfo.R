@@ -9,9 +9,14 @@ islin <- function() tolower(as.character(Sys.info()["sysname"])) == "linux"
 supported = function() iswin() || ismac() || islin()
 
 if (supported()){
-  Sys.meminfo()
-  Sys.swapinfo()
-  Sys.procmem()
-  Sys.cachesize()
-  Sys.cachelinesize()
+  invisible(Sys.meminfo())
+  invisible(Sys.swapinfo())
+  invisible(Sys.procmem())
+  invisible(Sys.cachesize())
+  invisible(Sys.cachelinesize())
 }
+
+
+
+file = system.file("doc/memuse-guide.pdf", package="memuse")
+invisible(Sys.filesize(file))

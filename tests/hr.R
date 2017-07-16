@@ -11,6 +11,7 @@ same(as.character(hr(x)), "1,000")
 same(as.character(hr(y)), "10,000")
 same(as.character(hr(z)), "100,000")
 same(as.character(hr(z*10)), "1,000,000")
+same(as.character(hr(1e20)), "100,000,000,000,000,000,000")
 
 same(as.character(hr(999, names="long")), "999")
 same(as.character(hr(x, names="long")), "1 Thousand")
