@@ -9,4 +9,4 @@ rm -rf ./man/*.pdf
 
 rm -rf ./src/meminfo/src/conf.h
 
-cd ./src/meminfo && make clean
+rm -rf ./src/meminfo/src/*.o
