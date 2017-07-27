@@ -23,6 +23,7 @@ static const R_CallMethodDef CallEntries[] = {
   {"R_meminfo_swapinfo", (DL_FUNC) &R_meminfo_swapinfo, 0},
   {NULL, NULL, 0}
 };
+
 void R_init_memuse(DllInfo *dll)
 {
   R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
