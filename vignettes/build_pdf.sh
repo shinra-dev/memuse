@@ -11,20 +11,27 @@ sed -i -e "s/packageversion}{.*}/packageversion}{${PKGVER}}/" cover.tex
 cd ..
 
 
-### Rebuild vignette
-rm *.aux *.bbl *.blg *.log *.out *.toc
 
-pdflatex memuse-guide.Rnw
-pdflatex memuse-guide.Rnw
+cleanVignette(){
+  rm -f *.aux *.bbl *.blg *.log *.out *.toc *.dvi
+}
 
-Rscript -e "tools::compactPDF('memuse-guide.pdf', gs_quality='ebook')"
+buildVignette(){
+  cleanVignette
+  
+  pdflatex $1
+  pdflatex $1
+  Rscript -e "tools::compactPDF('$1', gs_quality='ebook')"
+}
 
-rm -f *.aux *.bbl *.blg *.log *.out *.toc *.dvi
+publish(){
+  mv -f *.pdf ../inst/doc/
+  cp -f *.Rnw ../inst/doc/
+}
 
-INSTPATH="../inst/doc/"
-if [ ! -d $INSTPATH ];then
-  mkdir $INSTPATH
-fi
 
-mv -f *.pdf $INSTPATH
-cp -f *.Rnw $INSTPATH
+buildVignette memuse-guide.Rnw
+
+cleanVignette
+publish
+

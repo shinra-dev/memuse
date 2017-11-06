@@ -21,27 +21,7 @@ This object has a prototype, sanity checking, and all kinds of other boring crap
 
 To construct a \code{memuse} object, you can use the \code{memuse()} or \code{mu()} constructors.  These functions behave identically; \code{memuse()} exists because I generally find it inappropriate to not have an object constructor of the same name as the object, and \code{mu()} exists because if I have to type more than 5 characters, I'm completely furious.  I'm looking at you, \code{suppressPackageStartupMessages()}\dots
 
-Precedence is given to \code{unit.prefix=} over \code{unit=} in the constructor.  So for example, \code{mu(10, "mb", unit.prefix="IEC")} will return \code{10.000 MiB}.  The assumption is that you either do not know or do not care about the distinction between IEC and SI unit prefices, but are probably more familiar with IEC.
-
-
-
-\subsection{Default Parameters}
-
-So as you might have guessed from Section~\ref{howuse}, the \code{memuse} object's constructor is full of options you will never use.  In the constructor, the argument \code{size=} is a required argument with no default.  However, the constructors invoke the default parameters \code{.UNIT}, \code{.PREFIX}, and \code{.NAMES}.  These are default data values loaded into the package. They are, respectively, \code{"best"}, \code{"IEC"}, and \code{"short"}.  To change a package default, for example \code{"IEC"} to \code{"SI"}, simply execute:
-\begin{lstlisting}[language=rr]
-.PREFIX <- "SI"
-\end{lstlisting}
-And from then on, the constructor will use SI units by default.  This, and all other string values, are case insensitive, in the sense that the correct case will be determined for the user, regardless of the input.  Similarly, the choices for \code{.NAMES} are \code{"short"} and \code{"long"}, and are again case insensitive.
-
-On the other hand, \code{.UNIT} is slightly different.  This defaults to \code{"best"} and like the weird guy at work, should probably just be left alone.  Functions that need to know an input unit, such as the constructor \code{mu()}, have default argument \code{unit=.UNIT}.  Realistically, you are probably better off modifying that argument as necessary than changing \code{.UNIT}.  For example, you want to construct a 100 KiB \code{memuse} object, you probably just want to call
-\begin{lstlisting}[language=rr]
-mu(100, "KiB")
-\end{lstlisting}
-This is equivalent to calling
-\begin{lstlisting}[language=rr]
-mu(102400)
-\end{lstlisting}
-since the default \code{.UNIT=best} will make the choice to switch the units from b to KiB once you breach 1024 bytes.  This sounds a lot more confusing than it really is.
+Precedence is given to \code{prefix} values over \code{unit} in the constructor.  So for example, \code{mu(10, "mb", prefix="IEC")} will return \code{10.000 MiB}.  The assumption is that you either do not know or do not care about the distinction between IEC and SI unit prefices, but are probably more familiar with IEC.
 
 
 

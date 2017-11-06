@@ -1,4 +1,4 @@
-%\VignetteIndexEntry{memuse-guide}
+%\VignetteIndexEntry{Guide to the memuse Package}
 
 \documentclass{article}
 \usepackage[margin=1.1in]{geometry}
@@ -10,7 +10,7 @@
 \myauthor{Drew Schmidt\\ \texttt{wrathematics@gmail.com} }
 \mytitle{Guide to the \thispackage Package}
 \mysubtitle{A Package for Estimating Memory Usage}
-\myversion{3.1-0}
+\myversion{4.0-0}
 
 
 
@@ -40,9 +40,5 @@
 \input{./include/05-other}
 \input{./include/06-meminfo}
 
-% \newpage
-% \phantomsection
-% \addcontentsline{toc}{section}{References}
-% \bibliography{./pbdBASE-include/pbdBASE}
 
 \end{document}

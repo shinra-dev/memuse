@@ -146,10 +146,7 @@
         rulecolor=\color{gray},
         tabsize=4,
         captionpos=t,
-        morecomment=[l]{//},
-        morekeywords={newRvec,newRlist, newRmat, R_INIT, PT, R_END, INTP, DBLP, 
-INT, DBL, STR, MatINT, matDBL, RNULL, is_null, is_Rnull, is_Rnan, is_Rna, 
-is_double, is_integer, PRINT}
+        morecomment=[l]{//}
 }
 
 
@@ -185,7 +182,7 @@ is_double, is_integer, PRINT}
 %%%%% Headers/footers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{lastpage}
+\usepackage{./include/lastpage}
 \usepackage{fancyhdr}
 
 \pagestyle{fancy}
@@ -224,7 +221,7 @@ is_double, is_integer, PRINT}
 
 \usepackage{xspace}
 \newcommand{\R}{\proglang{R}\xspace}
-\newcommand{\C}{\proglang{C}\xspace}
+\newcommand{\Clang}{\proglang{C}\xspace}
 \newcommand{\Cpp}{\proglang{C$++$}\xspace}
 
 % \usepackage{url}
