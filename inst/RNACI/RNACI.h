@@ -22,7 +22,7 @@
 
 // Changelog:
 // Version 0.5.0:
-//   * Fixed rchk warnings.
+//   * Fixed several rchk warnings.
 //   * Add boolean/logical allocators.
 //   * Make is_Rnull() a simple macro.
 //   * Rewrote allocator internals.
@@ -100,7 +100,7 @@ static unsigned int RNACI_ptct = 0;
 
 // gc guards
 #define R_INIT // deprecated
-#define R_END {while (RNACI_ptct > 0){UNPROTECT(1); RNACI_ptct--;}}
+#define R_END {UNPROTECT(RNACI_ptct); RNACI_ptct = 0;};
 #define hidefromGC(x) RNACI_PT(x)
 #define unhideGC() R_END
 
