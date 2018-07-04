@@ -1,3 +1,6 @@
+Release 4.1-0:
+  * Added Sys.dirsize().
+
 Release 4.0-0:
   * API change: renamed accessors to avoid conflicts with some other well-known packages.
   * API change: "unit." part of constructor arguments dropped to better conform to new accessors. 

@@ -3,12 +3,15 @@
 \name{filesize}
 \alias{filesize}
 \alias{Sys.filesize}
+\alias{Sys.dirsize}
 \title{filesize}
 \usage{
 Sys.filesize(filename)
+
+Sys.dirsize(dirname)
 }
 \arguments{
-\item{filename}{Location of the file (as a string).}
+\item{filename, dirname}{Location of the file/directory (as a string).}
 }
 \value{
 A memuse class object.

@@ -318,8 +318,8 @@ Sys.cachelinesize <- function()
 #' directory of the memuse source tree) is licensed under the permissive
 #' 2-Clause BSD license.
 #' 
-#' @param filename
-#' Location of the file (as a string).
+#' @param filename,dirname
+#' Location of the file/directory (as a string).
 #' 
 #' @return 
 #' A memuse class object.
@@ -339,14 +339,26 @@ Sys.cachelinesize <- function()
 #' 
 #' @name filesize
 #' @rdname filesize
+NULL
+
+#' @rdname filesize
 #' @export
 Sys.filesize <- function(filename)
 {
-  filename <- tools::file_path_as_absolute(filename)
-  ret <- .Call(R_meminfo_filesize, filename)
+  filename = tools::file_path_as_absolute(filename)
+  bytes = .Call(R_meminfo_filesize, filename)
+  mu(bytes)
+}
+
+#' @rdname filesize
+#' @export
+Sys.dirsize = function(dirname)
+{
+  sz = function(filename) .Call(R_meminfo_filesize, filename)
   
-  ret <- mu(ret)
-  ret
+  files = dir(dirname, full.names=TRUE, all.files=TRUE, recursive=TRUE)
+  bytes = sum(sapply(files, sz))
+  mu(bytes)
 }
 
 
