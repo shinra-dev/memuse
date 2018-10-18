@@ -45,7 +45,7 @@
 #' 
 #' @seealso \code{\link{howmany}}
 #' @export
-howbig <- function(nrow, ncol, representation="dense", unit="best", prefix="IEC", names="short", ..., sparsity=0.05, type="double", intsize=4)
+howbig <- function(nrow=1, ncol=1, representation="dense", unit="best", prefix="IEC", names="short", ..., sparsity=0.05, type="double", intsize=4)
 {
   type <- match.arg(tolower(type), c("double", "integer"))
   
