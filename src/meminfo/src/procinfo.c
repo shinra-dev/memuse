@@ -55,7 +55,7 @@ int meminfo_process_size(memsize_t *size)
   
   
 #if OS_LINUX
-  ret = read_proc_file("/proc/self/status", size, "VmSize:", 7);
+  ret = read_proc_file("/proc/self/status", size, "VmRSS:", 6);
   *size *= 1024L;
 #elif OS_WINDOWS
   PROCESS_MEMORY_COUNTERS pmc;
@@ -101,7 +101,7 @@ int meminfo_process_peak(memsize_t *peak)
   
   
 #if OS_LINUX
-  ret = read_proc_file("/proc/self/status", peak, "VmPeak:", 7);
+  ret = read_proc_file("/proc/self/status", peak, "VmHWM:", 6);
   *peak *= 1024L;
 #elif OS_WINDOWS
   PROCESS_MEMORY_COUNTERS pmc;
