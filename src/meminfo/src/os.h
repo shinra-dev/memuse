@@ -29,9 +29,11 @@
 #define __MEMINFO_OS__
 
 
+#include <stdio.h> // for __GLIBC__
+
 // "portability"
-#if ((defined(__gnu_linux__) || defined(__linux__) || defined(__linux) || defined(linux)) )
-  #if (defined(__GLIBC__))
+#if (defined(__gnu_linux__) || defined(__linux__) || defined(__linux) || defined(linux))
+  #if (defined(__GNU_LIBRARY__) || defined(__GLIBC__))
     #define OS_LINUX 1
     #define OS_LINUX_NOTGLIBC 0
   #else
