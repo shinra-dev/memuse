@@ -74,11 +74,11 @@ int meminfo_totalram(memsize_t *totalram)
   memsize_t npages, pagesize;
   
   npages = sysconf(_SC_PHYS_PAGES);
-  if (npages == FAILURE)
+  if (npages == (memsize_t)FAILURE)
     return FAILURE;
   
   pagesize = sysconf(_SC_PAGESIZE);
-  if (pagesize == FAILURE)
+  if (pagesize == (memsize_t)FAILURE)
     return FAILURE;
   
   *totalram = (memsize_t) npages * pagesize;
@@ -160,11 +160,11 @@ int meminfo_freeram(memsize_t *freeram)
   memsize_t pagesize, freepages;
   
   pagesize = (memsize_t) sysconf(_SC_PAGESIZE);
-  if (pagesize == FAILURE)
+  if (pagesize == (memsize_t)FAILURE)
     return FAILURE;
   
   freepages = (memsize_t) sysconf(_SC_AVPHYS_PAGES);
-  if (freepages == FAILURE)
+  if (freepages == (memsize_t)FAILURE)
     return FAILURE;
   
   *freeram = pagesize * freepages;
