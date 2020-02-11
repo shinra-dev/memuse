@@ -1,5 +1,6 @@
 Release 4.1-0:
   * Added Sys.dirsize().
+  * Fixed documentation problem.
 
 Release 4.0-0:
   * API change: renamed accessors to avoid conflicts with some other well-known packages.

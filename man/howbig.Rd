@@ -4,9 +4,18 @@
 \alias{howbig}
 \title{howbig}
 \usage{
-howbig(nrow, ncol, representation = "dense", unit = "best",
-  prefix = "IEC", names = "short", ..., sparsity = 0.05,
-  type = "double", intsize = 4)
+howbig(
+  nrow = 1,
+  ncol = 1,
+  representation = "dense",
+  unit = "best",
+  prefix = "IEC",
+  names = "short",
+  ...,
+  sparsity = 0.05,
+  type = "double",
+  intsize = 4
+)
 }
 \arguments{
 \item{nrow, ncol}{Number of (global) rows/columns of the matrix.}

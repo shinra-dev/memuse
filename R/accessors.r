@@ -16,8 +16,6 @@
 #' memuse object
 #' @param as.is 
 #' logical; should the size be "as-is", or converted to bytes first.
-#' @param ... 
-#' Additional arguments; in this case, they are ignored.
 #' 
 #' @return Returns a numeric value in the case of \code{size()}, and
 #' \code{as.numeric()}, otherwise a string is returned.
