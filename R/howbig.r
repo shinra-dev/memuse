@@ -21,13 +21,11 @@
 #' string; control for whether the unit names should be
 #' printed out or their abbreviation should be used.  Options are "long" and
 #' "short", respectively.  Case is ignored.
-#' @param ... 
-#' Additional arguments.
 #' @param sparsity 
 #' The proportion of sparsity of the matrix if
 #' \code{representation="sparse"}
 #' @param type 
-#' "double" or "int"; the storage type of the data matrix.  If you
+#' "float", "double", or "int"; the storage type of the data matrix.  If you
 #' don't know the type, it is probably stored as a double, so the default value
 #' will suffice.
 #' @param intsize 
@@ -45,9 +43,9 @@
 #' 
 #' @seealso \code{\link{howmany}}
 #' @export
-howbig <- function(nrow=1, ncol=1, representation="dense", unit="best", prefix="IEC", names="short", ..., sparsity=0.05, type="double", intsize=4)
+howbig <- function(nrow=1, ncol=1, representation="dense", unit="best", prefix="IEC", names="short", sparsity=0.05, type="double", intsize=4)
 {
-  type <- match.arg(tolower(type), c("double", "integer"))
+  type <- match.arg(tolower(type), c("double", "float", "integer"))
   
   x <- internal.mu(size=1, unit="b", unit.prefix=prefix, unit.names=names)
   

@@ -7,6 +7,8 @@ check_type <- function(type, intsize)
 {
   if (type == "double")
     bytes <- 8
+  else if (type == "float")
+    bytes = 4
   else if (type == "integer")
     bytes <- intsize
   

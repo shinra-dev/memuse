@@ -4,9 +4,17 @@
 \alias{howbig}
 \title{howbig}
 \usage{
-howbig(nrow, ncol, representation = "dense", unit = "best",
-  prefix = "IEC", names = "short", ..., sparsity = 0.05,
-  type = "double", intsize = 4)
+howbig(
+  nrow = 1,
+  ncol = 1,
+  representation = "dense",
+  unit = "best",
+  prefix = "IEC",
+  names = "short",
+  sparsity = 0.05,
+  type = "double",
+  intsize = 4
+)
 }
 \arguments{
 \item{nrow, ncol}{Number of (global) rows/columns of the matrix.}
@@ -22,12 +30,10 @@ prefix.  Case is ignored.}
 printed out or their abbreviation should be used.  Options are "long" and
 "short", respectively.  Case is ignored.}
 
-\item{...}{Additional arguments.}
-
 \item{sparsity}{The proportion of sparsity of the matrix if
 \code{representation="sparse"}}
 
-\item{type}{"double" or "int"; the storage type of the data matrix.  If you
+\item{type}{"float", "double", or "int"; the storage type of the data matrix.  If you
 don't know the type, it is probably stored as a double, so the default value
 will suffice.}
 

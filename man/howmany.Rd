@@ -4,8 +4,18 @@
 \alias{howmany}
 \title{howmany}
 \usage{
-howmany(x, nrow, ncol, out.type = "full", representation = "dense", ...,
-  sparsity = 0.05, type = "double", intsize = 4, names = "short")
+howmany(
+  x,
+  nrow,
+  ncol,
+  out.type = "full",
+  representation = "dense",
+  ...,
+  sparsity = 0.05,
+  type = "double",
+  intsize = 4,
+  names = "short"
+)
 }
 \arguments{
 \item{x}{The size of a matrix stored as a \code{memuse} class object.}
