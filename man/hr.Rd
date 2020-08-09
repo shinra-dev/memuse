@@ -4,7 +4,7 @@
 \alias{hr}
 \title{hr}
 \usage{
-hr(x, names = "comma", digits = 1)
+hr(x, names = "comma", digits = 2)
 }
 \arguments{
 \item{x}{A number.}
@@ -18,7 +18,7 @@ reads like "10 million", "10m", or "10,000,000", respectively.}
 An object of class \code{humanreadable}.
 }
 \description{
-A poor man's exponential notation.
+A rich man's exponential notation.
 }
 \details{
 Approximate size of an integer.  Very useful when dealing with potentially
