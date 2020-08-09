@@ -1,6 +1,79 @@
 setClass("humanreadable", representation="VIRTUAL")
 
 
+hr_make_humanreadable = function(printsize, unit, sepchar)
+{
+  ret = paste(printsize, unit, sep=sepchar)
+  ret = gsub(ret, pattern=" $", replacement="", perl=TRUE)
+  class(ret) = "humanreadable"
+  ret
+}
+
+
+
+hr_trivial = function(x, digits)
+{
+  printsize = as.character(round(x, digits=digits))
+  sepchar = " "
+  unit = ""
+  
+  hr_make_humanreadable(printsize, unit, sepchar)
+}
+
+
+
+hr_names = function(x, digits, ordmag, names)
+{
+  index = max(1, min(which(.numbers$exponent >= ordmag)) - 1)
+  
+  if (names == "long")
+  {
+    sepchar = " "
+    unit = .numbers$name[index]
+  }
+  else if (names == "short")
+  {
+    sepchar = ""
+    unit = .numbers$shorthand[index]
+  }
+  
+  printsize = round(round(x, 0)/(10^.numbers$exponent[index]), digits=digits)
+  
+  hr_make_humanreadable(printsize, unit, sepchar)
+}
+
+
+
+hr_comma = function(x, digits)
+{
+  sgn = sign(x)
+  dec = round(abs(x) - floor(abs(x)), digits) * 10^digits
+  x = floor(abs(x))
+  
+  y = digits2zero(format(x, scientific=FALSE))
+  
+  if (dec > 0)
+    sepchar = "."
+  else
+  {
+    dec = ""
+    sepchar = ""
+  }
+  
+  if (sgn < 0)
+    sgnchar = "-"
+  else
+    sgnchar = ""
+  
+  # dat regex
+  printsize = gsub("(?<=\\d)(?=(\\d{3})+(?!\\d))", ",", x=y, perl=TRUE)
+  printsize = paste0(paste0(sgnchar, printsize), sepchar, dec)
+  unit = ""
+  
+  hr_make_humanreadable(printsize, unit, "")
+}
+
+
 
 #' hr
 #' 
@@ -8,7 +81,7 @@ setClass("humanreadable", representation="VIRTUAL")
 #' large values, such as those from \code{howmany()}.
 #' 
 #' @description
-#' A poor man's exponential notation.
+#' A rich man's exponential notation.
 #' 
 #' @param x 
 #' A number.
@@ -31,73 +104,26 @@ setClass("humanreadable", representation="VIRTUAL")
 #' 
 #' @seealso \code{\link{howmany}}
 #' @export
-hr <- function(x, names="comma", digits=1)
+hr = function(x, names="comma", digits=2)
 {
-  #unit <- match.arg(tolower(unit), c("best"))
-  unit <- "best" ### FIXME
-  names <- match.arg(tolower(names), c("long", "short", "comma"))
+  names = match.arg(tolower(names), c("long", "short", "comma"))
   
   if (length(x) > 1)
   {
-    ret <- sapply(x, hr)
-    class(ret) <- "approx"
+    ret = sapply(x, hr)
+    class(ret) = "approx"
     
-    return( ret )
+    return(ret)
   }
   
-  ordmag <- log10(x)
+  ordmag = floor(log10(x)) + 1
   
-  if (ordmag < 3)
-  {
-    printsize <- as.character(x)
-    sepchar <- " "
-    unit <- ""
-  }
+  if (ordmag < 4)
+    hr_trivial(x, digits)
   else if (names != "comma")
-  {
-    index <- max(1, min(which(.numbers$exponent > ordmag)) - 1)
-    
-    if (names == "long")
-    {
-      sepchar <- " "
-      unit <- .numbers$name[index]
-    }
-    else if (names == "short")
-    {
-      sepchar <- ""
-      unit <- .numbers$shorthand[index]
-    }
-    
-    printsize <- as.character( round(x/(10^.numbers$exponent[index]), digits=digits) )
-  }
-  else if (unit == "best")
-  {
-    y <- digits2zero(format(x, scientific=FALSE))
-    
-    numbers <- unlist(strsplit(as.character(y), split="[.]"))
-    if (length(numbers) == 2)
-    {
-      y <- numbers[1L]
-      dec <- numbers[2L]
-      sepchar <- "."
-    }
-    else
-    {
-      dec <- ""
-      sepchar <- ""
-    }
-    
-    # dat regex
-    printsize <- gsub("(?<=\\d)(?=(\\d{3})+(?!\\d))", ",", x=y, perl=TRUE)
-    printsize <- paste(printsize, dec, sep=sepchar)
-    unit <- ""
-  }
-  
-  ret <- paste(printsize, unit, sep=sepchar)
-  ret <- gsub(ret, pattern=" $", replacement="", perl=TRUE)
-  class(ret) <- "humanreadable"
-  
-  return(ret)
+    hr_names(x, digits, ordmag, names)
+  else
+    hr_comma(x, digits)
 }
 
 
@@ -110,7 +136,7 @@ hr <- function(x, names="comma", digits=1)
 #' @rdname print-hr
 #' @method print humanreadable
 #' @export
-print.humanreadable <- function(x, ...)
+print.humanreadable = function(x, ...)
 {
   cat(paste(paste(x, collapse=" "), "\n"))
 }
