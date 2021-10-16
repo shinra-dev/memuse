@@ -2,7 +2,6 @@
 
 * **Version:** 4.2-1
 * **License:** [BSD 2-Clause](http://opensource.org/licenses/BSD-2-Clause)
-* **Author:** Drew Schmidt
 * **Project home**: https://github.com/shinra-dev/memuse
 * **Bug reports**: https://github.com/shinra-dev/memuse/issues
 
@@ -22,12 +21,9 @@ To install the R package, run:
 install.package("memuse")
 ```
 
-The development version is maintained on GitHub, and can easily be installed by any of the packages that offer installations from GitHub:
+The development version is maintained on GitHub:
 
 ```r
-### Pick your preference
-devtools::install_github("shinra-dev/memuse")
-ghit::install_github("shinra-dev/memuse")
 remotes::install_github("shinra-dev/memuse")
 ```
 
