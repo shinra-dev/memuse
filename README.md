@@ -1,7 +1,6 @@
 # memuse 
 
-* **Version:** 4.2-0
-* **Status:** [![Build Status](https://travis-ci.org/shinra-dev/memuse.png)](https://travis-ci.org/shinra-dev/memuse) 
+* **Version:** 4.2-1
 * **License:** [BSD 2-Clause](http://opensource.org/licenses/BSD-2-Clause)
 * **Author:** Drew Schmidt
 * **Project home**: https://github.com/shinra-dev/memuse
