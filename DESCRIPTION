@@ -1,6 +1,6 @@
 Package: memuse
 Title: Memory Estimation Utilities
-Version: 4.2-1
+Version: 4.2-2
 Description: How much ram do you need to store a 100,000 by 100,000 matrix?
     How much ram is your current R session using? How much ram do you even have?
     Learn the scintillating answer to these and many more such questions with

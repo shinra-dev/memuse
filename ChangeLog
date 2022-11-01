@@ -1,3 +1,7 @@
+Release 4.2-2:
+  * C function prototype changes for CRAN.
+  * Internal class checks now use inherits().
+
 Release 4.2-1:
   * Updated configure files for CRAN.
 

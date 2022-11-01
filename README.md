@@ -1,6 +1,6 @@
 # memuse 
 
-* **Version:** 4.2-1
+* **Version:** 4.2-2
 * **License:** [BSD 2-Clause](https://opensource.org/licenses/BSD-2-Clause)
 * **Project home**: https://github.com/shinra-dev/memuse
 * **Bug reports**: https://github.com/shinra-dev/memuse/issues

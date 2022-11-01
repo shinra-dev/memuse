@@ -1,6 +1,6 @@
 valid.mu <- function(object)
 {
-  if (!class(object) == "memuse")
+  if (!inherits(object, "memuse"))
     return( "Not a class 'memuse' object" )
   
   if (object@size < 0)

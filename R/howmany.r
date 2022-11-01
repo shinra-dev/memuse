@@ -66,7 +66,7 @@
 #' @export
 howmany <- function(x, nrow, ncol, out.type="full", representation="dense", ..., sparsity=0.05, type="double", intsize=4, names="short")
 {
-  if (class(x) != "memuse")
+  if (!inherits(x, "memuse"))
     stop("input 'x' must be a memuse class object")
   
   # Manage input arguments
