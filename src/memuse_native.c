@@ -5,13 +5,13 @@
 #include <R_ext/Rdynload.h>
 #include <stdlib.h>
 
-extern SEXP R_meminfo_cacheinfo_linesize();
+extern SEXP R_meminfo_cacheinfo_linesize(void);
 extern SEXP R_meminfo_cacheinfo_size(SEXP level);
 extern SEXP R_meminfo_filesize(SEXP filename);
-extern SEXP R_meminfo_procinfo();
-extern SEXP R_meminfo_raminfo();
+extern SEXP R_meminfo_procinfo(void);
+extern SEXP R_meminfo_raminfo(void);
 extern SEXP R_meminfo_retvals(SEXP retval);
-extern SEXP R_meminfo_swapinfo();
+extern SEXP R_meminfo_swapinfo(void);
 
 static const R_CallMethodDef CallEntries[] = {
   {"R_meminfo_cacheinfo_linesize", (DL_FUNC) &R_meminfo_cacheinfo_linesize, 0},

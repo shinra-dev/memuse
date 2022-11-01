@@ -45,7 +45,7 @@ SEXP R_meminfo_retvals(SEXP retval)
 
 
 // Wrappers
-SEXP R_meminfo_raminfo()
+SEXP R_meminfo_raminfo(void)
 {
   int ret;
   int ct = 0;
@@ -68,7 +68,7 @@ SEXP R_meminfo_raminfo()
 
 
 
-SEXP R_meminfo_swapinfo()
+SEXP R_meminfo_swapinfo(void)
 {
   int ret;
   int ct = 0;
@@ -90,7 +90,7 @@ SEXP R_meminfo_swapinfo()
 
 
 
-SEXP R_meminfo_procinfo()
+SEXP R_meminfo_procinfo(void)
 {
   memsize_t tmp;
   int ct = 0;
@@ -126,7 +126,7 @@ SEXP R_meminfo_cacheinfo_size(SEXP level)
 
 
 
-SEXP R_meminfo_cacheinfo_linesize()
+SEXP R_meminfo_cacheinfo_linesize(void)
 {
   int ret;
   int ct = 0;

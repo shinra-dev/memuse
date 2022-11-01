@@ -58,7 +58,7 @@ int meminfo_abspath(const char *relpath, char **abspath);
 int meminfo_filesize(memsize_t *filesize, const char *filename);
 
 // getpid.c
-uint32_t meminfo_getpid();
+uint32_t meminfo_getpid(void);
 
 // platform.c
 #if OS_LINUX

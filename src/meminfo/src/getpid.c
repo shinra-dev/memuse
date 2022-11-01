@@ -38,7 +38,7 @@
  * @return
  * The PID.
  */
-uint32_t meminfo_getpid()
+uint32_t meminfo_getpid(void)
 {
 #if OS_WINDOWS
   DWORD pid = GetCurrentProcessId();
