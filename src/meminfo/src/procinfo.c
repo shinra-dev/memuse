@@ -108,6 +108,12 @@ int meminfo_process_peak(memsize_t *peak)
   
   GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
   *peak = (memsize_t) pmc.PeakWorkingSetSize;
+#elif OS_MAC
+  mach_task_basic_info_data_t info;
+  mach_msg_type_number_t info_count = MACH_TASK_BASIC_INFO_COUNT;
+  
+  ret = task_info(mach_task_self(), MACH_TASK_BASIC_INFO, (task_info_t)&info, &info_count);
+  *peak = (memsize_t) info.resident_size_max;
 #else
   ret = PLATFORM_ERROR;
 #endif
